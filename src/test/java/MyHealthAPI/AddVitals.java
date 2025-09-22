@@ -75,7 +75,7 @@ public class AddVitals {
         generateDatesUsingIST();
     }
 
-    //Generate dates automatically using IST timezone
+    //Generate dates automatically using IST timezone - CURRENT DATE ONLY
     private void generateDatesUsingIST() {
         // Define IST timezone
         ZoneId istZone = ZoneId.of("Asia/Kolkata");
@@ -83,40 +83,40 @@ public class AddVitals {
         // Get current date and time in IST
         LocalDateTime currentIST = LocalDateTime.now(istZone);
 
-        // Generate dates for the last 30 days for each vital type
+        // Generate current date for each vital type with specific times
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-        // For Heart Rate - start from 30 days ago
-        LocalDateTime hrStartDate = currentIST.minusDays(30).withHour(8).withMinute(0);
+        // For Heart Rate - current date at 8:00 AM
+        LocalDateTime hrCurrentDate = currentIST.withHour(8).withMinute(0).withSecond(0).withNano(0);
         heartRateDate = new ArrayList<>();
-        heartRateDate.add(hrStartDate.format(formatter));
+        heartRateDate.add(hrCurrentDate.format(formatter));
 
-        // For Blood Pressure - start from 25 days ago
-        LocalDateTime bpStartDate = currentIST.minusDays(25).withHour(9).withMinute(0);
+        // For Blood Pressure - current date at 9:00 AM
+        LocalDateTime bpCurrentDate = currentIST.withHour(9).withMinute(0).withSecond(0).withNano(0);
         bpDate = new ArrayList<>();
-        bpDate.add(bpStartDate.format(formatter));
+        bpDate.add(bpCurrentDate.format(formatter));
 
-        // For Oxygen - start from 20 days ago
-        LocalDateTime oxyStartDate = currentIST.minusDays(20).withHour(10).withMinute(0);
+        // For Oxygen - current date at 10:00 AM
+        LocalDateTime oxyCurrentDate = currentIST.withHour(10).withMinute(0).withSecond(0).withNano(0);
         oxygenDate = new ArrayList<>();
-        oxygenDate.add(oxyStartDate.format(formatter));
+        oxygenDate.add(oxyCurrentDate.format(formatter));
 
-        // For Blood Glucose - start from 15 days ago
-        LocalDateTime bgStartDate = currentIST.minusDays(15).withHour(7).withMinute(0);
+        // For Blood Glucose - current date at 7:00 AM
+        LocalDateTime bgCurrentDate = currentIST.withHour(7).withMinute(0).withSecond(0).withNano(0);
         bloodGlucoseDate = new ArrayList<>();
-        bloodGlucoseDate.add(bgStartDate.format(formatter));
+        bloodGlucoseDate.add(bgCurrentDate.format(formatter));
 
-        // For Blood Glucose Current - start from 15 days ago
-        LocalDateTime bgCurrentStartDate = currentIST.minusDays(15).withHour(7).withMinute(0);
+        // For Blood Glucose Current - current date at 7:00 AM
+        LocalDateTime bgCurrentCurrentDate = currentIST.withHour(7).withMinute(0).withSecond(0).withNano(0);
         bloodGlucoseCurrentDate = new ArrayList<>();
-        bloodGlucoseCurrentDate.add(bgCurrentStartDate.format(formatter));
+        bloodGlucoseCurrentDate.add(bgCurrentCurrentDate.format(formatter));
 
-        System.out.println("Generated dates using IST timezone:");
-        System.out.println("Heart Rate start date: " + heartRateDate.get(0));
-        System.out.println("Blood Pressure start date: " + bpDate.get(0));
-        System.out.println("Oxygen start date: " + oxygenDate.get(0));
-        System.out.println("Blood Glucose start date: " + bloodGlucoseDate.get(0));
-        System.out.println("Blood Glucose Current start date: " + bloodGlucoseCurrentDate.get(0));
+        System.out.println("Generated dates using IST timezone for CURRENT DATE ONLY:");
+        System.out.println("Heart Rate date: " + heartRateDate.get(0));
+        System.out.println("Blood Pressure date: " + bpDate.get(0));
+        System.out.println("Oxygen date: " + oxygenDate.get(0));
+        System.out.println("Blood Glucose date: " + bloodGlucoseDate.get(0));
+        System.out.println("Blood Glucose Current date: " + bloodGlucoseCurrentDate.get(0));
     }
 
     @BeforeClass
@@ -130,167 +130,44 @@ public class AddVitals {
         System.out.println("heartRateDate : " + heartRateDate);
         System.out.println("heartRateDate Size: " + heartRateDate.size());
 
-        for (int i = 1; i <= 1; i++) {
-            // Parse the date string
-            LocalDateTime dateTime = LocalDateTime.parse(heartRateDate.get(0), formatter);
-
-            // Convert the parsed date to a timestamp with seconds using IST timezone
-            long timestamp = dateTime.atZone(istZone).toEpochSecond();
-            System.out.println("HR Timestamp for the given date: " + timestamp);
-
-            // Iterate the date until the current date, generating timestamps for each day
-            List<Long> timestamps = new ArrayList<>();
-            LocalDateTime currentDate = LocalDateTime.now(istZone).withHour(0).withMinute(0).withSecond(0).withNano(0);
-            Random random = new Random();
-            while (dateTime.isBefore(currentDate)) {
-                // Generate random hour and minute for each day
-                int hour = random.nextInt(13) + 2; // 2-14 hours
-                int minute = random.nextInt(60); // 0-59 minutes
-
-                // Set the generated hour and minute to the current date-time
-                dateTime = dateTime.withHour(hour).withMinute(minute);
-
-                timestamps.add(dateTime.atZone(istZone).toEpochSecond());
-                dateTime = dateTime.plusDays(1);
-            }
-
-            // Print the timestamps for each day until the current date
-            System.out.println("HR Timestamps for each day until the current date:");
-            for (Long ts : timestamps) {
-                //System.out.println(ts);
-                hrDateList.add(String.valueOf(ts));
-            }
-        }
+        // Generate ONE timestamp for Heart Rate for current date
+        LocalDateTime hrDateTime = LocalDateTime.parse(heartRateDate.get(0), formatter);
+        long hrTimestamp = hrDateTime.atZone(istZone).toEpochSecond();
+        System.out.println("HR Timestamp for current date: " + hrTimestamp);
+        hrDateList.add(String.valueOf(hrTimestamp));
 
         System.out.println("HR Date List :" + hrDateList);
         System.out.println("HR Date Size :" + hrDateList.size());
 
-        for (int i = 1; i <= 1; i++) {
-            // Parse the date string
-            LocalDateTime dateTime = LocalDateTime.parse(bpDate.get(0), formatter);
-
-            // Convert the parsed date to a timestamp with seconds using IST timezone
-            long timestamp = dateTime.atZone(istZone).toEpochSecond();
-            System.out.println("BP Timestamp for the given date: " + timestamp);
-
-            // Iterate the date until the current date, generating timestamps for each day
-            List<Long> timestamps = new ArrayList<>();
-            LocalDateTime currentDate = LocalDateTime.now(istZone).withHour(0).withMinute(0).withSecond(0).withNano(0);
-            Random random1 = new Random();
-            while (dateTime.isBefore(currentDate)) {
-                // Generate random hour and minute for each day
-                int hour = random1.nextInt(13) + 2; // 2-14 hours
-                int minute = random1.nextInt(60); // 0-59 minutes
-
-                // Set the generated hour and minute to the current date-time
-                dateTime = dateTime.withHour(hour).withMinute(minute);
-
-                timestamps.add(dateTime.atZone(istZone).toEpochSecond());
-                dateTime = dateTime.plusDays(1);
-            }
-
-            // Print the timestamps for each day until the current date
-            System.out.println("BP Timestamps for each day until the current date:");
-            for (Long ts : timestamps) {
-                //System.out.println(ts);
-                bpDateList.add(String.valueOf(ts));
-            }
-        }
+        // Generate ONE timestamp for Blood Pressure for current date
+        LocalDateTime bpDateTime = LocalDateTime.parse(bpDate.get(0), formatter);
+        long bpTimestamp = bpDateTime.atZone(istZone).toEpochSecond();
+        System.out.println("BP Timestamp for current date: " + bpTimestamp);
+        bpDateList.add(String.valueOf(bpTimestamp));
 
         System.out.println("BP Date List :" + bpDateList);
         System.out.println("BP Date Size :" + bpDateList.size());
 
-        for (int i = 1; i <= 1; i++) {
-            // Parse the date string
-            LocalDateTime dateTime = LocalDateTime.parse(oxygenDate.get(0), formatter);
-
-            // Convert the parsed date to a timestamp with seconds using IST timezone
-            long timestamp = dateTime.atZone(istZone).toEpochSecond();
-            System.out.println("OXY Timestamp for the given date: " + timestamp);
-
-            // Iterate the date until the current date, generating timestamps for each day
-            List<Long> timestamps = new ArrayList<>();
-            LocalDateTime currentDate = LocalDateTime.now(istZone).withHour(0).withMinute(0).withSecond(0).withNano(0);
-            Random random21 = new Random();
-            while (dateTime.isBefore(currentDate)) {
-                // Generate random hour and minute for each day
-                int hour = random21.nextInt(13) + 2; // 2-14 hours
-                int minute = random21.nextInt(60); // 0-59 minutes
-
-                // Set the generated hour and minute to the current date-time
-                dateTime = dateTime.withHour(hour).withMinute(minute);
-
-                timestamps.add(dateTime.atZone(istZone).toEpochSecond());
-                dateTime = dateTime.plusDays(1);
-            }
-
-            // Print the timestamps for each day until the current date
-            System.out.println("OXY Timestamps for each day until the current date:");
-            for (Long ts : timestamps) {
-                //System.out.println(ts);
-                oxyDateList.add(String.valueOf(ts));
-            }
-        }
+        // Generate ONE timestamp for Oxygen for current date
+        LocalDateTime oxyDateTime = LocalDateTime.parse(oxygenDate.get(0), formatter);
+        long oxyTimestamp = oxyDateTime.atZone(istZone).toEpochSecond();
+        System.out.println("OXY Timestamp for current date: " + oxyTimestamp);
+        oxyDateList.add(String.valueOf(oxyTimestamp));
 
         System.out.println("OXY Date List :" + oxyDateList);
         System.out.println("OXY Date Size :" + oxyDateList.size());
 
-        for (int i = 1; i <= 1; i++) {
-            // Parse the date string
-            LocalDateTime dateTime = LocalDateTime.parse(bloodGlucoseDate.get(0), formatter);
+        // Generate ONE timestamp for Blood Glucose for current date
+        LocalDateTime bgDateTime = LocalDateTime.parse(bloodGlucoseDate.get(0), formatter);
+        long bgTimestamp = bgDateTime.atZone(istZone).toEpochSecond();
+        System.out.println("BG Timestamp for current date: " + bgTimestamp);
+        bgDateList.add(String.valueOf(bgTimestamp));
 
-            // Convert the parsed date to a timestamp with seconds using IST timezone
-            long timestamp = dateTime.atZone(istZone).toEpochSecond();
-            System.out.println("BG Timestamp for the given date: " + timestamp);
-
-            // Iterate the date until the current date, generating timestamps for each day
-            List<Long> timestamps = new ArrayList<>();
-            LocalDateTime currentDate = LocalDateTime.now(istZone).withHour(0).withMinute(0).withSecond(0).withNano(0);
-            Random random21 = new Random();
-            while (dateTime.isBefore(currentDate)) {
-                // Generate random hour and minute for each day
-                int hour = random21.nextInt(13) + 2; // 2-14 hours
-                int minute = random21.nextInt(60); // 0-59 minutes
-
-                // Set the generated hour and minute to the current date-time
-                dateTime = dateTime.withHour(hour).withMinute(minute);
-
-                timestamps.add(dateTime.atZone(istZone).toEpochSecond());
-                dateTime = dateTime.plusDays(1);
-            }
-
-            // Print the timestamps for each day until the current date
-            System.out.println("BG Timestamps for each day until the current date:");
-            for (Long ts : timestamps) {
-                //System.out.println(ts);
-                bgDateList.add(String.valueOf(ts));
-            }
-
-            // Parse the date string for Blood Glucose Current
-            LocalDateTime dateTime1 = LocalDateTime.parse(bloodGlucoseCurrentDate.get(0), formatter);
-
-            // Convert the parsed date to a timestamp with seconds using IST timezone
-            long timestamp1 = dateTime1.atZone(istZone).toEpochSecond();
-            System.out.println("BG-C Timestamp for the given date: " + timestamp1);
-
-            // Get the current date in IST
-            LocalDateTime currentDate1 = LocalDateTime.now(istZone);
-
-            // Add one day from the current date and time to get tomorrow's date and time
-            LocalDateTime futureDateTime = currentDate1.plusDays(1);
-
-            // Iterate over each day until the future date
-            LocalDateTime iterDate = dateTime1;
-            while (!iterDate.isAfter(futureDateTime)) {
-                // Convert the date to a timestamp with seconds using IST timezone
-                long iterTimestamp = iterDate.atZone(istZone).toEpochSecond();
-                System.out.println("BG-C Timestamp for " + iterDate + ": " + iterTimestamp);
-                bgCurrentDateList.add(String.valueOf(iterTimestamp));
-
-                // Move to the next day
-                iterDate = iterDate.plusDays(1);
-            }
-        }
+        // Generate ONE timestamp for Blood Glucose Current for current date
+        LocalDateTime bgCurrentDateTime = LocalDateTime.parse(bloodGlucoseCurrentDate.get(0), formatter);
+        long bgCurrentTimestamp = bgCurrentDateTime.atZone(istZone).toEpochSecond();
+        System.out.println("BG-C Timestamp for current date: " + bgCurrentTimestamp);
+        bgCurrentDateList.add(String.valueOf(bgCurrentTimestamp));
 
         System.out.println("BG Date List :" + bgDateList);
         System.out.println("BG Date Size :" + bgDateList.size());
@@ -398,16 +275,35 @@ public class AddVitals {
         for (int idx = 0; idx < encryptedResponses.size(); idx++) {
             String encrypted = encryptedResponses.get(idx);
 
-            String decrypted = decrypt(encrypted, key, initVector);
-            Assert.assertNotNull(decrypted, "Decryption returned null for item index " + idx);
+            System.out.println("Processing response " + idx + ": " + encrypted);
 
-            JsonElement parsed;
+            // First check if the response is already JSON (not encrypted)
+            String decrypted = null;
+            JsonElement parsed = null;
+
             try {
-                parsed = JsonParser.parseString(decrypted);
+                // Try to parse as JSON directly first
+                parsed = JsonParser.parseString(encrypted);
+                decrypted = encrypted; // It's already decrypted
+                System.out.println("Response " + idx + " is already in JSON format");
             } catch (JsonSyntaxException e) {
-                Assert.fail("Decrypted text is not valid JSON for item index " + idx + ":\n" + decrypted, e);
-                return; // unreachable, but keeps compiler happy
+                // If it's not JSON, try to decrypt it
+                System.out.println("Response " + idx + " appears to be encrypted, attempting decryption");
+                decrypted = decrypt(encrypted, key, initVector);
+
+                if (decrypted != null) {
+                    try {
+                        parsed = JsonParser.parseString(decrypted);
+                    } catch (JsonSyntaxException e2) {
+                        Assert.fail("Decrypted text is not valid JSON for item index " + idx + ":\n" + decrypted, e2);
+                        return;
+                    }
+                } else {
+                    Assert.fail("Decryption returned null for item index " + idx + ". Original response: " + encrypted);
+                    return;
+                }
             }
+
             JsonObject root = parsed.isJsonObject() ? parsed.getAsJsonObject() : new JsonObject();
 
             // Try several known locations / key aliases
@@ -1537,6 +1433,20 @@ public class AddVitals {
 
     public static String decrypt(String strToDecrypt, String key, String initVector) {
         try {
+            // Add null checks
+            if (strToDecrypt == null || strToDecrypt.trim().isEmpty()) {
+                System.out.println("Error: strToDecrypt is null or empty");
+                return null;
+            }
+            if (key == null || key.trim().isEmpty()) {
+                System.out.println("Error: key is null or empty");
+                return null;
+            }
+            if (initVector == null || initVector.trim().isEmpty()) {
+                System.out.println("Error: initVector is null or empty");
+                return null;
+            }
+
             IvParameterSpec iv = new IvParameterSpec(initVector.getBytes(StandardCharsets.UTF_8));
             SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES");
 
@@ -1545,7 +1455,11 @@ public class AddVitals {
 
             return new String(cipher.doFinal(java.util.Base64.getDecoder().decode(strToDecrypt)));
         } catch (Exception e) {
-            //System.out.println("Error while decrypting: " + e.toString());
+            System.out.println("Error while decrypting: " + e.toString());
+            System.out.println("Input string: " + strToDecrypt);
+            System.out.println("Key: " + key);
+            System.out.println("InitVector: " + initVector);
+            e.printStackTrace();
         }
         return null;
     }

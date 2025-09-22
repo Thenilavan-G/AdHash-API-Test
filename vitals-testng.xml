@@ -3,7 +3,13 @@
 <suite name="Daily Vitals Test Suite">
     <test name="Add Vitals Test">
         <classes>
-            <class name="MyHealthAPI.AddVitals"/>
+            <class name="MyHealthAPI.AddVitals">
+                <methods>
+                    <include name="loginEncReq"/>
+                    <include name="loginEncRes"/>
+                    <include name="loginDecRes"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

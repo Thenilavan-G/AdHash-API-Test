@@ -8,6 +8,14 @@
                     <include name="loginEncReq"/>
                     <include name="loginEncRes"/>
                     <include name="loginDecRes"/>
+                    <include name="hrEncReq"/>
+                    <include name="hrEncRes"/>
+                    <include name="bpEncReq"/>
+                    <include name="bpEncRes"/>
+                    <include name="oxyEncReq"/>
+                    <include name="oxyEncRes"/>
+                    <include name="bgEncReq"/>
+                    <include name="bgEncRes"/>
                 </methods>
             </class>
         </classes>

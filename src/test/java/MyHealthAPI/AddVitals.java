@@ -415,7 +415,7 @@ public class AddVitals {
     }
 
     //Decrypt the encrypted list
-    // @Test(priority = 4)
+    @Test(priority = 4)
     public void hrEncReq() {
         //Set the key value and vector value
         String key = "xfnr3PVyckouBZxW"; // 128 bit key
@@ -538,7 +538,7 @@ public class AddVitals {
         System.out.println("HR Response size: " + hrEncryptedResponses.size());
     }
 
-    //@Test(priority = 6)
+    @Test(priority = 6)
     public void bpEncReq() {
         for (int j = 1; j <= accessTokens.size(); j++) {
 
@@ -662,7 +662,7 @@ public class AddVitals {
         System.out.println("BP Response size: " + bpEncryptedResponses.size());
     }
 
-    //@Test(priority = 8)
+    @Test(priority = 8)
     public void oxyEncReq() {
         for (int j = 1; j <= accessTokens.size(); j++) {
 
@@ -773,7 +773,7 @@ public class AddVitals {
         System.out.println("OXY Response size: " + oxyEncryptedResponses.size());
     }
 
-   // @Test(priority = 10)
+    @Test(priority = 10)
     public void bgEncReq() {
         for (int j = 1; j <= accessTokens.size(); j++) {
 

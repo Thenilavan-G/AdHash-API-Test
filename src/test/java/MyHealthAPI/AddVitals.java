@@ -75,7 +75,7 @@ public class AddVitals {
         generateDatesUsingIST();
     }
 
-    //Generate dates automatically using IST timezone - CURRENT DATE ONLY
+    //Generate dates automatically using IST timezone - CURRENT DATE ONLY with COMMON TIME
     private void generateDatesUsingIST() {
         // Define IST timezone
         ZoneId istZone = ZoneId.of("Asia/Kolkata");
@@ -83,35 +83,34 @@ public class AddVitals {
         // Get current date and time in IST
         LocalDateTime currentIST = LocalDateTime.now(istZone);
 
-        // Generate current date for each vital type with specific times
+        // Generate current date for all vital types with COMMON TIME (10:00 AM)
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-        // For Heart Rate - current date at 8:00 AM
-        LocalDateTime hrCurrentDate = currentIST.withHour(8).withMinute(0).withSecond(0).withNano(0);
-        heartRateDate = new ArrayList<>();
-        heartRateDate.add(hrCurrentDate.format(formatter));
+        // Common time for all vitals - current date at 10:00 AM
+        LocalDateTime commonDateTime = currentIST.withHour(10).withMinute(0).withSecond(0).withNano(0);
+        String commonDateTimeString = commonDateTime.format(formatter);
 
-        // For Blood Pressure - current date at 9:00 AM
-        LocalDateTime bpCurrentDate = currentIST.withHour(9).withMinute(0).withSecond(0).withNano(0);
+        // For Heart Rate - current date at 10:00 AM
+        heartRateDate = new ArrayList<>();
+        heartRateDate.add(commonDateTimeString);
+
+        // For Blood Pressure - current date at 10:00 AM
         bpDate = new ArrayList<>();
-        bpDate.add(bpCurrentDate.format(formatter));
+        bpDate.add(commonDateTimeString);
 
         // For Oxygen - current date at 10:00 AM
-        LocalDateTime oxyCurrentDate = currentIST.withHour(10).withMinute(0).withSecond(0).withNano(0);
         oxygenDate = new ArrayList<>();
-        oxygenDate.add(oxyCurrentDate.format(formatter));
+        oxygenDate.add(commonDateTimeString);
 
-        // For Blood Glucose - current date at 7:00 AM
-        LocalDateTime bgCurrentDate = currentIST.withHour(7).withMinute(0).withSecond(0).withNano(0);
+        // For Blood Glucose - current date at 10:00 AM
         bloodGlucoseDate = new ArrayList<>();
-        bloodGlucoseDate.add(bgCurrentDate.format(formatter));
+        bloodGlucoseDate.add(commonDateTimeString);
 
-        // For Blood Glucose Current - current date at 7:00 AM
-        LocalDateTime bgCurrentCurrentDate = currentIST.withHour(7).withMinute(0).withSecond(0).withNano(0);
+        // For Blood Glucose Current - current date at 10:00 AM
         bloodGlucoseCurrentDate = new ArrayList<>();
-        bloodGlucoseCurrentDate.add(bgCurrentCurrentDate.format(formatter));
+        bloodGlucoseCurrentDate.add(commonDateTimeString);
 
-        System.out.println("Generated dates using IST timezone for CURRENT DATE ONLY:");
+        System.out.println("Generated dates using IST timezone for CURRENT DATE ONLY with COMMON TIME:");
         System.out.println("Heart Rate date: " + heartRateDate.get(0));
         System.out.println("Blood Pressure date: " + bpDate.get(0));
         System.out.println("Oxygen date: " + oxygenDate.get(0));

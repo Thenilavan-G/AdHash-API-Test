@@ -197,17 +197,17 @@ public class AddVitals {
             //Decrypt the encrypted list using keys
             String encryptedRequest = encrypt(key, initVector, "{\n" +
                     "\t\"fcmtoken\": \"f2QibZmCuEhevrIhsqIwc9:APA91bG_s6xWQ9UKFNVE4an3YJplXaLxJjgQzREVx5atPBu4SAIY9SD-_RME3P9oz75AMzLEDTjt9wy6CTGXX376HJMPpv_gVKd7cYpS5qBe_r3ACHff2icFOp3Dq-oeaMYSr0AQJozb\",\n" +
-                    "\t\"devicetype\": \"1\",\n" +
+                    "\t\"devicetype\": 1,\n" +
                     "\t\"osversion\": \"16.2\",\n" +
-                    "\t\"isVerified\": \"1\",\n" +
+                    "\t\"isVerified\": 1,\n" +
                     "\t\"mobilenumber\": \"" + number.get(i - 1) + "\",\n" +
                     "\t\"devicetoken\": \"\",\n" +
                     "\t\"appversion\": \"1.0\",\n" +
                     "\t\"manufacturer\": \"Apple\",\n" +
-                    "\t\"fname\": \"\",\n" +
-                    "\t\"lname\": \"\",\n" +
+                    "\t\"fname\": \"Test\",\n" +
+                    "\t\"lname\": \"User\",\n" +
                     "\t\"profilepic\": \"\",\n" +
-                    "\t\"email\": \"\",\n" +
+                    "\t\"email\": \"test@example.com\",\n" +
                     "\t\"buildversion\": \"1.0.1.0\"\n" +
                     "}"
             );

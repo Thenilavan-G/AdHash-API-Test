@@ -1,0 +1,5 @@
+# Created at 2025-09-22T04:20:40.307
+Boot Manifest-JAR contains absolute paths in classpath 'D:\Thenilavan\Automation\eclipse-workspace\MyHealthAIAPI\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+

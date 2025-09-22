@@ -75,7 +75,7 @@ jobs:
     - name: Run Maven tests
       run: |
         # Run the AddVitals test using TestNG suite
-        mvn test -DsuiteXmlFile=vitals-testng.xml -DfailIfNoTests=false
+        mvn test -Dsurefire.suiteXmlFiles=vitals-testng.xml -DfailIfNoTests=false
         
     - name: Upload test results
       uses: actions/upload-artifact@v4

@@ -293,25 +293,40 @@ public class AddVitals {
                 if (decrypted != null) {
                     try {
                         parsed = JsonParser.parseString(decrypted);
+                        System.out.println("Successfully decrypted response " + idx + ": " + decrypted);
                     } catch (JsonSyntaxException e2) {
+                        System.out.println("Decrypted text is not valid JSON for item index " + idx + ":\n" + decrypted);
                         Assert.fail("Decrypted text is not valid JSON for item index " + idx + ":\n" + decrypted, e2);
                         return;
                     }
                 } else {
+                    System.out.println("Decryption returned null for item index " + idx + ". Original response: " + encrypted);
                     Assert.fail("Decryption returned null for item index " + idx + ". Original response: " + encrypted);
                     return;
                 }
             }
 
             JsonObject root = parsed.isJsonObject() ? parsed.getAsJsonObject() : new JsonObject();
+            System.out.println("JSON structure for response " + idx + ": " + root.toString());
 
             // Try several known locations / key aliases
             String accessToken = findToken(root);
 
-            Assert.assertNotNull(
-                    accessToken,
-                    "Could not find access token for item index " + idx + ". JSON:\n" + decrypted
-            );
+            if (accessToken == null) {
+                System.out.println("Could not find access token using findToken method for item index " + idx);
+                System.out.println("Full JSON structure: " + decrypted);
+
+                // Try to find any field that looks like a token
+                accessToken = findAnyTokenField(root);
+
+                if (accessToken == null) {
+                    System.out.println("No token-like field found in the JSON response");
+                    Assert.fail("Could not find access token for item index " + idx + ". JSON:\n" + decrypted);
+                    return;
+                } else {
+                    System.out.println("Found token using fallback method: " + accessToken);
+                }
+            }
 
             System.out.println("Access token: " + (idx + 1) + " : " + accessToken);
             accessTokens.add(accessToken);
@@ -358,6 +373,31 @@ public class AddVitals {
         for (String n : names) {
             if (parent.has(n) && parent.get(n).isJsonPrimitive()) return parent.get(n).getAsString();
         }
+        return null;
+    }
+
+    // Fallback method to find any field that looks like a token
+    private static String findAnyTokenField(JsonObject root) {
+        if (root == null) return null;
+
+        // Look for any field containing "token", "Token", "jwt", "JWT", "access" etc.
+        for (String key : root.keySet()) {
+            String lowerKey = key.toLowerCase();
+            if (lowerKey.contains("token") || lowerKey.contains("jwt") || lowerKey.contains("access")) {
+                if (root.get(key).isJsonPrimitive()) {
+                    return root.get(key).getAsString();
+                }
+            }
+        }
+
+        // Recursively search in nested objects
+        for (String key : root.keySet()) {
+            if (root.get(key).isJsonObject()) {
+                String found = findAnyTokenField(root.getAsJsonObject(key));
+                if (found != null) return found;
+            }
+        }
+
         return null;
     }
 

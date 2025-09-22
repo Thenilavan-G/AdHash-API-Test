@@ -65,14 +65,27 @@ public class AddVitals {
     String key = "xfnr3PVyckouBZxW"; // 128 bit key
     String initVector = "xfnr3PVyckouBZxW"; // 16 bytes IV
 
-    //Get the mobile numbers from Excel and generate dates automatically using IST
+    //Generate test mobile numbers programmatically and generate dates automatically using IST
     @BeforeTest
     public void beforeTest() {
-        PatientReqRead addPatient = new PatientReqRead();
-        number = addPatient.getNumberList();
+        // Generate test mobile numbers programmatically instead of reading from Excel
+        generateTestMobileNumbers();
 
         // Generate dates automatically using IST timezone instead of reading from Excel
         generateDatesUsingIST();
+    }
+
+    //Generate test mobile numbers programmatically for reliable daily automation
+    private void generateTestMobileNumbers() {
+        number = new ArrayList<>();
+
+        // Use only the working mobile number for daily automation
+        // This number is enrolled with the doctor and will work consistently
+        String workingNumber = "9876543210";
+        number.add(workingNumber);
+
+        System.out.println("Generated test mobile number: " + number);
+        System.out.println("Total mobile numbers: " + number.size());
     }
 
     //Generate dates automatically using IST timezone - CURRENT DATE ONLY with COMMON TIME

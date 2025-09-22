@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Test]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Flipkart(failed)">
+    <classes>
+      <class name="AES.AESUtil">
+        <methods>
+          <include name="pdf"/>
+          <include name="OpenChrome"/>
+          <include name="Product_Click"/>
+          <include name="Product_RemoveCart"/>
+          <include name="Product_AddCart"/>
+          <include name="Product_SelectType"/>
+          <include name="deleteDir"/>
+          <include name="endTest"/>
+        </methods>
+      </class> <!-- AES.AESUtil -->
+    </classes>
+  </test> <!-- Flipkart(failed) -->
+</suite> <!-- Failed suite [Test] -->

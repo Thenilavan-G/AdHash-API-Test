@@ -1,0 +1,22 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="MyHealthAI_Production">
+    <test name="MyHealthAI">
+        <classes>
+            <class name="MyHealthAPI.AddVitals">
+                <methods>
+                    <include name="loginEncReq"/>
+                    <include name="loginEncRes"/>
+                    <include name="loginDecRes"/>
+                    <include name="hrEncReq"/>
+                    <include name="hrEncRes"/>
+                    <include name="bpEncReq"/>
+                    <include name="bpEncRes"/>
+                    <include name="oxyEncReq"/>
+                    <include name="oxyEncRes"/>
+                    <include name="bgEncReq"/>
+                    <include name="bgEncRes"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

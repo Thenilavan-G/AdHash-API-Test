@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+  <meta charset='utf-8'>
+  <title>TestNG reports</title>
+
+    <link type="text/css" href="testng-reports1.css" rel="stylesheet" id="ultra" />
+    <link type="text/css" href="testng-reports.css" rel="stylesheet" id="retro" disabled="false"/>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="testng-reports.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type='text/javascript'>
+      google.load('visualization', '1', {packages:['table']});
+      google.setOnLoadCallback(drawTable);
+      var suiteTableInitFunctions = new Array();
+      var suiteTableData = new Array();
+    </script>
+    <!--
+      <script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8.16.custom.min.js"></script>
+     -->
+  </head>
+
+  <body>
+    <div class="top-banner-root">
+      <span class="top-banner-title-font">Test results</span>
+      <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
+      <br/>
+      <span class="top-banner-font-1">3 suites, 5 failed tests</span>
+    </div> <!-- top-banner-root -->
+    <div class="navigator-root">
+      <div class="navigator-suite-header">
+        <span>All suites</span>
+        <a href="#" title="Collapse/expand all the suites" class="collapse-all-link">
+          <img src="collapseall.gif" class="collapse-all-icon">
+          </img> <!-- collapse-all-icon -->
+        </a> <!-- collapse-all-link -->
+      </div> <!-- navigator-suite-header -->
+      <div class="suite">
+        <div class="rounded-window">
+          <div class="suite-header light-rounded-window-top">
+            <a href="#" panel-name="suite-Test1" class="navigator-link">
+              <span class="suite-name border-failed">Test1</span>
+            </a> <!-- navigator-link -->
+          </div> <!-- suite-header light-rounded-window-top -->
+          <div class="navigator-suite-content">
+            <div class="suite-section-title">
+              <span>Info</span>
+            </div> <!-- suite-section-title -->
+            <div class="suite-section-content">
+              <ul>
+                <li>
+                  <a href="#" panel-name="test-xml-Test1" class="navigator-link ">
+                    <span>C:\Thenilavan\Automation\eclipse-workspace\Flipkart\testng1.xml</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="testlist-Test1" class="navigator-link ">
+                    <span class="test-stats">1 test</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="group-Test1" class="navigator-link ">
+                    <span>0 groups</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="times-Test1" class="navigator-link ">
+                    <span>Times</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="reporter-Test1" class="navigator-link ">
+                    <span>Reporter output</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="ignored-methods-Test1" class="navigator-link ">
+                    <span>Ignored methods</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="chronological-Test1" class="navigator-link ">
+                    <span>Chronological view</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+              </ul>
+            </div> <!-- suite-section-content -->
+            <div class="result-section">
+              <div class="suite-section-title">
+                <span>Results</span>
+              </div> <!-- suite-section-title -->
+              <div class="suite-section-content">
+                <ul>
+                  <li>
+                    <span class="method-stats">8 methods, 4 failed,   4 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Test1" class="hide-methods failed suite-Test1"> (hide)</a> <!-- hide-methods failed suite-Test1 -->
+                      <a href="#" panel-name="suite-Test1" class="show-methods failed suite-Test1"> (show)</a> <!-- show-methods failed suite-Test1 -->
+                    </span>
+                    <div class="method-list-content failed suite-Test1">
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Test1" title="AES.AESUtil" class="method navigator-link" hash-for-method="Product_AddCart">Product_AddCart</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Test1" title="AES.AESUtil" class="method navigator-link" hash-for-method="Product_Click">Product_Click</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Test1" title="AES.AESUtil" class="method navigator-link" hash-for-method="Product_RemoveCart">Product_RemoveCart</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Test1" title="AES.AESUtil" class="method navigator-link" hash-for-method="Product_SelectType">Product_SelectType</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-Test1 -->
+                  </li>
+                  <li>
+                    <span class="method-list-title passed">Passed methods</span>
+                    <span class="show-or-hide-methods passed">
+                      <a href="#" panel-name="suite-Test1" class="hide-methods passed suite-Test1"> (hide)</a> <!-- hide-methods passed suite-Test1 -->
+                      <a href="#" panel-name="suite-Test1" class="show-methods passed suite-Test1"> (show)</a> <!-- show-methods passed suite-Test1 -->
+                    </span>
+                    <div class="method-list-content passed suite-Test1">
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Test1" title="AES.AESUtil" class="method navigator-link" hash-for-method="Login_ButtonClick">Login_ButtonClick</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Test1" title="AES.AESUtil" class="method navigator-link" hash-for-method="Login_Click">Login_Click</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Test1" title="AES.AESUtil" class="method navigator-link" hash-for-method="Login_Credentials">Login_Credentials</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Test1" title="AES.AESUtil" class="method navigator-link" hash-for-method="Logout_Click">Logout_Click</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content passed suite-Test1 -->
+                  </li>
+                </ul>
+              </div> <!-- suite-section-content -->
+            </div> <!-- result-section -->
+          </div> <!-- navigator-suite-content -->
+        </div> <!-- rounded-window -->
+      </div> <!-- suite -->
+      <div class="suite">
+        <div class="rounded-window">
+          <div class="suite-header light-rounded-window-top">
+            <a href="#" panel-name="suite-Test2" class="navigator-link">
+              <span class="suite-name border-failed">Test2</span>
+            </a> <!-- navigator-link -->
+          </div> <!-- suite-header light-rounded-window-top -->
+          <div class="navigator-suite-content">
+            <div class="suite-section-title">
+              <span>Info</span>
+            </div> <!-- suite-section-title -->
+            <div class="suite-section-content">
+              <ul>
+                <li>
+                  <a href="#" panel-name="test-xml-Test2" class="navigator-link ">
+                    <span>C:\Thenilavan\Automation\eclipse-workspace\Flipkart\testng2.xml</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="testlist-Test2" class="navigator-link ">
+                    <span class="test-stats">1 test</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="group-Test2" class="navigator-link ">
+                    <span>0 groups</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="times-Test2" class="navigator-link ">
+                    <span>Times</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="reporter-Test2" class="navigator-link ">
+                    <span>Reporter output</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="ignored-methods-Test2" class="navigator-link ">
+                    <span>Ignored methods</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="chronological-Test2" class="navigator-link ">
+                    <span>Chronological view</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+              </ul>
+            </div> <!-- suite-section-content -->
+            <div class="result-section">
+              <div class="suite-section-title">
+                <span>Results</span>
+              </div> <!-- suite-section-title -->
+              <div class="suite-section-content">
+                <ul>
+                  <li>
+                    <span class="method-stats">1 method, 1 failed,   </span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Test2" class="hide-methods failed suite-Test2"> (hide)</a> <!-- hide-methods failed suite-Test2 -->
+                      <a href="#" panel-name="suite-Test2" class="show-methods failed suite-Test2"> (show)</a> <!-- show-methods failed suite-Test2 -->
+                    </span>
+                    <div class="method-list-content failed suite-Test2">
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Test2" title="Report.HtmlToPdf" class="method navigator-link" hash-for-method="pdf">pdf</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-Test2 -->
+                  </li>
+                </ul>
+              </div> <!-- suite-section-content -->
+            </div> <!-- result-section -->
+          </div> <!-- navigator-suite-content -->
+        </div> <!-- rounded-window -->
+      </div> <!-- suite -->
+    </div> <!-- navigator-root -->
+    <div class="wrapper">
+      <div class="main-panel-root">
+        <div panel-name="suite-Test1" class="panel Test1">
+          <div class="suite-Test1-class-failed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="failed.png"/>
+              <span class="class-name">AES.AESUtil</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="Product_AddCart">
+                  </a> <!-- Product_AddCart -->
+                  <span class="method-name">Product_AddCart</span>
+                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for
+                      Functions.GenericFunctions$$Lambda$419/0x0000000800db3cd0@574cd322 (tried for 30 second(s) with
+                      500 milliseconds interval)
+                      at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
+                      at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
+                      at Functions.GenericFunctions.click(GenericFunctions.java:26)
+                      at Pages.ProductPageObjects.addCart(ProductPageObjects.java:44)
+                      at AES.AESUtil.Product_AddCart(Flipkart.java:55)
+                      at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+                      at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)
+                      at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)
+                      Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element:
+                      {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;/html/body/div/div/div[3]/div[1]/div[2]/div[2]/div/div[1]/div/a[1]/div[1]/div/div&quot;}
+                      (Session info: chrome=91.0.4472.77)
+                      For documentation on this error, please visit:
+                      https://www.seleniumhq.org/exceptions/no_such_element.html
+                      Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;
+                      System info: host: &apos;THENILAVAN&apos;, ip: &apos;192.168.43.103&apos;, os.name: &apos;Windows
+                      10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;15.0.1&apos;
+                      Driver info: org.openqa.selenium.chrome.ChromeDriver
+                      Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 91.0.4472.77,
+                      chrome: {chromedriverVersion: 91.0.4472.101 (af52a90bf870..., userDataDir:
+                      C:\Users\SPLPT336\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:56873},
+                      javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform:
+                      WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability:
+                      false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss
+                      and notify, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+                      Session ID: 0a7e9ed471bdfa8aa9f1fba32d05aebc
+                      *** Element info: {Using=xpath,
+                      value=/html/body/div/div/div[3]/div[1]/div[2]/div[2]/div/div[1]/div/a[1]/div[1]/div/div}
+                      at
+                      org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+                      at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+                      at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+                      at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+                      at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+                      at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+                      at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
+                      at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:428)
+                      at org.openqa.selenium.By$ByXPath.findElement(By.java:353)
+                      at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
+                      at Functions.GenericFunctions.lambda$click$0(GenericFunctions.java:26)
+                      at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:249)
+                      ... 31 more
+                      ... Removed 30 stack frames
+                  </div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="Product_Click">
+                  </a> <!-- Product_Click -->
+                  <span class="method-name">Product_Click</span>
+                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for
+                      Functions.GenericFunctions$$Lambda$570/0x0000000800e7d730@79316f3a (tried for 30 second(s) with
+                      500 milliseconds interval)
+                      at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
+                      at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
+                      at Functions.GenericFunctions.scrollToElement(GenericFunctions.java:47)
+                      at Pages.ProductPageObjects.clickProduct(ProductPageObjects.java:35)
+                      at AES.AESUtil.Product_Click(Flipkart.java:48)
+                      at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+                      at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)
+                      at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)
+                      Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element:
+                      {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;/html/body/div/div/div[3]/div[2]/div/div[2]/div/div/div[1]/div/div[1]/div/a/div[1]/div&quot;}
+                      (Session info: chrome=91.0.4472.77)
+                      For documentation on this error, please visit:
+                      https://www.seleniumhq.org/exceptions/no_such_element.html
+                      Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;
+                      System info: host: &apos;THENILAVAN&apos;, ip: &apos;192.168.43.103&apos;, os.name: &apos;Windows
+                      10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;15.0.1&apos;
+                      Driver info: org.openqa.selenium.chrome.ChromeDriver
+                      Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 91.0.4472.77,
+                      chrome: {chromedriverVersion: 91.0.4472.101 (af52a90bf870..., userDataDir:
+                      C:\Users\SPLPT336\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:56873},
+                      javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform:
+                      WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability:
+                      false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss
+                      and notify, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+                      Session ID: 0a7e9ed471bdfa8aa9f1fba32d05aebc
+                      *** Element info: {Using=xpath,
+                      value=/html/body/div/div/div[3]/div[2]/div/div[2]/div/div/div[1]/div/div[1]/div/a/div[1]/div}
+                      at
+                      org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+                      at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+                      at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+                      at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+                      at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+                      at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+                      at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
+                      at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:428)
+                      at org.openqa.selenium.By$ByXPath.findElement(By.java:353)
+                      at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
+                      at Functions.GenericFunctions.lambda$scrollToElement$1(GenericFunctions.java:47)
+                      at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:249)
+                      ... 31 more
+                      ... Removed 30 stack frames
+                  </div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="Product_RemoveCart">
+                  </a> <!-- Product_RemoveCart -->
+                  <span class="method-name">Product_RemoveCart</span>
+                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for
+                      Functions.GenericFunctions$$Lambda$570/0x0000000800e7d730@3f4f5330 (tried for 30 second(s) with
+                      500 milliseconds interval)
+                      at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
+                      at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
+                      at Functions.GenericFunctions.scrollToElement(GenericFunctions.java:47)
+                      at Pages.ProductPageObjects.removeCart(ProductPageObjects.java:52)
+                      at AES.AESUtil.Product_RemoveCart(Flipkart.java:62)
+                      at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+                      at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)
+                      at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)
+                      Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element:
+                      {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;/html/body/div[1]/div/div[2]/div/div/div[1]/div/div[2]/div/div[2]/div[2]/div[2]&quot;}
+                      (Session info: chrome=91.0.4472.77)
+                      For documentation on this error, please visit:
+                      https://www.seleniumhq.org/exceptions/no_such_element.html
+                      Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;
+                      System info: host: &apos;THENILAVAN&apos;, ip: &apos;192.168.43.103&apos;, os.name: &apos;Windows
+                      10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;15.0.1&apos;
+                      Driver info: org.openqa.selenium.chrome.ChromeDriver
+                      Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 91.0.4472.77,
+                      chrome: {chromedriverVersion: 91.0.4472.101 (af52a90bf870..., userDataDir:
+                      C:\Users\SPLPT336\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:56873},
+                      javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform:
+                      WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability:
+                      false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss
+                      and notify, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+                      Session ID: 0a7e9ed471bdfa8aa9f1fba32d05aebc
+                      *** Element info: {Using=xpath,
+                      value=/html/body/div[1]/div/div[2]/div/div/div[1]/div/div[2]/div/div[2]/div[2]/div[2]}
+                      at
+                      org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+                      at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+                      at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+                      at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+                      at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+                      at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+                      at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
+                      at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:428)
+                      at org.openqa.selenium.By$ByXPath.findElement(By.java:353)
+                      at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
+                      at Functions.GenericFunctions.lambda$scrollToElement$1(GenericFunctions.java:47)
+                      at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:249)
+                      ... 31 more
+                      ... Removed 30 stack frames
+                  </div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="Product_SelectType">
+                  </a> <!-- Product_SelectType -->
+                  <span class="method-name">Product_SelectType</span>
+                  <div class="stack-trace">org.openqa.selenium.NoSuchElementException: no such element: Unable to locate
+                      element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;/html/body/div/div/div[2]/div/div/div[5]/a/div[2]/div/div&quot;}
+                      (Session info: chrome=91.0.4472.77)
+                      For documentation on this error, please visit:
+                      https://www.seleniumhq.org/exceptions/no_such_element.html
+                      Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;
+                      System info: host: &apos;THENILAVAN&apos;, ip: &apos;192.168.43.103&apos;, os.name: &apos;Windows
+                      10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;15.0.1&apos;
+                      Driver info: org.openqa.selenium.chrome.ChromeDriver
+                      Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 91.0.4472.77,
+                      chrome: {chromedriverVersion: 91.0.4472.101 (af52a90bf870..., userDataDir:
+                      C:\Users\SPLPT336\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:56873},
+                      javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform:
+                      WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability:
+                      false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss
+                      and notify, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+                      Session ID: 0a7e9ed471bdfa8aa9f1fba32d05aebc
+                      *** Element info: {Using=xpath, value=/html/body/div/div/div[2]/div/div/div[5]/a/div[2]/div/div}
+                      at
+                      org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+                      at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+                      at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+                      at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+                      at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+                      at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+                      at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
+                      at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:428)
+                      at org.openqa.selenium.By$ByXPath.findElement(By.java:353)
+                      at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
+                      at Functions.GenericFunctions.mouseHover(GenericFunctions.java:39)
+                      at Pages.ProductPageObjects.selectElectronics(ProductPageObjects.java:27)
+                      at AES.AESUtil.Product_SelectType(Flipkart.java:40)
+                      at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+                      at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)
+                      at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)
+                      ... Removed 30 stack frames
+                  </div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Test1-class-failed -->
+          <div class="suite-Test1-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">AES.AESUtil</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="Login_ButtonClick">
+                  </a> <!-- Login_ButtonClick -->
+                  <span class="method-name">Login_ButtonClick</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="Login_Click">
+                  </a> <!-- Login_Click -->
+                  <span class="method-name">Login_Click</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="Login_Credentials">
+                  </a> <!-- Login_Credentials -->
+                  <span class="method-name">Login_Credentials</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="Logout_Click">
+                  </a> <!-- Logout_Click -->
+                  <span class="method-name">Logout_Click</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Test1-class-passed -->
+        </div> <!-- panel Test1 -->
+        <div panel-name="suite-FlipkartTest" class="panel FlipkartTest">
+        </div> <!-- panel FlipkartTest -->
+        <div panel-name="suite-Test2" class="panel Test2">
+          <div class="suite-Test2-class-failed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="failed.png"/>
+              <span class="class-name">Report.HtmlToPdf</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="pdf">
+                  </a> <!-- pdf -->
+                  <span class="method-name">pdf</span>
+                  <div class="stack-trace">java.io.FileNotFoundException: .\test-output\emailable-report.html (The system cannot find the file specified)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:211)
+	at java.base/java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:153)
+	at java.base/java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:108)
+	at Report.HtmlToPdf.pdf(HtmlToPdf.java:14)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)
+	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)
+... Removed 25 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Test2-class-failed -->
+        </div> <!-- panel Test2 -->
+        <div panel-name="test-xml-Test1" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">C:\Thenilavan\Automation\eclipse-workspace\Flipkart\testng1.xml</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
+&lt;suite name=&quot;Test1&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
+  &lt;test thread-count=&quot;5&quot; name=&quot;Flipkart&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;AES.AESUtil&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Flipkart --&gt;
+&lt;/suite&gt; &lt;!-- Test1 --&gt;
+            </pre>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="test-xml-FlipkartTest" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">C:\Thenilavan\Automation\eclipse-workspace\Flipkart\testng.xml</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
+&lt;suite name=&quot;FlipkartTest&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
+  &lt;suite-files&gt;
+    &lt;suite-file path=&quot;./testng1.xml&quot;/&gt;
+    &lt;suite-file path=&quot;./testng2.xml&quot;/&gt;
+  &lt;/suite-files&gt;
+&lt;/suite&gt; &lt;!-- FlipkartTest --&gt;
+            </pre>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="test-xml-Test2" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">C:\Thenilavan\Automation\eclipse-workspace\Flipkart\testng2.xml</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
+&lt;suite name=&quot;Test2&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
+  &lt;test thread-count=&quot;5&quot; name=&quot;Report&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;Report.HtmlToPdf&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Report --&gt;
+&lt;/suite&gt; &lt;!-- Test2 --&gt;
+            </pre>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="testlist-Test1" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Tests for Test1</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <ul>
+              <li>
+                <span class="test-name">Flipkart (1 class)</span>
+              </li>
+            </ul>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="testlist-FlipkartTest" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Tests for FlipkartTest</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <ul>
+            </ul>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="testlist-Test2" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Tests for Test2</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <ul>
+              <li>
+                <span class="test-name">Report (1 class)</span>
+              </li>
+            </ul>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="group-Test1" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Groups for Test1</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="group-FlipkartTest" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Groups for FlipkartTest</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="group-Test2" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Groups for Test2</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="times-Test1" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Times for Test1</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="times-div">
+              <script type="text/javascript">
+                  suiteTableInitFunctions.push('tableData_Test1');
+                  function tableData_Test1() {
+                  var data = new google.visualization.DataTable();
+                  data.addColumn('number', 'Number');
+                  data.addColumn('string', 'Method');
+                  data.addColumn('string', 'Class');
+                  data.addColumn('number', 'Time (ms)');
+                  data.addRows(8);
+                  data.setCell(0, 0, 0)
+                  data.setCell(0, 1, 'Product_RemoveCart')
+                  data.setCell(0, 2, 'AES.AESUtil')
+                  data.setCell(0, 3, 42610);
+                  data.setCell(1, 0, 1)
+                  data.setCell(1, 1, 'Product_Click')
+                  data.setCell(1, 2, 'AES.AESUtil')
+                  data.setCell(1, 3, 40627);
+                  data.setCell(2, 0, 2)
+                  data.setCell(2, 1, 'Product_AddCart')
+                  data.setCell(2, 2, 'AES.AESUtil')
+                  data.setCell(2, 3, 40626);
+                  data.setCell(3, 0, 3)
+                  data.setCell(3, 1, 'Product_SelectType')
+                  data.setCell(3, 2, 'AES.AESUtil')
+                  data.setCell(3, 3, 22096);
+                  data.setCell(4, 0, 4)
+                  data.setCell(4, 1, 'Login_Credentials')
+                  data.setCell(4, 2, 'AES.AESUtil')
+                  data.setCell(4, 3, 1112);
+                  data.setCell(5, 0, 5)
+                  data.setCell(5, 1, 'Logout_Click')
+                  data.setCell(5, 2, 'AES.AESUtil')
+                  data.setCell(5, 3, 400);
+                  data.setCell(6, 0, 6)
+                  data.setCell(6, 1, 'Login_Click')
+                  data.setCell(6, 2, 'AES.AESUtil')
+                  data.setCell(6, 3, 321);
+                  data.setCell(7, 0, 7)
+                  data.setCell(7, 1, 'Login_ButtonClick')
+                  data.setCell(7, 2, 'AES.AESUtil')
+                  data.setCell(7, 3, 96);
+                  window.suiteTableData['Test1']= { tableData: data, tableDiv: 'times-div-Test1'}
+                  return data;
+                  }
+              </script>
+              <span class="suite-total-time">Total running time: 2 minutes</span>
+              <div id="times-div-Test1">
+              </div> <!-- times-div-Test1 -->
+            </div> <!-- times-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="times-FlipkartTest" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Times for FlipkartTest</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="times-div">
+              <script type="text/javascript">
+suiteTableInitFunctions.push('tableData_FlipkartTest');
+function tableData_FlipkartTest() {
+var data = new google.visualization.DataTable();
+data.addColumn('number', 'Number');
+data.addColumn('string', 'Method');
+data.addColumn('string', 'Class');
+data.addColumn('number', 'Time (ms)');
+data.addRows(0);
+window.suiteTableData['FlipkartTest']= { tableData: data, tableDiv: 'times-div-FlipkartTest'}
+return data;
+}
+              </script>
+              <span class="suite-total-time">Total running time: 0 ms</span>
+              <div id="times-div-FlipkartTest">
+              </div> <!-- times-div-FlipkartTest -->
+            </div> <!-- times-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="times-Test2" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Times for Test2</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="times-div">
+              <script type="text/javascript">
+suiteTableInitFunctions.push('tableData_Test2');
+function tableData_Test2() {
+var data = new google.visualization.DataTable();
+data.addColumn('number', 'Number');
+data.addColumn('string', 'Method');
+data.addColumn('string', 'Class');
+data.addColumn('number', 'Time (ms)');
+data.addRows(1);
+data.setCell(0, 0, 0)
+data.setCell(0, 1, 'pdf')
+data.setCell(0, 2, 'Report.HtmlToPdf')
+data.setCell(0, 3, 8);
+window.suiteTableData['Test2']= { tableData: data, tableDiv: 'times-div-Test2'}
+return data;
+}
+              </script>
+              <span class="suite-total-time">Total running time: 8 ms</span>
+              <div id="times-div-Test2">
+              </div> <!-- times-div-Test2 -->
+            </div> <!-- times-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="reporter-Test1" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Reporter output for Test1</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">Product_SelectType</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output"><a href='./FailedTestScreenshots/TestFailed_Product_SelectType.jpg'> <img src='./test-output/FailedTestScreenshots/TestFailed_Product_SelectType.jpg' height='500' width='500'/> </a></span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">Product_RemoveCart</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output"><a href='./FailedTestScreenshots/TestFailed_Product_RemoveCart.jpg'> <img src='./test-output/FailedTestScreenshots/TestFailed_Product_RemoveCart.jpg' height='500' width='500'/> </a></span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">Product_Click</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output"><a href='./FailedTestScreenshots/TestFailed_Product_Click.jpg'> <img src='./test-output/FailedTestScreenshots/TestFailed_Product_Click.jpg' height='500' width='500'/> </a></span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">Product_AddCart</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output"><a href='./FailedTestScreenshots/TestFailed_Product_AddCart.jpg'> <img src='./test-output/FailedTestScreenshots/TestFailed_Product_AddCart.jpg' height='500' width='500'/> </a></span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="reporter-FlipkartTest" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Reporter output for FlipkartTest</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="reporter-Test2" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Reporter output for Test2</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="ignored-methods-Test1" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">0 ignored methods</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="ignored-methods-FlipkartTest" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">0 ignored methods</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="ignored-methods-Test2" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">0 ignored methods</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="chronological-Test1" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Methods in chronological order</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="chronological-class">
+              <div class="chronological-class-name">AES.AESUtil</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">deleteDir</span>
+                <span class="method-start">0 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="configuration-class before">
+                <span class="method-name">OpenChrome</span>
+                <span class="method-start">168 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="test-method">
+                <span class="method-name">Login_Click</span>
+                <span class="method-start">12709 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">Login_Credentials</span>
+                <span class="method-start">13038 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">Login_ButtonClick</span>
+                <span class="method-start">14158 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">Product_SelectType</span>
+                <span class="method-start">14254 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">Product_Click</span>
+                <span class="method-start">36824 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">Product_AddCart</span>
+                <span class="method-start">77727 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">Product_RemoveCart</span>
+                <span class="method-start">118766 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">Logout_Click</span>
+                <span class="method-start">161720 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-class after">
+                <span class="method-name">endTest</span>
+                <span class="method-start">162120 ms</span>
+              </div> <!-- configuration-class after -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="chronological-FlipkartTest" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Methods in chronological order</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="chronological-Test2" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Methods in chronological order</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="chronological-class">
+              <div class="chronological-class-name">Report.HtmlToPdf</div> <!-- chronological-class-name -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">pdf</span>
+                <span class="method-start">0 ms</span>
+              </div> <!-- test-method -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+      </div> <!-- main-panel-root -->
+    </div> <!-- wrapper -->
+  </body>
+<script type="text/javascript" src="testng-reports2.js"></script>
+</html>

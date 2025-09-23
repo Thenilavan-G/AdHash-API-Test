@@ -31,11 +31,22 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
         
+    - name: Clean Maven cache (if needed)
+      run: |
+        echo "Cleaning Maven cache to prevent conflicts..."
+        if (Test-Path ~/.m2/repository/org/apache/maven/plugins/maven-surefire-plugin) {
+          Remove-Item -Recurse -Force ~/.m2/repository/org/apache/maven/plugins/maven-surefire-plugin
+          echo "Cleared Surefire plugin cache"
+        }
+
     - name: Run API Tests
       run: |
         echo "Starting AdHash API Tests..."
         echo "Running 43 API tests from testng.xml..."
-        mvn clean test -Dsurefire.suiteXmlFiles=testng.xml
+        echo "Maven version:"
+        mvn --version
+        echo "Running tests with updated Surefire plugin..."
+        mvn clean test
         echo "Tests completed. Exit code: $LASTEXITCODE"
         
     - name: Upload Test Results

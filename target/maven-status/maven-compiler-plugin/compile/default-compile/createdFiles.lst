@@ -1,4 +1,5 @@
 utils\EmailService$1.class
+utils\ExtentReportManager.class
 utils\EmailService.class
 utils\HttpClient.class
 utils\TestReportListener.class

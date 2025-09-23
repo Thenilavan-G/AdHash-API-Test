@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Simple HTML Report Generator for AdHash API Tests
@@ -17,36 +19,47 @@ public class SimpleHtmlReportGenerator {
     private static int passedTests = 0;
     private static int failedTests = 0;
     private static int skippedTests = 0;
+
+    // Lists to store test method details
+    private static List<String> passedTestMethods = new ArrayList<>();
+    private static List<String> failedTestMethods = new ArrayList<>();
+    private static List<String> skippedTestMethods = new ArrayList<>();
     
     /**
      * Initialize the simple report
      */
     public static void initializeReport() {
+        // Reset all counters and lists
+        reset();
+
         // Create reports directory if it doesn't exist
         File reportsDir = new File("simple-reports");
         if (!reportsDir.exists()) {
             reportsDir.mkdirs();
         }
-        
+
         // Generate report file name with timestamp
         String timestamp = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
         reportPath = "simple-reports/AdHash_API_Simple_Report_" + timestamp + ".html";
     }
     
     /**
-     * Record test result
+     * Record test result with test method name
      */
-    public static void recordTestResult(String status) {
+    public static void recordTestResult(String status, String testMethodName) {
         totalTests++;
         switch (status.toLowerCase()) {
             case "pass":
                 passedTests++;
+                passedTestMethods.add(testMethodName);
                 break;
             case "fail":
                 failedTests++;
+                failedTestMethods.add(testMethodName);
                 break;
             case "skip":
                 skippedTests++;
+                skippedTestMethods.add(testMethodName);
                 break;
         }
     }
@@ -104,6 +117,15 @@ public class SimpleHtmlReportGenerator {
         html.append("        .status.success { background-color: #e8f5e8; color: #4caf50; }\n");
         html.append("        .status.warning { background-color: #fff3e0; color: #ff9800; }\n");
         html.append("        .status.error { background-color: #ffebee; color: #f44336; }\n");
+        html.append("        .test-methods { margin: 30px 0; }\n");
+        html.append("        .test-methods h3 { text-align: center; color: #333; margin-bottom: 20px; }\n");
+        html.append("        .method-section { margin: 20px 0; }\n");
+        html.append("        .method-section h4 { margin-bottom: 10px; }\n");
+        html.append("        .method-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 8px; }\n");
+        html.append("        .method-item { padding: 8px 12px; border-radius: 4px; font-size: 14px; }\n");
+        html.append("        .passed-method { background-color: #e8f5e8; color: #2e7d32; border-left: 4px solid #4caf50; }\n");
+        html.append("        .failed-method { background-color: #ffebee; color: #c62828; border-left: 4px solid #f44336; }\n");
+        html.append("        .skipped-method { background-color: #fff3e0; color: #ef6c00; border-left: 4px solid #ff9800; }\n");
         html.append("        .footer { text-align: center; margin-top: 30px; color: #666; font-size: 12px; }\n");
         html.append("    </style>\n");
         html.append("</head>\n");
@@ -124,13 +146,10 @@ public class SimpleHtmlReportGenerator {
         html.append("                <div class=\"stat-number\">").append(passedTests).append("</div>\n");
         html.append("                <div class=\"stat-label\">✅ Passed</div>\n");
         html.append("            </div>\n");
-        
-        if (failedTests > 0) {
-            html.append("            <div class=\"stat-box failed\">\n");
-            html.append("                <div class=\"stat-number\">").append(failedTests).append("</div>\n");
-            html.append("                <div class=\"stat-label\">❌ Failed</div>\n");
-            html.append("            </div>\n");
-        }
+        html.append("            <div class=\"stat-box failed\">\n");
+        html.append("                <div class=\"stat-number\">").append(failedTests).append("</div>\n");
+        html.append("                <div class=\"stat-label\">❌ Failed</div>\n");
+        html.append("            </div>\n");
         
         if (skippedTests > 0) {
             html.append("            <div class=\"stat-box skipped\">\n");
@@ -154,7 +173,52 @@ public class SimpleHtmlReportGenerator {
         html.append("        <div class=\"status ").append(statusClass).append("\">\n");
         html.append("            ").append(statusText).append("\n");
         html.append("        </div>\n");
-        
+
+        // Add test methods section
+        html.append("        <div class=\"test-methods\">\n");
+        html.append("            <h3>📋 Test Methods</h3>\n");
+
+        // Passed tests
+        if (!passedTestMethods.isEmpty()) {
+            html.append("            <div class=\"method-section\">\n");
+            html.append("                <h4 style=\"color: #4caf50;\">✅ Passed Tests (").append(passedTests).append(")</h4>\n");
+            html.append("                <div class=\"method-list\">\n");
+            for (String method : passedTestMethods) {
+                String displayName = method.replace("pm_", "").replace("_", " ");
+                html.append("                    <div class=\"method-item passed-method\">").append(displayName).append("</div>\n");
+            }
+            html.append("                </div>\n");
+            html.append("            </div>\n");
+        }
+
+        // Failed tests
+        if (!failedTestMethods.isEmpty()) {
+            html.append("            <div class=\"method-section\">\n");
+            html.append("                <h4 style=\"color: #f44336;\">❌ Failed Tests (").append(failedTests).append(")</h4>\n");
+            html.append("                <div class=\"method-list\">\n");
+            for (String method : failedTestMethods) {
+                String displayName = method.replace("pm_", "").replace("_", " ");
+                html.append("                    <div class=\"method-item failed-method\">").append(displayName).append("</div>\n");
+            }
+            html.append("                </div>\n");
+            html.append("            </div>\n");
+        }
+
+        // Skipped tests
+        if (!skippedTestMethods.isEmpty()) {
+            html.append("            <div class=\"method-section\">\n");
+            html.append("                <h4 style=\"color: #ff9800;\">⏭️ Skipped Tests (").append(skippedTests).append(")</h4>\n");
+            html.append("                <div class=\"method-list\">\n");
+            for (String method : skippedTestMethods) {
+                String displayName = method.replace("pm_", "").replace("_", " ");
+                html.append("                    <div class=\"method-item skipped-method\">").append(displayName).append("</div>\n");
+            }
+            html.append("                </div>\n");
+            html.append("            </div>\n");
+        }
+
+        html.append("        </div>\n");
+
         html.append("        <div class=\"footer\">\n");
         html.append("            <p>Generated by AdHash API Test Suite</p>\n");
         html.append("        </div>\n");
@@ -173,12 +237,15 @@ public class SimpleHtmlReportGenerator {
     }
     
     /**
-     * Reset counters
+     * Reset counters and lists
      */
     public static void reset() {
         totalTests = 0;
         passedTests = 0;
         failedTests = 0;
         skippedTests = 0;
+        passedTestMethods.clear();
+        failedTestMethods.clear();
+        skippedTestMethods.clear();
     }
 }

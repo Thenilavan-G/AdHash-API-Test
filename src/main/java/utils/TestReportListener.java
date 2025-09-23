@@ -33,7 +33,7 @@ public class TestReportListener implements ITestListener, ISuiteListener {
         System.out.println("✅ PASSED: " + testName);
 
         // Record in simple report
-        SimpleHtmlReportGenerator.recordTestResult("pass");
+        SimpleHtmlReportGenerator.recordTestResult("pass", testName);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class TestReportListener implements ITestListener, ISuiteListener {
         System.out.println("   Error: " + result.getThrowable().getMessage());
 
         // Record in simple report
-        SimpleHtmlReportGenerator.recordTestResult("fail");
+        SimpleHtmlReportGenerator.recordTestResult("fail", testName);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class TestReportListener implements ITestListener, ISuiteListener {
         System.out.println("⏭️ SKIPPED: " + testName);
 
         // Record in simple report
-        SimpleHtmlReportGenerator.recordTestResult("skip");
+        SimpleHtmlReportGenerator.recordTestResult("skip", testName);
     }
     
     @Override
@@ -248,10 +248,7 @@ public class TestReportListener implements ITestListener, ISuiteListener {
         message.append("<p>");
         message.append("<strong>Total Tests:</strong> ").append(totalTests).append("<br>");
         message.append("<strong>✅ Passed:</strong> ").append(passedTests).append("<br>");
-
-        if (failedTests > 0) {
-            message.append("<strong>❌ Failed:</strong> ").append(failedTests).append("<br>");
-        }
+        message.append("<strong>❌ Failed:</strong> ").append(failedTests).append("<br>");
 
         if (skippedTests > 0) {
             message.append("<strong>⏭️ Skipped:</strong> ").append(skippedTests).append("<br>");

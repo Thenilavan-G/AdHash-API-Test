@@ -62,15 +62,15 @@ public class TestReportListener implements ITestListener, ISuiteListener {
      */
     private void sendEmailReport() {
         try {
-            // Check if email is enabled - check environment variables first, then system properties
-            String emailEnabled = System.getenv("EMAIL_ENABLED");
-            if (emailEnabled == null) {
-                emailEnabled = System.getProperty("email.enabled");
+            // Check if email is enabled - check system properties first (from Maven -D), then environment variables
+            String emailEnabled = System.getProperty("email.enabled");
+            if (emailEnabled == null || emailEnabled.trim().isEmpty()) {
+                emailEnabled = System.getenv("EMAIL_ENABLED");
             }
 
             System.out.println("🔍 Email configuration check:");
-            System.out.println("   EMAIL_ENABLED env var: " + System.getenv("EMAIL_ENABLED"));
             System.out.println("   email.enabled sys prop: " + System.getProperty("email.enabled"));
+            System.out.println("   EMAIL_ENABLED env var: " + System.getenv("EMAIL_ENABLED"));
             System.out.println("   Final emailEnabled value: " + emailEnabled);
 
             if (!"true".equalsIgnoreCase(emailEnabled)) {
@@ -78,18 +78,32 @@ public class TestReportListener implements ITestListener, ISuiteListener {
                 return;
             }
 
-            // Get email configuration - check environment variables first, then system properties
-            String emailProvider = System.getenv("EMAIL_PROVIDER");
-            if (emailProvider == null) emailProvider = System.getProperty("email.provider");
+            // Get email configuration - check system properties first (from Maven -D), then environment variables
+            String emailProvider = System.getProperty("email.provider");
+            if (emailProvider == null || emailProvider.trim().isEmpty()) {
+                emailProvider = System.getenv("EMAIL_PROVIDER");
+            }
 
-            String emailUsername = System.getenv("EMAIL_USERNAME");
-            if (emailUsername == null) emailUsername = System.getProperty("email.username");
+            String emailUsername = System.getProperty("email.username");
+            if (emailUsername == null || emailUsername.trim().isEmpty()) {
+                emailUsername = System.getenv("EMAIL_USERNAME");
+            }
 
-            String emailPassword = System.getenv("EMAIL_PASSWORD");
-            if (emailPassword == null) emailPassword = System.getProperty("email.password");
+            String emailPassword = System.getProperty("email.password");
+            if (emailPassword == null || emailPassword.trim().isEmpty()) {
+                emailPassword = System.getenv("EMAIL_PASSWORD");
+            }
 
-            String emailRecipients = System.getenv("EMAIL_RECIPIENTS");
-            if (emailRecipients == null) emailRecipients = System.getProperty("email.recipients");
+            String emailRecipients = System.getProperty("email.recipients");
+            if (emailRecipients == null || emailRecipients.trim().isEmpty()) {
+                emailRecipients = System.getenv("EMAIL_RECIPIENTS");
+            }
+
+            System.out.println("📧 Email configuration values:");
+            System.out.println("   Provider: " + emailProvider);
+            System.out.println("   Username: " + emailUsername);
+            System.out.println("   Recipients: " + emailRecipients);
+            System.out.println("   Password: " + (emailPassword != null ? "[SET]" : "[NOT SET]"));
             
             if (emailUsername == null || emailPassword == null || emailRecipients == null) {
                 System.out.println("⚠️ Email configuration missing. Please set EMAIL_USERNAME, EMAIL_PASSWORD, and EMAIL_RECIPIENTS");

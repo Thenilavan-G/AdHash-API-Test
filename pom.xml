@@ -162,6 +162,8 @@
                     <trimStackTrace>false</trimStackTrace>
                     <printSummary>true</printSummary>
                     <failIfNoTests>false</failIfNoTests>
+                    <!-- Continue execution even if tests fail -->
+                    <testFailureIgnore>false</testFailureIgnore>
                     <!-- Disable parallel execution to avoid conflicts -->
                     <parallel>none</parallel>
                     <!-- Generate detailed reports -->
@@ -169,6 +171,14 @@
                     <useFile>true</useFile>
                     <!-- Force TestNG provider -->
                     <testNGArtifactName>org.testng:testng</testNGArtifactName>
+                    <!-- System properties for email configuration -->
+                    <systemPropertyVariables>
+                        <email.enabled>${env.EMAIL_ENABLED}</email.enabled>
+                        <email.username>${env.EMAIL_USERNAME}</email.username>
+                        <email.password>${env.EMAIL_PASSWORD}</email.password>
+                        <email.recipients>${env.EMAIL_RECIPIENTS}</email.recipients>
+                        <email.provider>${env.EMAIL_PROVIDER}</email.provider>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>

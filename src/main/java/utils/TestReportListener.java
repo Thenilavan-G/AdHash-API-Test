@@ -62,18 +62,34 @@ public class TestReportListener implements ITestListener, ISuiteListener {
      */
     private void sendEmailReport() {
         try {
-            // Check if email is enabled
-            String emailEnabled = System.getProperty("email.enabled", System.getenv("EMAIL_ENABLED"));
+            // Check if email is enabled - check environment variables first, then system properties
+            String emailEnabled = System.getenv("EMAIL_ENABLED");
+            if (emailEnabled == null) {
+                emailEnabled = System.getProperty("email.enabled");
+            }
+
+            System.out.println("🔍 Email configuration check:");
+            System.out.println("   EMAIL_ENABLED env var: " + System.getenv("EMAIL_ENABLED"));
+            System.out.println("   email.enabled sys prop: " + System.getProperty("email.enabled"));
+            System.out.println("   Final emailEnabled value: " + emailEnabled);
+
             if (!"true".equalsIgnoreCase(emailEnabled)) {
                 System.out.println("📧 Email reporting is disabled. Set EMAIL_ENABLED=true to enable.");
                 return;
             }
-            
-            // Get email configuration
-            String emailProvider = System.getProperty("email.provider", System.getenv("EMAIL_PROVIDER"));
-            String emailUsername = System.getProperty("email.username", System.getenv("EMAIL_USERNAME"));
-            String emailPassword = System.getProperty("email.password", System.getenv("EMAIL_PASSWORD"));
-            String emailRecipients = System.getProperty("email.recipients", System.getenv("EMAIL_RECIPIENTS"));
+
+            // Get email configuration - check environment variables first, then system properties
+            String emailProvider = System.getenv("EMAIL_PROVIDER");
+            if (emailProvider == null) emailProvider = System.getProperty("email.provider");
+
+            String emailUsername = System.getenv("EMAIL_USERNAME");
+            if (emailUsername == null) emailUsername = System.getProperty("email.username");
+
+            String emailPassword = System.getenv("EMAIL_PASSWORD");
+            if (emailPassword == null) emailPassword = System.getProperty("email.password");
+
+            String emailRecipients = System.getenv("EMAIL_RECIPIENTS");
+            if (emailRecipients == null) emailRecipients = System.getProperty("email.recipients");
             
             if (emailUsername == null || emailPassword == null || emailRecipients == null) {
                 System.out.println("⚠️ Email configuration missing. Please set EMAIL_USERNAME, EMAIL_PASSWORD, and EMAIL_RECIPIENTS");

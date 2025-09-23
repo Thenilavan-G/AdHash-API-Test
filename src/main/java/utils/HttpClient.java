@@ -1,24 +1,52 @@
 package utils;
 
-import org.apache.http.HttpEntity;
+import java.io.IOException;
+
+import javax.net.ssl.SSLContext;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
-
-import java.io.IOException;
 
 /**
  * Simple HTTP Client utility to replace REST Assured
- * Eliminates all Hamcrest dependencies
+ * Eliminates all Hamcrest dependencies and handles SSL certificate issues
  */
 public class HttpClient {
-    
-    private static CloseableHttpClient client = HttpClients.createDefault();
+
+    private static CloseableHttpClient client = createHttpClient();
+
+    /**
+     * Create HTTP client with SSL certificate handling
+     */
+    private static CloseableHttpClient createHttpClient() {
+        try {
+            SSLContext sslContext = SSLContextBuilder.create()
+                .loadTrustMaterial(new TrustSelfSignedStrategy())
+                .build();
+
+            SSLConnectionSocketFactory sslSocketFactory = new SSLConnectionSocketFactory(
+                sslContext,
+                (hostname, session) -> true  // Accept all hostnames
+            );
+
+            return HttpClientBuilder.create()
+                .setSSLSocketFactory(sslSocketFactory)
+                .build();
+
+        } catch (Exception e) {
+            // Fallback to default client if SSL setup fails
+            return HttpClients.createDefault();
+        }
+    }
     
     /**
      * Execute GET request and verify status code

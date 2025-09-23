@@ -533,18 +533,18 @@ public class GeneratedApiTest extends ApiBase {
     }
 
 
-    @Test
-    public void pm_AskEPI_Login_OTP() {
-        given()
-            .urlEncodingEnabled(false)   // <-- important: keep the ":" in the path
-            .contentType(ContentType.JSON)
-            .queryParam("key", "AIzaSyA02OjHzzCXgEnDBC1vS4zFdOSgs2HJzxg")
-            .body("{\"sessionInfo\":\"AD8T5Itr8_jrpfhXAEBpwReQLHTHsicQvRko8Tq4kvfYxAJCqd2LO-74XxCereN6G7o0EKDW1XOA4PxlpndKbEz5ulr--Vxqw2foeLf3NffNYW8pogxERmF8m969flkDc8rmiz0zoGyg\",\"code\":\"123456\"}")
-        .when()
-            .post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber")
-        .then()
-            .statusCode(200);
-    }
+@Test
+public void pm_AskEPI_Login_OTP() {
+    given()
+        .urlEncodingEnabled(false)   // <-- important: keep the ":" in the path
+        .contentType(ContentType.JSON)
+        .queryParam("key", "AIzaSyA02OjHzzCXgEnDBC1vS4zFdOSgs2HJzxg")
+        .body("{\"sessionInfo\":\"AD8T5Itr8_jrpfhXAEBpwReQLHTHsicQvRko8Tq4kvfYxAJCqd2LO-74XxCereN6G7o0EKDW1XOA4PxlpndKbEz5ulr--Vxqw2foeLf3NffNYW8pogxERmF8m969flkDc8rmiz0zoGyg\",\"code\":\"123456\"}")
+    .when()
+        .post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber")
+    .then()
+        .statusCode(200);
+}
 
 
     @Test
@@ -677,7 +677,7 @@ public class GeneratedApiTest extends ApiBase {
             .then()
                 .statusCode(200);
     }
-
+    
 
     @Test
     public void pm_AutoeVantage_Analytics_Web_UI() {

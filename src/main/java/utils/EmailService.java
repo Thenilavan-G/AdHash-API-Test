@@ -1,13 +1,23 @@
 package utils;
 
-import javax.mail.*;
-import javax.mail.internet.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Properties;
 import java.util.Date;
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 /**
  * EmailService class to send HTML test reports via email
@@ -42,6 +52,20 @@ public class EmailService {
     public static EmailService forOutlook(String username, String password) {
         EmailService service = new EmailService();
         service.smtpHost = "smtp-mail.outlook.com";
+        service.smtpPort = "587";
+        service.username = username;
+        service.password = password;
+        service.useSSL = false;
+        service.useTLS = true;
+        return service;
+    }
+
+    /**
+     * Constructor for Zoho configuration
+     */
+    public static EmailService forZoho(String username, String password) {
+        EmailService service = new EmailService();
+        service.smtpHost = "smtp.zoho.com";
         service.smtpPort = "587";
         service.username = username;
         service.password = password;

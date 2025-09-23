@@ -1,11 +1,12 @@
 package utils;
 
-import org.testng.ITestListener;
-import org.testng.ITestResult;
-import org.testng.ISuite;
-import org.testng.ISuiteListener;
 import java.io.File;
 import java.util.Arrays;
+
+import org.testng.ISuite;
+import org.testng.ISuiteListener;
+import org.testng.ITestListener;
+import org.testng.ITestResult;
 
 /**
  * TestNG Listener to automatically send HTML test reports via email
@@ -83,6 +84,8 @@ public class TestReportListener implements ITestListener, ISuiteListener {
             EmailService emailService;
             if ("outlook".equalsIgnoreCase(emailProvider)) {
                 emailService = EmailService.forOutlook(emailUsername, emailPassword);
+            } else if ("zoho".equalsIgnoreCase(emailProvider)) {
+                emailService = EmailService.forZoho(emailUsername, emailPassword);
             } else {
                 // Default to Gmail
                 emailService = EmailService.forGmail(emailUsername, emailPassword);
@@ -111,26 +114,39 @@ public class TestReportListener implements ITestListener, ISuiteListener {
     }
     
     /**
-     * Find the HTML report file
+     * Find the HTML report file (TestNG, Surefire, or Extent Reports)
      */
     private String findHtmlReport() {
-        // Check common report locations
+        // Check common report locations (prioritize Extent Reports, then TestNG/Surefire)
         String[] possiblePaths = {
+            // Extent Reports locations
+            "test-output/ExtentReports.html",
+            "test-output/extent-reports.html",
+            "test-output/extent.html",
+            "reports/extent-reports.html",
+            "reports/ExtentReports.html",
+            // TestNG/Surefire locations
             "target/surefire-reports/emailable-report.html",
             "target/surefire-reports/index.html",
             "test-output/emailable-report.html",
             "test-output/index.html"
         };
-        
+
         for (String path : possiblePaths) {
             File file = new File(path);
             if (file.exists()) {
                 System.out.println("📄 Found HTML report: " + file.getAbsolutePath());
+                if (path.toLowerCase().contains("extent")) {
+                    System.out.println("   📊 Report Type: Extent Reports");
+                } else {
+                    System.out.println("   📊 Report Type: TestNG/Surefire");
+                }
                 return file.getAbsolutePath();
             }
         }
-        
+
         System.out.println("⚠️ HTML report not found in standard locations");
+        System.out.println("   Checked: Extent Reports, TestNG, and Surefire report locations");
         return null;
     }
     

@@ -5,7 +5,7 @@ This guide will help you configure automatic email notifications for your AdHash
 ## 🎯 Features
 
 - ✅ **Automatic HTML Report Emails** - Sends detailed test reports after each execution
-- ✅ **Multiple Email Providers** - Supports Gmail, Outlook, and custom SMTP
+- ✅ **Multiple Email Providers** - Supports Gmail, Outlook, Zoho, and custom SMTP
 - ✅ **Rich HTML Content** - Includes test summary table and full HTML report attachment
 - ✅ **Multiple Recipients** - Send to multiple email addresses
 - ✅ **Secure Configuration** - Uses environment variables for credentials
@@ -26,6 +26,11 @@ This guide will help you configure automatic email notifications for your AdHash
 1. **Use your regular Outlook credentials**
 2. **Ensure SMTP is enabled** (usually enabled by default)
 
+#### Option C: Zoho Setup
+1. **Use your Zoho email credentials**
+2. **Enable IMAP/SMTP** in Zoho Mail settings
+3. **Use your regular Zoho password** (no app password needed)
+
 ### Step 2: Configure Environment Variables
 
 #### For Local Testing:
@@ -35,7 +40,7 @@ Set these environment variables in your system:
 # Enable email functionality
 EMAIL_ENABLED=true
 
-# Email provider (gmail or outlook)
+# Email provider (gmail, outlook, or zoho)
 EMAIL_PROVIDER=gmail
 
 # Your email credentials
@@ -52,7 +57,7 @@ Add these as repository secrets:
 1. Go to your repository → Settings → Secrets and variables → Actions
 2. Add these secrets:
    - `EMAIL_ENABLED`: `true`
-   - `EMAIL_PROVIDER`: `gmail` or `outlook`
+   - `EMAIL_PROVIDER`: `gmail`, `outlook`, or `zoho`
    - `EMAIL_USERNAME`: Your email address
    - `EMAIL_PASSWORD`: Your app password
    - `EMAIL_RECIPIENTS`: Comma-separated recipient emails

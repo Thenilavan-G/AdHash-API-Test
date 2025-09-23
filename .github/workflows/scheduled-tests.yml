@@ -49,7 +49,7 @@ jobs:
     - name: Run API Tests
       run: |
         echo "Starting AdHash API Tests..."
-        echo "Running 60 API tests from testng.xml..."
+        echo "Running 60 API tests from TestNG.xml..."
         echo "Maven version:"
         mvn --version
         echo "Running tests with updated Surefire plugin..."

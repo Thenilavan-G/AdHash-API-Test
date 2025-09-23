@@ -8,51 +8,27 @@
 <body>
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
-<tr><th colspan="8">Surefire suite</th></tr>
-<tr><td><a href="#t0">Surefire test</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num attn">1</td><td class="num">4,612</td><td></td><td></td></tr>
+<tr><th colspan="8">AdHash_All_Projects_API_Production</th></tr>
+<tr><td><a href="#t0">AdHash_API_Tests</a></td><td class="num">7</td><td class="num">0</td><td class="num">0</td><td class="num attn">2</td><td class="num">7,327</td><td></td><td></td></tr>
 </table>
-<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Surefire suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Surefire test &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">generated.GeneratedApiTest</td><td><a href="#m0">pm_AutoChecker_Admin_Login</a></td><td rowspan="1">1758610977688</td><td rowspan="1">3236</td></tr></tbody>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">AdHash_All_Projects_API_Production</th></tr></tbody><tbody id="t0"><tr><th colspan="4">AdHash_API_Tests &#8212; failed</th></tr><tr class="failedeven"><td rowspan="2">generated.GeneratedApiTest</td><td><a href="#m0">pm_AutoeVantage_Analytics_Login_OTP</a></td><td rowspan="1">1758611605188</td><td rowspan="1">356</td></tr><tr class="failedeven"><td><a href="#m1">pm_AutoeVantage_Analytics_Login_PhoneNumber</a></td><td rowspan="1">1758611604739</td><td rowspan="1">446</td></tr><tr><th colspan="4">AdHash_API_Tests &#8212; passed</th></tr><tr class="passedeven"><td rowspan="7">generated.GeneratedApiTest</td><td><a href="#m2">pm_AdHash_Website</a></td><td rowspan="1">1758611598328</td><td rowspan="1">1012</td></tr><tr class="passedeven"><td><a href="#m3">pm_AutoChecker_Admin_Login</a></td><td rowspan="1">1758611600453</td><td rowspan="1">1130</td></tr><tr class="passedeven"><td><a href="#m4">pm_AutoChecker_Login_UI</a></td><td rowspan="1">1758611599343</td><td rowspan="1">1109</td></tr><tr class="passedeven"><td><a href="#m5">pm_MHAI_Doctor_SuperAdmin_Login</a></td><td rowspan="1">1758611602661</td><td rowspan="1">1065</td></tr><tr class="passedeven"><td><a href="#m6">pm_MHAI_Doctor_SuperAdmin_Login_UI</a></td><td rowspan="1">1758611601584</td><td rowspan="1">1076</td></tr><tr class="passedeven"><td><a href="#m7">pm_MHCCM_PAR_CRM_Login</a></td><td rowspan="1">1758611603727</td><td rowspan="1">1012</td></tr><tr class="passedeven"><td><a href="#m8">pm_Metcalf_UI</a></td><td rowspan="1">1758611605544</td><td rowspan="1">67</td></tr></tbody>
 </table>
-<h2>Surefire test</h2><h3 id="m0">generated.GeneratedApiTest#pm_AutoChecker_Admin_Login</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NoSuchMethodError: &apos;void org.hamcrest.Matcher.describeMismatch(java.lang.Object, org.hamcrest.Description)&apos;
-	at io.restassured.internal.util.MatcherErrorMessageBuilder.buildError(MatcherErrorMessageBuilder.java:35)
-	at io.restassured.internal.util.MatcherErrorMessageBuilder$buildError.call(Unknown Source)
-	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:148)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validateStatusCodeAndStatusLine(ResponseSpecificationImpl.groovy:549)
-	at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:193)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:61)
-	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:51)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:171)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:471)
-	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
-	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:139)
-	at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)
-	at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:193)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:61)
-	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:51)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:171)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
-	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)
-	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
-	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:51)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:171)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
-	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)
-	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
-	at io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)
-	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
-	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1262)
-	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnSuperN(ScriptBytecodeAdapter.java:144)
-	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)
-	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)
-	at generated.GeneratedApiTest.pm_AutoChecker_Admin_Login(GeneratedApiTest.java:41)
+<h2>AdHash_API_Tests</h2><h3 id="m0">generated.GeneratedApiTest#pm_AutoeVantage_Analytics_Login_OTP</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.AssertionError: Expected status code 200 but got 400
+	at utils.HttpClient.post(HttpClient.java:61)
+	at generated.GeneratedApiTest.pm_AutoeVantage_Analytics_Login_OTP(GeneratedApiTest.java:63)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-... Removed 37 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+... Removed 29 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">generated.GeneratedApiTest#pm_AutoeVantage_Analytics_Login_PhoneNumber</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.AssertionError: Expected status code 200 but got 400
+	at utils.HttpClient.post(HttpClient.java:61)
+	at generated.GeneratedApiTest.pm_AutoeVantage_Analytics_Login_PhoneNumber(GeneratedApiTest.java:56)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+... Removed 29 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m2">generated.GeneratedApiTest#pm_AdHash_Website</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m3">generated.GeneratedApiTest#pm_AutoChecker_Admin_Login</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m4">generated.GeneratedApiTest#pm_AutoChecker_Login_UI</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m5">generated.GeneratedApiTest#pm_MHAI_Doctor_SuperAdmin_Login</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m6">generated.GeneratedApiTest#pm_MHAI_Doctor_SuperAdmin_Login_UI</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m7">generated.GeneratedApiTest#pm_MHCCM_PAR_CRM_Login</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m8">generated.GeneratedApiTest#pm_Metcalf_UI</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 </body>
 </html>

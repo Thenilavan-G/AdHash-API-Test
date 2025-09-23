@@ -75,17 +75,34 @@ public class AddVitals {
         generateDatesUsingIST();
     }
 
-    //Generate test mobile numbers programmatically for reliable daily automation
+    //Read mobile numbers from Excel file for comprehensive testing
     private void generateTestMobileNumbers() {
         number = new ArrayList<>();
 
-        // Use only the working mobile number for daily automation
-        // This number is enrolled with the doctor and will work consistently
-        String workingNumber = "9876543210";
-        number.add(workingNumber);
+        try {
+            // Read mobile numbers from Excel file using existing PatientReqRead class
+            PatientReqRead patientData = new PatientReqRead();
+            List<String> excelMobileNumbers = patientData.getNumberList();
 
-        System.out.println("Generated test mobile number: " + number);
-        System.out.println("Total mobile numbers: " + number.size());
+            // Add all mobile numbers from Excel to the test list
+            if (excelMobileNumbers != null && !excelMobileNumbers.isEmpty()) {
+                number.addAll(excelMobileNumbers);
+                System.out.println("Successfully loaded mobile numbers from Excel: " + number);
+            } else {
+                // Fallback to hardcoded number if Excel reading fails
+                String fallbackNumber = "9876543210";
+                number.add(fallbackNumber);
+                System.out.println("Excel file empty or not found. Using fallback mobile number: " + number);
+            }
+        } catch (Exception e) {
+            // Fallback to hardcoded number if Excel reading fails
+            String fallbackNumber = "9876543210";
+            number.add(fallbackNumber);
+            System.out.println("Error reading Excel file: " + e.getMessage());
+            System.out.println("Using fallback mobile number: " + number);
+        }
+
+        System.out.println("Total mobile numbers loaded: " + number.size());
     }
 
     //Generate dates automatically using IST timezone - CURRENT DATE ONLY with COMMON TIME (6:00 AM)

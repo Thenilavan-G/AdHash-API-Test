@@ -2,8 +2,6 @@ package utils;
 
 import java.io.File;
 import java.util.Arrays;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
@@ -257,50 +255,28 @@ public class TestReportListener implements ITestListener, ISuiteListener {
     }
     
     /**
-     * Create detailed email message
+     * Create simple email message with just pass/fail counts
      */
     private String createEmailMessage() {
         StringBuilder message = new StringBuilder();
         message.append("<h3>🎯 AdHash API Test Execution Summary</h3>");
-        message.append("<table border='1' style='border-collapse: collapse; width: 100%;'>");
-        message.append("<tr style='background-color: #f2f2f2;'>");
-        message.append("<th style='padding: 8px;'>Metric</th>");
-        message.append("<th style='padding: 8px;'>Count</th>");
-        message.append("<th style='padding: 8px;'>Percentage</th>");
-        message.append("</tr>");
-        
-        message.append("<tr>");
-        message.append("<td style='padding: 8px;'>Total Tests</td>");
-        message.append("<td style='padding: 8px;'>").append(totalTests).append("</td>");
-        message.append("<td style='padding: 8px;'>100%</td>");
-        message.append("</tr>");
-        
-        message.append("<tr style='background-color: #d4edda;'>");
-        message.append("<td style='padding: 8px;'>✅ Passed</td>");
-        message.append("<td style='padding: 8px;'>").append(passedTests).append("</td>");
-        message.append("<td style='padding: 8px;'>").append(totalTests > 0 ? String.format("%.1f%%", passedTests * 100.0 / totalTests) : "0%").append("</td>");
-        message.append("</tr>");
-        
+        message.append("<p>");
+        message.append("<strong>Total Tests:</strong> ").append(totalTests).append("<br>");
+        message.append("<strong>✅ Passed:</strong> ").append(passedTests).append("<br>");
+
         if (failedTests > 0) {
-            message.append("<tr style='background-color: #f8d7da;'>");
-            message.append("<td style='padding: 8px;'>❌ Failed</td>");
-            message.append("<td style='padding: 8px;'>").append(failedTests).append("</td>");
-            message.append("<td style='padding: 8px;'>").append(totalTests > 0 ? String.format("%.1f%%", failedTests * 100.0 / totalTests) : "0%").append("</td>");
-            message.append("</tr>");
+            message.append("<strong>❌ Failed:</strong> ").append(failedTests).append("<br>");
         }
-        
+
         if (skippedTests > 0) {
-            message.append("<tr style='background-color: #fff3cd;'>");
-            message.append("<td style='padding: 8px;'>⏭️ Skipped</td>");
-            message.append("<td style='padding: 8px;'>").append(skippedTests).append("</td>");
-            message.append("<td style='padding: 8px;'>").append(totalTests > 0 ? String.format("%.1f%%", skippedTests * 100.0 / totalTests) : "0%").append("</td>");
-            message.append("</tr>");
+            message.append("<strong>⏭️ Skipped:</strong> ").append(skippedTests).append("<br>");
         }
-        
-        message.append("</table>");
+
+        message.append("<strong>📈 Success Rate:</strong> ").append(totalTests > 0 ? String.format("%.1f%%", passedTests * 100.0 / totalTests) : "0%");
+        message.append("</p>");
         message.append("<p><strong>Overall Status:</strong> ").append(getTestStatus()).append("</p>");
         message.append("<p><em>Detailed HTML report is attached to this email.</em></p>");
-        
+
         return message.toString();
     }
 }

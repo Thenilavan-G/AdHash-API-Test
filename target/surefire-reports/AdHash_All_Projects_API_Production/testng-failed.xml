@@ -9,8 +9,7 @@
       <class name="generated.GeneratedApiTest">
         <methods>
           <include name="setup"/>
-          <include name="pm_AutoeVantage_Analytics_Login_PhoneNumber"/>
-          <include name="pm_AutoeVantage_Analytics_Login_OTP"/>
+          <include name="pm_AskEPI_Login_PhoneNumber"/>
         </methods>
       </class> <!-- generated.GeneratedApiTest -->
     </classes>

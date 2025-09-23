@@ -1,5 +1,8 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="AdHash_All_Projects_API_Production">
+    <listeners>
+        <listener class-name="utils.TestReportListener"/>
+    </listeners>
     <test name="AdHash_API_Tests">
         <classes>
             <class name="generated.GeneratedApiTest">

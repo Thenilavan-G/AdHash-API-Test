@@ -13,7 +13,14 @@ on:
 jobs:
   api-tests:
     runs-on: windows-latest
-    
+
+    env:
+      EMAIL_ENABLED: ${{ secrets.EMAIL_ENABLED }}
+      EMAIL_PROVIDER: ${{ secrets.EMAIL_PROVIDER }}
+      EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
+      EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+      EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -42,7 +49,7 @@ jobs:
     - name: Run API Tests
       run: |
         echo "Starting AdHash API Tests..."
-        echo "Running 43 API tests from testng.xml..."
+        echo "Running 60 API tests from testng.xml..."
         echo "Maven version:"
         mvn --version
         echo "Running tests with updated Surefire plugin..."

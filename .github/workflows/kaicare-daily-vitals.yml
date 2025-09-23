@@ -6,6 +6,8 @@ on:
     - cron: '30 4 * * *'
   workflow_dispatch:
     # Allows manual triggering of the workflow
+  push:
+    branches: [ master ]
 
 jobs:
   vitals-automation:

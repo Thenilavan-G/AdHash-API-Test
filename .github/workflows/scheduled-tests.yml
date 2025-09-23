@@ -58,7 +58,7 @@ jobs:
         echo "EMAIL_RECIPIENTS: $env:EMAIL_RECIPIENTS"
         echo "EMAIL_PROVIDER: $env:EMAIL_PROVIDER"
         echo "Running tests with email configuration..."
-        mvn clean test -Demail.enabled=$env:EMAIL_ENABLED -Demail.username=$env:EMAIL_USERNAME -Demail.password=$env:EMAIL_PASSWORD -Demail.recipients=$env:EMAIL_RECIPIENTS -Demail.provider=$env:EMAIL_PROVIDER
+        mvn clean test "-Demail.enabled=$env:EMAIL_ENABLED" "-Demail.username=$env:EMAIL_USERNAME" "-Demail.password=$env:EMAIL_PASSWORD" "-Demail.recipients=$env:EMAIL_RECIPIENTS" "-Demail.provider=$env:EMAIL_PROVIDER"
         echo "Tests completed. Exit code: $LASTEXITCODE"
         
     - name: Upload Test Results

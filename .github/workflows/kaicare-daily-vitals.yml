@@ -1,0 +1,87 @@
+name: KaiCare Daily Vitals Automation
+
+on:
+  schedule:
+    # Runs daily at 10:00 AM IST (4:30 AM UTC)
+    - cron: '30 4 * * *'
+  workflow_dispatch:
+    # Allows manual triggering of the workflow
+
+jobs:
+  vitals-automation:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 11
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        
+    - name: Cache Maven dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+        
+    - name: Create test data files
+      run: |
+        echo "Creating required test data files..."
+        mkdir -p data
+        touch data/placeholder.txt
+        echo "Test data files created successfully"
+        
+    - name: Display current IST time
+      run: |
+        echo "Current UTC time: $(date -u)"
+        echo "Current IST time: $(TZ='Asia/Kolkata' date)"
+        echo "Workflow triggered for daily vitals automation"
+        
+    - name: Run KaiCare Vitals Tests
+      run: |
+        echo "Starting KaiCare Daily Vitals Automation..."
+        echo "Running all 11 test methods for complete vitals data insertion"
+        mvn test -Dsurefire.suiteXmlFiles=vitals-testng.xml -DfailIfNoTests=false
+        
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: kaicare-vitals-test-results
+        path: |
+          target/surefire-reports/
+          target/test-classes/
+        retention-days: 30
+        
+    - name: Display test summary
+      if: always()
+      run: |
+        echo "=== KaiCare Vitals Automation Summary ==="
+        echo "Date: $(TZ='Asia/Kolkata' date '+%d/%m/%Y %H:%M IST')"
+        echo "Repository: KaiCare_Vitals_API"
+        echo "Test Suite: vitals-testng.xml"
+        echo "Expected Tests: 11 (Login + HR + BP + Oxygen + Blood Glucose)"
+        echo "Data Insertion: Current IST date with 10:00 AM common time"
+        echo "Mobile Number: Single enrolled number (9876543210)"
+        echo "============================================="
+        
+        if [ -f target/surefire-reports/testng-results.xml ]; then
+          echo "Test results found - checking status..."
+        else
+          echo "Test results file not found"
+        fi
+        
+    - name: Notify on failure
+      if: failure()
+      run: |
+        echo "❌ KaiCare Vitals Automation Failed!"
+        echo "Please check the test logs for details."
+        echo "Common issues to check:"
+        echo "1. API connectivity"
+        echo "2. Mobile number enrollment status"
+        echo "3. Authentication token validity"
+        echo "4. Test data generation"

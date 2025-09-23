@@ -21,22 +21,9 @@ public class TestReportListener implements ITestListener, ISuiteListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        // Create test in Extent Report
+        // Simple tracking - no detailed logging needed
         String testName = result.getMethod().getMethodName();
-        String description = "AdHash API Test: " + testName.replace("pm_", "").replace("_", " ");
-        ExtentReportManager.createTest(testName, description);
-
-        // Assign categories based on test name
-        if (testName.contains("Login")) {
-            ExtentReportManager.assignCategory("Authentication");
-        } else if (testName.contains("UI")) {
-            ExtentReportManager.assignCategory("UI Tests");
-        } else {
-            ExtentReportManager.assignCategory("API Tests");
-        }
-
-        ExtentReportManager.assignAuthor("AdHash QA Team");
-        ExtentReportManager.logInfo("Starting test: " + testName);
+        System.out.println("🔄 STARTING: " + testName);
     }
 
     @Override
@@ -45,10 +32,8 @@ public class TestReportListener implements ITestListener, ISuiteListener {
         String testName = result.getMethod().getMethodName();
         System.out.println("✅ PASSED: " + testName);
 
-        // Log to Extent Report
-        ExtentReportManager.logPass("✅ Test passed successfully");
-        ExtentReportManager.logInfo("Execution time: " + (result.getEndMillis() - result.getStartMillis()) + "ms");
-        ExtentReportManager.endTest();
+        // Record in simple report
+        SimpleHtmlReportGenerator.recordTestResult("pass");
     }
 
     @Override
@@ -58,10 +43,8 @@ public class TestReportListener implements ITestListener, ISuiteListener {
         System.out.println("❌ FAILED: " + testName);
         System.out.println("   Error: " + result.getThrowable().getMessage());
 
-        // Log to Extent Report
-        ExtentReportManager.logFail("❌ Test failed: " + result.getThrowable().getMessage());
-        ExtentReportManager.logInfo("Execution time: " + (result.getEndMillis() - result.getStartMillis()) + "ms");
-        ExtentReportManager.endTest();
+        // Record in simple report
+        SimpleHtmlReportGenerator.recordTestResult("fail");
     }
 
     @Override
@@ -70,26 +53,24 @@ public class TestReportListener implements ITestListener, ISuiteListener {
         String testName = result.getMethod().getMethodName();
         System.out.println("⏭️ SKIPPED: " + testName);
 
-        // Log to Extent Report
-        ExtentReportManager.logSkip("⏭️ Test was skipped");
-        ExtentReportManager.logInfo("Reason: " + (result.getThrowable() != null ? result.getThrowable().getMessage() : "Unknown"));
-        ExtentReportManager.endTest();
+        // Record in simple report
+        SimpleHtmlReportGenerator.recordTestResult("skip");
     }
     
     @Override
     public void onStart(ISuite suite) {
-        // Initialize Extent Reports at the beginning
-        ExtentReportManager.initializeReport();
-        System.out.println("📊 Extent Reports initialized successfully");
+        // Initialize Simple HTML Report at the beginning
+        SimpleHtmlReportGenerator.initializeReport();
+        System.out.println("📊 Simple HTML Report initialized successfully");
     }
 
     @Override
     public void onFinish(ISuite suite) {
         totalTests = passedTests + failedTests + skippedTests;
 
-        // Finalize Extent Report
-        ExtentReportManager.flushReport();
-        System.out.println("📊 Extent Report generated: " + ExtentReportManager.getReportPath());
+        // Generate Simple HTML Report
+        SimpleHtmlReportGenerator.generateReport();
+        System.out.println("📊 Simple HTML Report generated: " + SimpleHtmlReportGenerator.getReportPath());
 
         System.out.println("\n" + "=".repeat(60));
         System.out.println("🎯 TEST EXECUTION COMPLETED - AdHash API Suite");
@@ -196,20 +177,22 @@ public class TestReportListener implements ITestListener, ISuiteListener {
      * Find the HTML report file (TestNG, Surefire, or Extent Reports)
      */
     private String findHtmlReport() {
-        // First, check if we have the Extent Report path from ExtentReportManager
-        String extentReportPath = ExtentReportManager.getReportPath();
-        if (extentReportPath != null) {
-            File extentFile = new File(extentReportPath);
-            if (extentFile.exists()) {
-                System.out.println("📄 Found Extent HTML report: " + extentFile.getAbsolutePath());
-                System.out.println("   📊 Report Type: Extent Reports (Professional)");
-                return extentFile.getAbsolutePath();
+        // First, check if we have the Simple Report path from SimpleHtmlReportGenerator
+        String simpleReportPath = SimpleHtmlReportGenerator.getReportPath();
+        if (simpleReportPath != null) {
+            File simpleFile = new File(simpleReportPath);
+            if (simpleFile.exists()) {
+                System.out.println("📄 Found Simple HTML report: " + simpleFile.getAbsolutePath());
+                System.out.println("   📊 Report Type: Simple HTML Report (Clean)");
+                return simpleFile.getAbsolutePath();
             }
         }
 
         // Fallback to check common report locations
         String[] possiblePaths = {
-            // Extent Reports locations
+            // Simple Reports locations
+            "simple-reports/AdHash_API_Simple_Report_*.html",
+            // Extent Reports locations (fallback)
             "extent-reports/AdHash_API_Report_*.html",
             "test-output/ExtentReports.html",
             "test-output/extent-reports.html",
@@ -227,7 +210,9 @@ public class TestReportListener implements ITestListener, ISuiteListener {
             File file = new File(path);
             if (file.exists()) {
                 System.out.println("📄 Found HTML report: " + file.getAbsolutePath());
-                if (path.toLowerCase().contains("extent")) {
+                if (path.toLowerCase().contains("simple")) {
+                    System.out.println("   📊 Report Type: Simple HTML Report (Clean)");
+                } else if (path.toLowerCase().contains("extent")) {
                     System.out.println("   📊 Report Type: Extent Reports");
                 } else {
                     System.out.println("   📊 Report Type: TestNG/Surefire (Basic)");

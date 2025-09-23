@@ -1,14 +1,14 @@
 package utils;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
-
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Extent Reports Manager for AdHash API Test Suite
@@ -41,8 +41,26 @@ public class ExtentReportManager {
             // Configure report settings
             sparkReporter.config().setTheme(Theme.STANDARD);
             sparkReporter.config().setDocumentTitle("AdHash API Test Report");
-            sparkReporter.config().setReportName("AdHash API Automation Results");
+            sparkReporter.config().setReportName("AdHash API Test Results");
             sparkReporter.config().setTimeStampFormat("EEEE, MMMM dd, yyyy, hh:mm a '('zzz')'");
+
+            // Configure to show only essential information
+            sparkReporter.config().setEncoding("utf-8");
+            sparkReporter.config().setProtocol(com.aventstack.extentreports.reporter.configuration.Protocol.HTTPS);
+
+            // Custom CSS to hide detailed test execution sections
+            sparkReporter.config().setCss(
+                ".test-content .collapsible-body { display: none !important; } " +
+                ".test-time-info { display: none !important; } " +
+                ".test-attributes { display: none !important; } " +
+                ".step-details { display: none !important; } " +
+                ".media-container { display: none !important; } " +
+                ".test-body-container { display: none !important; } " +
+                ".test-steps { display: none !important; } " +
+                ".test-info { display: none !important; } " +
+                ".collapsible-body { display: none !important; } " +
+                ".test-detail { display: none !important; }"
+            );
             
             // Initialize ExtentReports
             extent = new ExtentReports();

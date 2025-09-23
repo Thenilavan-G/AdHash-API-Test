@@ -24,6 +24,22 @@ public class HttpClient {
 
     private static CloseableHttpClient client = createHttpClient();
 
+    // Thread-local storage for API call details
+    private static ThreadLocal<ApiCallDetails> currentApiCall = new ThreadLocal<>();
+
+    // Inner class to store API call details
+    public static class ApiCallDetails {
+        public String url;
+        public int statusCode;
+        public String errorMessage;
+
+        public ApiCallDetails(String url, int statusCode, String errorMessage) {
+            this.url = url;
+            this.statusCode = statusCode;
+            this.errorMessage = errorMessage;
+        }
+    }
+
     /**
      * Create HTTP client with SSL certificate handling
      */
@@ -56,16 +72,23 @@ public class HttpClient {
             HttpGet request = new HttpGet(url);
             HttpResponse response = client.execute(request);
             int statusCode = response.getStatusLine().getStatusCode();
-            
+
+            // Store API call details
+            currentApiCall.set(new ApiCallDetails(url, statusCode, null));
+
             if (statusCode != expectedStatusCode) {
-                throw new AssertionError("Expected status code " + expectedStatusCode + " but got " + statusCode);
+                String errorMsg = "Expected status code " + expectedStatusCode + " but got " + statusCode;
+                currentApiCall.set(new ApiCallDetails(url, statusCode, errorMsg));
+                throw new AssertionError(errorMsg);
             }
-            
+
             // Consume response to free resources
             EntityUtils.consume(response.getEntity());
-            
+
         } catch (IOException e) {
-            throw new RuntimeException("HTTP GET request failed: " + e.getMessage(), e);
+            String errorMsg = "HTTP GET request failed: " + e.getMessage();
+            currentApiCall.set(new ApiCallDetails(url, 0, errorMsg));
+            throw new RuntimeException(errorMsg, e);
         }
     }
     
@@ -76,27 +99,48 @@ public class HttpClient {
         try {
             HttpPost request = new HttpPost(url);
             request.setHeader("Content-Type", "application/json");
-            
+
             if (jsonBody != null && !jsonBody.isEmpty()) {
                 StringEntity entity = new StringEntity(jsonBody);
                 request.setEntity(entity);
             }
-            
+
             HttpResponse response = client.execute(request);
             int statusCode = response.getStatusLine().getStatusCode();
-            
+
+            // Store API call details
+            currentApiCall.set(new ApiCallDetails(url, statusCode, null));
+
             if (statusCode != expectedStatusCode) {
-                throw new AssertionError("Expected status code " + expectedStatusCode + " but got " + statusCode);
+                String errorMsg = "Expected status code " + expectedStatusCode + " but got " + statusCode;
+                currentApiCall.set(new ApiCallDetails(url, statusCode, errorMsg));
+                throw new AssertionError(errorMsg);
             }
-            
+
             // Consume response to free resources
             EntityUtils.consume(response.getEntity());
-            
+
         } catch (IOException e) {
-            throw new RuntimeException("HTTP POST request failed: " + e.getMessage(), e);
+            String errorMsg = "HTTP POST request failed: " + e.getMessage();
+            currentApiCall.set(new ApiCallDetails(url, 0, errorMsg));
+            throw new RuntimeException(errorMsg, e);
         }
     }
     
+    /**
+     * Get the current API call details for the current thread
+     */
+    public static ApiCallDetails getCurrentApiCallDetails() {
+        return currentApiCall.get();
+    }
+
+    /**
+     * Clear the current API call details for the current thread
+     */
+    public static void clearCurrentApiCallDetails() {
+        currentApiCall.remove();
+    }
+
     /**
      * Close the HTTP client
      */

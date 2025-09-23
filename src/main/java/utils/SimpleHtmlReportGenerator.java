@@ -20,10 +20,25 @@ public class SimpleHtmlReportGenerator {
     private static int failedTests = 0;
     private static int skippedTests = 0;
 
-    // Lists to store test method details
-    private static List<String> passedTestMethods = new ArrayList<>();
-    private static List<String> failedTestMethods = new ArrayList<>();
-    private static List<String> skippedTestMethods = new ArrayList<>();
+    // Lists to store test method details with API information
+    private static List<TestMethodDetails> passedTestMethods = new ArrayList<>();
+    private static List<TestMethodDetails> failedTestMethods = new ArrayList<>();
+    private static List<TestMethodDetails> skippedTestMethods = new ArrayList<>();
+
+    // Inner class to store test method details
+    public static class TestMethodDetails {
+        public String methodName;
+        public String apiUrl;
+        public int statusCode;
+        public String errorMessage;
+
+        public TestMethodDetails(String methodName, String apiUrl, int statusCode, String errorMessage) {
+            this.methodName = methodName;
+            this.apiUrl = apiUrl;
+            this.statusCode = statusCode;
+            this.errorMessage = errorMessage;
+        }
+    }
     
     /**
      * Initialize the simple report
@@ -44,22 +59,24 @@ public class SimpleHtmlReportGenerator {
     }
     
     /**
-     * Record test result with test method name
+     * Record test result with test method name and API details
      */
-    public static void recordTestResult(String status, String testMethodName) {
+    public static void recordTestResult(String status, String testMethodName, String apiUrl, int statusCode, String errorMessage) {
         totalTests++;
+        TestMethodDetails details = new TestMethodDetails(testMethodName, apiUrl, statusCode, errorMessage);
+
         switch (status.toLowerCase()) {
             case "pass":
                 passedTests++;
-                passedTestMethods.add(testMethodName);
+                passedTestMethods.add(details);
                 break;
             case "fail":
                 failedTests++;
-                failedTestMethods.add(testMethodName);
+                failedTestMethods.add(details);
                 break;
             case "skip":
                 skippedTests++;
-                skippedTestMethods.add(testMethodName);
+                skippedTestMethods.add(details);
                 break;
         }
     }
@@ -122,7 +139,14 @@ public class SimpleHtmlReportGenerator {
         html.append("        .method-section { margin: 20px 0; }\n");
         html.append("        .method-section h4 { margin-bottom: 10px; }\n");
         html.append("        .method-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 8px; }\n");
-        html.append("        .method-item { padding: 8px 12px; border-radius: 4px; font-size: 14px; }\n");
+        html.append("        .method-item { padding: 8px 12px; border-radius: 4px; font-size: 14px; margin-bottom: 4px; }\n");
+        html.append("        .expandable { cursor: pointer; transition: all 0.3s ease; }\n");
+        html.append("        .expandable:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }\n");
+        html.append("        .method-name { display: inline-block; flex: 1; }\n");
+        html.append("        .expand-icon { float: right; transition: transform 0.3s ease; font-size: 12px; }\n");
+        html.append("        .method-details { margin-top: 8px; padding: 8px; background: rgba(255,255,255,0.5); border-radius: 4px; }\n");
+        html.append("        .detail-item { margin: 4px 0; font-size: 12px; }\n");
+        html.append("        .error-message { color: #d32f2f; font-weight: bold; }\n");
         html.append("        .passed-method { background-color: #e8f5e8; color: #2e7d32; border-left: 4px solid #4caf50; }\n");
         html.append("        .failed-method { background-color: #ffebee; color: #c62828; border-left: 4px solid #f44336; }\n");
         html.append("        .skipped-method { background-color: #fff3e0; color: #ef6c00; border-left: 4px solid #ff9800; }\n");
@@ -183,9 +207,17 @@ public class SimpleHtmlReportGenerator {
             html.append("            <div class=\"method-section\">\n");
             html.append("                <h4 style=\"color: #4caf50;\">✅ Passed Tests (").append(passedTests).append(")</h4>\n");
             html.append("                <div class=\"method-list\">\n");
-            for (String method : passedTestMethods) {
-                String displayName = method.replace("pm_", "").replace("_", " ");
-                html.append("                    <div class=\"method-item passed-method\">").append(displayName).append("</div>\n");
+            for (TestMethodDetails method : passedTestMethods) {
+                String displayName = method.methodName.replace("pm_", "").replace("_", " ");
+                String methodId = "passed_" + method.methodName;
+                html.append("                    <div class=\"method-item passed-method expandable\" onclick=\"toggleDetails('").append(methodId).append("')\">\n");
+                html.append("                        <span class=\"method-name\">").append(displayName).append("</span>\n");
+                html.append("                        <span class=\"expand-icon\">▼</span>\n");
+                html.append("                        <div class=\"method-details\" id=\"").append(methodId).append("\" style=\"display: none;\">\n");
+                html.append("                            <div class=\"detail-item\"><strong>API URL:</strong> ").append(method.apiUrl != null ? method.apiUrl : "N/A").append("</div>\n");
+                html.append("                            <div class=\"detail-item\"><strong>Status Code:</strong> ").append(method.statusCode > 0 ? method.statusCode : "N/A").append("</div>\n");
+                html.append("                        </div>\n");
+                html.append("                    </div>\n");
             }
             html.append("                </div>\n");
             html.append("            </div>\n");
@@ -196,9 +228,20 @@ public class SimpleHtmlReportGenerator {
             html.append("            <div class=\"method-section\">\n");
             html.append("                <h4 style=\"color: #f44336;\">❌ Failed Tests (").append(failedTests).append(")</h4>\n");
             html.append("                <div class=\"method-list\">\n");
-            for (String method : failedTestMethods) {
-                String displayName = method.replace("pm_", "").replace("_", " ");
-                html.append("                    <div class=\"method-item failed-method\">").append(displayName).append("</div>\n");
+            for (TestMethodDetails method : failedTestMethods) {
+                String displayName = method.methodName.replace("pm_", "").replace("_", " ");
+                String methodId = "failed_" + method.methodName;
+                html.append("                    <div class=\"method-item failed-method expandable\" onclick=\"toggleDetails('").append(methodId).append("')\">\n");
+                html.append("                        <span class=\"method-name\">").append(displayName).append("</span>\n");
+                html.append("                        <span class=\"expand-icon\">▼</span>\n");
+                html.append("                        <div class=\"method-details\" id=\"").append(methodId).append("\" style=\"display: none;\">\n");
+                html.append("                            <div class=\"detail-item\"><strong>API URL:</strong> ").append(method.apiUrl != null ? method.apiUrl : "N/A").append("</div>\n");
+                html.append("                            <div class=\"detail-item\"><strong>Status Code:</strong> ").append(method.statusCode > 0 ? method.statusCode : "N/A").append("</div>\n");
+                if (method.errorMessage != null && !method.errorMessage.isEmpty()) {
+                    html.append("                            <div class=\"detail-item error-message\"><strong>Error:</strong> ").append(method.errorMessage).append("</div>\n");
+                }
+                html.append("                        </div>\n");
+                html.append("                    </div>\n");
             }
             html.append("                </div>\n");
             html.append("            </div>\n");
@@ -209,9 +252,17 @@ public class SimpleHtmlReportGenerator {
             html.append("            <div class=\"method-section\">\n");
             html.append("                <h4 style=\"color: #ff9800;\">⏭️ Skipped Tests (").append(skippedTests).append(")</h4>\n");
             html.append("                <div class=\"method-list\">\n");
-            for (String method : skippedTestMethods) {
-                String displayName = method.replace("pm_", "").replace("_", " ");
-                html.append("                    <div class=\"method-item skipped-method\">").append(displayName).append("</div>\n");
+            for (TestMethodDetails method : skippedTestMethods) {
+                String displayName = method.methodName.replace("pm_", "").replace("_", " ");
+                String methodId = "skipped_" + method.methodName;
+                html.append("                    <div class=\"method-item skipped-method expandable\" onclick=\"toggleDetails('").append(methodId).append("')\">\n");
+                html.append("                        <span class=\"method-name\">").append(displayName).append("</span>\n");
+                html.append("                        <span class=\"expand-icon\">▼</span>\n");
+                html.append("                        <div class=\"method-details\" id=\"").append(methodId).append("\" style=\"display: none;\">\n");
+                html.append("                            <div class=\"detail-item\"><strong>API URL:</strong> ").append(method.apiUrl != null ? method.apiUrl : "N/A").append("</div>\n");
+                html.append("                            <div class=\"detail-item\"><strong>Status Code:</strong> ").append(method.statusCode > 0 ? method.statusCode : "N/A").append("</div>\n");
+                html.append("                        </div>\n");
+                html.append("                    </div>\n");
             }
             html.append("                </div>\n");
             html.append("            </div>\n");
@@ -223,6 +274,23 @@ public class SimpleHtmlReportGenerator {
         html.append("            <p>Generated by AdHash API Test Suite</p>\n");
         html.append("        </div>\n");
         html.append("    </div>\n");
+        html.append("    \n");
+        html.append("    <script>\n");
+        html.append("        function toggleDetails(methodId) {\n");
+        html.append("            var details = document.getElementById(methodId);\n");
+        html.append("            var icon = details.parentElement.querySelector('.expand-icon');\n");
+        html.append("            \n");
+        html.append("            if (details.style.display === 'none') {\n");
+        html.append("                details.style.display = 'block';\n");
+        html.append("                icon.innerHTML = '▲';\n");
+        html.append("                icon.style.transform = 'rotate(180deg)';\n");
+        html.append("            } else {\n");
+        html.append("                details.style.display = 'none';\n");
+        html.append("                icon.innerHTML = '▼';\n");
+        html.append("                icon.style.transform = 'rotate(0deg)';\n");
+        html.append("            }\n");
+        html.append("        }\n");
+        html.append("    </script>\n");
         html.append("</body>\n");
         html.append("</html>\n");
         

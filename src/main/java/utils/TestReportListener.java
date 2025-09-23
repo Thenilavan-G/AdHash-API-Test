@@ -32,8 +32,17 @@ public class TestReportListener implements ITestListener, ISuiteListener {
         String testName = result.getMethod().getMethodName();
         System.out.println("✅ PASSED: " + testName);
 
+        // Get API call details
+        HttpClient.ApiCallDetails apiDetails = HttpClient.getCurrentApiCallDetails();
+        String apiUrl = apiDetails != null ? apiDetails.url : "N/A";
+        int statusCode = apiDetails != null ? apiDetails.statusCode : 0;
+        String errorMessage = apiDetails != null ? apiDetails.errorMessage : null;
+
         // Record in simple report
-        SimpleHtmlReportGenerator.recordTestResult("pass", testName);
+        SimpleHtmlReportGenerator.recordTestResult("pass", testName, apiUrl, statusCode, errorMessage);
+
+        // Clear API details for next test
+        HttpClient.clearCurrentApiCallDetails();
     }
 
     @Override
@@ -43,8 +52,17 @@ public class TestReportListener implements ITestListener, ISuiteListener {
         System.out.println("❌ FAILED: " + testName);
         System.out.println("   Error: " + result.getThrowable().getMessage());
 
+        // Get API call details
+        HttpClient.ApiCallDetails apiDetails = HttpClient.getCurrentApiCallDetails();
+        String apiUrl = apiDetails != null ? apiDetails.url : "N/A";
+        int statusCode = apiDetails != null ? apiDetails.statusCode : 0;
+        String errorMessage = apiDetails != null ? apiDetails.errorMessage : result.getThrowable().getMessage();
+
         // Record in simple report
-        SimpleHtmlReportGenerator.recordTestResult("fail", testName);
+        SimpleHtmlReportGenerator.recordTestResult("fail", testName, apiUrl, statusCode, errorMessage);
+
+        // Clear API details for next test
+        HttpClient.clearCurrentApiCallDetails();
     }
 
     @Override
@@ -53,8 +71,17 @@ public class TestReportListener implements ITestListener, ISuiteListener {
         String testName = result.getMethod().getMethodName();
         System.out.println("⏭️ SKIPPED: " + testName);
 
+        // Get API call details (may be null for skipped tests)
+        HttpClient.ApiCallDetails apiDetails = HttpClient.getCurrentApiCallDetails();
+        String apiUrl = apiDetails != null ? apiDetails.url : "N/A";
+        int statusCode = apiDetails != null ? apiDetails.statusCode : 0;
+        String errorMessage = apiDetails != null ? apiDetails.errorMessage : "Test was skipped";
+
         // Record in simple report
-        SimpleHtmlReportGenerator.recordTestResult("skip", testName);
+        SimpleHtmlReportGenerator.recordTestResult("skip", testName, apiUrl, statusCode, errorMessage);
+
+        // Clear API details for next test
+        HttpClient.clearCurrentApiCallDetails();
     }
     
     @Override

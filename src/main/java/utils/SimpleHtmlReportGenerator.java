@@ -1,7 +1,6 @@
 package utils;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -86,17 +85,21 @@ public class SimpleHtmlReportGenerator {
      */
     public static void generateReport() {
         try {
-            FileWriter writer = new FileWriter(reportPath);
-            
+            // Use UTF-8 encoding explicitly to ensure proper display of Unicode characters
+            java.io.OutputStreamWriter writer = new java.io.OutputStreamWriter(
+                new java.io.FileOutputStream(reportPath),
+                java.nio.charset.StandardCharsets.UTF_8
+            );
+
             // Calculate success rate
             double successRate = totalTests > 0 ? (passedTests * 100.0 / totalTests) : 0;
-            
+
             // Generate HTML content
             writer.write(generateHtmlContent(successRate));
             writer.close();
-            
+
             System.out.println("📊 Simple HTML Report generated: " + reportPath);
-            
+
         } catch (IOException e) {
             System.err.println("Error generating simple HTML report: " + e.getMessage());
         }

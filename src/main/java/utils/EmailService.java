@@ -164,7 +164,7 @@ public class EmailService {
      */
     private String createEmailBody(String additionalMessage, String htmlReportPath) {
         StringBuilder body = new StringBuilder();
-        body.append("<html><body>");
+        body.append("<html><head><meta charset=\"UTF-8\"></head><body>");
         body.append("<h2>🎯 AdHash API Test Report</h2>");
         body.append("<p><strong>Test Execution Completed:</strong> ").append(new Date()).append("</p>");
         
@@ -175,7 +175,9 @@ public class EmailService {
         // Try to read and include HTML report content
         if (htmlReportPath != null && new File(htmlReportPath).exists()) {
             try {
-                String htmlContent = new String(Files.readAllBytes(Paths.get(htmlReportPath)));
+                // Read HTML file with UTF-8 encoding to preserve Unicode characters
+                String htmlContent = new String(Files.readAllBytes(Paths.get(htmlReportPath)),
+                    java.nio.charset.StandardCharsets.UTF_8);
                 body.append("<hr>");
                 body.append("<h3>📊 Test Results Summary:</h3>");
                 body.append(htmlContent);

@@ -1,5 +1,3 @@
-MyHealthAPI\GetExcelReq.class
 utils\EmailService$1.class
 utils\EmailService.class
-MyHealthAPI\PatientReqRead.class
 utils\TestReportListener.class

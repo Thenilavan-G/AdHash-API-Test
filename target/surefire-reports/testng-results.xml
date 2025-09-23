@@ -2,40 +2,40 @@
 <testng-results ignored="0" total="9" passed="7" failed="2" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-09-23T03:13:18 GMT-04:00" name="AdHash_All_Projects_API_Production" finished-at="2025-09-23T03:13:25 GMT-04:00" duration-ms="7327">
+  <suite started-at="2025-09-23T03:16:26 GMT-04:00" name="AdHash_All_Projects_API_Production" finished-at="2025-09-23T03:16:33 GMT-04:00" duration-ms="6788">
     <groups>
     </groups>
-    <test started-at="2025-09-23T03:13:18 GMT-04:00" name="AdHash_API_Tests" finished-at="2025-09-23T03:13:25 GMT-04:00" duration-ms="7327">
+    <test started-at="2025-09-23T03:16:26 GMT-04:00" name="AdHash_API_Tests" finished-at="2025-09-23T03:16:33 GMT-04:00" duration-ms="6788">
       <class name="generated.GeneratedApiTest">
-        <test-method is-config="true" signature="setup()[pri:0, instance:generated.GeneratedApiTest@460d0a57]" started-at="2025-09-23T03:13:18 GMT-04:00" name="setup" finished-at="2025-09-23T03:13:18 GMT-04:00" duration-ms="10" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:generated.GeneratedApiTest@460d0a57]" started-at="2025-09-23T03:16:26 GMT-04:00" name="setup" finished-at="2025-09-23T03:16:26 GMT-04:00" duration-ms="13" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="pm_AdHash_Website()[pri:0, instance:generated.GeneratedApiTest@460d0a57]" started-at="2025-09-23T03:13:18 GMT-04:00" name="pm_AdHash_Website" finished-at="2025-09-23T03:13:19 GMT-04:00" duration-ms="1012" status="PASS">
+        <test-method signature="pm_AdHash_Website()[pri:0, instance:generated.GeneratedApiTest@460d0a57]" started-at="2025-09-23T03:16:26 GMT-04:00" name="pm_AdHash_Website" finished-at="2025-09-23T03:16:27 GMT-04:00" duration-ms="742" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- pm_AdHash_Website -->
-        <test-method signature="pm_AutoChecker_Login_UI()[pri:0, instance:generated.GeneratedApiTest@460d0a57]" started-at="2025-09-23T03:13:19 GMT-04:00" name="pm_AutoChecker_Login_UI" finished-at="2025-09-23T03:13:20 GMT-04:00" duration-ms="1109" status="PASS">
+        <test-method signature="pm_AutoChecker_Login_UI()[pri:0, instance:generated.GeneratedApiTest@460d0a57]" started-at="2025-09-23T03:16:27 GMT-04:00" name="pm_AutoChecker_Login_UI" finished-at="2025-09-23T03:16:28 GMT-04:00" duration-ms="1139" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- pm_AutoChecker_Login_UI -->
-        <test-method signature="pm_AutoChecker_Admin_Login()[pri:0, instance:generated.GeneratedApiTest@460d0a57]" started-at="2025-09-23T03:13:20 GMT-04:00" name="pm_AutoChecker_Admin_Login" finished-at="2025-09-23T03:13:21 GMT-04:00" duration-ms="1130" status="PASS">
+        <test-method signature="pm_AutoChecker_Admin_Login()[pri:0, instance:generated.GeneratedApiTest@460d0a57]" started-at="2025-09-23T03:16:28 GMT-04:00" name="pm_AutoChecker_Admin_Login" finished-at="2025-09-23T03:16:29 GMT-04:00" duration-ms="1104" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- pm_AutoChecker_Admin_Login -->
-        <test-method signature="pm_MHAI_Doctor_SuperAdmin_Login_UI()[pri:0, instance:generated.GeneratedApiTest@460d0a57]" started-at="2025-09-23T03:13:21 GMT-04:00" name="pm_MHAI_Doctor_SuperAdmin_Login_UI" finished-at="2025-09-23T03:13:22 GMT-04:00" duration-ms="1076" status="PASS">
+        <test-method signature="pm_MHAI_Doctor_SuperAdmin_Login_UI()[pri:0, instance:generated.GeneratedApiTest@460d0a57]" started-at="2025-09-23T03:16:29 GMT-04:00" name="pm_MHAI_Doctor_SuperAdmin_Login_UI" finished-at="2025-09-23T03:16:30 GMT-04:00" duration-ms="1100" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- pm_MHAI_Doctor_SuperAdmin_Login_UI -->
-        <test-method signature="pm_MHAI_Doctor_SuperAdmin_Login()[pri:0, instance:generated.GeneratedApiTest@460d0a57]" started-at="2025-09-23T03:13:22 GMT-04:00" name="pm_MHAI_Doctor_SuperAdmin_Login" finished-at="2025-09-23T03:13:23 GMT-04:00" duration-ms="1065" status="PASS">
+        <test-method signature="pm_MHAI_Doctor_SuperAdmin_Login()[pri:0, instance:generated.GeneratedApiTest@460d0a57]" started-at="2025-09-23T03:16:30 GMT-04:00" name="pm_MHAI_Doctor_SuperAdmin_Login" finished-at="2025-09-23T03:16:31 GMT-04:00" duration-ms="1103" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- pm_MHAI_Doctor_SuperAdmin_Login -->
-        <test-method signature="pm_MHCCM_PAR_CRM_Login()[pri:0, instance:generated.GeneratedApiTest@460d0a57]" started-at="2025-09-23T03:13:23 GMT-04:00" name="pm_MHCCM_PAR_CRM_Login" finished-at="2025-09-23T03:13:24 GMT-04:00" duration-ms="1012" status="PASS">
+        <test-method signature="pm_MHCCM_PAR_CRM_Login()[pri:0, instance:generated.GeneratedApiTest@460d0a57]" started-at="2025-09-23T03:16:31 GMT-04:00" name="pm_MHCCM_PAR_CRM_Login" finished-at="2025-09-23T03:16:32 GMT-04:00" duration-ms="755" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- pm_MHCCM_PAR_CRM_Login -->
-        <test-method signature="pm_AutoeVantage_Analytics_Login_PhoneNumber()[pri:0, instance:generated.GeneratedApiTest@460d0a57]" started-at="2025-09-23T03:13:24 GMT-04:00" name="pm_AutoeVantage_Analytics_Login_PhoneNumber" finished-at="2025-09-23T03:13:25 GMT-04:00" duration-ms="446" status="FAIL">
+        <test-method signature="pm_AutoeVantage_Analytics_Login_PhoneNumber()[pri:0, instance:generated.GeneratedApiTest@460d0a57]" started-at="2025-09-23T03:16:32 GMT-04:00" name="pm_AutoeVantage_Analytics_Login_PhoneNumber" finished-at="2025-09-23T03:16:32 GMT-04:00" duration-ms="381" status="FAIL">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[Expected status code 200 but got 400]]>
@@ -80,7 +80,7 @@ at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- pm_AutoeVantage_Analytics_Login_PhoneNumber -->
-        <test-method signature="pm_AutoeVantage_Analytics_Login_OTP()[pri:0, instance:generated.GeneratedApiTest@460d0a57]" started-at="2025-09-23T03:13:25 GMT-04:00" name="pm_AutoeVantage_Analytics_Login_OTP" finished-at="2025-09-23T03:13:25 GMT-04:00" duration-ms="356" status="FAIL">
+        <test-method signature="pm_AutoeVantage_Analytics_Login_OTP()[pri:0, instance:generated.GeneratedApiTest@460d0a57]" started-at="2025-09-23T03:16:32 GMT-04:00" name="pm_AutoeVantage_Analytics_Login_OTP" finished-at="2025-09-23T03:16:33 GMT-04:00" duration-ms="346" status="FAIL">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[Expected status code 200 but got 400]]>
@@ -125,7 +125,7 @@ at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- pm_AutoeVantage_Analytics_Login_OTP -->
-        <test-method signature="pm_Metcalf_UI()[pri:0, instance:generated.GeneratedApiTest@460d0a57]" started-at="2025-09-23T03:13:25 GMT-04:00" name="pm_Metcalf_UI" finished-at="2025-09-23T03:13:25 GMT-04:00" duration-ms="67" status="PASS">
+        <test-method signature="pm_Metcalf_UI()[pri:0, instance:generated.GeneratedApiTest@460d0a57]" started-at="2025-09-23T03:16:33 GMT-04:00" name="pm_Metcalf_UI" finished-at="2025-09-23T03:16:33 GMT-04:00" duration-ms="65" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- pm_Metcalf_UI -->

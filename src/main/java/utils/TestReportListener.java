@@ -2,6 +2,8 @@ package utils;
 
 import java.io.File;
 import java.util.Arrays;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
@@ -18,30 +20,79 @@ public class TestReportListener implements ITestListener, ISuiteListener {
     private int passedTests = 0;
     private int failedTests = 0;
     private int skippedTests = 0;
-    
+
+    @Override
+    public void onTestStart(ITestResult result) {
+        // Create test in Extent Report
+        String testName = result.getMethod().getMethodName();
+        String description = "AdHash API Test: " + testName.replace("pm_", "").replace("_", " ");
+        ExtentReportManager.createTest(testName, description);
+
+        // Assign categories based on test name
+        if (testName.contains("Login")) {
+            ExtentReportManager.assignCategory("Authentication");
+        } else if (testName.contains("UI")) {
+            ExtentReportManager.assignCategory("UI Tests");
+        } else {
+            ExtentReportManager.assignCategory("API Tests");
+        }
+
+        ExtentReportManager.assignAuthor("AdHash QA Team");
+        ExtentReportManager.logInfo("Starting test: " + testName);
+    }
+
     @Override
     public void onTestSuccess(ITestResult result) {
         passedTests++;
-        System.out.println("✅ PASSED: " + result.getMethod().getMethodName());
+        String testName = result.getMethod().getMethodName();
+        System.out.println("✅ PASSED: " + testName);
+
+        // Log to Extent Report
+        ExtentReportManager.logPass("✅ Test passed successfully");
+        ExtentReportManager.logInfo("Execution time: " + (result.getEndMillis() - result.getStartMillis()) + "ms");
+        ExtentReportManager.endTest();
     }
-    
+
     @Override
     public void onTestFailure(ITestResult result) {
         failedTests++;
-        System.out.println("❌ FAILED: " + result.getMethod().getMethodName());
+        String testName = result.getMethod().getMethodName();
+        System.out.println("❌ FAILED: " + testName);
         System.out.println("   Error: " + result.getThrowable().getMessage());
+
+        // Log to Extent Report
+        ExtentReportManager.logFail("❌ Test failed: " + result.getThrowable().getMessage());
+        ExtentReportManager.logInfo("Execution time: " + (result.getEndMillis() - result.getStartMillis()) + "ms");
+        ExtentReportManager.endTest();
     }
-    
+
     @Override
     public void onTestSkipped(ITestResult result) {
         skippedTests++;
-        System.out.println("⏭️ SKIPPED: " + result.getMethod().getMethodName());
+        String testName = result.getMethod().getMethodName();
+        System.out.println("⏭️ SKIPPED: " + testName);
+
+        // Log to Extent Report
+        ExtentReportManager.logSkip("⏭️ Test was skipped");
+        ExtentReportManager.logInfo("Reason: " + (result.getThrowable() != null ? result.getThrowable().getMessage() : "Unknown"));
+        ExtentReportManager.endTest();
     }
     
     @Override
+    public void onStart(ISuite suite) {
+        // Initialize Extent Reports at the beginning
+        ExtentReportManager.initializeReport();
+        System.out.println("📊 Extent Reports initialized successfully");
+    }
+
+    @Override
     public void onFinish(ISuite suite) {
         totalTests = passedTests + failedTests + skippedTests;
-        
+
+        // Finalize Extent Report
+        ExtentReportManager.flushReport();
+        System.out.println("📊 Extent Report generated: " + ExtentReportManager.getReportPath());
+
         System.out.println("\n" + "=".repeat(60));
         System.out.println("🎯 TEST EXECUTION COMPLETED - AdHash API Suite");
         System.out.println("=".repeat(60));
@@ -52,7 +103,7 @@ public class TestReportListener implements ITestListener, ISuiteListener {
         System.out.println("   ⏭️ Skipped: " + skippedTests);
         System.out.println("   📈 Success Rate: " + (totalTests > 0 ? (passedTests * 100.0 / totalTests) : 0) + "%");
         System.out.println("=".repeat(60));
-        
+
         // Send email report
         sendEmailReport();
     }
@@ -147,15 +198,27 @@ public class TestReportListener implements ITestListener, ISuiteListener {
      * Find the HTML report file (TestNG, Surefire, or Extent Reports)
      */
     private String findHtmlReport() {
-        // Check common report locations (prioritize Extent Reports, then TestNG/Surefire)
+        // First, check if we have the Extent Report path from ExtentReportManager
+        String extentReportPath = ExtentReportManager.getReportPath();
+        if (extentReportPath != null) {
+            File extentFile = new File(extentReportPath);
+            if (extentFile.exists()) {
+                System.out.println("📄 Found Extent HTML report: " + extentFile.getAbsolutePath());
+                System.out.println("   📊 Report Type: Extent Reports (Professional)");
+                return extentFile.getAbsolutePath();
+            }
+        }
+
+        // Fallback to check common report locations
         String[] possiblePaths = {
             // Extent Reports locations
+            "extent-reports/AdHash_API_Report_*.html",
             "test-output/ExtentReports.html",
             "test-output/extent-reports.html",
             "test-output/extent.html",
             "reports/extent-reports.html",
             "reports/ExtentReports.html",
-            // TestNG/Surefire locations
+            // TestNG/Surefire locations (fallback)
             "target/surefire-reports/emailable-report.html",
             "target/surefire-reports/index.html",
             "test-output/emailable-report.html",
@@ -169,7 +232,7 @@ public class TestReportListener implements ITestListener, ISuiteListener {
                 if (path.toLowerCase().contains("extent")) {
                     System.out.println("   📊 Report Type: Extent Reports");
                 } else {
-                    System.out.println("   📊 Report Type: TestNG/Surefire");
+                    System.out.println("   📊 Report Type: TestNG/Surefire (Basic)");
                 }
                 return file.getAbsolutePath();
             }

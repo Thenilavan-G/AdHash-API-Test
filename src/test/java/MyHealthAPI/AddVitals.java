@@ -88,7 +88,7 @@ public class AddVitals {
         System.out.println("Total mobile numbers: " + number.size());
     }
 
-    //Generate dates automatically using IST timezone - CURRENT DATE ONLY with COMMON TIME
+    //Generate dates automatically using IST timezone - CURRENT DATE ONLY with COMMON TIME (6:00 AM)
     private void generateDatesUsingIST() {
         // Define IST timezone
         ZoneId istZone = ZoneId.of("Asia/Kolkata");
@@ -96,11 +96,11 @@ public class AddVitals {
         // Get current date and time in IST
         LocalDateTime currentIST = LocalDateTime.now(istZone);
 
-        // Generate current date for all vital types with COMMON TIME (10:00 AM)
+        // Generate current date for all vital types with COMMON TIME (6:00 AM)
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-        // Common time for all vitals - current date at 10:00 AM
-        LocalDateTime commonDateTime = currentIST.withHour(10).withMinute(0).withSecond(0).withNano(0);
+        // Common time for all vitals - current date at 6:00 AM
+        LocalDateTime commonDateTime = currentIST.withHour(6).withMinute(0).withSecond(0).withNano(0);
         String commonDateTimeString = commonDateTime.format(formatter);
 
         // For Heart Rate - current date at 10:00 AM

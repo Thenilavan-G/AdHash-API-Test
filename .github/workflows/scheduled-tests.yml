@@ -1,0 +1,76 @@
+name: AdHash API Scheduled Tests
+
+on:
+  schedule:
+    # Run at 9:00 AM IST (3:30 AM UTC same day)
+    - cron: '30 3 * * *'
+    # Run at 5:00 PM IST (11:30 AM UTC same day)
+    - cron: '30 11 * * *'
+  
+  # Allow manual triggering
+  workflow_dispatch:
+
+jobs:
+  api-tests:
+    runs-on: windows-latest
+
+    env:
+      EMAIL_ENABLED: ${{ secrets.EMAIL_ENABLED }}
+      EMAIL_PROVIDER: ${{ secrets.EMAIL_PROVIDER }}
+      EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
+      EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+      EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '11'
+        
+    - name: Cache Maven dependencies
+      uses: actions/cache@v4
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+        
+    - name: Clean Maven cache (if needed)
+      run: |
+        echo "Cleaning Maven cache to prevent conflicts..."
+        if (Test-Path ~/.m2/repository/org/apache/maven/plugins/maven-surefire-plugin) {
+          Remove-Item -Recurse -Force ~/.m2/repository/org/apache/maven/plugins/maven-surefire-plugin
+          echo "Cleared Surefire plugin cache"
+        }
+
+    - name: Debug Email Configuration
+      run: |
+        echo "=== EMAIL CONFIGURATION DEBUG ==="
+        echo "EMAIL_ENABLED: '$env:EMAIL_ENABLED'"
+        echo "EMAIL_PROVIDER: '$env:EMAIL_PROVIDER'"
+        echo "EMAIL_USERNAME: '$env:EMAIL_USERNAME'"
+        echo "EMAIL_RECIPIENTS: '$env:EMAIL_RECIPIENTS'"
+        echo "EMAIL_PASSWORD: $(if ($env:EMAIL_PASSWORD) { '[SET - Length: ' + $env:EMAIL_PASSWORD.Length + ']' } else { '[NOT SET]' })"
+        echo "=================================="
+
+    - name: Run API Tests
+      run: |
+        echo "Starting AdHash API Tests..."
+        echo "Running 60 API tests from TestNG.xml..."
+        echo "Maven version:"
+        mvn --version
+        echo "Running tests with email configuration..."
+        mvn clean test "-Demail.enabled=$env:EMAIL_ENABLED" "-Demail.username=$env:EMAIL_USERNAME" "-Demail.password=$env:EMAIL_PASSWORD" "-Demail.recipients=$env:EMAIL_RECIPIENTS" "-Demail.provider=$env:EMAIL_PROVIDER"
+        echo "Tests completed. Exit code: $LASTEXITCODE"
+        
+    - name: Upload Test Results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results-${{ github.run_number }}
+        path: |
+          target/surefire-reports/
+          test-output/

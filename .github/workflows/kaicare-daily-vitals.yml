@@ -131,7 +131,7 @@ jobs:
         username: ${{ secrets.EMAIL_USERNAME }}
         password: ${{ secrets.EMAIL_PASSWORD }}
         subject: "✅ KaiCare Daily Vitals Automation - SUCCESS (${{ steps.test-results.outputs.timestamp }})"
-        to: your-email@example.com
+        to: thenilavan@gmail.com
         from: KaiCare Automation <${{ secrets.EMAIL_USERNAME }}>
         html_body: |
           <h2 style="color: #28a745;">✅ KaiCare Daily Vitals Automation - SUCCESS</h2>
@@ -204,7 +204,7 @@ jobs:
         username: ${{ secrets.EMAIL_USERNAME }}
         password: ${{ secrets.EMAIL_PASSWORD }}
         subject: "❌ KaiCare Daily Vitals Automation - FAILED (${{ steps.test-results.outputs.timestamp }})"
-        to: your-email@example.com
+        to: thenilavan@gmail.com
         from: KaiCare Automation <${{ secrets.EMAIL_USERNAME }}>
         html_body: |
           <h2 style="color: #dc3545;">❌ KaiCare Daily Vitals Automation - FAILED</h2>

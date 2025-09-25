@@ -1,5 +1,0 @@
-# Created at 2025-09-23T06:15:36.480
-Boot Manifest-JAR contains absolute paths in classpath 'D:\Thenilavan\Automation\eclipse-workspace\AdHash_API\target\test-classes'
-Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
-'other' has different root
-

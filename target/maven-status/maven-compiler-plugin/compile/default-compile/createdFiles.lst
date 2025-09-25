@@ -1,2 +1,8 @@
-MyHealthAPI\GetExcelReq.class
-MyHealthAPI\PatientReqRead.class
+utils\EmailService$1.class
+utils\EmailService.class
+utils\HttpClient.class
+utils\ExtentReportManager.class
+utils\SimpleHtmlReportGenerator.class
+utils\HttpClient$ApiCallDetails.class
+utils\SimpleHtmlReportGenerator$TestMethodDetails.class
+utils\TestReportListener.class

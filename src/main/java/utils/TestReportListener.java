@@ -1,0 +1,291 @@
+package utils;
+
+import java.io.File;
+import java.util.Arrays;
+
+import org.testng.ISuite;
+import org.testng.ISuiteListener;
+import org.testng.ITestListener;
+import org.testng.ITestResult;
+
+/**
+ * TestNG Listener to automatically send HTML test reports via email
+ * Triggers after all tests are completed
+ */
+public class TestReportListener implements ITestListener, ISuiteListener {
+    
+    private int totalTests = 0;
+    private int passedTests = 0;
+    private int failedTests = 0;
+    private int skippedTests = 0;
+
+    @Override
+    public void onTestStart(ITestResult result) {
+        // Simple tracking - no detailed logging needed
+        String testName = result.getMethod().getMethodName();
+        System.out.println("🔄 STARTING: " + testName);
+    }
+
+    @Override
+    public void onTestSuccess(ITestResult result) {
+        passedTests++;
+        String testName = result.getMethod().getMethodName();
+        System.out.println("✅ PASSED: " + testName);
+
+        // Get API call details
+        HttpClient.ApiCallDetails apiDetails = HttpClient.getCurrentApiCallDetails();
+        String apiUrl = apiDetails != null ? apiDetails.url : "N/A";
+        int statusCode = apiDetails != null ? apiDetails.statusCode : 0;
+        String errorMessage = apiDetails != null ? apiDetails.errorMessage : null;
+
+        // Record in simple report
+        SimpleHtmlReportGenerator.recordTestResult("pass", testName, apiUrl, statusCode, errorMessage);
+
+        // Clear API details for next test
+        HttpClient.clearCurrentApiCallDetails();
+    }
+
+    @Override
+    public void onTestFailure(ITestResult result) {
+        failedTests++;
+        String testName = result.getMethod().getMethodName();
+        System.out.println("❌ FAILED: " + testName);
+        System.out.println("   Error: " + result.getThrowable().getMessage());
+
+        // Get API call details
+        HttpClient.ApiCallDetails apiDetails = HttpClient.getCurrentApiCallDetails();
+        String apiUrl = apiDetails != null ? apiDetails.url : "N/A";
+        int statusCode = apiDetails != null ? apiDetails.statusCode : 0;
+        String errorMessage = apiDetails != null ? apiDetails.errorMessage : result.getThrowable().getMessage();
+
+        // Record in simple report
+        SimpleHtmlReportGenerator.recordTestResult("fail", testName, apiUrl, statusCode, errorMessage);
+
+        // Clear API details for next test
+        HttpClient.clearCurrentApiCallDetails();
+    }
+
+    @Override
+    public void onTestSkipped(ITestResult result) {
+        skippedTests++;
+        String testName = result.getMethod().getMethodName();
+        System.out.println("⏭️ SKIPPED: " + testName);
+
+        // Get API call details (may be null for skipped tests)
+        HttpClient.ApiCallDetails apiDetails = HttpClient.getCurrentApiCallDetails();
+        String apiUrl = apiDetails != null ? apiDetails.url : "N/A";
+        int statusCode = apiDetails != null ? apiDetails.statusCode : 0;
+        String errorMessage = apiDetails != null ? apiDetails.errorMessage : "Test was skipped";
+
+        // Record in simple report
+        SimpleHtmlReportGenerator.recordTestResult("skip", testName, apiUrl, statusCode, errorMessage);
+
+        // Clear API details for next test
+        HttpClient.clearCurrentApiCallDetails();
+    }
+    
+    @Override
+    public void onStart(ISuite suite) {
+        // Initialize Simple HTML Report at the beginning
+        SimpleHtmlReportGenerator.initializeReport();
+        System.out.println("📊 Simple HTML Report initialized successfully");
+    }
+
+    @Override
+    public void onFinish(ISuite suite) {
+        totalTests = passedTests + failedTests + skippedTests;
+
+        // Generate Simple HTML Report
+        SimpleHtmlReportGenerator.generateReport();
+        System.out.println("📊 Simple HTML Report generated: " + SimpleHtmlReportGenerator.getReportPath());
+
+        System.out.println("\n" + "=".repeat(60));
+        System.out.println("🎯 TEST EXECUTION COMPLETED - AdHash API Suite");
+        System.out.println("=".repeat(60));
+        System.out.println("📊 RESULTS SUMMARY:");
+        System.out.println("   Total Tests: " + totalTests);
+        System.out.println("   ✅ Passed: " + passedTests);
+        System.out.println("   ❌ Failed: " + failedTests);
+        System.out.println("   ⏭️ Skipped: " + skippedTests);
+        System.out.println("   📈 Success Rate: " + (totalTests > 0 ? (passedTests * 100.0 / totalTests) : 0) + "%");
+        System.out.println("=".repeat(60));
+
+        // Send email report
+        sendEmailReport();
+    }
+    
+    /**
+     * Send email report with HTML attachment
+     */
+    private void sendEmailReport() {
+        try {
+            // Check if email is enabled - check system properties first (from Maven -D), then environment variables
+            String emailEnabled = System.getProperty("email.enabled");
+            if (emailEnabled == null || emailEnabled.trim().isEmpty()) {
+                emailEnabled = System.getenv("EMAIL_ENABLED");
+            }
+
+            System.out.println("🔍 Email configuration check:");
+            System.out.println("   email.enabled sys prop: " + System.getProperty("email.enabled"));
+            System.out.println("   EMAIL_ENABLED env var: " + System.getenv("EMAIL_ENABLED"));
+            System.out.println("   Final emailEnabled value: " + emailEnabled);
+
+            if (!"true".equalsIgnoreCase(emailEnabled)) {
+                System.out.println("📧 Email reporting is disabled. Set EMAIL_ENABLED=true to enable.");
+                return;
+            }
+
+            // Get email configuration - check system properties first (from Maven -D), then environment variables
+            String emailProvider = System.getProperty("email.provider");
+            if (emailProvider == null || emailProvider.trim().isEmpty()) {
+                emailProvider = System.getenv("EMAIL_PROVIDER");
+            }
+
+            String emailUsername = System.getProperty("email.username");
+            if (emailUsername == null || emailUsername.trim().isEmpty()) {
+                emailUsername = System.getenv("EMAIL_USERNAME");
+            }
+
+            String emailPassword = System.getProperty("email.password");
+            if (emailPassword == null || emailPassword.trim().isEmpty()) {
+                emailPassword = System.getenv("EMAIL_PASSWORD");
+            }
+
+            String emailRecipients = System.getProperty("email.recipients");
+            if (emailRecipients == null || emailRecipients.trim().isEmpty()) {
+                emailRecipients = System.getenv("EMAIL_RECIPIENTS");
+            }
+
+            System.out.println("📧 Email configuration values:");
+            System.out.println("   Provider: " + emailProvider);
+            System.out.println("   Username: " + emailUsername);
+            System.out.println("   Recipients: " + emailRecipients);
+            System.out.println("   Password: " + (emailPassword != null ? "[SET]" : "[NOT SET]"));
+            
+            if (emailUsername == null || emailPassword == null || emailRecipients == null) {
+                System.out.println("⚠️ Email configuration missing. Please set EMAIL_USERNAME, EMAIL_PASSWORD, and EMAIL_RECIPIENTS");
+                return;
+            }
+            
+            // Create email service
+            EmailService emailService;
+            if ("outlook".equalsIgnoreCase(emailProvider)) {
+                emailService = EmailService.forOutlook(emailUsername, emailPassword);
+            } else if ("zoho".equalsIgnoreCase(emailProvider)) {
+                emailService = EmailService.forZoho(emailUsername, emailPassword);
+            } else {
+                // Default to Gmail
+                emailService = EmailService.forGmail(emailUsername, emailPassword);
+            }
+            
+            // Find HTML report file
+            String htmlReportPath = findHtmlReport();
+            
+            // Prepare email details
+            String[] recipients = emailRecipients.split(",");
+            for (int i = 0; i < recipients.length; i++) {
+                recipients[i] = recipients[i].trim();
+            }
+            
+            String subject = "AdHash API Test Report - " + getTestStatus();
+            String message = createEmailMessage();
+            
+            // Send email
+            System.out.println("📧 Sending email report to: " + Arrays.toString(recipients));
+            emailService.sendTestReport(recipients, subject, htmlReportPath, message);
+            
+        } catch (Exception e) {
+            System.err.println("❌ Failed to send email report: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Find the HTML report file (TestNG, Surefire, or Extent Reports)
+     */
+    private String findHtmlReport() {
+        // First, check if we have the Simple Report path from SimpleHtmlReportGenerator
+        String simpleReportPath = SimpleHtmlReportGenerator.getReportPath();
+        if (simpleReportPath != null) {
+            File simpleFile = new File(simpleReportPath);
+            if (simpleFile.exists()) {
+                System.out.println("📄 Found Simple HTML report: " + simpleFile.getAbsolutePath());
+                System.out.println("   📊 Report Type: Simple HTML Report (Clean)");
+                return simpleFile.getAbsolutePath();
+            }
+        }
+
+        // Fallback to check common report locations
+        String[] possiblePaths = {
+            // Simple Reports locations
+            "simple-reports/AdHash_API_Simple_Report_*.html",
+            // Extent Reports locations (fallback)
+            "extent-reports/AdHash_API_Report_*.html",
+            "test-output/ExtentReports.html",
+            "test-output/extent-reports.html",
+            "test-output/extent.html",
+            "reports/extent-reports.html",
+            "reports/ExtentReports.html",
+            // TestNG/Surefire locations (fallback)
+            "target/surefire-reports/emailable-report.html",
+            "target/surefire-reports/index.html",
+            "test-output/emailable-report.html",
+            "test-output/index.html"
+        };
+
+        for (String path : possiblePaths) {
+            File file = new File(path);
+            if (file.exists()) {
+                System.out.println("📄 Found HTML report: " + file.getAbsolutePath());
+                if (path.toLowerCase().contains("simple")) {
+                    System.out.println("   📊 Report Type: Simple HTML Report (Clean)");
+                } else if (path.toLowerCase().contains("extent")) {
+                    System.out.println("   📊 Report Type: Extent Reports");
+                } else {
+                    System.out.println("   📊 Report Type: TestNG/Surefire (Basic)");
+                }
+                return file.getAbsolutePath();
+            }
+        }
+
+        System.out.println("⚠️ HTML report not found in standard locations");
+        System.out.println("   Checked: Extent Reports, TestNG, and Surefire report locations");
+        return null;
+    }
+    
+    /**
+     * Get overall test status
+     */
+    private String getTestStatus() {
+        if (failedTests > 0) {
+            return "FAILED (" + failedTests + " failures)";
+        } else if (skippedTests > 0) {
+            return "PASSED with SKIPS (" + skippedTests + " skipped)";
+        } else {
+            return "ALL PASSED";
+        }
+    }
+    
+    /**
+     * Create simple email message with just pass/fail counts
+     */
+    private String createEmailMessage() {
+        StringBuilder message = new StringBuilder();
+        message.append("<h3>🎯 AdHash API Test Execution Summary</h3>");
+        message.append("<p>");
+        message.append("<strong>Total Tests:</strong> ").append(totalTests).append("<br>");
+        message.append("<strong>✅ Passed:</strong> ").append(passedTests).append("<br>");
+        message.append("<strong>❌ Failed:</strong> ").append(failedTests).append("<br>");
+
+        if (skippedTests > 0) {
+            message.append("<strong>⏭️ Skipped:</strong> ").append(skippedTests).append("<br>");
+        }
+
+        message.append("<strong>📈 Success Rate:</strong> ").append(totalTests > 0 ? String.format("%.1f%%", passedTests * 100.0 / totalTests) : "0%");
+        message.append("</p>");
+        message.append("<p><strong>Overall Status:</strong> ").append(getTestStatus()).append("</p>");
+        message.append("<p><em>Detailed HTML report is attached to this email.</em></p>");
+
+        return message.toString();
+    }
+}

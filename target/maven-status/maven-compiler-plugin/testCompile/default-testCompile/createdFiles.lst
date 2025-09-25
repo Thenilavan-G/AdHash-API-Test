@@ -1,3 +1,2 @@
-MyHealthAPI\AddPatient.class
-MyHealthAPI\AddVitals.class
-MyHealthAPI\TestingPgm.class
+base\ApiBase.class
+generated\GeneratedApiTest.class

@@ -6,6 +6,12 @@ on:
     - cron: '30 1 * * *'
   workflow_dispatch:
     # Allows manual triggering of the workflow
+    inputs:
+      test_email_only:
+        description: 'Test email functionality only (skip vitals automation)'
+        required: false
+        default: false
+        type: boolean
   push:
     branches: [ master ]
 
@@ -44,6 +50,7 @@ jobs:
         echo "Workflow triggered for daily vitals automation"
         
     - name: Run KaiCare Vitals Tests
+      if: github.event.inputs.test_email_only != 'true'
       run: |
         echo "Starting KaiCare Daily Vitals Automation..."
         echo "Running all 11 test methods for complete vitals data insertion"
@@ -88,22 +95,29 @@ jobs:
         SKIPPED=0
         STATUS="UNKNOWN"
 
-        # Parse TestNG results if available
-        if [ -f target/surefire-reports/testng-results.xml ]; then
-          echo "Parsing TestNG results..."
-          TESTS_RUN=$(grep -o 'total="[0-9]*"' target/surefire-reports/testng-results.xml | grep -o '[0-9]*' || echo "0")
-          FAILURES=$(grep -o 'failed="[0-9]*"' target/surefire-reports/testng-results.xml | grep -o '[0-9]*' || echo "0")
-          ERRORS=$(grep -o 'errors="[0-9]*"' target/surefire-reports/testng-results.xml | grep -o '[0-9]*' || echo "0")
-          SKIPPED=$(grep -o 'skipped="[0-9]*"' target/surefire-reports/testng-results.xml | grep -o '[0-9]*' || echo "0")
-        fi
-
-        # Determine overall status
-        if [ "$FAILURES" -eq 0 ] && [ "$ERRORS" -eq 0 ] && [ "$TESTS_RUN" -gt 0 ]; then
-          STATUS="SUCCESS"
-        elif [ "$TESTS_RUN" -eq 0 ]; then
-          STATUS="NO_TESTS"
+        # Check if this is email test only
+        if [ "${{ github.event.inputs.test_email_only }}" = "true" ]; then
+          echo "Email test mode - skipping test result parsing"
+          STATUS="EMAIL_TEST"
+          TESTS_RUN=1
         else
-          STATUS="FAILURE"
+          # Parse TestNG results if available
+          if [ -f target/surefire-reports/testng-results.xml ]; then
+            echo "Parsing TestNG results..."
+            TESTS_RUN=$(grep -o 'total="[0-9]*"' target/surefire-reports/testng-results.xml | grep -o '[0-9]*' || echo "0")
+            FAILURES=$(grep -o 'failed="[0-9]*"' target/surefire-reports/testng-results.xml | grep -o '[0-9]*' || echo "0")
+            ERRORS=$(grep -o 'errors="[0-9]*"' target/surefire-reports/testng-results.xml | grep -o '[0-9]*' || echo "0")
+            SKIPPED=$(grep -o 'skipped="[0-9]*"' target/surefire-reports/testng-results.xml | grep -o '[0-9]*' || echo "0")
+          fi
+
+          # Determine overall status
+          if [ "$FAILURES" -eq 0 ] && [ "$ERRORS" -eq 0 ] && [ "$TESTS_RUN" -gt 0 ]; then
+            STATUS="SUCCESS"
+          elif [ "$TESTS_RUN" -eq 0 ]; then
+            STATUS="NO_TESTS"
+          else
+            STATUS="FAILURE"
+          fi
         fi
 
         # Set outputs for email step
@@ -121,8 +135,56 @@ jobs:
         echo "Skipped: $SKIPPED"
         echo "Status: $STATUS"
 
+    - name: Debug Email Configuration
+      if: always()
+      run: |
+        echo "=== Email Configuration Debug ==="
+        echo "EMAIL_USERNAME is set: ${{ secrets.EMAIL_USERNAME != '' }}"
+        echo "EMAIL_PASSWORD is set: ${{ secrets.EMAIL_PASSWORD != '' }}"
+        echo "EMAIL_TO is set: ${{ secrets.EMAIL_TO != '' }}"
+        echo "Test Status: ${{ steps.test-results.outputs.status }}"
+        echo "Timestamp: ${{ steps.test-results.outputs.timestamp }}"
+        echo "================================="
+
+    - name: Send Test Email
+      if: always() && github.event.inputs.test_email_only == 'true'
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.zoho.com
+        server_port: 587
+        secure: true
+        username: ${{ secrets.EMAIL_USERNAME }}
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: "🧪 KaiCare Email Test - Configuration Verification"
+        to: ${{ secrets.EMAIL_TO }}
+        from: ${{ secrets.EMAIL_USERNAME }}
+        ignore_cert: true
+        convert_markdown: true
+        html_body: |
+          <h2 style="color: #007bff;">🧪 KaiCare Email Test - Configuration Verification</h2>
+
+          <p>This is a test email to verify that the email configuration is working correctly.</p>
+
+          <h3>✅ Configuration Status</h3>
+          <ul>
+            <li><strong>SMTP Server:</strong> smtp.zoho.com:587</li>
+            <li><strong>Security:</strong> TLS/STARTTLS enabled</li>
+            <li><strong>Authentication:</strong> Username/Password</li>
+            <li><strong>Timestamp:</strong> ${{ steps.test-results.outputs.timestamp }}</li>
+          </ul>
+
+          <p style="color: #28a745; font-weight: bold;">
+            ✅ If you receive this email, the configuration is working correctly!
+          </p>
+
+          <hr>
+          <p style="color: #6c757d; font-size: 12px;">
+            This is a test message from KaiCare Daily Vitals Automation.<br>
+            Triggered manually for email configuration verification.
+          </p>
+
     - name: Send Success Email
-      if: always() && steps.test-results.outputs.status == 'SUCCESS'
+      if: always() && steps.test-results.outputs.status == 'SUCCESS' && github.event.inputs.test_email_only != 'true'
       uses: dawidd6/action-send-mail@v3
       with:
         server_address: smtp.zoho.com
@@ -132,7 +194,9 @@ jobs:
         password: ${{ secrets.EMAIL_PASSWORD }}
         subject: "✅ KaiCare Daily Vitals Automation - SUCCESS (${{ steps.test-results.outputs.timestamp }})"
         to: ${{ secrets.EMAIL_TO }}
-        from: KaiCare Automation <${{ secrets.EMAIL_USERNAME }}>
+        from: ${{ secrets.EMAIL_USERNAME }}
+        ignore_cert: true
+        convert_markdown: true
         html_body: |
           <h2 style="color: #28a745;">✅ KaiCare Daily Vitals Automation - SUCCESS</h2>
 
@@ -195,7 +259,7 @@ jobs:
           </p>
 
     - name: Send Failure Email
-      if: always() && (steps.test-results.outputs.status == 'FAILURE' || steps.test-results.outputs.status == 'NO_TESTS')
+      if: always() && (steps.test-results.outputs.status == 'FAILURE' || steps.test-results.outputs.status == 'NO_TESTS') && github.event.inputs.test_email_only != 'true'
       uses: dawidd6/action-send-mail@v3
       with:
         server_address: smtp.zoho.com
@@ -205,7 +269,9 @@ jobs:
         password: ${{ secrets.EMAIL_PASSWORD }}
         subject: "❌ KaiCare Daily Vitals Automation - FAILED (${{ steps.test-results.outputs.timestamp }})"
         to: ${{ secrets.EMAIL_TO }}
-        from: KaiCare Automation <${{ secrets.EMAIL_USERNAME }}>
+        from: ${{ secrets.EMAIL_USERNAME }}
+        ignore_cert: true
+        convert_markdown: true
         html_body: |
           <h2 style="color: #dc3545;">❌ KaiCare Daily Vitals Automation - FAILED</h2>
 

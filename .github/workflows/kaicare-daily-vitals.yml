@@ -121,18 +121,29 @@ jobs:
         echo "Skipped: $SKIPPED"
         echo "Status: $STATUS"
 
+    - name: Debug Email Configuration
+      if: always()
+      run: |
+        echo "=== Email Configuration Debug ==="
+        echo "EMAIL_USERNAME is set: ${{ secrets.EMAIL_USERNAME != '' }}"
+        echo "EMAIL_PASSWORD is set: ${{ secrets.EMAIL_PASSWORD != '' }}"
+        echo "EMAIL_TO is set: ${{ secrets.EMAIL_TO != '' }}"
+        echo "Test Status: ${{ steps.test-results.outputs.status }}"
+        echo "Timestamp: ${{ steps.test-results.outputs.timestamp }}"
+        echo "================================="
+
     - name: Send Success Email
       if: always() && steps.test-results.outputs.status == 'SUCCESS'
       uses: dawidd6/action-send-mail@v3
       with:
-        server_address: smtp.zoho.com
+        server_address: smtp.gmail.com
         server_port: 587
         secure: true
         username: ${{ secrets.EMAIL_USERNAME }}
         password: ${{ secrets.EMAIL_PASSWORD }}
         subject: "✅ KaiCare Daily Vitals Automation - SUCCESS (${{ steps.test-results.outputs.timestamp }})"
         to: ${{ secrets.EMAIL_TO }}
-        from: KaiCare Automation <${{ secrets.EMAIL_USERNAME }}>
+        from: ${{ secrets.EMAIL_USERNAME }}
         html_body: |
           <h2 style="color: #28a745;">✅ KaiCare Daily Vitals Automation - SUCCESS</h2>
 
@@ -198,14 +209,14 @@ jobs:
       if: always() && (steps.test-results.outputs.status == 'FAILURE' || steps.test-results.outputs.status == 'NO_TESTS')
       uses: dawidd6/action-send-mail@v3
       with:
-        server_address: smtp.zoho.com
+        server_address: smtp.gmail.com
         server_port: 587
         secure: true
         username: ${{ secrets.EMAIL_USERNAME }}
         password: ${{ secrets.EMAIL_PASSWORD }}
         subject: "❌ KaiCare Daily Vitals Automation - FAILED (${{ steps.test-results.outputs.timestamp }})"
         to: ${{ secrets.EMAIL_TO }}
-        from: KaiCare Automation <${{ secrets.EMAIL_USERNAME }}>
+        from: ${{ secrets.EMAIL_USERNAME }}
         html_body: |
           <h2 style="color: #dc3545;">❌ KaiCare Daily Vitals Automation - FAILED</h2>
 

@@ -2,60 +2,60 @@
 <testng-results ignored="0" total="11" passed="11" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-09-22T04:29:19 GMT-04:00" name="Daily Vitals Test Suite" finished-at="2025-09-22T04:29:22 GMT-04:00" duration-ms="3440">
+  <suite started-at="2025-09-23T08:09:18 GMT-04:00" name="Daily Vitals Test Suite" finished-at="2025-09-23T08:09:43 GMT-04:00" duration-ms="25158">
     <groups>
     </groups>
-    <test started-at="2025-09-22T04:29:19 GMT-04:00" name="Add Vitals Test" finished-at="2025-09-22T04:29:22 GMT-04:00" duration-ms="3440">
+    <test started-at="2025-09-23T08:09:18 GMT-04:00" name="Add Vitals Test" finished-at="2025-09-23T08:09:43 GMT-04:00" duration-ms="25158">
       <class name="MyHealthAPI.AddVitals">
-        <test-method is-config="true" signature="beforeTest()[pri:0, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-22T04:29:19 GMT-04:00" name="beforeTest" finished-at="2025-09-22T04:29:19 GMT-04:00" duration-ms="17" status="PASS">
+        <test-method is-config="true" signature="beforeTest()[pri:0, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-23T08:09:18 GMT-04:00" name="beforeTest" finished-at="2025-09-23T08:09:19 GMT-04:00" duration-ms="1268" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeTest -->
-        <test-method is-config="true" signature="beforeClass()[pri:0, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-22T04:29:19 GMT-04:00" name="beforeClass" finished-at="2025-09-22T04:29:19 GMT-04:00" duration-ms="6" status="PASS">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-23T08:09:19 GMT-04:00" name="beforeClass" finished-at="2025-09-23T08:09:19 GMT-04:00" duration-ms="11" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method signature="loginEncReq()[pri:1, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-22T04:29:19 GMT-04:00" name="loginEncReq" finished-at="2025-09-22T04:29:19 GMT-04:00" duration-ms="49" status="PASS">
+        <test-method signature="loginEncReq()[pri:1, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-23T08:09:19 GMT-04:00" name="loginEncReq" finished-at="2025-09-23T08:09:19 GMT-04:00" duration-ms="123" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginEncReq -->
-        <test-method signature="loginEncRes()[pri:2, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-22T04:29:19 GMT-04:00" name="loginEncRes" finished-at="2025-09-22T04:29:21 GMT-04:00" duration-ms="2063" status="PASS">
+        <test-method signature="loginEncRes()[pri:2, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-23T08:09:19 GMT-04:00" name="loginEncRes" finished-at="2025-09-23T08:09:26 GMT-04:00" duration-ms="7110" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginEncRes -->
-        <test-method signature="loginDecRes()[pri:3, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-22T04:29:21 GMT-04:00" name="loginDecRes" finished-at="2025-09-22T04:29:21 GMT-04:00" duration-ms="12" status="PASS">
+        <test-method signature="loginDecRes()[pri:3, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-23T08:09:26 GMT-04:00" name="loginDecRes" finished-at="2025-09-23T08:09:26 GMT-04:00" duration-ms="57" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginDecRes -->
-        <test-method signature="hrEncReq()[pri:4, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-22T04:29:21 GMT-04:00" name="hrEncReq" finished-at="2025-09-22T04:29:21 GMT-04:00" duration-ms="5" status="PASS">
+        <test-method signature="hrEncReq()[pri:4, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-23T08:09:26 GMT-04:00" name="hrEncReq" finished-at="2025-09-23T08:09:26 GMT-04:00" duration-ms="16" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- hrEncReq -->
-        <test-method signature="hrEncRes()[pri:5, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-22T04:29:21 GMT-04:00" name="hrEncRes" finished-at="2025-09-22T04:29:21 GMT-04:00" duration-ms="333" status="PASS">
+        <test-method signature="hrEncRes()[pri:5, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-23T08:09:26 GMT-04:00" name="hrEncRes" finished-at="2025-09-23T08:09:31 GMT-04:00" duration-ms="4123" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- hrEncRes -->
-        <test-method signature="bpEncReq()[pri:6, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-22T04:29:21 GMT-04:00" name="bpEncReq" finished-at="2025-09-22T04:29:21 GMT-04:00" duration-ms="5" status="PASS">
+        <test-method signature="bpEncReq()[pri:6, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-23T08:09:31 GMT-04:00" name="bpEncReq" finished-at="2025-09-23T08:09:31 GMT-04:00" duration-ms="14" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- bpEncReq -->
-        <test-method signature="bpEncRes()[pri:7, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-22T04:29:21 GMT-04:00" name="bpEncRes" finished-at="2025-09-22T04:29:22 GMT-04:00" duration-ms="302" status="PASS">
+        <test-method signature="bpEncRes()[pri:7, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-23T08:09:31 GMT-04:00" name="bpEncRes" finished-at="2025-09-23T08:09:35 GMT-04:00" duration-ms="4281" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- bpEncRes -->
-        <test-method signature="oxyEncReq()[pri:8, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-22T04:29:22 GMT-04:00" name="oxyEncReq" finished-at="2025-09-22T04:29:22 GMT-04:00" duration-ms="1" status="PASS">
+        <test-method signature="oxyEncReq()[pri:8, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-23T08:09:35 GMT-04:00" name="oxyEncReq" finished-at="2025-09-23T08:09:35 GMT-04:00" duration-ms="4" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- oxyEncReq -->
-        <test-method signature="oxyEncRes()[pri:9, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-22T04:29:22 GMT-04:00" name="oxyEncRes" finished-at="2025-09-22T04:29:22 GMT-04:00" duration-ms="300" status="PASS">
+        <test-method signature="oxyEncRes()[pri:9, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-23T08:09:35 GMT-04:00" name="oxyEncRes" finished-at="2025-09-23T08:09:39 GMT-04:00" duration-ms="4095" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- oxyEncRes -->
-        <test-method signature="bgEncReq()[pri:10, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-22T04:29:22 GMT-04:00" name="bgEncReq" finished-at="2025-09-22T04:29:22 GMT-04:00" duration-ms="7" status="PASS">
+        <test-method signature="bgEncReq()[pri:10, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-23T08:09:39 GMT-04:00" name="bgEncReq" finished-at="2025-09-23T08:09:39 GMT-04:00" duration-ms="39" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- bgEncReq -->
-        <test-method signature="bgEncRes()[pri:11, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-22T04:29:22 GMT-04:00" name="bgEncRes" finished-at="2025-09-22T04:29:22 GMT-04:00" duration-ms="317" status="PASS">
+        <test-method signature="bgEncRes()[pri:11, instance:MyHealthAPI.AddVitals@3d51f06e]" started-at="2025-09-23T08:09:39 GMT-04:00" name="bgEncRes" finished-at="2025-09-23T08:09:43 GMT-04:00" duration-ms="3953" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- bgEncRes -->

@@ -139,7 +139,7 @@ jobs:
       uses: dawidd6/action-send-mail@v3
       with:
         server_address: smtp.zoho.com
-        server_port: 587
+        server_port: 465
         secure: true
         username: ${{ secrets.EMAIL_USERNAME }}
         password: ${{ secrets.EMAIL_PASSWORD }}
@@ -147,6 +147,7 @@ jobs:
         to: ${{ secrets.EMAIL_TO }}
         from: ${{ secrets.EMAIL_USERNAME }}
         ignore_cert: true
+        convert_markdown: true
         html_body: |
           <h2 style="color: #28a745;">✅ KaiCare Daily Vitals Automation - SUCCESS</h2>
 
@@ -213,7 +214,7 @@ jobs:
       uses: dawidd6/action-send-mail@v3
       with:
         server_address: smtp.zoho.com
-        server_port: 587
+        server_port: 465
         secure: true
         username: ${{ secrets.EMAIL_USERNAME }}
         password: ${{ secrets.EMAIL_PASSWORD }}
@@ -221,6 +222,7 @@ jobs:
         to: ${{ secrets.EMAIL_TO }}
         from: ${{ secrets.EMAIL_USERNAME }}
         ignore_cert: true
+        convert_markdown: true
         html_body: |
           <h2 style="color: #dc3545;">❌ KaiCare Daily Vitals Automation - FAILED</h2>
 

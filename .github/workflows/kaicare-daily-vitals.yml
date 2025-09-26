@@ -132,11 +132,13 @@ jobs:
         echo "Timestamp: ${{ steps.test-results.outputs.timestamp }}"
         echo "================================="
 
+
+
     - name: Send Success Email
       if: always() && steps.test-results.outputs.status == 'SUCCESS'
       uses: dawidd6/action-send-mail@v3
       with:
-        server_address: smtp.gmail.com
+        server_address: smtp.zoho.com
         server_port: 587
         secure: true
         username: ${{ secrets.EMAIL_USERNAME }}
@@ -144,6 +146,7 @@ jobs:
         subject: "✅ KaiCare Daily Vitals Automation - SUCCESS (${{ steps.test-results.outputs.timestamp }})"
         to: ${{ secrets.EMAIL_TO }}
         from: ${{ secrets.EMAIL_USERNAME }}
+        ignore_cert: true
         html_body: |
           <h2 style="color: #28a745;">✅ KaiCare Daily Vitals Automation - SUCCESS</h2>
 
@@ -209,7 +212,7 @@ jobs:
       if: always() && (steps.test-results.outputs.status == 'FAILURE' || steps.test-results.outputs.status == 'NO_TESTS')
       uses: dawidd6/action-send-mail@v3
       with:
-        server_address: smtp.gmail.com
+        server_address: smtp.zoho.com
         server_port: 587
         secure: true
         username: ${{ secrets.EMAIL_USERNAME }}
@@ -217,6 +220,7 @@ jobs:
         subject: "❌ KaiCare Daily Vitals Automation - FAILED (${{ steps.test-results.outputs.timestamp }})"
         to: ${{ secrets.EMAIL_TO }}
         from: ${{ secrets.EMAIL_USERNAME }}
+        ignore_cert: true
         html_body: |
           <h2 style="color: #dc3545;">❌ KaiCare Daily Vitals Automation - FAILED</h2>
 

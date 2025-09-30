@@ -441,4 +441,32 @@ public class GeneratedApiTest extends ApiBase {
         HttpClient.get("https://metcalf.ai/", 200);
     }
 
+        @Test
+    public void pm_Humee_Admin_Web_Login_UI() {
+        // Source: RiskRealm_Admin_Web_Login_UI
+        HttpClient.get("https://www.humee.com/", 200);
+    }
+
+    @Test
+    public void pm_Humee_Chat_Web_Login_UI() {
+        // Source: RiskRealm_Chat_Web_Login_UI
+        HttpClient.get("https://dashboard.humee.com/", 200);
+    }
+
+    @Test
+    public void pm_Humee_Login_Number() {
+        // Source: RiskRealm_Login_Number
+        HttpClient.post("https://api.humee.com/api/users/beforeLogincheckUser",
+                       "{\"key\" : \"fUjZB3a_IJyX6AyCgxVZ4r-mOOJSBWMIR1JBrMqkopjAukjBMPYpMVkLnfyYhm78\"}",
+                       200);
+    }
+
+    @Test
+    public void pm_Humee_Login_OTP() {
+        // Source: RiskRealm_Login_OTP
+        HttpClient.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyB6Fk4wRtuKFPL_2BToGZuGP7bOGUH08lQ",
+                       "{\"sessionInfo\":\"AD8T5ItYv_dvp2B6t8uZbWQvvV3vc1XB9lPmk1ET95hWjvCVUQP2SFc9W6nUGmXHoGRW_PwuMA4UNz40Rw2kFeDAgKNXZ9Q2BQYO76bivCM2Pu4Yp_OPpEfM_-M5wonI2597C1ZurCA2bouSZ5hKKzbK7oQin7qcCQ\",\"code\":\"123456\"}",
+                       200);
+    }
+
 }

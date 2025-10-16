@@ -68,9 +68,18 @@
                     <include name="pm_AutoeVantage_Analytics_Login_OTP"/>
                     <include name="pm_Metcalf_UI"/>
                     <include name="pm_Humee_Admin_Web_Login_UI"/>
-                    <include name="pm_Humee_Chat_Web_Login_UI"/>
-                    <include name="pm_Humee_Login_Number"/>
-                    <include name="pm_Humee_Login_OTP"/>
+                    <include name="pm_Humee_Dashboard_Web_Login_UI"/>
+                    <include name="pm_Humee_Dashboard_Login_Number"/>
+                    <include name="pm_Humee_Dashboard_Login_OTP"/>
+                    <include name="pm_Humee_SuperAdmin_Login_UI"/>
+                    <include name="pm_Humee_SuperAdmin_Login_Number"/>
+                    <include name="pm_Humee_SuperAdmin_Login_OTP"/>
+                    <include name="pm_Humee_CPA_Login_UI"/>
+                    <include name="pm_Humee_CPA_Login_Number"/>
+                    <include name="pm_Humee_CPA_Login_OTP"/>
+                    <include name="pm_Humee_Participant_Login_UI"/>
+                    <include name="pm_Humee_Participant_Login_Number"/>
+                    <include name="pm_Humee_Participant_Login_OTP"/>
                 </methods>
             </class>
         </classes>

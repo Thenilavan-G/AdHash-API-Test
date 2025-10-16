@@ -448,13 +448,13 @@ public class GeneratedApiTest extends ApiBase {
     }
 
     @Test
-    public void pm_Humee_Chat_Web_Login_UI() {
+    public void pm_Humee_Dashboard_Web_Login_UI() {
         // Source: RiskRealm_Chat_Web_Login_UI
         HttpClient.get("https://dashboard.humee.com/", 200);
     }
 
     @Test
-    public void pm_Humee_Login_Number() {
+    public void pm_Humee_Dashboard_Login_Number() {
         // Source: RiskRealm_Login_Number
         HttpClient.post("https://api.humee.com/api/users/beforeLogincheckUser",
                        "{\"key\" : \"fUjZB3a_IJyX6AyCgxVZ4r-mOOJSBWMIR1JBrMqkopjAukjBMPYpMVkLnfyYhm78\"}",
@@ -462,11 +462,77 @@ public class GeneratedApiTest extends ApiBase {
     }
 
     @Test
-    public void pm_Humee_Login_OTP() {
+    public void pm_Humee_Dashboard_Login_OTP() {
         // Source: RiskRealm_Login_OTP
         HttpClient.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyB6Fk4wRtuKFPL_2BToGZuGP7bOGUH08lQ",
                        "{\"sessionInfo\":\"AD8T5ItYv_dvp2B6t8uZbWQvvV3vc1XB9lPmk1ET95hWjvCVUQP2SFc9W6nUGmXHoGRW_PwuMA4UNz40Rw2kFeDAgKNXZ9Q2BQYO76bivCM2Pu4Yp_OPpEfM_-M5wonI2597C1ZurCA2bouSZ5hKKzbK7oQin7qcCQ\",\"code\":\"123456\"}",
                        200);
     }
 
+        @Test
+    public void pm_Humee_SuperAdmin_Login_UI() {
+        // Source: RiskRealm_Chat_Web_Login_UI
+        HttpClient.get("https://admin.humee.com/", 200);
+    }
+
+    @Test
+    public void pm_Humee_SuperAdmin_Login_Number() {
+        // Source: RiskRealm_Login_Number
+        HttpClient.post("https://apiparticipant.humee.com/api/user/login",
+                       "{\"key\" : \"UolFVSl619gADNtaLskiYQhzCJ4ARYCdvE95I5cA6GCGUlVImhrFmv62BN2OfozsXZE5CxD8J/m6gjTJfY0i769gz73TVFeOmz/QH7apgFYF/DC8sFJUU8UXlbIWJwhV\"}",
+                       200);
+    }
+
+    @Test
+    public void pm_Humee_SuperAdmin_Login_OTP() {
+        // Source: RiskRealm_Login_OTP
+        HttpClient.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyBAf4PM4HeNcO0uuByCUWwZFIYMYHfwUik",
+                       "{\"sessionInfo\":\"AD8T5IszXE6IDLWf7c_b-1EO_LHAVLn7eSpnZawE5yK66RqQ9vdoKX0-0WLauRBs8F2zIZBSwWTwe_kQMVqhW-rvGbmiVa7kgx4_WjAeC95BL1o9PF5zCmhN5RkeMcSImNexfqnGS_oUSZRf__86SShcC-qoo2a4SQ\",\"code\":\"123456\"}",
+                       200);
+    }
+
+    @Test
+    public void pm_Humee_CPA_Login_UI() {
+        // Source: RiskRealm_Chat_Web_Login_UI
+        HttpClient.get("https://cpa.humee.com/", 200);
+    }
+
+    @Test
+    public void pm_Humee_CPA_Login_Number() {
+        // Source: RiskRealm_Login_Number
+        HttpClient.post("https://apiparticipant.humee.com/api/user/login",
+                       "{\"key\" : \"zWnxj6lfy0D7gDyaQxeKeHisOe40qa4LDTWD8GOqqMsQPHx1QGlrQyMclLK1Udt3VoIVYWbgOympTcy6BoSct3ZdfZeZnGSQmBrgFrNyOUUsqEWS0gTxMGfzTIPQfExO\"}",
+                       200);
+    }
+
+    @Test
+    public void pm_Humee_CPA_Login_OTP() {
+        // Source: RiskRealm_Login_OTP
+        HttpClient.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyBAf4PM4HeNcO0uuByCUWwZFIYMYHfwUik",
+                       "{\"sessionInfo\":\"AD8T5It939sBS47skGEDUTJkmu_A_-15SPAIfyhJnQPu-cPWid2tQ9lOosMcdxwSSVvQRZShYoNANzwlwsxh4VyluWBZFuA729kP93c0_HuJIKuUKAZuxyI9noWDZSYiTADWH0A3VCD68bLthZMdpo7sqkpjoMVxIQ\",\"code\":\"123456\"}",
+                       200);
+    }
+
+    @Test
+    public void pm_Humee_Participant_Login_UI() {
+        // Source: RiskRealm_Chat_Web_Login_UI
+        HttpClient.get("https://participant.humee.com/", 200);
+    }
+
+    @Test
+    public void pm_Humee_Participant_Login_Number() {
+        // Source: RiskRealm_Login_Number
+        HttpClient.post("https://apiparticipant.humee.com/api/user/login",
+                       "{\"key\" : \"Rvy06w8KodBbMGFiqM6pSf7DEqBcLV5Bh4w8qs7JYvibfkz/30fvl5qIlc2kP/gs3Msl7u08McNuW+7bwHlmCSNwpPrTEcwZ5IlZAtV1PuQb5rop2gbZNuLXEZXqhtdJ\"}",
+                       200);
+    }
+
+    @Test
+    public void pm_Humee_Participant_Login_OTP() {
+        // Source: RiskRealm_Login_OTP
+        HttpClient.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyBAf4PM4HeNcO0uuByCUWwZFIYMYHfwUik",
+                       "{\"sessionInfo\":\"AD8T5It8XKFQSq5xVi-0Uo03E9fc2ssh7V4UaCHfY-SCm2F-N1TbbxLt2oQQ425nApflMp2ZEvgNqX61oOyUSG7CmkzDP6e-Nh6hZzcSMDoBbeBMADtzr7HOsB2sATPMtaR0Q_-Y3cFxxYaoyf6zQo2qZfB7bL_WOg\",\"code\":\"123456\"}",
+                       200);
+    }
+    
 }

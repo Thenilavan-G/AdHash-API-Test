@@ -80,6 +80,7 @@
                     <include name="pm_Humee_Participant_Login_UI"/>
                     <include name="pm_Humee_Participant_Login_Number"/>
                     <include name="pm_Humee_Participant_Login_OTP"/>
+                    <include name="pm_ZAPAI_UI"/>
                 </methods>
             </class>
         </classes>

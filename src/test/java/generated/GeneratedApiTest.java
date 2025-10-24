@@ -534,5 +534,10 @@ public class GeneratedApiTest extends ApiBase {
                        "{\"sessionInfo\":\"AD8T5It8XKFQSq5xVi-0Uo03E9fc2ssh7V4UaCHfY-SCm2F-N1TbbxLt2oQQ425nApflMp2ZEvgNqX61oOyUSG7CmkzDP6e-Nh6hZzcSMDoBbeBMADtzr7HOsB2sATPMtaR0Q_-Y3cFxxYaoyf6zQo2qZfB7bL_WOg\",\"code\":\"123456\"}",
                        200);
     }
-    
+
+    @Test
+    public void pm_ZAPAI_UI() {
+        // Source: Metcalf_UI
+        HttpClient.get("https://zapai.us/", 200);
+    }
 }

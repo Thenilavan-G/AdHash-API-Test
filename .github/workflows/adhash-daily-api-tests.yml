@@ -107,8 +107,21 @@ jobs:
         echo "Skipped: $SKIPPED"
         echo "Status: $STATUS"
 
+    - name: Check Email Secrets
+      if: always()
+      id: check-secrets
+      run: |
+        if [ -z "${{ secrets.EMAIL_USERNAME }}" ] || [ -z "${{ secrets.EMAIL_PASSWORD }}" ] || [ -z "${{ secrets.EMAIL_TO }}" ]; then
+          echo "secrets_available=false" >> $GITHUB_OUTPUT
+          echo "⚠️ Email secrets are not configured. Skipping email notifications."
+          echo "Please add EMAIL_USERNAME, EMAIL_PASSWORD, and EMAIL_TO secrets to the repository."
+        else
+          echo "secrets_available=true" >> $GITHUB_OUTPUT
+          echo "✅ Email secrets are configured."
+        fi
+
     - name: Send Success Email
-      if: always() && steps.test-results.outputs.status == 'SUCCESS'
+      if: always() && steps.test-results.outputs.status == 'SUCCESS' && steps.check-secrets.outputs.secrets_available == 'true'
       uses: dawidd6/action-send-mail@v3
       with:
         server_address: smtp.zoho.com
@@ -190,7 +203,7 @@ jobs:
           </html>
 
     - name: Send Failure Email
-      if: always() && (steps.test-results.outputs.status == 'FAILURE' || steps.test-results.outputs.status == 'NO_TESTS')
+      if: always() && (steps.test-results.outputs.status == 'FAILURE' || steps.test-results.outputs.status == 'NO_TESTS') && steps.check-secrets.outputs.secrets_available == 'true'
       uses: dawidd6/action-send-mail@v3
       with:
         server_address: smtp.zoho.com
@@ -256,6 +269,20 @@ jobs:
           </p>
           </body>
           </html>
+
+    - name: Warn about missing secrets
+      if: always() && steps.check-secrets.outputs.secrets_available == 'false'
+      run: |
+        echo "⚠️⚠️⚠️ WARNING: Email secrets are not configured! ⚠️⚠️⚠️"
+        echo ""
+        echo "To receive email notifications, please add these secrets to the repository:"
+        echo "1. Go to: https://github.com/Thenilavan-G/AdHash-API-Test/settings/secrets/actions"
+        echo "2. Add the following secrets:"
+        echo "   - EMAIL_USERNAME: Your Zoho email address"
+        echo "   - EMAIL_PASSWORD: Your Zoho email password"
+        echo "   - EMAIL_TO: Recipient email address"
+        echo ""
+        echo "Without these secrets, the workflow will run but won't send email notifications."
 
     - name: Notify on failure (Console)
       if: failure()

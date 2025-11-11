@@ -47,7 +47,7 @@ jobs:
       run: |
         echo "Starting KaiCare Daily Vitals Automation..."
         echo "Running all 11 test methods for complete vitals data insertion"
-        mvn test -Dsurefire.suiteXmlFiles=TestNG.xml -DfailIfNoTests=false
+        mvn test -Dsurefire.suiteXmlFiles=TestNG-KaiCare-Vitals.xml -DfailIfNoTests=false
         
     - name: Upload test results
       uses: actions/upload-artifact@v4
@@ -65,7 +65,7 @@ jobs:
         echo "=== KaiCare Vitals Automation Summary ==="
         echo "Date: $(TZ='Asia/Kolkata' date '+%d/%m/%Y %H:%M IST')"
         echo "Repository: KaiCare_Vitals_API"
-        echo "Test Suite: TestNG.xml"
+        echo "Test Suite: TestNG-KaiCare-Vitals.xml"
         echo "Expected Tests: 11 (Login + HR + BP + Oxygen + Blood Glucose)"
         echo "Data Insertion: Current IST date with 6:00 AM common time"
         echo "Mobile Numbers: 11 numbers from Excel (9999999996, 9000000001-9000000008, 9898989800, 5159490885)"

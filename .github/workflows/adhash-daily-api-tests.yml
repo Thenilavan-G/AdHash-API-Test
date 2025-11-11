@@ -328,10 +328,10 @@ jobs:
               </div>
 
               <div class="success-rate">
-                <div class="success-rate-number" style="color: #f44336;">
-                  ${{ steps.test-results.outputs.tests_run > 0 && format('{0:0.0}', (steps.test-results.outputs.tests_run - steps.test-results.outputs.failures - steps.test-results.outputs.errors) * 100.0 / steps.test-results.outputs.tests_run) || '0.0' }}%
+                <div class="success-rate-number" style="color: #4caf50;">
+                  Passed: ${{ steps.test-results.outputs.tests_run - steps.test-results.outputs.failures - steps.test-results.outputs.errors }} / ${{ steps.test-results.outputs.tests_run }}
                 </div>
-                <div class="success-rate-label">Success Rate</div>
+                <div class="success-rate-label">Test Results</div>
               </div>
 
               <div class="status-banner failed">

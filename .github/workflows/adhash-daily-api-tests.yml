@@ -161,77 +161,106 @@ jobs:
         from: ${{ secrets.EMAIL_USERNAME }}
         attachments: ${{ steps.find-report.outputs.report_found == 'true' && steps.find-report.outputs.report_path || '' }}
         html_body: |
+          <!DOCTYPE html>
           <html>
-          <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-          <h2 style="color: #28a745;">✅ AdHash Daily API Tests - SUCCESS</h2>
+          <head>
+            <meta charset="UTF-8">
+            <style>
+              body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f5f5f5; padding: 20px; }
+              .container { max-width: 800px; margin: 0 auto; background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+              .header { text-align: center; margin-bottom: 30px; }
+              .title { color: #333; font-size: 28px; margin: 10px 0; }
+              .subtitle { color: #666; font-size: 14px; }
+              .stats-container { display: flex; justify-content: space-around; margin: 30px 0; flex-wrap: wrap; }
+              .stat-card { background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center; min-width: 150px; margin: 10px; }
+              .stat-card.total { background: #e3f2fd; }
+              .stat-card.passed { background: #e8f5e9; }
+              .stat-card.failed { background: #ffebee; }
+              .stat-number { font-size: 48px; font-weight: bold; margin: 10px 0; }
+              .stat-label { font-size: 14px; color: #666; }
+              .success-rate { text-align: center; margin: 30px 0; }
+              .success-rate-number { font-size: 64px; font-weight: bold; color: #4caf50; }
+              .success-rate-label { font-size: 16px; color: #666; }
+              .status-banner { background: #d4edda; color: #155724; padding: 15px; border-radius: 8px; text-align: center; font-weight: bold; margin: 20px 0; }
+              .info-box { background-color: #e7f3ff; padding: 15px; border-left: 4px solid #2196F3; margin: 20px 0; border-radius: 4px; }
+              .projects-section { margin: 30px 0; }
+              .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 20px 0; }
+              .project-item { background: #f8f9fa; padding: 10px; border-radius: 4px; font-size: 14px; }
+              .footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 12px; }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <h1 class="title">🎯 AdHash API Test Report</h1>
+                <p class="subtitle">${{ steps.test-results.outputs.timestamp }}</p>
+              </div>
 
-          <h3>📊 Test Results Summary</h3>
-          <table border="1" style="border-collapse: collapse; width: 100%;">
-            <tr style="background-color: #f8f9fa;">
-              <td><strong>Execution Time</strong></td>
-              <td>${{ steps.test-results.outputs.timestamp }}</td>
-            </tr>
-            <tr style="background-color: #d4edda;">
-              <td><strong>Tests Run</strong></td>
-              <td style="color: #155724; font-weight: bold;">${{ steps.test-results.outputs.tests_run }}</td>
-            </tr>
-            <tr>
-              <td><strong>Failures</strong></td>
-              <td>${{ steps.test-results.outputs.failures }}</td>
-            </tr>
-            <tr>
-              <td><strong>Errors</strong></td>
-              <td>${{ steps.test-results.outputs.errors }}</td>
-            </tr>
-            <tr>
-              <td><strong>Skipped</strong></td>
-              <td>${{ steps.test-results.outputs.skipped }}</td>
-            </tr>
-            <tr style="background-color: #d4edda;">
-              <td><strong>Overall Status</strong></td>
-              <td style="color: #155724; font-weight: bold;">SUCCESS ✅</td>
-            </tr>
-          </table>
+              <div class="stats-container">
+                <div class="stat-card total">
+                  <div class="stat-number" style="color: #1976d2;">${{ steps.test-results.outputs.tests_run }}</div>
+                  <div class="stat-label">Total Tests</div>
+                </div>
+                <div class="stat-card passed">
+                  <div class="stat-number" style="color: #4caf50;">✅ ${{ steps.test-results.outputs.tests_run }}</div>
+                  <div class="stat-label">Passed</div>
+                </div>
+                <div class="stat-card failed">
+                  <div class="stat-number" style="color: #f44336;">❌ 0</div>
+                  <div class="stat-label">Failed</div>
+                </div>
+              </div>
 
-          <p style="background-color: #e7f3ff; padding: 10px; border-left: 4px solid #2196F3; margin: 20px 0;">
-            📎 <strong>Detailed HTML report is attached to this email.</strong><br>
-            Open the attachment to view the complete test results with expandable test details.
-          </p>
+              <div class="success-rate">
+                <div class="success-rate-number">100.0%</div>
+                <div class="success-rate-label">Success Rate</div>
+              </div>
 
-          <h3>🚀 AdHash Projects Tested</h3>
-          <p>All <strong>74 API endpoints</strong> tested successfully across all AdHash projects:</p>
-          <ul>
-            <li>🌐 AdHash Website</li>
-            <li>🔧 AutoChecker (UI, Admin, App)</li>
-            <li>🏥 MyHealth AI (Doctor SuperAdmin, Doctor Login)</li>
-            <li>💊 KaiCare AI (Doctor SuperAdmin, Doctor Login)</li>
-            <li>📋 MHCRM (SuperAdmin, Admin)</li>
-            <li>🏢 MHCCM (SuperAdmin, CPA, PAR, Form, CRM)</li>
-            <li>🎯 MHRTM (SuperAdmin, CPA, Participant)</li>
-            <li>📱 Patient Apps (MHAI, KCAI, Wavedin, Sparkme)</li>
-            <li>🌊 WavedIn (SuperAdmin, Market Web)</li>
-            <li>✨ Sparkme (Web Login)</li>
-            <li>📈 Algomax (ProSky, GoPocket)</li>
-            <li>🎮 LGM (Login UI, Phone, OTP)</li>
-            <li>💬 AskEPI (Login UI, Phone, OTP)</li>
-            <li>🛡️ RiskRealm (Admin, Chat, Login)</li>
-            <li>🚗 AutoeVantage (eCommerce, Tools, Analytics)</li>
-            <li>🏛️ Metcalf</li>
-            <li>👥 Humee (Admin, Dashboard, SuperAdmin, CPA, Participant)</li>
-            <li>⚡ ZAPAI</li>
-          </ul>
+              <div class="status-banner">
+                ✅ ALL TESTS PASSED
+              </div>
 
-          <h3>🔗 Useful Links</h3>
-          <p>
-            <a href="https://github.com/Thenilavan-G/AdHash-API-Test/actions">View Workflow Run</a> |
-            <a href="https://github.com/Thenilavan-G/AdHash-API-Test">Repository</a>
-          </p>
+              <div class="info-box">
+                📎 <strong>Detailed HTML report is attached to this email.</strong><br>
+                Open the attachment to view the complete test results with expandable test details.
+              </div>
 
-          <hr>
-          <p style="color: #6c757d; font-size: 12px;">
-            This is an automated message from AdHash Daily API Tests.<br>
-            Next scheduled run: Tomorrow at 9:00 AM IST
-          </p>
+              <div class="projects-section">
+                <h3>🚀 AdHash Projects Tested</h3>
+                <p>All <strong>74 API endpoints</strong> tested successfully across all AdHash projects:</p>
+                <div class="project-grid">
+                  <div class="project-item">🌐 AdHash Website</div>
+                  <div class="project-item">🔧 AutoChecker (UI, Admin, App)</div>
+                  <div class="project-item">🏥 MyHealth AI (Doctor SuperAdmin, Doctor Login)</div>
+                  <div class="project-item">💊 KaiCare AI (Doctor SuperAdmin, Doctor Login)</div>
+                  <div class="project-item">📋 MHCRM (SuperAdmin, Admin)</div>
+                  <div class="project-item">🏢 MHCCM (SuperAdmin, CPA, PAR, Form, CRM)</div>
+                  <div class="project-item">🎯 MHRTM (SuperAdmin, CPA, Participant)</div>
+                  <div class="project-item">📱 Patient Apps (MHAI, KCAI, Wavedin, Sparkme)</div>
+                  <div class="project-item">🌊 WavedIn (SuperAdmin, Market Web)</div>
+                  <div class="project-item">✨ Sparkme (Web Login)</div>
+                  <div class="project-item">📈 Algomax (ProSky, GoPocket)</div>
+                  <div class="project-item">🎮 LGM (Login UI, Phone, OTP)</div>
+                  <div class="project-item">💬 AskEPI (Login UI, Phone, OTP)</div>
+                  <div class="project-item">🛡️ RiskRealm (Admin, Chat, Login)</div>
+                  <div class="project-item">🚗 AutoeVantage (eCommerce, Tools, Analytics)</div>
+                  <div class="project-item">🏛️ Metcalf</div>
+                  <div class="project-item">👥 Humee (Admin, Dashboard, SuperAdmin, CPA, Participant)</div>
+                  <div class="project-item">⚡ ZAPAI</div>
+                </div>
+              </div>
+
+              <h3>🔗 Useful Links</h3>
+              <p>
+                <a href="https://github.com/Thenilavan-G/AdHash-API-Test/actions" style="color: #2196F3; text-decoration: none;">View Workflow Run</a> |
+                <a href="https://github.com/Thenilavan-G/AdHash-API-Test" style="color: #2196F3; text-decoration: none;">Repository</a>
+              </p>
+
+              <div class="footer">
+                This is an automated message from AdHash Daily API Tests.<br>
+                Next scheduled run: Tomorrow at 9:00 AM IST
+              </div>
+            </div>
           </body>
           </html>
 
@@ -249,63 +278,93 @@ jobs:
         from: ${{ secrets.EMAIL_USERNAME }}
         attachments: ${{ steps.find-report.outputs.report_found == 'true' && steps.find-report.outputs.report_path || '' }}
         html_body: |
+          <!DOCTYPE html>
           <html>
-          <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-          <h2 style="color: #dc3545;">❌ AdHash Daily API Tests - FAILED</h2>
+          <head>
+            <meta charset="UTF-8">
+            <style>
+              body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f5f5f5; padding: 20px; }
+              .container { max-width: 800px; margin: 0 auto; background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+              .header { text-align: center; margin-bottom: 30px; }
+              .title { color: #333; font-size: 28px; margin: 10px 0; }
+              .subtitle { color: #666; font-size: 14px; }
+              .stats-container { display: flex; justify-content: space-around; margin: 30px 0; flex-wrap: wrap; }
+              .stat-card { background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center; min-width: 150px; margin: 10px; }
+              .stat-card.total { background: #e3f2fd; }
+              .stat-card.passed { background: #e8f5e9; }
+              .stat-card.failed { background: #ffebee; }
+              .stat-number { font-size: 48px; font-weight: bold; margin: 10px 0; }
+              .stat-label { font-size: 14px; color: #666; }
+              .success-rate { text-align: center; margin: 30px 0; }
+              .success-rate-number { font-size: 64px; font-weight: bold; }
+              .success-rate-label { font-size: 16px; color: #666; }
+              .status-banner { padding: 15px; border-radius: 8px; text-align: center; font-weight: bold; margin: 20px 0; }
+              .status-banner.failed { background: #f8d7da; color: #721c24; }
+              .warning-box { background-color: #fff3cd; padding: 15px; border-left: 4px solid #ffc107; margin: 20px 0; border-radius: 4px; }
+              .troubleshooting { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; }
+              .footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 12px; }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <h1 class="title">🎯 AdHash API Test Report</h1>
+                <p class="subtitle">${{ steps.test-results.outputs.timestamp }}</p>
+              </div>
 
-          <h3>📊 Test Results Summary</h3>
-          <table border="1" style="border-collapse: collapse; width: 100%;">
-            <tr style="background-color: #f8f9fa;">
-              <td><strong>Execution Time</strong></td>
-              <td>${{ steps.test-results.outputs.timestamp }}</td>
-            </tr>
-            <tr>
-              <td><strong>Tests Run</strong></td>
-              <td>${{ steps.test-results.outputs.tests_run }}</td>
-            </tr>
-            <tr style="background-color: #f8d7da;">
-              <td><strong>Failures</strong></td>
-              <td style="color: #721c24; font-weight: bold;">${{ steps.test-results.outputs.failures }}</td>
-            </tr>
-            <tr style="background-color: #f8d7da;">
-              <td><strong>Errors</strong></td>
-              <td style="color: #721c24; font-weight: bold;">${{ steps.test-results.outputs.errors }}</td>
-            </tr>
-            <tr>
-              <td><strong>Skipped</strong></td>
-              <td>${{ steps.test-results.outputs.skipped }}</td>
-            </tr>
-            <tr style="background-color: #f5c6cb;">
-              <td><strong>Overall Status</strong></td>
-              <td style="color: #721c24; font-weight: bold;">FAILED ❌</td>
-            </tr>
-          </table>
+              <div class="stats-container">
+                <div class="stat-card total">
+                  <div class="stat-number" style="color: #1976d2;">${{ steps.test-results.outputs.tests_run }}</div>
+                  <div class="stat-label">Total Tests</div>
+                </div>
+                <div class="stat-card passed">
+                  <div class="stat-number" style="color: #4caf50;">✅ ${{ steps.test-results.outputs.tests_run - steps.test-results.outputs.failures - steps.test-results.outputs.errors }}</div>
+                  <div class="stat-label">Passed</div>
+                </div>
+                <div class="stat-card failed">
+                  <div class="stat-number" style="color: #f44336;">❌ ${{ steps.test-results.outputs.failures + steps.test-results.outputs.errors }}</div>
+                  <div class="stat-label">Failed</div>
+                </div>
+              </div>
 
-          <p style="background-color: #fff3cd; padding: 10px; border-left: 4px solid #ffc107; margin: 20px 0;">
-            📎 <strong>Detailed HTML report is attached to this email.</strong><br>
-            Open the attachment to view the complete test results and identify which tests failed.
-          </p>
+              <div class="success-rate">
+                <div class="success-rate-number" style="color: #f44336;">
+                  ${{ steps.test-results.outputs.tests_run > 0 && format('{0:0.0}', (steps.test-results.outputs.tests_run - steps.test-results.outputs.failures - steps.test-results.outputs.errors) * 100.0 / steps.test-results.outputs.tests_run) || '0.0' }}%
+                </div>
+                <div class="success-rate-label">Success Rate</div>
+              </div>
 
-          <h3>🔍 Troubleshooting Steps</h3>
-          <ol>
-            <li><strong>Check API Endpoints:</strong> Verify all AdHash project APIs are accessible</li>
-            <li><strong>Authentication:</strong> Check if login credentials are valid</li>
-            <li><strong>Network Issues:</strong> Check for any network connectivity problems</li>
-            <li><strong>Server Status:</strong> Ensure all AdHash project servers are running</li>
-            <li><strong>Review Logs:</strong> Check GitHub Actions logs for detailed error messages</li>
-          </ol>
+              <div class="status-banner failed">
+                ❌ TESTS FAILED
+              </div>
 
-          <h3>🔗 Investigation Links</h3>
-          <p>
-            <a href="https://github.com/Thenilavan-G/AdHash-API-Test/actions">View Workflow Run</a> |
-            <a href="https://github.com/Thenilavan-G/AdHash-API-Test">Repository</a>
-          </p>
+              <div class="warning-box">
+                📎 <strong>Detailed HTML report is attached to this email.</strong><br>
+                Open the attachment to view the complete test results and identify which tests failed.
+              </div>
 
-          <hr>
-          <p style="color: #6c757d; font-size: 12px;">
-            This is an automated message from AdHash Daily API Tests.<br>
-            Please investigate and resolve the issue before the next scheduled run at 9:00 AM IST tomorrow.
-          </p>
+              <div class="troubleshooting">
+                <h3>🔍 Troubleshooting Steps</h3>
+                <ol>
+                  <li><strong>Check API Endpoints:</strong> Verify all AdHash project APIs are accessible</li>
+                  <li><strong>Authentication:</strong> Check if login credentials are valid</li>
+                  <li><strong>Network Issues:</strong> Check for any network connectivity problems</li>
+                  <li><strong>Server Status:</strong> Ensure all AdHash project servers are running</li>
+                  <li><strong>Review Logs:</strong> Check GitHub Actions logs for detailed error messages</li>
+                </ol>
+              </div>
+
+              <h3>🔗 Investigation Links</h3>
+              <p>
+                <a href="https://github.com/Thenilavan-G/AdHash-API-Test/actions" style="color: #2196F3; text-decoration: none;">View Workflow Run</a> |
+                <a href="https://github.com/Thenilavan-G/AdHash-API-Test" style="color: #2196F3; text-decoration: none;">Repository</a>
+              </p>
+
+              <div class="footer">
+                This is an automated message from AdHash Daily API Tests.<br>
+                Please investigate and resolve the issue before the next scheduled run at 9:00 AM IST tomorrow.
+              </div>
+            </div>
           </body>
           </html>
 

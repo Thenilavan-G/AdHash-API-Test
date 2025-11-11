@@ -1,0 +1,265 @@
+name: AdHash Daily API Tests
+
+on:
+  schedule:
+    # Runs daily at 9:00 AM IST (3:30 AM UTC)
+    - cron: '30 3 * * *'
+  workflow_dispatch:
+    # Allows manual triggering of the workflow
+  push:
+    branches: [ master ]
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 11
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        
+    - name: Cache Maven dependencies
+      uses: actions/cache@v4
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+        
+    - name: Display current IST time
+      run: |
+        echo "Current UTC time: $(date -u)"
+        echo "Current IST time: $(TZ='Asia/Kolkata' date)"
+        echo "Workflow triggered for AdHash daily API tests"
+        
+    - name: Run AdHash API Tests
+      run: |
+        echo "Starting AdHash Daily API Tests..."
+        echo "Running all 74 API tests for AdHash projects"
+        mvn test -Dsurefire.suiteXmlFiles=TestNG.xml -DfailIfNoTests=false
+        
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: adhash-api-test-results
+        path: |
+          target/surefire-reports/
+          target/test-classes/
+        retention-days: 30
+        
+    - name: Display test summary
+      if: always()
+      run: |
+        echo "=== AdHash API Tests Summary ==="
+        echo "Date: $(TZ='Asia/Kolkata' date '+%d/%m/%Y %H:%M IST')"
+        echo "Repository: AdHash-API-Test"
+        echo "Test Suite: TestNG.xml"
+        echo "Expected Tests: 74 (All AdHash Projects API Tests)"
+        echo "Test Class: generated.GeneratedApiTest"
+        echo "============================================="
+        
+    - name: Parse test results
+      if: always()
+      id: test-results
+      run: |
+        # Initialize variables
+        TESTS_RUN=0
+        FAILURES=0
+        ERRORS=0
+        SKIPPED=0
+        STATUS="UNKNOWN"
+
+        # Parse TestNG results if available
+        if [ -f target/surefire-reports/testng-results.xml ]; then
+          echo "Parsing TestNG results..."
+          TESTS_RUN=$(grep -o 'total="[0-9]*"' target/surefire-reports/testng-results.xml | grep -o '[0-9]*' || echo "0")
+          FAILURES=$(grep -o 'failed="[0-9]*"' target/surefire-reports/testng-results.xml | grep -o '[0-9]*' || echo "0")
+          ERRORS=$(grep -o 'errors="[0-9]*"' target/surefire-reports/testng-results.xml | grep -o '[0-9]*' || echo "0")
+          SKIPPED=$(grep -o 'skipped="[0-9]*"' target/surefire-reports/testng-results.xml | grep -o '[0-9]*' || echo "0")
+        fi
+
+        # Determine overall status
+        if [ "$FAILURES" -eq 0 ] && [ "$ERRORS" -eq 0 ] && [ "$TESTS_RUN" -gt 0 ]; then
+          STATUS="SUCCESS"
+        elif [ "$TESTS_RUN" -eq 0 ]; then
+          STATUS="NO_TESTS"
+        else
+          STATUS="FAILURE"
+        fi
+
+        # Set outputs for email step
+        echo "tests_run=$TESTS_RUN" >> $GITHUB_OUTPUT
+        echo "failures=$FAILURES" >> $GITHUB_OUTPUT
+        echo "errors=$ERRORS" >> $GITHUB_OUTPUT
+        echo "skipped=$SKIPPED" >> $GITHUB_OUTPUT
+        echo "status=$STATUS" >> $GITHUB_OUTPUT
+        echo "timestamp=$(TZ='Asia/Kolkata' date '+%d/%m/%Y %H:%M IST')" >> $GITHUB_OUTPUT
+
+        echo "Test Results Summary:"
+        echo "Tests Run: $TESTS_RUN"
+        echo "Failures: $FAILURES"
+        echo "Errors: $ERRORS"
+        echo "Skipped: $SKIPPED"
+        echo "Status: $STATUS"
+
+    - name: Send Success Email
+      if: always() && steps.test-results.outputs.status == 'SUCCESS'
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.zoho.com
+        server_port: 465
+        secure: true
+        username: ${{ secrets.EMAIL_USERNAME }}
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: "✅ AdHash Daily API Tests - SUCCESS (${{ steps.test-results.outputs.timestamp }})"
+        to: ${{ secrets.EMAIL_TO }}
+        from: ${{ secrets.EMAIL_USERNAME }}
+        html_body: |
+          <html>
+          <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+          <h2 style="color: #28a745;">✅ AdHash Daily API Tests - SUCCESS</h2>
+
+          <h3>📊 Test Results Summary</h3>
+          <table border="1" style="border-collapse: collapse; width: 100%;">
+            <tr style="background-color: #f8f9fa;">
+              <td><strong>Execution Time</strong></td>
+              <td>${{ steps.test-results.outputs.timestamp }}</td>
+            </tr>
+            <tr style="background-color: #d4edda;">
+              <td><strong>Tests Run</strong></td>
+              <td style="color: #155724; font-weight: bold;">${{ steps.test-results.outputs.tests_run }}</td>
+            </tr>
+            <tr>
+              <td><strong>Failures</strong></td>
+              <td>${{ steps.test-results.outputs.failures }}</td>
+            </tr>
+            <tr>
+              <td><strong>Errors</strong></td>
+              <td>${{ steps.test-results.outputs.errors }}</td>
+            </tr>
+            <tr>
+              <td><strong>Skipped</strong></td>
+              <td>${{ steps.test-results.outputs.skipped }}</td>
+            </tr>
+            <tr style="background-color: #d4edda;">
+              <td><strong>Overall Status</strong></td>
+              <td style="color: #155724; font-weight: bold;">SUCCESS ✅</td>
+            </tr>
+          </table>
+
+          <h3>🚀 AdHash Projects Tested</h3>
+          <p>All <strong>74 API endpoints</strong> tested successfully across all AdHash projects:</p>
+          <ul>
+            <li>🌐 AdHash Website</li>
+            <li>🔧 AutoChecker (UI, Admin, App)</li>
+            <li>🏥 MyHealth AI (Doctor SuperAdmin, Doctor Login)</li>
+            <li>💊 KaiCare AI (Doctor SuperAdmin, Doctor Login)</li>
+            <li>📋 MHCRM (SuperAdmin, Admin)</li>
+            <li>🏢 MHCCM (SuperAdmin, CPA, PAR, Form, CRM)</li>
+            <li>🎯 MHRTM (SuperAdmin, CPA, Participant)</li>
+            <li>📱 Patient Apps (MHAI, KCAI, Wavedin, Sparkme)</li>
+            <li>🌊 WavedIn (SuperAdmin, Market Web)</li>
+            <li>✨ Sparkme (Web Login)</li>
+            <li>📈 Algomax (ProSky, GoPocket)</li>
+            <li>🎮 LGM (Login UI, Phone, OTP)</li>
+            <li>💬 AskEPI (Login UI, Phone, OTP)</li>
+            <li>🛡️ RiskRealm (Admin, Chat, Login)</li>
+            <li>🚗 AutoeVantage (eCommerce, Tools, Analytics)</li>
+            <li>🏛️ Metcalf</li>
+            <li>👥 Humee (Admin, Dashboard, SuperAdmin, CPA, Participant)</li>
+            <li>⚡ ZAPAI</li>
+          </ul>
+
+          <h3>🔗 Useful Links</h3>
+          <p>
+            <a href="https://github.com/Thenilavan-G/AdHash-API-Test/actions">View Workflow Run</a> |
+            <a href="https://github.com/Thenilavan-G/AdHash-API-Test">Repository</a>
+          </p>
+
+          <hr>
+          <p style="color: #6c757d; font-size: 12px;">
+            This is an automated message from AdHash Daily API Tests.<br>
+            Next scheduled run: Tomorrow at 9:00 AM IST
+          </p>
+          </body>
+          </html>
+
+    - name: Send Failure Email
+      if: always() && (steps.test-results.outputs.status == 'FAILURE' || steps.test-results.outputs.status == 'NO_TESTS')
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.zoho.com
+        server_port: 465
+        secure: true
+        username: ${{ secrets.EMAIL_USERNAME }}
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: "❌ AdHash Daily API Tests - FAILED (${{ steps.test-results.outputs.timestamp }})"
+        to: ${{ secrets.EMAIL_TO }}
+        from: ${{ secrets.EMAIL_USERNAME }}
+        html_body: |
+          <html>
+          <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+          <h2 style="color: #dc3545;">❌ AdHash Daily API Tests - FAILED</h2>
+
+          <h3>📊 Test Results Summary</h3>
+          <table border="1" style="border-collapse: collapse; width: 100%;">
+            <tr style="background-color: #f8f9fa;">
+              <td><strong>Execution Time</strong></td>
+              <td>${{ steps.test-results.outputs.timestamp }}</td>
+            </tr>
+            <tr>
+              <td><strong>Tests Run</strong></td>
+              <td>${{ steps.test-results.outputs.tests_run }}</td>
+            </tr>
+            <tr style="background-color: #f8d7da;">
+              <td><strong>Failures</strong></td>
+              <td style="color: #721c24; font-weight: bold;">${{ steps.test-results.outputs.failures }}</td>
+            </tr>
+            <tr style="background-color: #f8d7da;">
+              <td><strong>Errors</strong></td>
+              <td style="color: #721c24; font-weight: bold;">${{ steps.test-results.outputs.errors }}</td>
+            </tr>
+            <tr>
+              <td><strong>Skipped</strong></td>
+              <td>${{ steps.test-results.outputs.skipped }}</td>
+            </tr>
+            <tr style="background-color: #f5c6cb;">
+              <td><strong>Overall Status</strong></td>
+              <td style="color: #721c24; font-weight: bold;">FAILED ❌</td>
+            </tr>
+          </table>
+
+          <h3>🔍 Troubleshooting Steps</h3>
+          <ol>
+            <li><strong>Check API Endpoints:</strong> Verify all AdHash project APIs are accessible</li>
+            <li><strong>Authentication:</strong> Check if login credentials are valid</li>
+            <li><strong>Network Issues:</strong> Check for any network connectivity problems</li>
+            <li><strong>Server Status:</strong> Ensure all AdHash project servers are running</li>
+            <li><strong>Review Logs:</strong> Check GitHub Actions logs for detailed error messages</li>
+          </ol>
+
+          <h3>🔗 Investigation Links</h3>
+          <p>
+            <a href="https://github.com/Thenilavan-G/AdHash-API-Test/actions">View Workflow Run</a> |
+            <a href="https://github.com/Thenilavan-G/AdHash-API-Test">Repository</a>
+          </p>
+
+          <hr>
+          <p style="color: #6c757d; font-size: 12px;">
+            This is an automated message from AdHash Daily API Tests.<br>
+            Please investigate and resolve the issue before the next scheduled run at 9:00 AM IST tomorrow.
+          </p>
+          </body>
+          </html>
+
+    - name: Notify on failure (Console)
+      if: failure()
+      run: |
+        echo "❌ AdHash API Tests workflow failed!"
+        echo "Please check the logs above for details."
+

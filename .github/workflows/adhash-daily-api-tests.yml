@@ -213,8 +213,8 @@ jobs:
               .status-banner { background: #d4edda; color: #155724; padding: 15px; border-radius: 8px; text-align: center; font-weight: bold; margin: 20px 0; }
               .info-box { background-color: #e7f3ff; padding: 15px; border-left: 4px solid #2196F3; margin: 20px 0; border-radius: 4px; }
               .projects-section { margin: 30px 0; }
-              .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 20px 0; }
-              .project-item { background: #f8f9fa; padding: 10px; border-radius: 4px; font-size: 14px; }
+              .project-table { width: 100%; border-collapse: separate; border-spacing: 8px; margin: 20px 0; }
+              .project-item { background: #f8f9fa; padding: 12px 15px; border-radius: 6px; font-size: 14px; border: 1px solid #e0e0e0; }
               .footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 12px; }
             </style>
           </head>
@@ -257,26 +257,44 @@ jobs:
               <div class="projects-section">
                 <h3>🚀 AdHash Projects Tested</h3>
                 <p>All <strong>74 API endpoints</strong> tested successfully across all AdHash projects:</p>
-                <div class="project-grid">
-                  <div class="project-item">🌐 AdHash Website</div>
-                  <div class="project-item">🔧 AutoChecker (UI, Admin, App)</div>
-                  <div class="project-item">🏥 MyHealth AI (Doctor SuperAdmin, Doctor Login)</div>
-                  <div class="project-item">💊 KaiCare AI (Doctor SuperAdmin, Doctor Login)</div>
-                  <div class="project-item">📋 MHCRM (SuperAdmin, Admin)</div>
-                  <div class="project-item">🏢 MHCCM (SuperAdmin, CPA, PAR, Form, CRM)</div>
-                  <div class="project-item">🎯 MHRTM (SuperAdmin, CPA, Participant)</div>
-                  <div class="project-item">📱 Patient Apps (MHAI, KCAI, Wavedin, Sparkme)</div>
-                  <div class="project-item">🌊 WavedIn (SuperAdmin, Market Web)</div>
-                  <div class="project-item">✨ Sparkme (Web Login)</div>
-                  <div class="project-item">📈 Algomax (ProSky, GoPocket)</div>
-                  <div class="project-item">🎮 LGM (Login UI, Phone, OTP)</div>
-                  <div class="project-item">💬 AskEPI (Login UI, Phone, OTP)</div>
-                  <div class="project-item">🛡️ RiskRealm (Admin, Chat, Login)</div>
-                  <div class="project-item">🚗 AutoeVantage (eCommerce, Tools, Analytics)</div>
-                  <div class="project-item">🏛️ Metcalf</div>
-                  <div class="project-item">👥 Humee (Admin, Dashboard, SuperAdmin, CPA, Participant)</div>
-                  <div class="project-item">⚡ ZAPAI</div>
-                </div>
+                <table class="project-table" cellpadding="5" cellspacing="0">
+                  <tr>
+                    <td class="project-item">🌐 AdHash Website</td>
+                    <td class="project-item">🔧 AutoChecker (UI, Admin, App)</td>
+                  </tr>
+                  <tr>
+                    <td class="project-item">🏥 MyHealth AI (Doctor SuperAdmin, Doctor Login)</td>
+                    <td class="project-item">💊 KaiCare AI (Doctor SuperAdmin, Doctor Login)</td>
+                  </tr>
+                  <tr>
+                    <td class="project-item">📋 MHCRM (SuperAdmin, Admin)</td>
+                    <td class="project-item">🏢 MHCCM (SuperAdmin, CPA, PAR, Form, CRM)</td>
+                  </tr>
+                  <tr>
+                    <td class="project-item">🎯 MHRTM (SuperAdmin, CPA, Participant)</td>
+                    <td class="project-item">📱 Patient Apps (MHAI, KCAI, Wavedin, Sparkme)</td>
+                  </tr>
+                  <tr>
+                    <td class="project-item">🌊 WavedIn (SuperAdmin, Market Web)</td>
+                    <td class="project-item">✨ Sparkme (Web Login)</td>
+                  </tr>
+                  <tr>
+                    <td class="project-item">📈 Algomax (ProSky, GoPocket)</td>
+                    <td class="project-item">🎮 LGM (Login UI, Phone, OTP)</td>
+                  </tr>
+                  <tr>
+                    <td class="project-item">💬 AskEPI (Login UI, Phone, OTP)</td>
+                    <td class="project-item">🛡️ RiskRealm (Admin, Chat, Login)</td>
+                  </tr>
+                  <tr>
+                    <td class="project-item">🚗 AutoeVantage (eCommerce, Tools, Analytics)</td>
+                    <td class="project-item">🏛️ Metcalf</td>
+                  </tr>
+                  <tr>
+                    <td class="project-item">👥 Humee (Admin, Dashboard, SuperAdmin, CPA, Participant)</td>
+                    <td class="project-item">⚡ ZAPAI</td>
+                  </tr>
+                </table>
               </div>
 
               <h3>🔗 Useful Links</h3>

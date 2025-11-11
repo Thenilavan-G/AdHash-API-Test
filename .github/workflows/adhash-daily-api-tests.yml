@@ -107,6 +107,35 @@ jobs:
         echo "Skipped: $SKIPPED"
         echo "Status: $STATUS"
 
+    - name: Calculate Test Statistics
+      if: always()
+      id: test-stats
+      shell: bash
+      run: |
+        TESTS_RUN="${{ steps.test-results.outputs.tests_run }}"
+        FAILURES="${{ steps.test-results.outputs.failures }}"
+        ERRORS="${{ steps.test-results.outputs.errors }}"
+
+        # Calculate passed tests
+        PASSED=$((TESTS_RUN - FAILURES - ERRORS))
+        FAILED=$((FAILURES + ERRORS))
+
+        # Calculate success rate
+        if [ "$TESTS_RUN" -gt 0 ]; then
+          SUCCESS_RATE=$(awk "BEGIN {printf \"%.1f\", ($PASSED * 100.0 / $TESTS_RUN)}")
+        else
+          SUCCESS_RATE="0.0"
+        fi
+
+        echo "passed=$PASSED" >> $GITHUB_OUTPUT
+        echo "failed=$FAILED" >> $GITHUB_OUTPUT
+        echo "success_rate=$SUCCESS_RATE" >> $GITHUB_OUTPUT
+
+        echo "Calculated Statistics:"
+        echo "Passed: $PASSED"
+        echo "Failed: $FAILED"
+        echo "Success Rate: $SUCCESS_RATE%"
+
     - name: Find HTML Report
       if: always()
       id: find-report
@@ -202,17 +231,17 @@ jobs:
                   <div class="stat-label">Total Tests</div>
                 </div>
                 <div class="stat-card passed">
-                  <div class="stat-number" style="color: #4caf50;">✅ ${{ steps.test-results.outputs.tests_run }}</div>
+                  <div class="stat-number" style="color: #4caf50;">✅ ${{ steps.test-stats.outputs.passed }}</div>
                   <div class="stat-label">Passed</div>
                 </div>
                 <div class="stat-card failed">
-                  <div class="stat-number" style="color: #f44336;">❌ 0</div>
+                  <div class="stat-number" style="color: #f44336;">❌ ${{ steps.test-stats.outputs.failed }}</div>
                   <div class="stat-label">Failed</div>
                 </div>
               </div>
 
               <div class="success-rate">
-                <div class="success-rate-number">100.0%</div>
+                <div class="success-rate-number">${{ steps.test-stats.outputs.success_rate }}%</div>
                 <div class="success-rate-label">Success Rate</div>
               </div>
 
@@ -318,20 +347,20 @@ jobs:
                   <div class="stat-label">Total Tests</div>
                 </div>
                 <div class="stat-card passed">
-                  <div class="stat-number" style="color: #4caf50;">✅ ${{ steps.test-results.outputs.tests_run - steps.test-results.outputs.failures - steps.test-results.outputs.errors }}</div>
+                  <div class="stat-number" style="color: #4caf50;">✅ ${{ steps.test-stats.outputs.passed }}</div>
                   <div class="stat-label">Passed</div>
                 </div>
                 <div class="stat-card failed">
-                  <div class="stat-number" style="color: #f44336;">❌ ${{ steps.test-results.outputs.failures + steps.test-results.outputs.errors }}</div>
+                  <div class="stat-number" style="color: #f44336;">❌ ${{ steps.test-stats.outputs.failed }}</div>
                   <div class="stat-label">Failed</div>
                 </div>
               </div>
 
               <div class="success-rate">
-                <div class="success-rate-number" style="color: #4caf50;">
-                  Passed: ${{ steps.test-results.outputs.tests_run - steps.test-results.outputs.failures - steps.test-results.outputs.errors }} / ${{ steps.test-results.outputs.tests_run }}
+                <div class="success-rate-number" style="color: #f44336;">
+                  ${{ steps.test-stats.outputs.success_rate }}%
                 </div>
-                <div class="success-rate-label">Test Results</div>
+                <div class="success-rate-label">Success Rate</div>
               </div>
 
               <div class="status-banner failed">

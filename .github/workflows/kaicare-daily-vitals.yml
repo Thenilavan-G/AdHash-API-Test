@@ -113,6 +113,7 @@ jobs:
         echo "skipped=$SKIPPED" >> $GITHUB_OUTPUT
         echo "status=$STATUS" >> $GITHUB_OUTPUT
         echo "timestamp=$(TZ='Asia/Kolkata' date '+%d/%m/%Y %H:%M IST')" >> $GITHUB_OUTPUT
+        echo "insertion_date=$(TZ='Asia/Kolkata' date '+%d/%m/%Y')" >> $GITHUB_OUTPUT
 
         echo "Test Results Summary:"
         echo "Tests Run: $TESTS_RUN"
@@ -189,7 +190,7 @@ jobs:
           </ul>
 
           <h3>💉 Vitals Data Inserted</h3>
-          <p>All vital types successfully inserted with <strong>6:00 AM IST</strong> timestamp:</p>
+          <p>All vital types successfully inserted with timestamp: <strong>${{ steps.test-results.outputs.insertion_date }} at 6:00 AM IST</strong></p>
           <ul>
             <li>❤️ Heart Rate (2 values per mobile number)</li>
             <li>🩸 Blood Pressure (2 values per mobile number)</li>
@@ -261,7 +262,7 @@ jobs:
             <li><strong>Authentication:</strong> Check if access tokens are being generated correctly</li>
             <li><strong>Excel File:</strong> Verify Test_data.xlsx is accessible and contains valid data</li>
             <li><strong>Network Issues:</strong> Check for any network connectivity problems</li>
-            <li><strong>Time Validation:</strong> Ensure 6:00 AM IST falls within acceptable time windows</li>
+            <li><strong>Time Validation:</strong> Ensure timestamp (${{ steps.test-results.outputs.insertion_date }} at 6:00 AM IST) falls within acceptable time windows</li>
           </ol>
 
           <h3>📱 Expected Mobile Numbers</h3>

@@ -1,0 +1,4716 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>AdHash API Test Report</title>
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@d6562a79075e061305ccfdb82f01e5e195e2d307/spark/css/spark-style.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@7cc78ce/spark/js/jsontree.js"></script>
+<style type="text/css"></style></head><body class="spa -report standard">
+  <div class="app">
+    <div class="layout">
+<div class="header navbar">
+<div class="vheader">
+<div class="nav-logo">
+<a href="#">
+<div class="logo" style="background-image: url('https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png')"></div>
+</a>
+</div>
+<ul class="nav-left">
+<li class="search-box">
+<a class="search-toggle" href="#">
+<i class="search-icon fa fa-search"></i>
+<i class="search-icon-close fa fa-close"></i>
+</a>
+</li>
+<li class="search-input"><input id="search-tests" class="form-control" type="text" placeholder="Search..."></li>
+</ul>
+<ul class="nav-right">
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">AdHash API Automation Results</span></a>
+</li>
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Tuesday, September 23, 2025, 04:15 am (GMT-04:00)</span></a>
+</li>
+</ul>
+</div>
+</div><div class="side-nav">
+<div class="side-nav-inner">
+<ul class="side-nav-menu">
+<li class="nav-item dropdown" onclick="toggleView('test-view')">
+<a id="nav-test" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-list"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('category-view')">
+<a id="nav-category" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-tag"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('author-view')">
+<a id="nav-author" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-user"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('dashboard-view')">
+<a id="nav-dashboard" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bar-chart"></i></span>
+</a>
+</li>
+</ul>
+</div>
+</div>      <div class="vcontainer">
+        <div class="main-content">
+<div class="test-wrapper row view test-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+<ul class="tools pull-left">
+<li><a href="#"><span class="font-size-14">Tests</span></a></li>
+</ul>
+<ul class="tools text-right">
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
+<ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" status="pass" href="#"><span>Pass</span><span class="status success"></span></a>
+<div class="dropdown-divider"></div>
+<a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
+</ul>
+</li>
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></a>
+<ul id="author-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" href="#">AdHashQATeam</a>
+</ul>
+</li>
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tag"></i></a>
+<ul id="tag-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" href="#">Authentication</a><a class="dropdown-item" href="#">UITests</a><a class="dropdown-item" href="#">APITests</a>
+</ul>
+</li>
+</ul>
+</div>    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        <li class="test-item"  status="pass" test-id="1"
+          author="AdHashQATeam"
+          tag="APITests"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_AdHash_Website</p>
+            <p class="text-sm">
+              <span>4:15:51 am</span> / <span>00:00:01:165</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_AdHash_Website</h5>
+<span class='badge badge-success'>09.23.2025 4:15:51 am</span>
+<span class='badge badge-danger'>09.23.2025 4:15:52 am</span>
+<span class='badge badge-default'>00:00:01:165</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">APITests</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: AdHash Website</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:15:51 am</td>
+        <td>
+          Starting test: pm_AdHash_Website
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:15:52 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:15:52 am</td>
+        <td>
+          Execution time: 1164ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="2"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_AutoChecker_Login_UI</p>
+            <p class="text-sm">
+              <span>4:15:52 am</span> / <span>00:00:01:183</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_AutoChecker_Login_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:15:52 am</span>
+<span class='badge badge-danger'>09.23.2025 4:15:54 am</span>
+<span class='badge badge-default'>00:00:01:183</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=2</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: AutoChecker Login UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:15:52 am</td>
+        <td>
+          Starting test: pm_AutoChecker_Login_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:15:54 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:15:54 am</td>
+        <td>
+          Execution time: 1183ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="3"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_AutoChecker_Admin_Login</p>
+            <p class="text-sm">
+              <span>4:15:54 am</span> / <span>00:00:01:157</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_AutoChecker_Admin_Login</h5>
+<span class='badge badge-success'>09.23.2025 4:15:54 am</span>
+<span class='badge badge-danger'>09.23.2025 4:15:55 am</span>
+<span class='badge badge-default'>00:00:01:157</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=3</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: AutoChecker Admin Login</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:15:54 am</td>
+        <td>
+          Starting test: pm_AutoChecker_Admin_Login
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:15:55 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:15:55 am</td>
+        <td>
+          Execution time: 1157ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="4"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_AutoChecker_App_Login</p>
+            <p class="text-sm">
+              <span>4:15:55 am</span> / <span>00:00:01:150</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_AutoChecker_App_Login</h5>
+<span class='badge badge-success'>09.23.2025 4:15:55 am</span>
+<span class='badge badge-danger'>09.23.2025 4:15:56 am</span>
+<span class='badge badge-default'>00:00:01:150</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=4</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: AutoChecker App Login</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:15:55 am</td>
+        <td>
+          Starting test: pm_AutoChecker_App_Login
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:15:56 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:15:56 am</td>
+        <td>
+          Execution time: 1150ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="5"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHAI_Doctor_SuperAdmin_Login_UI</p>
+            <p class="text-sm">
+              <span>4:15:56 am</span> / <span>00:00:01:092</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHAI_Doctor_SuperAdmin_Login_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:15:56 am</span>
+<span class='badge badge-danger'>09.23.2025 4:15:57 am</span>
+<span class='badge badge-default'>00:00:01:092</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=5</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHAI Doctor SuperAdmin Login UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:15:56 am</td>
+        <td>
+          Starting test: pm_MHAI_Doctor_SuperAdmin_Login_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:15:57 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:15:57 am</td>
+        <td>
+          Execution time: 1091ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="6"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHAI_Doctor_SuperAdmin_Login</p>
+            <p class="text-sm">
+              <span>4:15:57 am</span> / <span>00:00:00:276</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHAI_Doctor_SuperAdmin_Login</h5>
+<span class='badge badge-success'>09.23.2025 4:15:57 am</span>
+<span class='badge badge-danger'>09.23.2025 4:15:57 am</span>
+<span class='badge badge-default'>00:00:00:276</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=6</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHAI Doctor SuperAdmin Login</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:15:57 am</td>
+        <td>
+          Starting test: pm_MHAI_Doctor_SuperAdmin_Login
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:15:57 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:15:57 am</td>
+        <td>
+          Execution time: 275ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="7"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHAI_Doctor_Login_UI</p>
+            <p class="text-sm">
+              <span>4:15:57 am</span> / <span>00:00:01:104</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHAI_Doctor_Login_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:15:57 am</span>
+<span class='badge badge-danger'>09.23.2025 4:15:58 am</span>
+<span class='badge badge-default'>00:00:01:104</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=7</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHAI Doctor Login UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:15:57 am</td>
+        <td>
+          Starting test: pm_MHAI_Doctor_Login_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:15:58 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:15:58 am</td>
+        <td>
+          Execution time: 1103ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="8"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHAI_Doctor_Login</p>
+            <p class="text-sm">
+              <span>4:15:58 am</span> / <span>00:00:00:274</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHAI_Doctor_Login</h5>
+<span class='badge badge-success'>09.23.2025 4:15:58 am</span>
+<span class='badge badge-danger'>09.23.2025 4:15:59 am</span>
+<span class='badge badge-default'>00:00:00:274</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=8</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHAI Doctor Login</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:15:58 am</td>
+        <td>
+          Starting test: pm_MHAI_Doctor_Login
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:15:59 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:15:59 am</td>
+        <td>
+          Execution time: 274ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="9"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_KCAI_Doctor_SuperAdmin_Login_UI</p>
+            <p class="text-sm">
+              <span>4:15:59 am</span> / <span>00:00:00:592</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_KCAI_Doctor_SuperAdmin_Login_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:15:59 am</span>
+<span class='badge badge-danger'>09.23.2025 4:15:59 am</span>
+<span class='badge badge-default'>00:00:00:592</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=9</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: KCAI Doctor SuperAdmin Login UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:15:59 am</td>
+        <td>
+          Starting test: pm_KCAI_Doctor_SuperAdmin_Login_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:15:59 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:15:59 am</td>
+        <td>
+          Execution time: 592ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="10"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_KCAI_Doctor_SuperAdmin_Login</p>
+            <p class="text-sm">
+              <span>4:15:59 am</span> / <span>00:00:00:616</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_KCAI_Doctor_SuperAdmin_Login</h5>
+<span class='badge badge-success'>09.23.2025 4:15:59 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:00 am</span>
+<span class='badge badge-default'>00:00:00:616</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=10</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: KCAI Doctor SuperAdmin Login</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:15:59 am</td>
+        <td>
+          Starting test: pm_KCAI_Doctor_SuperAdmin_Login
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:00 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:00 am</td>
+        <td>
+          Execution time: 618ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="11"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_KCAI_Doctor_Login_UI</p>
+            <p class="text-sm">
+              <span>4:16:00 am</span> / <span>00:00:00:586</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_KCAI_Doctor_Login_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:16:00 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:00 am</span>
+<span class='badge badge-default'>00:00:00:586</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=11</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: KCAI Doctor Login UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:00 am</td>
+        <td>
+          Starting test: pm_KCAI_Doctor_Login_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:00 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:00 am</td>
+        <td>
+          Execution time: 586ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="12"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_KCAI_Doctor_Login</p>
+            <p class="text-sm">
+              <span>4:16:00 am</span> / <span>00:00:00:494</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_KCAI_Doctor_Login</h5>
+<span class='badge badge-success'>09.23.2025 4:16:00 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:01 am</span>
+<span class='badge badge-default'>00:00:00:494</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=12</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: KCAI Doctor Login</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:00 am</td>
+        <td>
+          Starting test: pm_KCAI_Doctor_Login
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:01 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:01 am</td>
+        <td>
+          Execution time: 495ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="13"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHCRM_SuperAdmin_Login_UI</p>
+            <p class="text-sm">
+              <span>4:16:01 am</span> / <span>00:00:01:085</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHCRM_SuperAdmin_Login_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:16:01 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:02 am</span>
+<span class='badge badge-default'>00:00:01:085</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=13</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHCRM SuperAdmin Login UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:01 am</td>
+        <td>
+          Starting test: pm_MHCRM_SuperAdmin_Login_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:02 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:02 am</td>
+        <td>
+          Execution time: 1086ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="14"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHCRM_SuperAdmin_Login</p>
+            <p class="text-sm">
+              <span>4:16:02 am</span> / <span>00:00:01:138</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHCRM_SuperAdmin_Login</h5>
+<span class='badge badge-success'>09.23.2025 4:16:02 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:03 am</span>
+<span class='badge badge-default'>00:00:01:138</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=14</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHCRM SuperAdmin Login</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:02 am</td>
+        <td>
+          Starting test: pm_MHCRM_SuperAdmin_Login
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:03 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:03 am</td>
+        <td>
+          Execution time: 1138ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="15"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHCRM_Admin_Login</p>
+            <p class="text-sm">
+              <span>4:16:03 am</span> / <span>00:00:00:283</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHCRM_Admin_Login</h5>
+<span class='badge badge-success'>09.23.2025 4:16:03 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:03 am</span>
+<span class='badge badge-default'>00:00:00:283</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=15</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHCRM Admin Login</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:03 am</td>
+        <td>
+          Starting test: pm_MHCRM_Admin_Login
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:03 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:03 am</td>
+        <td>
+          Execution time: 282ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="16"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHCCM_SuperAdmin_Login_UI</p>
+            <p class="text-sm">
+              <span>4:16:03 am</span> / <span>00:00:01:136</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHCCM_SuperAdmin_Login_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:16:03 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:05 am</span>
+<span class='badge badge-default'>00:00:01:136</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=16</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHCCM SuperAdmin Login UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:03 am</td>
+        <td>
+          Starting test: pm_MHCCM_SuperAdmin_Login_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:05 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:05 am</td>
+        <td>
+          Execution time: 1137ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="17"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHCCM_SuperAdmin_Login</p>
+            <p class="text-sm">
+              <span>4:16:05 am</span> / <span>00:00:00:298</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHCCM_SuperAdmin_Login</h5>
+<span class='badge badge-success'>09.23.2025 4:16:05 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:05 am</span>
+<span class='badge badge-default'>00:00:00:298</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=17</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHCCM SuperAdmin Login</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:05 am</td>
+        <td>
+          Starting test: pm_MHCCM_SuperAdmin_Login
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:05 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:05 am</td>
+        <td>
+          Execution time: 299ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="18"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHCCM_CPA_Login_UI</p>
+            <p class="text-sm">
+              <span>4:16:05 am</span> / <span>00:00:01:139</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHCCM_CPA_Login_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:16:05 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:06 am</span>
+<span class='badge badge-default'>00:00:01:139</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=18</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHCCM CPA Login UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:05 am</td>
+        <td>
+          Starting test: pm_MHCCM_CPA_Login_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:06 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:06 am</td>
+        <td>
+          Execution time: 1139ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="19"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHCCM_CPA_Login</p>
+            <p class="text-sm">
+              <span>4:16:06 am</span> / <span>00:00:00:312</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHCCM_CPA_Login</h5>
+<span class='badge badge-success'>09.23.2025 4:16:06 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:06 am</span>
+<span class='badge badge-default'>00:00:00:312</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=19</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHCCM CPA Login</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:06 am</td>
+        <td>
+          Starting test: pm_MHCCM_CPA_Login
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:06 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:06 am</td>
+        <td>
+          Execution time: 312ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="20"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHCCM_PAR_Login_UI</p>
+            <p class="text-sm">
+              <span>4:16:06 am</span> / <span>00:00:01:223</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHCCM_PAR_Login_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:16:06 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:08 am</span>
+<span class='badge badge-default'>00:00:01:223</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=20</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHCCM PAR Login UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:06 am</td>
+        <td>
+          Starting test: pm_MHCCM_PAR_Login_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:08 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:08 am</td>
+        <td>
+          Execution time: 1222ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="21"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHCCM_PAR_Login</p>
+            <p class="text-sm">
+              <span>4:16:08 am</span> / <span>00:00:00:343</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHCCM_PAR_Login</h5>
+<span class='badge badge-success'>09.23.2025 4:16:08 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:08 am</span>
+<span class='badge badge-default'>00:00:00:343</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=21</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHCCM PAR Login</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:08 am</td>
+        <td>
+          Starting test: pm_MHCCM_PAR_Login
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:08 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:08 am</td>
+        <td>
+          Execution time: 342ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="22"
+          author="AdHashQATeam"
+          tag="UITests"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHCCM_Form_UI</p>
+            <p class="text-sm">
+              <span>4:16:08 am</span> / <span>00:00:01:141</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHCCM_Form_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:16:08 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:09 am</span>
+<span class='badge badge-default'>00:00:01:141</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=22</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">UITests</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHCCM Form UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:08 am</td>
+        <td>
+          Starting test: pm_MHCCM_Form_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:09 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:09 am</td>
+        <td>
+          Execution time: 1141ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="23"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHCCM_PAR_CRM_Login_UI</p>
+            <p class="text-sm">
+              <span>4:16:09 am</span> / <span>00:00:01:132</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHCCM_PAR_CRM_Login_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:16:09 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:10 am</span>
+<span class='badge badge-default'>00:00:01:132</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=23</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHCCM PAR CRM Login UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:09 am</td>
+        <td>
+          Starting test: pm_MHCCM_PAR_CRM_Login_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:10 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:10 am</td>
+        <td>
+          Execution time: 1131ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="24"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHCCM_PAR_CRM_Login</p>
+            <p class="text-sm">
+              <span>4:16:10 am</span> / <span>00:00:01:275</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHCCM_PAR_CRM_Login</h5>
+<span class='badge badge-success'>09.23.2025 4:16:10 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:11 am</span>
+<span class='badge badge-default'>00:00:01:275</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=24</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHCCM PAR CRM Login</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:10 am</td>
+        <td>
+          Starting test: pm_MHCCM_PAR_CRM_Login
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:11 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:11 am</td>
+        <td>
+          Execution time: 1275ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="25"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHRTM_SuperAdmin_Login_UI</p>
+            <p class="text-sm">
+              <span>4:16:11 am</span> / <span>00:00:00:154</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHRTM_SuperAdmin_Login_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:16:11 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:12 am</span>
+<span class='badge badge-default'>00:00:00:154</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=25</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHRTM SuperAdmin Login UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:11 am</td>
+        <td>
+          Starting test: pm_MHRTM_SuperAdmin_Login_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:12 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:12 am</td>
+        <td>
+          Execution time: 154ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="26"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHRTM_SuperAdmin_Login</p>
+            <p class="text-sm">
+              <span>4:16:12 am</span> / <span>00:00:00:614</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHRTM_SuperAdmin_Login</h5>
+<span class='badge badge-success'>09.23.2025 4:16:12 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:12 am</span>
+<span class='badge badge-default'>00:00:00:614</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=26</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHRTM SuperAdmin Login</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:12 am</td>
+        <td>
+          Starting test: pm_MHRTM_SuperAdmin_Login
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:12 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:12 am</td>
+        <td>
+          Execution time: 614ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="27"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHRTM_CPA_Login_UI</p>
+            <p class="text-sm">
+              <span>4:16:12 am</span> / <span>00:00:00:612</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHRTM_CPA_Login_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:16:12 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:13 am</span>
+<span class='badge badge-default'>00:00:00:612</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=27</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHRTM CPA Login UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:12 am</td>
+        <td>
+          Starting test: pm_MHRTM_CPA_Login_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:13 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:13 am</td>
+        <td>
+          Execution time: 612ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="28"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHRTM_CPA_Login</p>
+            <p class="text-sm">
+              <span>4:16:13 am</span> / <span>00:00:00:489</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHRTM_CPA_Login</h5>
+<span class='badge badge-success'>09.23.2025 4:16:13 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:13 am</span>
+<span class='badge badge-default'>00:00:00:489</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=28</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHRTM CPA Login</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:13 am</td>
+        <td>
+          Starting test: pm_MHRTM_CPA_Login
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:13 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:13 am</td>
+        <td>
+          Execution time: 490ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="29"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHRTM_Participant_Login_UI</p>
+            <p class="text-sm">
+              <span>4:16:13 am</span> / <span>00:00:00:604</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHRTM_Participant_Login_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:16:13 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:14 am</span>
+<span class='badge badge-default'>00:00:00:604</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=29</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHRTM Participant Login UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:13 am</td>
+        <td>
+          Starting test: pm_MHRTM_Participant_Login_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:14 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:14 am</td>
+        <td>
+          Execution time: 605ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="30"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHRTM_Participant_Login</p>
+            <p class="text-sm">
+              <span>4:16:14 am</span> / <span>00:00:00:483</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHRTM_Participant_Login</h5>
+<span class='badge badge-success'>09.23.2025 4:16:14 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:14 am</span>
+<span class='badge badge-default'>00:00:00:483</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=30</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHRTM Participant Login</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:14 am</td>
+        <td>
+          Starting test: pm_MHRTM_Participant_Login
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:14 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:14 am</td>
+        <td>
+          Execution time: 483ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="31"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_MHAI_Patient_App_Login</p>
+            <p class="text-sm">
+              <span>4:16:14 am</span> / <span>00:00:01:179</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_MHAI_Patient_App_Login</h5>
+<span class='badge badge-success'>09.23.2025 4:16:14 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:16 am</span>
+<span class='badge badge-default'>00:00:01:179</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=31</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: MHAI Patient App Login</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:14 am</td>
+        <td>
+          Starting test: pm_MHAI_Patient_App_Login
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:16 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:16 am</td>
+        <td>
+          Execution time: 1179ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="32"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_KCAI_Patient_App_Login</p>
+            <p class="text-sm">
+              <span>4:16:16 am</span> / <span>00:00:00:719</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_KCAI_Patient_App_Login</h5>
+<span class='badge badge-success'>09.23.2025 4:16:16 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:16 am</span>
+<span class='badge badge-default'>00:00:00:719</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=32</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: KCAI Patient App Login</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:16 am</td>
+        <td>
+          Starting test: pm_KCAI_Patient_App_Login
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:16 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:16 am</td>
+        <td>
+          Execution time: 720ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="33"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_Wavedin_App_Login</p>
+            <p class="text-sm">
+              <span>4:16:16 am</span> / <span>00:00:01:151</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_Wavedin_App_Login</h5>
+<span class='badge badge-success'>09.23.2025 4:16:16 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:18 am</span>
+<span class='badge badge-default'>00:00:01:151</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=33</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: Wavedin App Login</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:16 am</td>
+        <td>
+          Starting test: pm_Wavedin_App_Login
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:18 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:18 am</td>
+        <td>
+          Execution time: 1152ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="34"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_Sparkme_App_Login</p>
+            <p class="text-sm">
+              <span>4:16:18 am</span> / <span>00:00:00:240</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_Sparkme_App_Login</h5>
+<span class='badge badge-success'>09.23.2025 4:16:18 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:18 am</span>
+<span class='badge badge-default'>00:00:00:240</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=34</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: Sparkme App Login</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:18 am</td>
+        <td>
+          Starting test: pm_Sparkme_App_Login
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:18 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:18 am</td>
+        <td>
+          Execution time: 240ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="35"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_WavedIn_SuperAdmin_Login_UI</p>
+            <p class="text-sm">
+              <span>4:16:18 am</span> / <span>00:00:00:991</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_WavedIn_SuperAdmin_Login_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:16:18 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:19 am</span>
+<span class='badge badge-default'>00:00:00:991</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=35</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: WavedIn SuperAdmin Login UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:18 am</td>
+        <td>
+          Starting test: pm_WavedIn_SuperAdmin_Login_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:19 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:19 am</td>
+        <td>
+          Execution time: 990ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="36"
+          author="AdHashQATeam"
+          tag="APITests"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_WavedIn_Market_Web</p>
+            <p class="text-sm">
+              <span>4:16:19 am</span> / <span>00:00:00:986</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_WavedIn_Market_Web</h5>
+<span class='badge badge-success'>09.23.2025 4:16:19 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:20 am</span>
+<span class='badge badge-default'>00:00:00:986</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=36</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">APITests</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: WavedIn Market Web</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:19 am</td>
+        <td>
+          Starting test: pm_WavedIn_Market_Web
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:20 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:20 am</td>
+        <td>
+          Execution time: 985ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="37"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_Sparkme_Web_Login_UI</p>
+            <p class="text-sm">
+              <span>4:16:20 am</span> / <span>00:00:00:235</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_Sparkme_Web_Login_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:16:20 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:20 am</span>
+<span class='badge badge-default'>00:00:00:235</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=37</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: Sparkme Web Login UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:20 am</td>
+        <td>
+          Starting test: pm_Sparkme_Web_Login_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:20 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:20 am</td>
+        <td>
+          Execution time: 234ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="38"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_Sparkme_Web_Login</p>
+            <p class="text-sm">
+              <span>4:16:20 am</span> / <span>00:00:00:097</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_Sparkme_Web_Login</h5>
+<span class='badge badge-success'>09.23.2025 4:16:20 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:20 am</span>
+<span class='badge badge-default'>00:00:00:097</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=38</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: Sparkme Web Login</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:20 am</td>
+        <td>
+          Starting test: pm_Sparkme_Web_Login
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:20 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:20 am</td>
+        <td>
+          Execution time: 97ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="39"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_Algomax_ProSky_Web_Login_UI</p>
+            <p class="text-sm">
+              <span>4:16:20 am</span> / <span>00:00:00:277</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_Algomax_ProSky_Web_Login_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:16:20 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:20 am</span>
+<span class='badge badge-default'>00:00:00:277</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=39</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: Algomax ProSky Web Login UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:20 am</td>
+        <td>
+          Starting test: pm_Algomax_ProSky_Web_Login_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:20 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:20 am</td>
+        <td>
+          Execution time: 277ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="40"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_Algomax_GoPocket_Web_Login_UI</p>
+            <p class="text-sm">
+              <span>4:16:20 am</span> / <span>00:00:00:225</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_Algomax_GoPocket_Web_Login_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:16:20 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:21 am</span>
+<span class='badge badge-default'>00:00:00:225</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=40</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: Algomax GoPocket Web Login UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:20 am</td>
+        <td>
+          Starting test: pm_Algomax_GoPocket_Web_Login_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:21 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:21 am</td>
+        <td>
+          Execution time: 224ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="41"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_LGM_Login_UI</p>
+            <p class="text-sm">
+              <span>4:16:21 am</span> / <span>00:00:01:002</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_LGM_Login_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:16:21 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:22 am</span>
+<span class='badge badge-default'>00:00:01:002</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=41</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: LGM Login UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:21 am</td>
+        <td>
+          Starting test: pm_LGM_Login_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:22 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:22 am</td>
+        <td>
+          Execution time: 1002ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="42"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_LGM_Login_PhoneNumber</p>
+            <p class="text-sm">
+              <span>4:16:22 am</span> / <span>00:00:01:348</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_LGM_Login_PhoneNumber</h5>
+<span class='badge badge-success'>09.23.2025 4:16:22 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:23 am</span>
+<span class='badge badge-default'>00:00:01:348</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=42</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: LGM Login PhoneNumber</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:22 am</td>
+        <td>
+          Starting test: pm_LGM_Login_PhoneNumber
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:23 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:23 am</td>
+        <td>
+          Execution time: 1348ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="43"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_LGM_Login_OTP</p>
+            <p class="text-sm">
+              <span>4:16:23 am</span> / <span>00:00:00:760</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_LGM_Login_OTP</h5>
+<span class='badge badge-success'>09.23.2025 4:16:23 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:24 am</span>
+<span class='badge badge-default'>00:00:00:760</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=43</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: LGM Login OTP</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:23 am</td>
+        <td>
+          Starting test: pm_LGM_Login_OTP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:24 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:24 am</td>
+        <td>
+          Execution time: 760ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="44"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_AskEPI_Login_UI</p>
+            <p class="text-sm">
+              <span>4:16:24 am</span> / <span>00:00:01:405</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_AskEPI_Login_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:16:24 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:25 am</span>
+<span class='badge badge-default'>00:00:01:405</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=44</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: AskEPI Login UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:24 am</td>
+        <td>
+          Starting test: pm_AskEPI_Login_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:25 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:25 am</td>
+        <td>
+          Execution time: 1406ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="45"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_AskEPI_Login_PhoneNumber</p>
+            <p class="text-sm">
+              <span>4:16:25 am</span> / <span>00:00:00:974</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_AskEPI_Login_PhoneNumber</h5>
+<span class='badge badge-success'>09.23.2025 4:16:25 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:26 am</span>
+<span class='badge badge-default'>00:00:00:974</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=45</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: AskEPI Login PhoneNumber</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:25 am</td>
+        <td>
+          Starting test: pm_AskEPI_Login_PhoneNumber
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:26 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:26 am</td>
+        <td>
+          Execution time: 974ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="46"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_AskEPI_Login_OTP</p>
+            <p class="text-sm">
+              <span>4:16:26 am</span> / <span>00:00:00:776</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_AskEPI_Login_OTP</h5>
+<span class='badge badge-success'>09.23.2025 4:16:26 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:27 am</span>
+<span class='badge badge-default'>00:00:00:776</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=46</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: AskEPI Login OTP</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:26 am</td>
+        <td>
+          Starting test: pm_AskEPI_Login_OTP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:27 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:27 am</td>
+        <td>
+          Execution time: 775ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="47"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_RiskRealm_Admin_Web_Login_UI</p>
+            <p class="text-sm">
+              <span>4:16:27 am</span> / <span>00:00:00:832</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_RiskRealm_Admin_Web_Login_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:16:27 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:28 am</span>
+<span class='badge badge-default'>00:00:00:832</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=47</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: RiskRealm Admin Web Login UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:27 am</td>
+        <td>
+          Starting test: pm_RiskRealm_Admin_Web_Login_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:28 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:28 am</td>
+        <td>
+          Execution time: 832ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="48"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_RiskRealm_Chat_Web_Login_UI</p>
+            <p class="text-sm">
+              <span>4:16:28 am</span> / <span>00:00:00:402</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_RiskRealm_Chat_Web_Login_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:16:28 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:28 am</span>
+<span class='badge badge-default'>00:00:00:402</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=48</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: RiskRealm Chat Web Login UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:28 am</td>
+        <td>
+          Starting test: pm_RiskRealm_Chat_Web_Login_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:28 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:28 am</td>
+        <td>
+          Execution time: 401ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="49"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_RiskRealm_Login_Number</p>
+            <p class="text-sm">
+              <span>4:16:28 am</span> / <span>00:00:00:354</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_RiskRealm_Login_Number</h5>
+<span class='badge badge-success'>09.23.2025 4:16:28 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:28 am</span>
+<span class='badge badge-default'>00:00:00:354</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=49</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: RiskRealm Login Number</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:28 am</td>
+        <td>
+          Starting test: pm_RiskRealm_Login_Number
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:28 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:28 am</td>
+        <td>
+          Execution time: 353ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="50"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_RiskRealm_Login_OTP</p>
+            <p class="text-sm">
+              <span>4:16:28 am</span> / <span>00:00:00:820</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_RiskRealm_Login_OTP</h5>
+<span class='badge badge-success'>09.23.2025 4:16:28 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:29 am</span>
+<span class='badge badge-default'>00:00:00:820</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=50</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: RiskRealm Login OTP</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:28 am</td>
+        <td>
+          Starting test: pm_RiskRealm_Login_OTP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:29 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:29 am</td>
+        <td>
+          Execution time: 819ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="51"
+          author="AdHashQATeam"
+          tag="UITests"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_AutoeVantage_eCommerce_Web_UI</p>
+            <p class="text-sm">
+              <span>4:16:29 am</span> / <span>00:00:00:765</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_AutoeVantage_eCommerce_Web_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:16:29 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:30 am</span>
+<span class='badge badge-default'>00:00:00:765</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=51</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">UITests</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: AutoeVantage eCommerce Web UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:29 am</td>
+        <td>
+          Starting test: pm_AutoeVantage_eCommerce_Web_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:30 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:30 am</td>
+        <td>
+          Execution time: 764ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="52"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_AutoeVantage_eCommerce_Login_PhoneNumber</p>
+            <p class="text-sm">
+              <span>4:16:30 am</span> / <span>00:00:00:569</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_AutoeVantage_eCommerce_Login_PhoneNumber</h5>
+<span class='badge badge-success'>09.23.2025 4:16:30 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:31 am</span>
+<span class='badge badge-default'>00:00:00:569</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=52</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: AutoeVantage eCommerce Login PhoneNumber</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:30 am</td>
+        <td>
+          Starting test: pm_AutoeVantage_eCommerce_Login_PhoneNumber
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:31 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:31 am</td>
+        <td>
+          Execution time: 569ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="53"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_AutoeVantage_eCommerce_Login_OTP</p>
+            <p class="text-sm">
+              <span>4:16:31 am</span> / <span>00:00:00:519</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_AutoeVantage_eCommerce_Login_OTP</h5>
+<span class='badge badge-success'>09.23.2025 4:16:31 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:31 am</span>
+<span class='badge badge-default'>00:00:00:519</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=53</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: AutoeVantage eCommerce Login OTP</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:31 am</td>
+        <td>
+          Starting test: pm_AutoeVantage_eCommerce_Login_OTP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:31 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:31 am</td>
+        <td>
+          Execution time: 519ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="54"
+          author="AdHashQATeam"
+          tag="UITests"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_AutoeVantage_Tools_Web_UI</p>
+            <p class="text-sm">
+              <span>4:16:31 am</span> / <span>00:00:00:420</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_AutoeVantage_Tools_Web_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:16:31 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:32 am</span>
+<span class='badge badge-default'>00:00:00:420</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=54</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">UITests</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: AutoeVantage Tools Web UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:31 am</td>
+        <td>
+          Starting test: pm_AutoeVantage_Tools_Web_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:32 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:32 am</td>
+        <td>
+          Execution time: 419ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="55"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_AutoeVantage_Tools_Login_PhoneNumber</p>
+            <p class="text-sm">
+              <span>4:16:32 am</span> / <span>00:00:00:296</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_AutoeVantage_Tools_Login_PhoneNumber</h5>
+<span class='badge badge-success'>09.23.2025 4:16:32 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:32 am</span>
+<span class='badge badge-default'>00:00:00:296</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=55</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: AutoeVantage Tools Login PhoneNumber</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:32 am</td>
+        <td>
+          Starting test: pm_AutoeVantage_Tools_Login_PhoneNumber
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:32 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:32 am</td>
+        <td>
+          Execution time: 295ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="56"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_AutoeVantage_Tools_Login_OTP</p>
+            <p class="text-sm">
+              <span>4:16:32 am</span> / <span>00:00:00:447</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_AutoeVantage_Tools_Login_OTP</h5>
+<span class='badge badge-success'>09.23.2025 4:16:32 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:32 am</span>
+<span class='badge badge-default'>00:00:00:447</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=56</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: AutoeVantage Tools Login OTP</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:32 am</td>
+        <td>
+          Starting test: pm_AutoeVantage_Tools_Login_OTP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:32 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:32 am</td>
+        <td>
+          Execution time: 447ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="57"
+          author="AdHashQATeam"
+          tag="UITests"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_AutoeVantage_Analytics_Web_UI</p>
+            <p class="text-sm">
+              <span>4:16:32 am</span> / <span>00:00:00:575</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_AutoeVantage_Analytics_Web_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:16:32 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:33 am</span>
+<span class='badge badge-default'>00:00:00:575</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=57</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">UITests</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: AutoeVantage Analytics Web UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:32 am</td>
+        <td>
+          Starting test: pm_AutoeVantage_Analytics_Web_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:33 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:33 am</td>
+        <td>
+          Execution time: 574ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="58"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_AutoeVantage_Analytics_Login_PhoneNumber</p>
+            <p class="text-sm">
+              <span>4:16:33 am</span> / <span>00:00:00:294</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_AutoeVantage_Analytics_Login_PhoneNumber</h5>
+<span class='badge badge-success'>09.23.2025 4:16:33 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:33 am</span>
+<span class='badge badge-default'>00:00:00:294</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=58</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: AutoeVantage Analytics Login PhoneNumber</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:33 am</td>
+        <td>
+          Starting test: pm_AutoeVantage_Analytics_Login_PhoneNumber
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:33 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:33 am</td>
+        <td>
+          Execution time: 294ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="59"
+          author="AdHashQATeam"
+          tag="Authentication"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_AutoeVantage_Analytics_Login_OTP</p>
+            <p class="text-sm">
+              <span>4:16:33 am</span> / <span>00:00:00:593</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_AutoeVantage_Analytics_Login_OTP</h5>
+<span class='badge badge-success'>09.23.2025 4:16:33 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:34 am</span>
+<span class='badge badge-default'>00:00:00:593</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=59</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">Authentication</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: AutoeVantage Analytics Login OTP</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:33 am</td>
+        <td>
+          Starting test: pm_AutoeVantage_Analytics_Login_OTP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:34 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:34 am</td>
+        <td>
+          Execution time: 593ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="60"
+          author="AdHashQATeam"
+          tag="UITests"
+          device="">
+          <div class="test-detail">
+            <p class="name">pm_Metcalf_UI</p>
+            <p class="text-sm">
+              <span>4:16:34 am</span> / <span>00:00:00:145</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">pm_Metcalf_UI</h5>
+<span class='badge badge-success'>09.23.2025 4:16:34 am</span>
+<span class='badge badge-danger'>09.23.2025 4:16:34 am</span>
+<span class='badge badge-default'>00:00:00:145</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=60</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AdHashQATeam</span>
+<span class="badge badge-pill badge-default">UITests</span></div>
+<div class="m-t-10 m-l-5">AdHash API Test: Metcalf UI</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:34 am</td>
+        <td>
+          Starting test: pm_Metcalf_UI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:16:34 am</td>
+        <td>
+          ✅ Test passed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:16:34 am</td>
+        <td>
+          Execution time: 145ms
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+<div class="test-content scrollable">
+<div class="test-content-tools">
+<ul><li><a class="back-to-test" href="#"><i class="fa fa-arrow-left"></i></a></li></ul>
+</div>
+<div class="test-content-detail"><div class="detail-body"></div></div>
+</div></div>
+<div class="test-wrapper row view category-view attributes-view">
+<div class="test-list">
+<div class="test-list-tools">
+<ul class="tools pull-left"><li><a href=""><span class="font-size-14">Category</span></a></li></ul>
+<ul class="tools text-right"><li><a href="#"><span class="badge badge-primary">3</span></a></li></ul>
+</div>
+<div class="test-list-wrapper scrollable">
+<ul class="test-list-item">
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log pass-bg'>53</span>
+</span>
+<p class="name">Authentication</p>
+<p class="duration text-sm">53 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>Authentication</h4>
+<span status="pass" class='badge log pass-bg'>53 passed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:15:52 am</td>
+<td>
+<a href="#" class="linked" test-id='2' id='2'>pm_AutoChecker_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:15:54 am</td>
+<td>
+<a href="#" class="linked" test-id='3' id='3'>pm_AutoChecker_Admin_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:15:55 am</td>
+<td>
+<a href="#" class="linked" test-id='4' id='4'>pm_AutoChecker_App_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:15:56 am</td>
+<td>
+<a href="#" class="linked" test-id='5' id='5'>pm_MHAI_Doctor_SuperAdmin_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:15:57 am</td>
+<td>
+<a href="#" class="linked" test-id='6' id='6'>pm_MHAI_Doctor_SuperAdmin_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:15:57 am</td>
+<td>
+<a href="#" class="linked" test-id='7' id='7'>pm_MHAI_Doctor_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:15:58 am</td>
+<td>
+<a href="#" class="linked" test-id='8' id='8'>pm_MHAI_Doctor_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:15:59 am</td>
+<td>
+<a href="#" class="linked" test-id='9' id='9'>pm_KCAI_Doctor_SuperAdmin_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:15:59 am</td>
+<td>
+<a href="#" class="linked" test-id='10' id='10'>pm_KCAI_Doctor_SuperAdmin_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:00 am</td>
+<td>
+<a href="#" class="linked" test-id='11' id='11'>pm_KCAI_Doctor_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:00 am</td>
+<td>
+<a href="#" class="linked" test-id='12' id='12'>pm_KCAI_Doctor_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:01 am</td>
+<td>
+<a href="#" class="linked" test-id='13' id='13'>pm_MHCRM_SuperAdmin_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:02 am</td>
+<td>
+<a href="#" class="linked" test-id='14' id='14'>pm_MHCRM_SuperAdmin_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:03 am</td>
+<td>
+<a href="#" class="linked" test-id='15' id='15'>pm_MHCRM_Admin_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:03 am</td>
+<td>
+<a href="#" class="linked" test-id='16' id='16'>pm_MHCCM_SuperAdmin_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:05 am</td>
+<td>
+<a href="#" class="linked" test-id='17' id='17'>pm_MHCCM_SuperAdmin_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:05 am</td>
+<td>
+<a href="#" class="linked" test-id='18' id='18'>pm_MHCCM_CPA_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:06 am</td>
+<td>
+<a href="#" class="linked" test-id='19' id='19'>pm_MHCCM_CPA_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:06 am</td>
+<td>
+<a href="#" class="linked" test-id='20' id='20'>pm_MHCCM_PAR_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:08 am</td>
+<td>
+<a href="#" class="linked" test-id='21' id='21'>pm_MHCCM_PAR_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:09 am</td>
+<td>
+<a href="#" class="linked" test-id='23' id='23'>pm_MHCCM_PAR_CRM_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:10 am</td>
+<td>
+<a href="#" class="linked" test-id='24' id='24'>pm_MHCCM_PAR_CRM_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:11 am</td>
+<td>
+<a href="#" class="linked" test-id='25' id='25'>pm_MHRTM_SuperAdmin_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:12 am</td>
+<td>
+<a href="#" class="linked" test-id='26' id='26'>pm_MHRTM_SuperAdmin_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:12 am</td>
+<td>
+<a href="#" class="linked" test-id='27' id='27'>pm_MHRTM_CPA_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:13 am</td>
+<td>
+<a href="#" class="linked" test-id='28' id='28'>pm_MHRTM_CPA_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:13 am</td>
+<td>
+<a href="#" class="linked" test-id='29' id='29'>pm_MHRTM_Participant_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:14 am</td>
+<td>
+<a href="#" class="linked" test-id='30' id='30'>pm_MHRTM_Participant_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:14 am</td>
+<td>
+<a href="#" class="linked" test-id='31' id='31'>pm_MHAI_Patient_App_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:16 am</td>
+<td>
+<a href="#" class="linked" test-id='32' id='32'>pm_KCAI_Patient_App_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:16 am</td>
+<td>
+<a href="#" class="linked" test-id='33' id='33'>pm_Wavedin_App_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:18 am</td>
+<td>
+<a href="#" class="linked" test-id='34' id='34'>pm_Sparkme_App_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:18 am</td>
+<td>
+<a href="#" class="linked" test-id='35' id='35'>pm_WavedIn_SuperAdmin_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:20 am</td>
+<td>
+<a href="#" class="linked" test-id='37' id='37'>pm_Sparkme_Web_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:20 am</td>
+<td>
+<a href="#" class="linked" test-id='38' id='38'>pm_Sparkme_Web_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:20 am</td>
+<td>
+<a href="#" class="linked" test-id='39' id='39'>pm_Algomax_ProSky_Web_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:20 am</td>
+<td>
+<a href="#" class="linked" test-id='40' id='40'>pm_Algomax_GoPocket_Web_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:21 am</td>
+<td>
+<a href="#" class="linked" test-id='41' id='41'>pm_LGM_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:22 am</td>
+<td>
+<a href="#" class="linked" test-id='42' id='42'>pm_LGM_Login_PhoneNumber</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:23 am</td>
+<td>
+<a href="#" class="linked" test-id='43' id='43'>pm_LGM_Login_OTP</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:24 am</td>
+<td>
+<a href="#" class="linked" test-id='44' id='44'>pm_AskEPI_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:25 am</td>
+<td>
+<a href="#" class="linked" test-id='45' id='45'>pm_AskEPI_Login_PhoneNumber</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:26 am</td>
+<td>
+<a href="#" class="linked" test-id='46' id='46'>pm_AskEPI_Login_OTP</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:27 am</td>
+<td>
+<a href="#" class="linked" test-id='47' id='47'>pm_RiskRealm_Admin_Web_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:28 am</td>
+<td>
+<a href="#" class="linked" test-id='48' id='48'>pm_RiskRealm_Chat_Web_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:28 am</td>
+<td>
+<a href="#" class="linked" test-id='49' id='49'>pm_RiskRealm_Login_Number</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:28 am</td>
+<td>
+<a href="#" class="linked" test-id='50' id='50'>pm_RiskRealm_Login_OTP</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:30 am</td>
+<td>
+<a href="#" class="linked" test-id='52' id='52'>pm_AutoeVantage_eCommerce_Login_PhoneNumber</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:31 am</td>
+<td>
+<a href="#" class="linked" test-id='53' id='53'>pm_AutoeVantage_eCommerce_Login_OTP</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:32 am</td>
+<td>
+<a href="#" class="linked" test-id='55' id='55'>pm_AutoeVantage_Tools_Login_PhoneNumber</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:32 am</td>
+<td>
+<a href="#" class="linked" test-id='56' id='56'>pm_AutoeVantage_Tools_Login_OTP</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:33 am</td>
+<td>
+<a href="#" class="linked" test-id='58' id='58'>pm_AutoeVantage_Analytics_Login_PhoneNumber</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:33 am</td>
+<td>
+<a href="#" class="linked" test-id='59' id='59'>pm_AutoeVantage_Analytics_Login_OTP</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log pass-bg'>5</span>
+</span>
+<p class="name">UITests</p>
+<p class="duration text-sm">5 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>UITests</h4>
+<span status="pass" class='badge log pass-bg'>5 passed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:08 am</td>
+<td>
+<a href="#" class="linked" test-id='22' id='22'>pm_MHCCM_Form_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:29 am</td>
+<td>
+<a href="#" class="linked" test-id='51' id='51'>pm_AutoeVantage_eCommerce_Web_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:31 am</td>
+<td>
+<a href="#" class="linked" test-id='54' id='54'>pm_AutoeVantage_Tools_Web_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:32 am</td>
+<td>
+<a href="#" class="linked" test-id='57' id='57'>pm_AutoeVantage_Analytics_Web_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:34 am</td>
+<td>
+<a href="#" class="linked" test-id='60' id='60'>pm_Metcalf_UI</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log pass-bg'>2</span>
+</span>
+<p class="name">APITests</p>
+<p class="duration text-sm">2 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>APITests</h4>
+<span status="pass" class='badge log pass-bg'>2 passed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:15:51 am</td>
+<td>
+<a href="#" class="linked" test-id='1' id='1'>pm_AdHash_Website</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:19 am</td>
+<td>
+<a href="#" class="linked" test-id='36' id='36'>pm_WavedIn_Market_Web</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="test-content scrollable">
+<div class="test-content-detail">
+<div class="detail-body"></div>
+</div>
+</div>
+</div><div class="test-wrapper row view author-view attributes-view">
+<div class="test-list">
+<div class="test-list-tools">
+<ul class="tools pull-left"><li><a href=""><span class="font-size-14">Author</span></a></li></ul>
+<ul class="tools text-right"><li><a href="#"><span class="badge badge-primary">1</span></a></li></ul>
+</div>
+<div class="test-list-wrapper scrollable">
+<ul class="test-list-item">
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log pass-bg'>60</span>
+</span>
+<p class="name">AdHashQATeam</p>
+<p class="duration text-sm">60 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>AdHashQATeam</h4>
+<span status="pass" class='badge log pass-bg'>60 passed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:15:51 am</td>
+<td>
+<a href="#" class="linked" test-id='1' id='1'>pm_AdHash_Website</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:15:52 am</td>
+<td>
+<a href="#" class="linked" test-id='2' id='2'>pm_AutoChecker_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:15:54 am</td>
+<td>
+<a href="#" class="linked" test-id='3' id='3'>pm_AutoChecker_Admin_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:15:55 am</td>
+<td>
+<a href="#" class="linked" test-id='4' id='4'>pm_AutoChecker_App_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:15:56 am</td>
+<td>
+<a href="#" class="linked" test-id='5' id='5'>pm_MHAI_Doctor_SuperAdmin_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:15:57 am</td>
+<td>
+<a href="#" class="linked" test-id='6' id='6'>pm_MHAI_Doctor_SuperAdmin_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:15:57 am</td>
+<td>
+<a href="#" class="linked" test-id='7' id='7'>pm_MHAI_Doctor_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:15:58 am</td>
+<td>
+<a href="#" class="linked" test-id='8' id='8'>pm_MHAI_Doctor_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:15:59 am</td>
+<td>
+<a href="#" class="linked" test-id='9' id='9'>pm_KCAI_Doctor_SuperAdmin_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:15:59 am</td>
+<td>
+<a href="#" class="linked" test-id='10' id='10'>pm_KCAI_Doctor_SuperAdmin_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:00 am</td>
+<td>
+<a href="#" class="linked" test-id='11' id='11'>pm_KCAI_Doctor_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:00 am</td>
+<td>
+<a href="#" class="linked" test-id='12' id='12'>pm_KCAI_Doctor_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:01 am</td>
+<td>
+<a href="#" class="linked" test-id='13' id='13'>pm_MHCRM_SuperAdmin_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:02 am</td>
+<td>
+<a href="#" class="linked" test-id='14' id='14'>pm_MHCRM_SuperAdmin_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:03 am</td>
+<td>
+<a href="#" class="linked" test-id='15' id='15'>pm_MHCRM_Admin_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:03 am</td>
+<td>
+<a href="#" class="linked" test-id='16' id='16'>pm_MHCCM_SuperAdmin_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:05 am</td>
+<td>
+<a href="#" class="linked" test-id='17' id='17'>pm_MHCCM_SuperAdmin_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:05 am</td>
+<td>
+<a href="#" class="linked" test-id='18' id='18'>pm_MHCCM_CPA_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:06 am</td>
+<td>
+<a href="#" class="linked" test-id='19' id='19'>pm_MHCCM_CPA_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:06 am</td>
+<td>
+<a href="#" class="linked" test-id='20' id='20'>pm_MHCCM_PAR_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:08 am</td>
+<td>
+<a href="#" class="linked" test-id='21' id='21'>pm_MHCCM_PAR_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:08 am</td>
+<td>
+<a href="#" class="linked" test-id='22' id='22'>pm_MHCCM_Form_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:09 am</td>
+<td>
+<a href="#" class="linked" test-id='23' id='23'>pm_MHCCM_PAR_CRM_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:10 am</td>
+<td>
+<a href="#" class="linked" test-id='24' id='24'>pm_MHCCM_PAR_CRM_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:11 am</td>
+<td>
+<a href="#" class="linked" test-id='25' id='25'>pm_MHRTM_SuperAdmin_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:12 am</td>
+<td>
+<a href="#" class="linked" test-id='26' id='26'>pm_MHRTM_SuperAdmin_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:12 am</td>
+<td>
+<a href="#" class="linked" test-id='27' id='27'>pm_MHRTM_CPA_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:13 am</td>
+<td>
+<a href="#" class="linked" test-id='28' id='28'>pm_MHRTM_CPA_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:13 am</td>
+<td>
+<a href="#" class="linked" test-id='29' id='29'>pm_MHRTM_Participant_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:14 am</td>
+<td>
+<a href="#" class="linked" test-id='30' id='30'>pm_MHRTM_Participant_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:14 am</td>
+<td>
+<a href="#" class="linked" test-id='31' id='31'>pm_MHAI_Patient_App_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:16 am</td>
+<td>
+<a href="#" class="linked" test-id='32' id='32'>pm_KCAI_Patient_App_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:16 am</td>
+<td>
+<a href="#" class="linked" test-id='33' id='33'>pm_Wavedin_App_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:18 am</td>
+<td>
+<a href="#" class="linked" test-id='34' id='34'>pm_Sparkme_App_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:18 am</td>
+<td>
+<a href="#" class="linked" test-id='35' id='35'>pm_WavedIn_SuperAdmin_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:19 am</td>
+<td>
+<a href="#" class="linked" test-id='36' id='36'>pm_WavedIn_Market_Web</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:20 am</td>
+<td>
+<a href="#" class="linked" test-id='37' id='37'>pm_Sparkme_Web_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:20 am</td>
+<td>
+<a href="#" class="linked" test-id='38' id='38'>pm_Sparkme_Web_Login</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:20 am</td>
+<td>
+<a href="#" class="linked" test-id='39' id='39'>pm_Algomax_ProSky_Web_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:20 am</td>
+<td>
+<a href="#" class="linked" test-id='40' id='40'>pm_Algomax_GoPocket_Web_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:21 am</td>
+<td>
+<a href="#" class="linked" test-id='41' id='41'>pm_LGM_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:22 am</td>
+<td>
+<a href="#" class="linked" test-id='42' id='42'>pm_LGM_Login_PhoneNumber</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:23 am</td>
+<td>
+<a href="#" class="linked" test-id='43' id='43'>pm_LGM_Login_OTP</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:24 am</td>
+<td>
+<a href="#" class="linked" test-id='44' id='44'>pm_AskEPI_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:25 am</td>
+<td>
+<a href="#" class="linked" test-id='45' id='45'>pm_AskEPI_Login_PhoneNumber</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:26 am</td>
+<td>
+<a href="#" class="linked" test-id='46' id='46'>pm_AskEPI_Login_OTP</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:27 am</td>
+<td>
+<a href="#" class="linked" test-id='47' id='47'>pm_RiskRealm_Admin_Web_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:28 am</td>
+<td>
+<a href="#" class="linked" test-id='48' id='48'>pm_RiskRealm_Chat_Web_Login_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:28 am</td>
+<td>
+<a href="#" class="linked" test-id='49' id='49'>pm_RiskRealm_Login_Number</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:28 am</td>
+<td>
+<a href="#" class="linked" test-id='50' id='50'>pm_RiskRealm_Login_OTP</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:29 am</td>
+<td>
+<a href="#" class="linked" test-id='51' id='51'>pm_AutoeVantage_eCommerce_Web_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:30 am</td>
+<td>
+<a href="#" class="linked" test-id='52' id='52'>pm_AutoeVantage_eCommerce_Login_PhoneNumber</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:31 am</td>
+<td>
+<a href="#" class="linked" test-id='53' id='53'>pm_AutoeVantage_eCommerce_Login_OTP</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:31 am</td>
+<td>
+<a href="#" class="linked" test-id='54' id='54'>pm_AutoeVantage_Tools_Web_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:32 am</td>
+<td>
+<a href="#" class="linked" test-id='55' id='55'>pm_AutoeVantage_Tools_Login_PhoneNumber</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:32 am</td>
+<td>
+<a href="#" class="linked" test-id='56' id='56'>pm_AutoeVantage_Tools_Login_OTP</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:32 am</td>
+<td>
+<a href="#" class="linked" test-id='57' id='57'>pm_AutoeVantage_Analytics_Web_UI</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:33 am</td>
+<td>
+<a href="#" class="linked" test-id='58' id='58'>pm_AutoeVantage_Analytics_Login_PhoneNumber</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:33 am</td>
+<td>
+<a href="#" class="linked" test-id='59' id='59'>pm_AutoeVantage_Analytics_Login_OTP</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>04:16:34 am</td>
+<td>
+<a href="#" class="linked" test-id='60' id='60'>pm_Metcalf_UI</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="test-content scrollable">
+<div class="test-content-detail">
+<div class="detail-body"></div>
+</div>
+</div>
+</div><div class="container-fluid p-4 view dashboard-view">
+<div class="row">
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Started</p>
+<h3>Tuesday, September 23, 2025, 04:15 am (GMT-04:00)</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Ended</p>
+<h3>Tuesday, September 23, 2025, 04:16 am (GMT-04:00)</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-pass">Tests Passed</p>
+<h3>60</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-fail">Tests Failed</p>
+<h3>0</h3>
+</div></div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Tests</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='parent-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='100%'>
+<b>60</b> tests passed
+</small>
+</div>
+<div>
+<small data-tooltip='0%'><b>0</b> tests failed,
+<b>0</b> skipped, <b data-tooltip='0%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Log events</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='events-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='33%'><b>60</b> events passed</small></div>
+<div>
+<small data-tooltip='0%'><b>0</b> events failed,
+<b data-tooltip='%'>120</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-md-12">
+<div class="card"><div class="card-header"><p>Timeline</p></div>
+<div class="card-body pt-0"><div>
+<canvas id="timeline" height="120"></canvas>
+</div></div>
+</div>
+</div></div>
+<script>
+var timeline = {
+"pm_AdHash_Website":1.165,"pm_AutoChecker_Login_UI":1.183,"pm_AutoChecker_Admin_Login":1.157,"pm_AutoChecker_App_Login":1.15,"pm_MHAI_Doctor_SuperAdmin_Login_UI":1.092,"pm_MHAI_Doctor_SuperAdmin_Login":0.276,"pm_MHAI_Doctor_Login_UI":1.104,"pm_MHAI_Doctor_Login":0.274,"pm_KCAI_Doctor_SuperAdmin_Login_UI":0.592,"pm_KCAI_Doctor_SuperAdmin_Login":0.616,"pm_KCAI_Doctor_Login_UI":0.586,"pm_KCAI_Doctor_Login":0.494,"pm_MHCRM_SuperAdmin_Login_UI":1.085,"pm_MHCRM_SuperAdmin_Login":1.138,"pm_MHCRM_Admin_Login":0.283,"pm_MHCCM_SuperAdmin_Login_UI":1.136,"pm_MHCCM_SuperAdmin_Login":0.298,"pm_MHCCM_CPA_Login_UI":1.139,"pm_MHCCM_CPA_Login":0.312,"pm_MHCCM_PAR_Login_UI":1.223,"pm_MHCCM_PAR_Login":0.343,"pm_MHCCM_Form_UI":1.141,"pm_MHCCM_PAR_CRM_Login_UI":1.132,"pm_MHCCM_PAR_CRM_Login":1.275,"pm_MHRTM_SuperAdmin_Login_UI":0.154,"pm_MHRTM_SuperAdmin_Login":0.614,"pm_MHRTM_CPA_Login_UI":0.612,"pm_MHRTM_CPA_Login":0.489,"pm_MHRTM_Participant_Login_UI":0.604,"pm_MHRTM_Participant_Login":0.483,"pm_MHAI_Patient_App_Login":1.179,"pm_KCAI_Patient_App_Login":0.719,"pm_Wavedin_App_Login":1.151,"pm_Sparkme_App_Login":0.24,"pm_WavedIn_SuperAdmin_Login_UI":0.991,"pm_WavedIn_Market_Web":0.986,"pm_Sparkme_Web_Login_UI":0.235,"pm_Sparkme_Web_Login":0.097,"pm_Algomax_ProSky_Web_Login_UI":0.277,"pm_Algomax_GoPocket_Web_Login_UI":0.225,"pm_LGM_Login_UI":1.002,"pm_LGM_Login_PhoneNumber":1.348,"pm_LGM_Login_OTP":0.76,"pm_AskEPI_Login_UI":1.405,"pm_AskEPI_Login_PhoneNumber":0.974,"pm_AskEPI_Login_OTP":0.776,"pm_RiskRealm_Admin_Web_Login_UI":0.832,"pm_RiskRealm_Chat_Web_Login_UI":0.402,"pm_RiskRealm_Login_Number":0.354,"pm_RiskRealm_Login_OTP":0.82,"pm_AutoeVantage_eCommerce_Web_UI":0.765,"pm_AutoeVantage_eCommerce_Login_PhoneNumber":0.569,"pm_AutoeVantage_eCommerce_Login_OTP":0.519,"pm_AutoeVantage_Tools_Web_UI":0.42,"pm_AutoeVantage_Tools_Login_PhoneNumber":0.296,"pm_AutoeVantage_Tools_Login_OTP":0.447,"pm_AutoeVantage_Analytics_Web_UI":0.575,"pm_AutoeVantage_Analytics_Login_PhoneNumber":0.294,"pm_AutoeVantage_Analytics_Login_OTP":0.593,"pm_Metcalf_UI":0.145
+};
+</script>
+<div class="row">
+<div class="col-lg-6 col-md-12 author-container">
+<div class="card">
+<div class="card-header"><p>Author</p></div>
+<div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+<thead><tr class="bg-gray"><th>Name</th><th>Passed</th><th>Failed</th><th>Skipped</th><th>Others</th><th>Passed %</th></tr></thead>
+<tbody>
+<tr>
+<td>AdHashQATeam</td>
+<td>60</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="col-lg-6 col-md-12 category-container">
+<div class="card">
+<div class="card-header"><p>Tags</p></div>
+<div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+<thead><tr class="bg-gray"><th>Name</th><th>Passed</th><th>Failed</th><th>Skipped</th><th>Others</th><th>Passed %</th></tr></thead><tbody>
+<tr>
+<td>Authentication</td>
+<td>53</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>UITests</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>APITests</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="col-lg-6 col-md-12 sysenv-container">
+<div class="card">
+<div class="card-header"><p>System/Environment</p></div>
+<div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+<thead><tr class="bg-gray"><th>Name</th><th>Value</th></tr></thead>
+<tbody>
+<tr>
+<td>Project</td>
+<td>AdHash API Test Suite</td>
+</tr>
+<tr>
+<td>Environment</td>
+<td>Production</td>
+</tr>
+<tr>
+<td>Total APIs</td>
+<td>60</td>
+</tr>
+<tr>
+<td>Test Type</td>
+<td>API Automation</td>
+</tr>
+<tr>
+<td>Framework</td>
+<td>TestNG + HttpClient</td>
+</tr>
+<tr>
+<td>Java Version</td>
+<td>21.0.7</td>
+</tr>
+<tr>
+<td>OS</td>
+<td>Windows 11</td>
+</tr>
+<tr>
+<td>User</td>
+<td>Adhash Tech</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+var statusGroup = {
+parentCount: 5,
+passParent: 60,
+failParent: 0,
+warningParent: 0,
+skipParent: 0,
+childCount: 5,
+passChild: 0,
+failChild: 0,
+warningChild: 0,
+skipChild: 0,
+infoChild: 0,
+grandChildCount: 5,
+passGrandChild: 0,
+failGrandChild: 0,
+warningGrandChild: 0,
+skipGrandChild: 0,
+infoGrandChild: 0,
+eventsCount: 5,
+passEvents: 60,
+failEvents: 0,
+warningEvents: 0,
+skipEvents: 0,
+infoEvents: 120
+};
+</script>        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@d6562a79075e061305ccfdb82f01e5e195e2d307/spark/js/spark-script.js"></script>
+<script type="text/javascript"></script></body>
+</html>

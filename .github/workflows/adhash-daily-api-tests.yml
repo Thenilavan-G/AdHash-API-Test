@@ -107,6 +107,33 @@ jobs:
         echo "Skipped: $SKIPPED"
         echo "Status: $STATUS"
 
+    - name: Find HTML Report
+      if: always()
+      id: find-report
+      shell: bash
+      run: |
+        echo "🔍 Looking for HTML test report..."
+
+        # Find the most recent HTML report in simple-reports directory
+        if [ -d "simple-reports" ]; then
+          REPORT_FILE=$(ls -t simple-reports/AdHash_API_Simple_Report_*.html 2>/dev/null | head -n 1)
+          if [ -n "$REPORT_FILE" ]; then
+            echo "report_path=$REPORT_FILE" >> $GITHUB_OUTPUT
+            echo "report_found=true" >> $GITHUB_OUTPUT
+            echo "✅ Found HTML report: $REPORT_FILE"
+
+            # Get file size for logging
+            FILE_SIZE=$(du -h "$REPORT_FILE" | cut -f1)
+            echo "📊 Report size: $FILE_SIZE"
+          else
+            echo "report_found=false" >> $GITHUB_OUTPUT
+            echo "⚠️ No HTML report found in simple-reports directory"
+          fi
+        else
+          echo "report_found=false" >> $GITHUB_OUTPUT
+          echo "⚠️ simple-reports directory not found"
+        fi
+
     - name: Check Email Secrets
       if: always()
       id: check-secrets
@@ -132,6 +159,7 @@ jobs:
         subject: "✅ AdHash Daily API Tests - SUCCESS (${{ steps.test-results.outputs.timestamp }})"
         to: ${{ secrets.EMAIL_TO }}
         from: ${{ secrets.EMAIL_USERNAME }}
+        attachments: ${{ steps.find-report.outputs.report_found == 'true' && steps.find-report.outputs.report_path || '' }}
         html_body: |
           <html>
           <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
@@ -164,6 +192,11 @@ jobs:
               <td style="color: #155724; font-weight: bold;">SUCCESS ✅</td>
             </tr>
           </table>
+
+          <p style="background-color: #e7f3ff; padding: 10px; border-left: 4px solid #2196F3; margin: 20px 0;">
+            📎 <strong>Detailed HTML report is attached to this email.</strong><br>
+            Open the attachment to view the complete test results with expandable test details.
+          </p>
 
           <h3>🚀 AdHash Projects Tested</h3>
           <p>All <strong>74 API endpoints</strong> tested successfully across all AdHash projects:</p>
@@ -214,6 +247,7 @@ jobs:
         subject: "❌ AdHash Daily API Tests - FAILED (${{ steps.test-results.outputs.timestamp }})"
         to: ${{ secrets.EMAIL_TO }}
         from: ${{ secrets.EMAIL_USERNAME }}
+        attachments: ${{ steps.find-report.outputs.report_found == 'true' && steps.find-report.outputs.report_path || '' }}
         html_body: |
           <html>
           <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
@@ -246,6 +280,11 @@ jobs:
               <td style="color: #721c24; font-weight: bold;">FAILED ❌</td>
             </tr>
           </table>
+
+          <p style="background-color: #fff3cd; padding: 10px; border-left: 4px solid #ffc107; margin: 20px 0;">
+            📎 <strong>Detailed HTML report is attached to this email.</strong><br>
+            Open the attachment to view the complete test results and identify which tests failed.
+          </p>
 
           <h3>🔍 Troubleshooting Steps</h3>
           <ol>

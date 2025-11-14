@@ -4,6 +4,8 @@ on:
   schedule:
     # Runs daily at 9:00 AM IST (3:30 AM UTC)
     - cron: '30 3 * * *'
+    # Runs daily at 5:00 PM IST (11:30 AM UTC)
+    - cron: '30 11 * * *'
   workflow_dispatch:
     # Allows manual triggering of the workflow
   push:
@@ -136,6 +138,85 @@ jobs:
         echo "Failed: $FAILED"
         echo "Success Rate: $SUCCESS_RATE%"
 
+    - name: Extract Individual Test Results
+      if: always()
+      id: extract-tests
+      shell: bash
+      run: |
+        echo "Extracting individual test results..."
+
+        # Create a temporary file for test details
+        TEST_DETAILS_FILE="test_details.html"
+
+        if [ -f target/surefire-reports/testng-results.xml ]; then
+          # Parse TestNG XML and extract test methods
+          python3 << 'EOF'
+        import xml.etree.ElementTree as ET
+        import html
+
+        try:
+            tree = ET.parse('target/surefire-reports/testng-results.xml')
+            root = tree.getroot()
+
+            test_rows = []
+            test_count = 0
+
+            # Find all test methods
+            for test_method in root.findall('.//test-method[@is-config="false"]'):
+                test_count += 1
+                name = test_method.get('name', 'Unknown')
+                status = test_method.get('status', 'UNKNOWN')
+
+                # Clean up test name - remove "test" prefix and make readable
+                display_name = name.replace('test', '').replace('_', ' ').strip()
+                if not display_name:
+                    display_name = name
+
+                # Determine status icon and color
+                if status == 'PASS':
+                    icon = '✅'
+                    status_text = 'PASS'
+                    row_class = 'pass'
+                    status_color = '#4caf50'
+                elif status == 'FAIL':
+                    icon = '❌'
+                    status_text = 'FAIL'
+                    row_class = 'fail'
+                    status_color = '#f44336'
+                else:
+                    icon = '⚠️'
+                    status_text = 'SKIP'
+                    row_class = 'skip'
+                    status_color = '#ff9800'
+
+                # Create table row
+                row = f'''
+                  <tr class="{row_class}">
+                    <td style="padding: 10px; text-align: center; border-bottom: 1px solid #e0e0e0;">{test_count}</td>
+                    <td style="padding: 10px; border-bottom: 1px solid #e0e0e0;">{html.escape(display_name)}</td>
+                    <td style="padding: 10px; text-align: center; border-bottom: 1px solid #e0e0e0; color: {status_color}; font-weight: bold;">{icon} {status_text}</td>
+                  </tr>'''
+                test_rows.append(row)
+
+            # Write to file
+            with open('test_details.html', 'w', encoding='utf-8') as f:
+                f.write('\n'.join(test_rows))
+
+            print(f"Extracted {test_count} test results")
+
+        except Exception as e:
+            print(f"Error parsing test results: {e}")
+            with open('test_details.html', 'w', encoding='utf-8') as f:
+                f.write('<tr><td colspan="3" style="padding: 20px; text-align: center; color: #666;">No test details available</td></tr>')
+        EOF
+
+          echo "test_details_available=true" >> $GITHUB_OUTPUT
+        else
+          echo "TestNG results file not found"
+          echo '<tr><td colspan="3" style="padding: 20px; text-align: center; color: #666;">No test results found</td></tr>' > test_details.html
+          echo "test_details_available=false" >> $GITHUB_OUTPUT
+        fi
+
     - name: Find HTML Report
       if: always()
       id: find-report
@@ -178,18 +259,13 @@ jobs:
 
     - name: Send Success Email
       if: always() && steps.test-results.outputs.status == 'SUCCESS' && steps.check-secrets.outputs.secrets_available == 'true'
-      uses: dawidd6/action-send-mail@v3
-      with:
-        server_address: smtp.zoho.com
-        server_port: 465
-        secure: true
-        username: ${{ secrets.EMAIL_USERNAME }}
-        password: ${{ secrets.EMAIL_PASSWORD }}
-        subject: "✅ AdHash Daily API Tests - SUCCESS (${{ steps.test-results.outputs.timestamp }})"
-        to: ${{ secrets.EMAIL_TO }}
-        from: ${{ secrets.EMAIL_USERNAME }}
-        attachments: ${{ steps.find-report.outputs.report_found == 'true' && steps.find-report.outputs.report_path || '' }}
-        html_body: |
+      shell: bash
+      run: |
+        # Read test details
+        TEST_DETAILS=$(cat test_details.html)
+
+        # Create email body with test details injected
+        cat > email_body_success.html << 'EMAILEOF'
           <!DOCTYPE html>
           <html>
           <head>
@@ -215,6 +291,13 @@ jobs:
               .projects-section { margin: 30px 0; }
               .project-table { width: 100%; border-collapse: separate; border-spacing: 8px; margin: 20px 0; }
               .project-item { background: #f8f9fa; padding: 12px 15px; border-radius: 6px; font-size: 14px; border: 1px solid #e0e0e0; }
+              .test-details-section { margin: 30px 0; }
+              .test-details-table { width: 100%; border-collapse: collapse; margin: 20px 0; background: white; }
+              .test-details-table th { background: #2196F3; color: white; padding: 12px; text-align: left; font-weight: bold; }
+              .test-details-table tr.pass { background: #f1f8f4; }
+              .test-details-table tr.fail { background: #fef1f1; }
+              .test-details-table tr.skip { background: #fff8e1; }
+              .test-details-table tr:hover { background: #f5f5f5; }
               .footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 12px; }
             </style>
           </head>
@@ -252,6 +335,22 @@ jobs:
               <div class="info-box">
                 📎 <strong>Detailed HTML report is attached to this email.</strong><br>
                 Open the attachment to view the complete test results with expandable test details.
+              </div>
+
+              <div class="test-details-section">
+                <h3>📋 Individual API Test Results</h3>
+                <table class="test-details-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 60px;">#</th>
+                      <th>API Endpoint</th>
+                      <th style="width: 120px; text-align: center;">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    TEST_DETAILS_PLACEHOLDER
+                  </tbody>
+                </table>
               </div>
 
               <div class="projects-section">
@@ -305,26 +404,94 @@ jobs:
 
               <div class="footer">
                 This is an automated message from AdHash Daily API Tests.<br>
-                Next scheduled run: Tomorrow at 9:00 AM IST
+                Scheduled runs: Daily at 9:00 AM IST and 5:00 PM IST
               </div>
             </div>
           </body>
           </html>
+        EMAILEOF
+
+        # Replace placeholder with actual test details
+        python3 << 'PYEOF'
+        import re
+
+        # Read test details
+        with open('test_details.html', 'r', encoding='utf-8') as f:
+            test_details = f.read()
+
+        # Read email template
+        with open('email_body_success.html', 'r', encoding='utf-8') as f:
+            email_body = f.read()
+
+        # Replace placeholder
+        email_body = email_body.replace('TEST_DETAILS_PLACEHOLDER', test_details)
+
+        # Write final email
+        with open('email_body_success_final.html', 'w', encoding='utf-8') as f:
+            f.write(email_body)
+        PYEOF
+
+        # Send email using Python SMTP
+        python3 << 'PYEOF'
+        import smtplib
+        from email.mime.multipart import MIMEMultipart
+        from email.mime.text import MIMEText
+        from email.mime.base import MIMEBase
+        from email import encoders
+        import os
+
+        # Email configuration
+        smtp_server = "smtp.zoho.com"
+        smtp_port = 465
+        username = "${{ secrets.EMAIL_USERNAME }}"
+        password = "${{ secrets.EMAIL_PASSWORD }}"
+        from_email = "${{ secrets.EMAIL_USERNAME }}"
+        to_email = "${{ secrets.EMAIL_TO }}"
+        subject = "✅ AdHash Daily API Tests - SUCCESS (${{ steps.test-results.outputs.timestamp }})"
+
+        # Read email body
+        with open('email_body_success_final.html', 'r', encoding='utf-8') as f:
+            html_body = f.read()
+
+        # Create message
+        msg = MIMEMultipart()
+        msg['From'] = from_email
+        msg['To'] = to_email
+        msg['Subject'] = subject
+
+        # Attach HTML body
+        msg.attach(MIMEText(html_body, 'html'))
+
+        # Attach HTML report if available
+        report_path = "${{ steps.find-report.outputs.report_path }}"
+        if report_path and os.path.exists(report_path):
+            with open(report_path, 'rb') as f:
+                part = MIMEBase('application', 'octet-stream')
+                part.set_payload(f.read())
+                encoders.encode_base64(part)
+                part.add_header('Content-Disposition', f'attachment; filename="{os.path.basename(report_path)}"')
+                msg.attach(part)
+
+        # Send email
+        try:
+            with smtplib.SMTP_SSL(smtp_server, smtp_port) as server:
+                server.login(username, password)
+                server.send_message(msg)
+            print("Success email sent successfully!")
+        except Exception as e:
+            print(f"Error sending email: {e}")
+            raise
+        PYEOF
 
     - name: Send Failure Email
       if: always() && (steps.test-results.outputs.status == 'FAILURE' || steps.test-results.outputs.status == 'NO_TESTS') && steps.check-secrets.outputs.secrets_available == 'true'
-      uses: dawidd6/action-send-mail@v3
-      with:
-        server_address: smtp.zoho.com
-        server_port: 465
-        secure: true
-        username: ${{ secrets.EMAIL_USERNAME }}
-        password: ${{ secrets.EMAIL_PASSWORD }}
-        subject: "❌ AdHash Daily API Tests - FAILED (${{ steps.test-results.outputs.timestamp }})"
-        to: ${{ secrets.EMAIL_TO }}
-        from: ${{ secrets.EMAIL_USERNAME }}
-        attachments: ${{ steps.find-report.outputs.report_found == 'true' && steps.find-report.outputs.report_path || '' }}
-        html_body: |
+      shell: bash
+      run: |
+        # Read test details
+        TEST_DETAILS=$(cat test_details.html)
+
+        # Create email body with test details injected
+        cat > email_body_failure.html << 'EMAILEOF'
           <!DOCTYPE html>
           <html>
           <head>
@@ -349,6 +516,13 @@ jobs:
               .status-banner.failed { background: #f8d7da; color: #721c24; }
               .warning-box { background-color: #fff3cd; padding: 15px; border-left: 4px solid #ffc107; margin: 20px 0; border-radius: 4px; }
               .troubleshooting { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; }
+              .test-details-section { margin: 30px 0; }
+              .test-details-table { width: 100%; border-collapse: collapse; margin: 20px 0; background: white; }
+              .test-details-table th { background: #2196F3; color: white; padding: 12px; text-align: left; font-weight: bold; }
+              .test-details-table tr.pass { background: #f1f8f4; }
+              .test-details-table tr.fail { background: #fef1f1; }
+              .test-details-table tr.skip { background: #fff8e1; }
+              .test-details-table tr:hover { background: #f5f5f5; }
               .footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 12px; }
             </style>
           </head>
@@ -390,6 +564,22 @@ jobs:
                 Open the attachment to view the complete test results and identify which tests failed.
               </div>
 
+              <div class="test-details-section">
+                <h3>📋 Individual API Test Results</h3>
+                <table class="test-details-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 60px;">#</th>
+                      <th>API Endpoint</th>
+                      <th style="width: 120px; text-align: center;">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    TEST_DETAILS_PLACEHOLDER
+                  </tbody>
+                </table>
+              </div>
+
               <div class="troubleshooting">
                 <h3>🔍 Troubleshooting Steps</h3>
                 <ol>
@@ -409,11 +599,84 @@ jobs:
 
               <div class="footer">
                 This is an automated message from AdHash Daily API Tests.<br>
-                Please investigate and resolve the issue before the next scheduled run at 9:00 AM IST tomorrow.
+                Scheduled runs: Daily at 9:00 AM IST and 5:00 PM IST. Please investigate and resolve any issues promptly.
               </div>
             </div>
           </body>
           </html>
+        EMAILEOF
+
+        # Replace placeholder with actual test details
+        python3 << 'PYEOF'
+        import re
+
+        # Read test details
+        with open('test_details.html', 'r', encoding='utf-8') as f:
+            test_details = f.read()
+
+        # Read email template
+        with open('email_body_failure.html', 'r', encoding='utf-8') as f:
+            email_body = f.read()
+
+        # Replace placeholder
+        email_body = email_body.replace('TEST_DETAILS_PLACEHOLDER', test_details)
+
+        # Write final email
+        with open('email_body_failure_final.html', 'w', encoding='utf-8') as f:
+            f.write(email_body)
+        PYEOF
+
+        # Send email using Python SMTP
+        python3 << 'PYEOF'
+        import smtplib
+        from email.mime.multipart import MIMEMultipart
+        from email.mime.text import MIMEText
+        from email.mime.base import MIMEBase
+        from email import encoders
+        import os
+
+        # Email configuration
+        smtp_server = "smtp.zoho.com"
+        smtp_port = 465
+        username = "${{ secrets.EMAIL_USERNAME }}"
+        password = "${{ secrets.EMAIL_PASSWORD }}"
+        from_email = "${{ secrets.EMAIL_USERNAME }}"
+        to_email = "${{ secrets.EMAIL_TO }}"
+        subject = "❌ AdHash Daily API Tests - FAILED (${{ steps.test-results.outputs.timestamp }})"
+
+        # Read email body
+        with open('email_body_failure_final.html', 'r', encoding='utf-8') as f:
+            html_body = f.read()
+
+        # Create message
+        msg = MIMEMultipart()
+        msg['From'] = from_email
+        msg['To'] = to_email
+        msg['Subject'] = subject
+
+        # Attach HTML body
+        msg.attach(MIMEText(html_body, 'html'))
+
+        # Attach HTML report if available
+        report_path = "${{ steps.find-report.outputs.report_path }}"
+        if report_path and os.path.exists(report_path):
+            with open(report_path, 'rb') as f:
+                part = MIMEBase('application', 'octet-stream')
+                part.set_payload(f.read())
+                encoders.encode_base64(part)
+                part.add_header('Content-Disposition', f'attachment; filename="{os.path.basename(report_path)}"')
+                msg.attach(part)
+
+        # Send email
+        try:
+            with smtplib.SMTP_SSL(smtp_server, smtp_port) as server:
+                server.login(username, password)
+                server.send_message(msg)
+            print("Failure email sent successfully!")
+        except Exception as e:
+            print(f"Error sending email: {e}")
+            raise
+        PYEOF
 
     - name: Warn about missing secrets
       if: always() && steps.check-secrets.outputs.secrets_available == 'false'

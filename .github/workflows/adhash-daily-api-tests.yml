@@ -41,7 +41,7 @@ jobs:
     - name: Run AdHash API Tests
       run: |
         echo "Starting AdHash Daily API Tests..."
-        echo "Running all 74 API tests for AdHash projects"
+        echo "Running all 75 API tests for AdHash projects"
         mvn test -Dsurefire.suiteXmlFiles=TestNG.xml -DfailIfNoTests=false
         
     - name: Upload test results

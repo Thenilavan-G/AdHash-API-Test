@@ -540,4 +540,11 @@ public class GeneratedApiTest extends ApiBase {
         // Source: Metcalf_UI
         HttpClient.get("https://zapai.us/", 200);
     }
+
+    @Test
+    public void pm_ZAPCRM_UI() {
+        // Source: Metcalf_UI
+        HttpClient.get("https://demo.zapcrm.io/", 200);
+    }
+
 }

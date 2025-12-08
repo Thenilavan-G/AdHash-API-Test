@@ -11,10 +11,10 @@
                     <include name="pm_AutoChecker_Login_UI"/>
                     <include name="pm_AutoChecker_Admin_Login"/>
                     <include name="pm_AutoChecker_App_Login"/>
-                    <include name="pm_MHAI_Doctor_SuperAdmin_Login_UI"/>
-                    <include name="pm_MHAI_Doctor_SuperAdmin_Login"/>
-                    <include name="pm_MHAI_Doctor_Login_UI"/>
-                    <include name="pm_MHAI_Doctor_Login"/>
+                    <exclude name="pm_MHAI_Doctor_SuperAdmin_Login_UI"/>
+                    <exclude name="pm_MHAI_Doctor_SuperAdmin_Login"/>
+                    <exclude name="pm_MHAI_Doctor_Login_UI"/>
+                    <exclude name="pm_MHAI_Doctor_Login"/>
                     <include name="pm_KCAI_Doctor_SuperAdmin_Login_UI"/>
                     <include name="pm_KCAI_Doctor_SuperAdmin_Login"/>
                     <include name="pm_KCAI_Doctor_Login_UI"/>

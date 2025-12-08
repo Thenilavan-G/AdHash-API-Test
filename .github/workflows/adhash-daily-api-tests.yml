@@ -14,7 +14,8 @@ on:
 jobs:
   api-tests:
     runs-on: ubuntu-latest
-    
+    timeout-minutes: 15  # Max 15 minutes to prevent hanging (tests normally complete in ~2 mins)
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4

@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.net.ssl.SSLContext;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
@@ -21,6 +22,11 @@ import org.apache.http.util.EntityUtils;
  * Eliminates all Hamcrest dependencies and handles SSL certificate issues
  */
 public class HttpClient {
+
+    // Timeout settings (in milliseconds)
+    private static final int CONNECTION_TIMEOUT = 30000;  // 30 seconds to establish connection
+    private static final int SOCKET_TIMEOUT = 60000;      // 60 seconds to wait for data
+    private static final int CONNECTION_REQUEST_TIMEOUT = 30000;  // 30 seconds to get connection from pool
 
     private static CloseableHttpClient client = createHttpClient();
 
@@ -41,10 +47,18 @@ public class HttpClient {
     }
 
     /**
-     * Create HTTP client with SSL certificate handling
+     * Create HTTP client with SSL certificate handling and TIMEOUTS
+     * Timeouts prevent the tests from hanging indefinitely on unresponsive endpoints
      */
     private static CloseableHttpClient createHttpClient() {
         try {
+            // Configure request timeouts to prevent hanging
+            RequestConfig requestConfig = RequestConfig.custom()
+                .setConnectTimeout(CONNECTION_TIMEOUT)
+                .setSocketTimeout(SOCKET_TIMEOUT)
+                .setConnectionRequestTimeout(CONNECTION_REQUEST_TIMEOUT)
+                .build();
+
             SSLContext sslContext = SSLContextBuilder.create()
                 .loadTrustMaterial(new TrustSelfSignedStrategy())
                 .build();
@@ -56,11 +70,19 @@ public class HttpClient {
 
             return HttpClientBuilder.create()
                 .setSSLSocketFactory(sslSocketFactory)
+                .setDefaultRequestConfig(requestConfig)
                 .build();
 
         } catch (Exception e) {
-            // Fallback to default client if SSL setup fails
-            return HttpClients.createDefault();
+            // Fallback to default client with timeouts if SSL setup fails
+            RequestConfig requestConfig = RequestConfig.custom()
+                .setConnectTimeout(CONNECTION_TIMEOUT)
+                .setSocketTimeout(SOCKET_TIMEOUT)
+                .setConnectionRequestTimeout(CONNECTION_REQUEST_TIMEOUT)
+                .build();
+            return HttpClientBuilder.create()
+                .setDefaultRequestConfig(requestConfig)
+                .build();
         }
     }
     

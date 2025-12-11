@@ -2,98 +2,10 @@ name: AdHash Daily API Tests
 
 on:
   schedule:
-    # ============================================
-    # WEEKENDS - Every Saturday & Sunday
-    # ============================================
-    - cron: '30 3 * * 0,6'   # 9:00 AM IST (Sat & Sun)
-    - cron: '30 11 * * 0,6'  # 5:00 PM IST (Sat & Sun)
-
-    # ============================================
-    # 2026 INDIAN GOVERNMENT HOLIDAYS - 9:00 AM IST
-    # ============================================
-    # January
-    - cron: '30 3 1 1 *'    # Jan 1 - New Year's Day
-    - cron: '30 3 14 1 *'   # Jan 14 - Makar Sankranti / Pongal
-    - cron: '30 3 23 1 *'   # Jan 23 - Netaji Subhas Chandra Bose Jayanti
-    - cron: '30 3 26 1 *'   # Jan 26 - Republic Day
-    # February
-    - cron: '30 3 26 2 *'   # Feb 26 - Maha Shivaratri
-    # March
-    - cron: '30 3 30 3 *'   # Mar 30 - Holi
-    - cron: '30 3 31 3 *'   # Mar 31 - Eid-ul-Fitr
-    # April
-    - cron: '30 3 2 4 *'    # Apr 2 - Ram Navami
-    - cron: '30 3 6 4 *'    # Apr 6 - Mahavir Jayanti
-    - cron: '30 3 14 4 *'   # Apr 14 - Ambedkar Jayanti
-    - cron: '30 3 18 4 *'   # Apr 18 - Good Friday
-    # May
-    - cron: '30 3 1 5 *'    # May 1 - May Day
-    - cron: '30 3 12 5 *'   # May 12 - Buddha Purnima
-    # June
-    - cron: '30 3 7 6 *'    # Jun 7 - Eid ul-Adha (Bakrid)
-    # July
-    - cron: '30 3 6 7 *'    # Jul 6 - Muharram
-    # August
-    - cron: '30 3 12 8 *'   # Aug 12 - Raksha Bandhan
-    - cron: '30 3 15 8 *'   # Aug 15 - Independence Day
-    - cron: '30 3 16 8 *'   # Aug 16 - Janmashtami
-    # September
-    - cron: '30 3 5 9 *'    # Sep 5 - Milad un-Nabi
-    # October
-    - cron: '30 3 1 10 *'   # Oct 1 - Maha Navami
-    - cron: '30 3 2 10 *'   # Oct 2 - Gandhi Jayanti / Dussehra
-    - cron: '30 3 20 10 *'  # Oct 20 - Diwali
-    - cron: '30 3 21 10 *'  # Oct 21 - Govardhan Puja
-    - cron: '30 3 22 10 *'  # Oct 22 - Bhai Dooj
-    # November
-    - cron: '30 3 14 11 *'  # Nov 14 - Children's Day
-    - cron: '30 3 16 11 *'  # Nov 16 - Guru Nanak Jayanti
-    # December
-    - cron: '30 3 25 12 *'  # Dec 25 - Christmas
-
-    # ============================================
-    # 2026 INDIAN GOVERNMENT HOLIDAYS - 5:00 PM IST
-    # ============================================
-    # January
-    - cron: '30 11 1 1 *'   # Jan 1 - New Year's Day
-    - cron: '30 11 14 1 *'  # Jan 14 - Makar Sankranti / Pongal
-    - cron: '30 11 23 1 *'  # Jan 23 - Netaji Subhas Chandra Bose Jayanti
-    - cron: '30 11 26 1 *'  # Jan 26 - Republic Day
-    # February
-    - cron: '30 11 26 2 *'  # Feb 26 - Maha Shivaratri
-    # March
-    - cron: '30 11 30 3 *'  # Mar 30 - Holi
-    - cron: '30 11 31 3 *'  # Mar 31 - Eid-ul-Fitr
-    # April
-    - cron: '30 11 2 4 *'   # Apr 2 - Ram Navami
-    - cron: '30 11 6 4 *'   # Apr 6 - Mahavir Jayanti
-    - cron: '30 11 14 4 *'  # Apr 14 - Ambedkar Jayanti
-    - cron: '30 11 18 4 *'  # Apr 18 - Good Friday
-    # May
-    - cron: '30 11 1 5 *'   # May 1 - May Day
-    - cron: '30 11 12 5 *'  # May 12 - Buddha Purnima
-    # June
-    - cron: '30 11 7 6 *'   # Jun 7 - Eid ul-Adha (Bakrid)
-    # July
-    - cron: '30 11 6 7 *'   # Jul 6 - Muharram
-    # August
-    - cron: '30 11 12 8 *'  # Aug 12 - Raksha Bandhan
-    - cron: '30 11 15 8 *'  # Aug 15 - Independence Day
-    - cron: '30 11 16 8 *'  # Aug 16 - Janmashtami
-    # September
-    - cron: '30 11 5 9 *'   # Sep 5 - Milad un-Nabi
-    # October
-    - cron: '30 11 1 10 *'  # Oct 1 - Maha Navami
-    - cron: '30 11 2 10 *'  # Oct 2 - Gandhi Jayanti / Dussehra
-    - cron: '30 11 20 10 *' # Oct 20 - Diwali
-    - cron: '30 11 21 10 *' # Oct 21 - Govardhan Puja
-    - cron: '30 11 22 10 *' # Oct 22 - Bhai Dooj
-    # November
-    - cron: '30 11 14 11 *' # Nov 14 - Children's Day
-    - cron: '30 11 16 11 *' # Nov 16 - Guru Nanak Jayanti
-    # December
-    - cron: '30 11 25 12 *' # Dec 25 - Christmas
-
+    # Runs EVERY DAY at 9:00 AM IST (3:30 AM UTC)
+    - cron: '30 3 * * *'
+    # Runs EVERY DAY at 5:00 PM IST (11:30 AM UTC)
+    - cron: '30 11 * * *'
   workflow_dispatch:
     # Allows manual triggering of the workflow
 

@@ -2,14 +2,38 @@ name: AdHash Daily API Tests
 
 on:
   schedule:
-    # Runs daily at 9:00 AM IST (3:30 AM UTC)
-    - cron: '30 3 * * *'
-    # Runs daily at 5:00 PM IST (11:30 AM UTC)
-    - cron: '30 11 * * *'
+    # Runs at 9:00 AM IST (3:30 AM UTC) - Every Saturday and Sunday
+    - cron: '30 3 * * 0,6'
+    # Runs at 5:00 PM IST (11:30 AM UTC) - Every Saturday and Sunday
+    - cron: '30 11 * * 0,6'
+    # 2026 Indian Government Holidays at 9:00 AM IST (3:30 AM UTC)
+    - cron: '30 3 26 1 *'   # Jan 26 - Republic Day
+    - cron: '30 3 30 3 *'   # Mar 30 - Holi
+    - cron: '30 3 14 4 *'   # Apr 14 - Ambedkar Jayanti
+    - cron: '30 3 18 4 *'   # Apr 18 - Good Friday
+    - cron: '30 3 1 5 *'    # May 1 - May Day
+    - cron: '30 3 12 5 *'   # May 12 - Buddha Purnima
+    - cron: '30 3 15 8 *'   # Aug 15 - Independence Day
+    - cron: '30 3 16 8 *'   # Aug 16 - Janmashtami
+    - cron: '30 3 2 10 *'   # Oct 2 - Gandhi Jayanti
+    - cron: '30 3 2 10 *'   # Oct 2 - Dussehra
+    - cron: '30 3 20 10 *'  # Oct 20 - Diwali
+    - cron: '30 3 25 12 *'  # Dec 25 - Christmas
+    # 2026 Indian Government Holidays at 5:00 PM IST (11:30 AM UTC)
+    - cron: '30 11 26 1 *'  # Jan 26 - Republic Day
+    - cron: '30 11 30 3 *'  # Mar 30 - Holi
+    - cron: '30 11 14 4 *'  # Apr 14 - Ambedkar Jayanti
+    - cron: '30 11 18 4 *'  # Apr 18 - Good Friday
+    - cron: '30 11 1 5 *'   # May 1 - May Day
+    - cron: '30 11 12 5 *'  # May 12 - Buddha Purnima
+    - cron: '30 11 15 8 *'  # Aug 15 - Independence Day
+    - cron: '30 11 16 8 *'  # Aug 16 - Janmashtami
+    - cron: '30 11 2 10 *'  # Oct 2 - Gandhi Jayanti
+    - cron: '30 11 2 10 *'  # Oct 2 - Dussehra
+    - cron: '30 11 20 10 *' # Oct 20 - Diwali
+    - cron: '30 11 25 12 *' # Dec 25 - Christmas
   workflow_dispatch:
     # Allows manual triggering of the workflow
-  push:
-    branches: [ master ]
 
 jobs:
   api-tests:
@@ -19,25 +43,25 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      
+
     - name: Set up JDK 11
       uses: actions/setup-java@v4
       with:
         java-version: '11'
         distribution: 'temurin'
-        
+
     - name: Cache Maven dependencies
       uses: actions/cache@v4
       with:
         path: ~/.m2
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
-        
+
     - name: Display current IST time
       run: |
         echo "Current UTC time: $(date -u)"
         echo "Current IST time: $(TZ='Asia/Kolkata' date)"
-        echo "Workflow triggered for AdHash daily API tests"
+        echo "Workflow triggered for AdHash API tests (Weekends & Holidays 2026)"
         
     - name: Run AdHash API Tests
       run: |

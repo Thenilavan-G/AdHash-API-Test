@@ -547,4 +547,10 @@ public class GeneratedApiTest extends ApiBase {
         HttpClient.get("https://demo.zapcrm.io/", 200);
     }
 
+    @Test
+    public void pm_KaiCareAi_CPTCode_Loader() {
+        // Source: Metcalf_UI
+        HttpClient.get("https://adminapi.kaicare.ai/api/PhysicianAsst/UpdateCPTCode", 200);
+    }
+
 }

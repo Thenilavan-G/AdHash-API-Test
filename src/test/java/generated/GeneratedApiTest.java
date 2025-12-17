@@ -553,4 +553,10 @@ public class GeneratedApiTest extends ApiBase {
         HttpClient.get("https://adminapi.kaicare.ai/api/PhysicianAsst/UpdateCPTCode", 200);
     }
 
+    @Test
+    public void pm_KaiCareAi_CallRecord_Loader() {
+        // Source: Metcalf_UI
+        HttpClient.get("https://adminapi.kaicare.ai/api/Calls/ProcessCallRecordUploads?key=9dk3ci5AaSsCHJAgRrEqExpEBzF/PfERfrAF7ur07tQ=", 200);
+    }
+
 }

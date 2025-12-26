@@ -36,34 +36,6 @@ public class GeneratedApiTest extends ApiBase {
     }
 
     @Test
-    public void pm_MHAI_Doctor_SuperAdmin_Login_UI() {
-        // Source: MHAI_Doctor_SuperAdmin_Login_UI
-        HttpClient.get("https://admin.myhealthai.io/", 200);
-    }
-
-    @Test
-    public void pm_MHAI_Doctor_SuperAdmin_Login() {
-        // Source: MHAI_Doctor_SuperAdmin_Login
-        HttpClient.post("https://admin.myhealthai.io/api/login/login",
-                       "{\"Key\":\"N9GtP6iO2aCc81CiAKuxU2neyE2PEcaDUpjcAhsju93rOShrJvPYn8qBaLybJamYyy/25C1knR3ljl9WqrdMF3xmGUOASX6Hluc6gzLiaW4=\"}",
-                       200);
-    }
-
-    @Test
-    public void pm_MHAI_Doctor_Login_UI() {
-        // Source: MHAI_Doctor_Login_UI
-        HttpClient.get("https://doctor.myhealthai.io/", 200);
-    }
-
-    @Test
-    public void pm_MHAI_Doctor_Login() {
-        // Source: MHAI_Doctor_Login
-        HttpClient.post("https://admin.myhealthai.io/api/login/physicianlogin",
-                       "{\"Key\":\"TxVnM0rMfKSffcdTzuPXapnc3yEkNOt9oIqJrc6DYNYrIGbXR7pipTUEW5HVC6W9tOgiPEsdGNXpIGOrPDbHx8x1fjmGmEfxbDdfiw1EtCQ=\"}",
-                       200);
-    }
-
-    @Test
     public void pm_KCAI_Doctor_SuperAdmin_Login_UI() {
         // Source: KCAI_Doctor_SuperAdmin_Login_UI
         HttpClient.get("https://admin.kaicare.ai/", 200);

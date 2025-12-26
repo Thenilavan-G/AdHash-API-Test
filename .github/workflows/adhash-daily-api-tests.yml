@@ -40,7 +40,7 @@ jobs:
     - name: Run AdHash API Tests
       run: |
         echo "Starting AdHash Daily API Tests..."
-        echo "Running all 73 API tests for AdHash projects"
+        echo "Running all 74 API tests for AdHash projects"
         mvn test -Dsurefire.suiteXmlFiles=TestNG.xml -DfailIfNoTests=false
         
     - name: Upload test results
@@ -60,7 +60,7 @@ jobs:
         echo "Date: $(TZ='Asia/Kolkata' date '+%d/%m/%Y %H:%M IST')"
         echo "Repository: AdHash-API-Test"
         echo "Test Suite: TestNG.xml"
-        echo "Expected Tests: 73 (All AdHash Projects API Tests)"
+        echo "Expected Tests: 74 (All AdHash Projects API Tests)"
         echo "Test Class: generated.GeneratedApiTest"
         echo "============================================="
         
@@ -354,7 +354,7 @@ jobs:
 
               <div class="projects-section">
                 <h3>🚀 AdHash Projects Tested</h3>
-                <p>All <strong>73 API endpoints</strong> tested successfully across all AdHash projects:</p>
+                <p>All <strong>74 API endpoints</strong> tested successfully across all AdHash projects:</p>
                 <table class="project-table" cellpadding="5" cellspacing="0">
                   <tr>
                     <td class="project-item">🌐 AdHash Website</td>

@@ -82,7 +82,9 @@
                     <include name="pm_Humee_Participant_Login_OTP"/>
                     <include name="pm_ZAPAI_UI"/>
                     <include name="pm_ZAPCRM_UI"/>
+                    <include name="pm_Lead_ZAPCRM_UI"/>
                     <include name="pm_KaiCareAi_CPTCode_Loader"/>
+                    <include name="pm_KaiCareAi_CallRecord_Loader"/>
                 </methods>
             </class>
         </classes>

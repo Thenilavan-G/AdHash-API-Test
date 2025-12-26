@@ -544,7 +544,13 @@ public class GeneratedApiTest extends ApiBase {
     @Test
     public void pm_ZAPCRM_UI() {
         // Source: Metcalf_UI
-        HttpClient.get("https://demo.zapcrm.io/", 200);
+        HttpClient.get("https://zapcrm.io/", 200);
+    }
+
+    @Test
+    public void pm_Lead_ZAPCRM_UI() {
+        // Source: Metcalf_UI
+        HttpClient.get("https://lead.zapcrm.io/", 200);
     }
 
     @Test

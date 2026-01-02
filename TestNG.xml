@@ -79,6 +79,8 @@
                     <include name="pm_ZAPAI_UI"/>
                     <include name="pm_ZAPCRM_UI"/>
                     <include name="pm_Lead_ZAPCRM_UI"/>
+                    <include name="pm_Secure_ZAPCRM_UI"/>
+                    <include name="pm_Social_ZAPCRM_UI"/>
                     <include name="pm_KaiCareAi_CPTCode_Loader"/>
                     <include name="pm_KaiCareAi_CallRecord_Loader"/>
                 </methods>

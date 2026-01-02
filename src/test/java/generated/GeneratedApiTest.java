@@ -525,6 +525,18 @@ public class GeneratedApiTest extends ApiBase {
         HttpClient.get("https://lead.zapcrm.io/", 200);
     }
 
+        @Test
+    public void pm_Secure_ZAPCRM_UI() {
+        // Source: Metcalf_UI
+        HttpClient.get("https://secure.zapcrm.io/", 200);
+    }
+
+        @Test
+    public void pm_Social_ZAPCRM_UI() {
+        // Source: Metcalf_UI
+        HttpClient.get("https://social.zapcrm.io/", 200);
+    }
+
     @Test
     public void pm_KaiCareAi_CPTCode_Loader() {
         // Source: Metcalf_UI

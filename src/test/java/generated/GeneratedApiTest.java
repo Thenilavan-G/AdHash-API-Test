@@ -190,14 +190,6 @@ public class GeneratedApiTest extends ApiBase {
     }
 
     @Test
-    public void pm_MHAI_Patient_App_Login() {
-        // Source: MHAI_Patient_App_Login
-        HttpClient.post("https://mobileapi.myhealthai.io/api/Login",
-                       "{\"type\" : \"daUHsM4u2R/esmeev1wtyRDPTqx73UltFNRViWkskfdbxXCxVKfm85tkqan8z+i5HeIHKDJktT1pt0n5ZexZmt0Q+gcXMVYRpzKLQpKzUwMxOMnD1mIfEu9n8QjK54nV6dh9O7P15yYZyXhUDT7rxkGAdUUULGYL/QNfLm5kZf4DyHh0Id7CgKZLixMkrdqbSgjhr3GC1KESDSLY4tspFjQTGErz0J5RpU7RdQd/Zumqo/CUtPnXfDMCFsytJ5a8o4lqhim8MeFmk+oiCf4fTvsQAYGO/cq87lJmpVj4XvUenZ00nSjxS0atHfAhLiegLDMDH7z0mO+mqHSnnZfqoALLYJUSOnJnIde/OuHBJ6T3eWa6ZVXvKei4M5g0/qJovs74su9NAEVhjSL9INF9AScyBisDRpc5gjfnLL54Nq/mEwuJbnQi82d9suF5CirUkp663hpMT5koTI2tA6/WLDqQ7BrXxXfHfPM8UPWFwBstcpCZ4ow4EN1vQHF+lJM6hJapD3dz6QVtCx/DtfD278HUtkrCoK9GQibkNPKNEx2IJgFpNZo31mOWxHQDxXYIWxzZnjFmGF+6Afd9BsI4Eg==\"}",
-                       200);
-    }
-
-    @Test
     public void pm_KCAI_Patient_App_Login() {
         // Source: KCAI_Patient_App_Login
         HttpClient.post("https://mobileapi.kaicare.ai/api/Login",

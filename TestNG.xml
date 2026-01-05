@@ -33,7 +33,6 @@
                     <include name="pm_MHRTM_CPA_Login"/>
                     <include name="pm_MHRTM_Participant_Login_UI"/>
                     <include name="pm_MHRTM_Participant_Login"/>
-                    <include name="pm_MHAI_Patient_App_Login"/>
                     <include name="pm_KCAI_Patient_App_Login"/>
                     <include name="pm_Wavedin_App_Login"/>
                     <include name="pm_Sparkme_App_Login"/>

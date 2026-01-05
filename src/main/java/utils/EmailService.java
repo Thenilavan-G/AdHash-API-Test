@@ -160,38 +160,56 @@ public class EmailService {
     }
     
     /**
-     * Create HTML email body
+     * Create HTML email body - converts HTML report to email-friendly format
+     * Email clients don't support JavaScript, so we remove expand/collapse functionality
+     * and show a clean table format that matches the HTML report style
      */
     private String createEmailBody(String additionalMessage, String htmlReportPath) {
+        // Try to read and modify HTML report for email compatibility
+        if (htmlReportPath != null && new File(htmlReportPath).exists()) {
+            try {
+                String htmlContent = new String(Files.readAllBytes(Paths.get(htmlReportPath)),
+                    java.nio.charset.StandardCharsets.UTF_8);
+
+                // Make HTML email-compatible by:
+                // 1. Remove JavaScript (doesn't work in emails)
+                htmlContent = htmlContent.replaceAll("(?s)<script[^>]*>.*?</script>", "");
+
+                // 2. Remove expand button column header
+                htmlContent = htmlContent.replaceAll("<th class=\"expand-col\"></th>", "");
+
+                // 3. Remove expand button cells (single line)
+                htmlContent = htmlContent.replaceAll("<td class=\"expand-col\">.*?</td>\\s*", "");
+
+                // 4. Remove hidden details rows (multi-line - they would just clutter the email)
+                // Each details-row contains the expandable API details that won't work without JS
+                htmlContent = htmlContent.replaceAll("(?s)<tr class=\"details-row\"[^>]*>.*?</tr>\\s*", "");
+
+                // 5. Update colspan from 6 to 5 since we removed the expand column
+                htmlContent = htmlContent.replaceAll("colspan=\"6\"", "colspan=\"5\"");
+
+                return htmlContent;
+            } catch (IOException e) {
+                // Fall back to simple email body if HTML report cannot be read
+            }
+        }
+
+        // Fallback simple email body if HTML report is not available
         StringBuilder body = new StringBuilder();
         body.append("<html><head><meta charset=\"UTF-8\"></head><body>");
-        body.append("<h2>🎯 AdHash API Test Report</h2>");
+        body.append("<div style=\"font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;\">");
+        body.append("<h2 style=\"color: #333;\">🎯 AdHash API Test Report</h2>");
         body.append("<p><strong>Test Execution Completed:</strong> ").append(new Date()).append("</p>");
-        
+
         if (additionalMessage != null && !additionalMessage.trim().isEmpty()) {
             body.append("<p>").append(additionalMessage).append("</p>");
         }
-        
-        // Try to read and include HTML report content
-        if (htmlReportPath != null && new File(htmlReportPath).exists()) {
-            try {
-                // Read HTML file with UTF-8 encoding to preserve Unicode characters
-                String htmlContent = new String(Files.readAllBytes(Paths.get(htmlReportPath)),
-                    java.nio.charset.StandardCharsets.UTF_8);
-                body.append("<hr>");
-                body.append("<h3>📊 Test Results Summary:</h3>");
-                body.append(htmlContent);
-            } catch (IOException e) {
-                body.append("<p>❌ Could not read HTML report content. Please check the attachment.</p>");
-            }
-        } else {
-            body.append("<p>⚠️ HTML report file not found at: ").append(htmlReportPath).append("</p>");
-        }
-        
-        body.append("<hr>");
-        body.append("<p><em>This is an automated email from AdHash API Test Suite.</em></p>");
-        body.append("</body></html>");
-        
+
+        body.append("<p style=\"color: #ff9800;\">⚠️ HTML report file not found. Please check the attachment.</p>");
+        body.append("<hr style=\"border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;\">");
+        body.append("<p style=\"color: #666; font-size: 12px;\"><em>This is an automated email from AdHash API Test Suite.</em></p>");
+        body.append("</div></body></html>");
+
         return body.toString();
     }
     

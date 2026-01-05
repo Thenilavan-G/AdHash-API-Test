@@ -37,9 +37,13 @@ public class TestReportListener implements ITestListener, ISuiteListener {
         String apiUrl = apiDetails != null ? apiDetails.url : "N/A";
         int statusCode = apiDetails != null ? apiDetails.statusCode : 0;
         String errorMessage = apiDetails != null ? apiDetails.errorMessage : null;
+        String httpMethod = apiDetails != null ? apiDetails.httpMethod : "GET";
+        String requestBody = apiDetails != null ? apiDetails.requestBody : null;
+        String responseBody = apiDetails != null ? apiDetails.responseBody : null;
 
-        // Record in simple report
-        SimpleHtmlReportGenerator.recordTestResult("pass", testName, apiUrl, statusCode, errorMessage);
+        // Record in simple report with full details
+        SimpleHtmlReportGenerator.recordTestResult("pass", testName, apiUrl, statusCode, errorMessage,
+                                                    httpMethod, requestBody, responseBody);
 
         // Clear API details for next test
         HttpClient.clearCurrentApiCallDetails();
@@ -57,9 +61,13 @@ public class TestReportListener implements ITestListener, ISuiteListener {
         String apiUrl = apiDetails != null ? apiDetails.url : "N/A";
         int statusCode = apiDetails != null ? apiDetails.statusCode : 0;
         String errorMessage = apiDetails != null ? apiDetails.errorMessage : result.getThrowable().getMessage();
+        String httpMethod = apiDetails != null ? apiDetails.httpMethod : "GET";
+        String requestBody = apiDetails != null ? apiDetails.requestBody : null;
+        String responseBody = apiDetails != null ? apiDetails.responseBody : null;
 
-        // Record in simple report
-        SimpleHtmlReportGenerator.recordTestResult("fail", testName, apiUrl, statusCode, errorMessage);
+        // Record in simple report with full details
+        SimpleHtmlReportGenerator.recordTestResult("fail", testName, apiUrl, statusCode, errorMessage,
+                                                    httpMethod, requestBody, responseBody);
 
         // Clear API details for next test
         HttpClient.clearCurrentApiCallDetails();
@@ -76,9 +84,13 @@ public class TestReportListener implements ITestListener, ISuiteListener {
         String apiUrl = apiDetails != null ? apiDetails.url : "N/A";
         int statusCode = apiDetails != null ? apiDetails.statusCode : 0;
         String errorMessage = apiDetails != null ? apiDetails.errorMessage : "Test was skipped";
+        String httpMethod = apiDetails != null ? apiDetails.httpMethod : "GET";
+        String requestBody = apiDetails != null ? apiDetails.requestBody : null;
+        String responseBody = apiDetails != null ? apiDetails.responseBody : null;
 
-        // Record in simple report
-        SimpleHtmlReportGenerator.recordTestResult("skip", testName, apiUrl, statusCode, errorMessage);
+        // Record in simple report with full details
+        SimpleHtmlReportGenerator.recordTestResult("skip", testName, apiUrl, statusCode, errorMessage,
+                                                    httpMethod, requestBody, responseBody);
 
         // Clear API details for next test
         HttpClient.clearCurrentApiCallDetails();

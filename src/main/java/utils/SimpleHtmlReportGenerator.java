@@ -1,5 +1,7 @@
 package utils;
 
+// Simple HTML Report Generator - Updated with expandable details
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -30,12 +32,29 @@ public class SimpleHtmlReportGenerator {
         public String apiUrl;
         public int statusCode;
         public String errorMessage;
+        public String httpMethod;
+        public String requestBody;
+        public String responseBody;
 
         public TestMethodDetails(String methodName, String apiUrl, int statusCode, String errorMessage) {
             this.methodName = methodName;
             this.apiUrl = apiUrl;
             this.statusCode = statusCode;
             this.errorMessage = errorMessage;
+            this.httpMethod = "GET";
+            this.requestBody = null;
+            this.responseBody = null;
+        }
+
+        public TestMethodDetails(String methodName, String apiUrl, int statusCode, String errorMessage,
+                                  String httpMethod, String requestBody, String responseBody) {
+            this.methodName = methodName;
+            this.apiUrl = apiUrl;
+            this.statusCode = statusCode;
+            this.errorMessage = errorMessage;
+            this.httpMethod = httpMethod;
+            this.requestBody = requestBody;
+            this.responseBody = responseBody;
         }
     }
     
@@ -58,11 +77,20 @@ public class SimpleHtmlReportGenerator {
     }
     
     /**
-     * Record test result with test method name and API details
+     * Record test result with test method name and API details (legacy method)
      */
     public static void recordTestResult(String status, String testMethodName, String apiUrl, int statusCode, String errorMessage) {
+        recordTestResult(status, testMethodName, apiUrl, statusCode, errorMessage, "GET", null, null);
+    }
+
+    /**
+     * Record test result with full API details including request/response
+     */
+    public static void recordTestResult(String status, String testMethodName, String apiUrl, int statusCode,
+                                         String errorMessage, String httpMethod, String requestBody, String responseBody) {
         totalTests++;
-        TestMethodDetails details = new TestMethodDetails(testMethodName, apiUrl, statusCode, errorMessage);
+        TestMethodDetails details = new TestMethodDetails(testMethodName, apiUrl, statusCode, errorMessage,
+                                                           httpMethod, requestBody, responseBody);
 
         switch (status.toLowerCase()) {
             case "pass":
@@ -106,198 +134,283 @@ public class SimpleHtmlReportGenerator {
     }
     
     /**
-     * Generate HTML content
+     * Generate HTML content - Certificate Expiry style with expandable table format
      */
     private static String generateHtmlContent(double successRate) {
         StringBuilder html = new StringBuilder();
-        
-        html.append("<!DOCTYPE html>\n");
-        html.append("<html>\n");
-        html.append("<head>\n");
+
+        // Get timestamp in IST
+        SimpleDateFormat istFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        istFormat.setTimeZone(java.util.TimeZone.getTimeZone("Asia/Kolkata"));
+        String timestamp = istFormat.format(new Date()) + " IST";
+
+        html.append("<!DOCTYPE html>\n<html>\n<head>\n");
         html.append("    <title>AdHash API Test Report</title>\n");
         html.append("    <meta charset=\"UTF-8\">\n");
         html.append("    <style>\n");
-        html.append("        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }\n");
-        html.append("        .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }\n");
-        html.append("        .header { text-align: center; margin-bottom: 30px; }\n");
-        html.append("        .title { color: #333; font-size: 28px; margin-bottom: 10px; }\n");
-        html.append("        .subtitle { color: #666; font-size: 16px; }\n");
-        html.append("        .stats { display: flex; justify-content: space-around; margin: 30px 0; }\n");
-        html.append("        .stat-box { text-align: center; padding: 20px; border-radius: 8px; min-width: 120px; }\n");
-        html.append("        .stat-number { font-size: 36px; font-weight: bold; margin-bottom: 5px; }\n");
-        html.append("        .stat-label { font-size: 14px; color: #666; }\n");
-        html.append("        .total { background-color: #e3f2fd; color: #1976d2; }\n");
-        html.append("        .passed { background-color: #e8f5e8; color: #4caf50; }\n");
-        html.append("        .failed { background-color: #ffebee; color: #f44336; }\n");
-        html.append("        .skipped { background-color: #fff3e0; color: #ff9800; }\n");
-        html.append("        .success-rate { text-align: center; margin: 30px 0; }\n");
-        html.append("        .success-rate-number { font-size: 48px; font-weight: bold; color: ").append(successRate >= 90 ? "#4caf50" : successRate >= 70 ? "#ff9800" : "#f44336").append("; }\n");
-        html.append("        .chart-container { text-align: center; margin: 30px 0; }\n");
-        html.append("        .status { text-align: center; margin: 20px 0; padding: 15px; border-radius: 8px; font-size: 18px; font-weight: bold; }\n");
-        html.append("        .status.success { background-color: #e8f5e8; color: #4caf50; }\n");
-        html.append("        .status.warning { background-color: #fff3e0; color: #ff9800; }\n");
-        html.append("        .status.error { background-color: #ffebee; color: #f44336; }\n");
-        html.append("        .test-methods { margin: 30px 0; }\n");
-        html.append("        .test-methods h3 { text-align: center; color: #333; margin-bottom: 20px; }\n");
-        html.append("        .method-section { margin: 20px 0; }\n");
-        html.append("        .method-section h4 { margin-bottom: 10px; }\n");
-        html.append("        .method-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 8px; }\n");
-        html.append("        .method-item { padding: 8px 12px; border-radius: 4px; font-size: 14px; margin-bottom: 4px; }\n");
-        html.append("        .expandable { cursor: pointer; transition: all 0.3s ease; }\n");
-        html.append("        .expandable:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }\n");
-        html.append("        .method-name { display: inline-block; flex: 1; }\n");
-        html.append("        .expand-icon { float: right; transition: transform 0.3s ease; font-size: 12px; }\n");
-        html.append("        .method-details { margin-top: 8px; padding: 8px; background: rgba(255,255,255,0.5); border-radius: 4px; }\n");
-        html.append("        .detail-item { margin: 4px 0; font-size: 12px; }\n");
-        html.append("        .error-message { color: #d32f2f; font-weight: bold; }\n");
-        html.append("        .passed-method { background-color: #e8f5e8; color: #2e7d32; border-left: 4px solid #4caf50; }\n");
-        html.append("        .failed-method { background-color: #ffebee; color: #c62828; border-left: 4px solid #f44336; }\n");
-        html.append("        .skipped-method { background-color: #fff3e0; color: #ef6c00; border-left: 4px solid #ff9800; }\n");
-        html.append("        .footer { text-align: center; margin-top: 30px; color: #666; font-size: 12px; }\n");
-        html.append("    </style>\n");
-        html.append("</head>\n");
-        html.append("<body>\n");
+        html.append(generateCSS(successRate));
+        html.append("    </style>\n</head>\n<body>\n");
         html.append("    <div class=\"container\">\n");
+
+        // Header
         html.append("        <div class=\"header\">\n");
         html.append("            <h1 class=\"title\">🎯 AdHash API Test Report</h1>\n");
-        html.append("            <p class=\"subtitle\">").append(new SimpleDateFormat("EEEE, MMMM dd, yyyy 'at' hh:mm a").format(new Date())).append("</p>\n");
+        html.append("            <p class=\"timestamp\">").append(timestamp).append("</p>\n");
         html.append("        </div>\n");
-        
-        // Statistics
+
+        // Statistics boxes
         html.append("        <div class=\"stats\">\n");
-        html.append("            <div class=\"stat-box total\">\n");
-        html.append("                <div class=\"stat-number\">").append(totalTests).append("</div>\n");
-        html.append("                <div class=\"stat-label\">Total Tests</div>\n");
-        html.append("            </div>\n");
-        html.append("            <div class=\"stat-box passed\">\n");
-        html.append("                <div class=\"stat-number\">").append(passedTests).append("</div>\n");
-        html.append("                <div class=\"stat-label\">✅ Passed</div>\n");
-        html.append("            </div>\n");
-        html.append("            <div class=\"stat-box failed\">\n");
-        html.append("                <div class=\"stat-number\">").append(failedTests).append("</div>\n");
-        html.append("                <div class=\"stat-label\">❌ Failed</div>\n");
-        html.append("            </div>\n");
-        
-        if (skippedTests > 0) {
-            html.append("            <div class=\"stat-box skipped\">\n");
-            html.append("                <div class=\"stat-number\">").append(skippedTests).append("</div>\n");
-            html.append("                <div class=\"stat-label\">⏭️ Skipped</div>\n");
-            html.append("            </div>\n");
-        }
-        
+        html.append("            <div class=\"stat-box total\"><div class=\"stat-number\">").append(totalTests).append("</div><div class=\"stat-label\">Total Tests</div></div>\n");
+        html.append("            <div class=\"stat-box passed\"><div class=\"stat-number\">✓ ").append(passedTests).append("</div><div class=\"stat-label\">Passed</div></div>\n");
+        html.append("            <div class=\"stat-box failed\"><div class=\"stat-number\">✗ ").append(failedTests).append("</div><div class=\"stat-label\">Failed</div></div>\n");
         html.append("        </div>\n");
-        
+
         // Success Rate
-        html.append("        <div class=\"success-rate\">\n");
-        html.append("            <div class=\"success-rate-number\">").append(String.format("%.1f%%", successRate)).append("</div>\n");
-        html.append("            <div class=\"stat-label\">Success Rate</div>\n");
-        html.append("        </div>\n");
-        
-        // Overall Status
-        String statusClass = failedTests > 0 ? "error" : skippedTests > 0 ? "warning" : "success";
-        String statusText = failedTests > 0 ? "❌ TESTS FAILED" : skippedTests > 0 ? "⚠️ TESTS PASSED WITH SKIPS" : "✅ ALL TESTS PASSED";
-        
-        html.append("        <div class=\"status ").append(statusClass).append("\">\n");
-        html.append("            ").append(statusText).append("\n");
-        html.append("        </div>\n");
+        html.append("        <div class=\"success-rate\"><div class=\"success-rate-number\">").append(String.format("%.1f%%", successRate)).append("</div><div class=\"success-rate-label\">Success Rate</div></div>\n");
 
-        // Add test methods section
-        html.append("        <div class=\"test-methods\">\n");
-        html.append("            <h3>📋 Test Methods</h3>\n");
+        // Status Banner
+        String bannerClass = failedTests > 0 ? "failed" : skippedTests > 0 ? "warning" : "success";
+        String bannerText = failedTests > 0 ? "✗ TESTS FAILED" : skippedTests > 0 ? "⚠ TESTS PASSED WITH SKIPS" : "✓ ALL TESTS PASSED";
+        html.append("        <div class=\"status-banner ").append(bannerClass).append("\">").append(bannerText).append("</div>\n");
 
-        // Passed tests
-        if (!passedTestMethods.isEmpty()) {
-            html.append("            <div class=\"method-section\">\n");
-            html.append("                <h4 style=\"color: #4caf50;\">✅ Passed Tests (").append(passedTests).append(")</h4>\n");
-            html.append("                <div class=\"method-list\">\n");
-            for (TestMethodDetails method : passedTestMethods) {
-                String displayName = method.methodName.replace("pm_", "").replace("_", " ");
-                String methodId = "passed_" + method.methodName;
-                html.append("                    <div class=\"method-item passed-method expandable\" onclick=\"toggleDetails('").append(methodId).append("')\">\n");
-                html.append("                        <span class=\"method-name\">").append(displayName).append("</span>\n");
-                html.append("                        <span class=\"expand-icon\">▼</span>\n");
-                html.append("                        <div class=\"method-details\" id=\"").append(methodId).append("\" style=\"display: none;\">\n");
-                html.append("                            <div class=\"detail-item\"><strong>API URL:</strong> ").append(method.apiUrl != null ? method.apiUrl : "N/A").append("</div>\n");
-                html.append("                            <div class=\"detail-item\"><strong>Status Code:</strong> ").append(method.statusCode > 0 ? method.statusCode : "N/A").append("</div>\n");
-                html.append("                        </div>\n");
-                html.append("                    </div>\n");
-            }
-            html.append("                </div>\n");
-            html.append("            </div>\n");
+        // Table with all tests
+        html.append("        <div class=\"table-container\">\n");
+        html.append("            <table>\n");
+        html.append("                <thead><tr><th class=\"sno\">S.No</th><th>Project Name</th><th>Function</th><th>Website URL</th><th>Status</th><th class=\"expand-col\"></th></tr></thead>\n");
+        html.append("                <tbody>\n");
+
+        int sno = 1;
+        // Add failed tests first
+        for (TestMethodDetails method : failedTestMethods) {
+            html.append(generateTableRow(sno++, method, "fail"));
+        }
+        // Add passed tests
+        for (TestMethodDetails method : passedTestMethods) {
+            html.append(generateTableRow(sno++, method, "pass"));
+        }
+        // Add skipped tests
+        for (TestMethodDetails method : skippedTestMethods) {
+            html.append(generateTableRow(sno++, method, "skip"));
         }
 
-        // Failed tests
-        if (!failedTestMethods.isEmpty()) {
-            html.append("            <div class=\"method-section\">\n");
-            html.append("                <h4 style=\"color: #f44336;\">❌ Failed Tests (").append(failedTests).append(")</h4>\n");
-            html.append("                <div class=\"method-list\">\n");
-            for (TestMethodDetails method : failedTestMethods) {
-                String displayName = method.methodName.replace("pm_", "").replace("_", " ");
-                String methodId = "failed_" + method.methodName;
-                html.append("                    <div class=\"method-item failed-method expandable\" onclick=\"toggleDetails('").append(methodId).append("')\">\n");
-                html.append("                        <span class=\"method-name\">").append(displayName).append("</span>\n");
-                html.append("                        <span class=\"expand-icon\">▼</span>\n");
-                html.append("                        <div class=\"method-details\" id=\"").append(methodId).append("\" style=\"display: none;\">\n");
-                html.append("                            <div class=\"detail-item\"><strong>API URL:</strong> ").append(method.apiUrl != null ? method.apiUrl : "N/A").append("</div>\n");
-                html.append("                            <div class=\"detail-item\"><strong>Status Code:</strong> ").append(method.statusCode > 0 ? method.statusCode : "N/A").append("</div>\n");
-                if (method.errorMessage != null && !method.errorMessage.isEmpty()) {
-                    html.append("                            <div class=\"detail-item error-message\"><strong>Error:</strong> ").append(method.errorMessage).append("</div>\n");
-                }
-                html.append("                        </div>\n");
-                html.append("                    </div>\n");
-            }
-            html.append("                </div>\n");
-            html.append("            </div>\n");
-        }
-
-        // Skipped tests
-        if (!skippedTestMethods.isEmpty()) {
-            html.append("            <div class=\"method-section\">\n");
-            html.append("                <h4 style=\"color: #ff9800;\">⏭️ Skipped Tests (").append(skippedTests).append(")</h4>\n");
-            html.append("                <div class=\"method-list\">\n");
-            for (TestMethodDetails method : skippedTestMethods) {
-                String displayName = method.methodName.replace("pm_", "").replace("_", " ");
-                String methodId = "skipped_" + method.methodName;
-                html.append("                    <div class=\"method-item skipped-method expandable\" onclick=\"toggleDetails('").append(methodId).append("')\">\n");
-                html.append("                        <span class=\"method-name\">").append(displayName).append("</span>\n");
-                html.append("                        <span class=\"expand-icon\">▼</span>\n");
-                html.append("                        <div class=\"method-details\" id=\"").append(methodId).append("\" style=\"display: none;\">\n");
-                html.append("                            <div class=\"detail-item\"><strong>API URL:</strong> ").append(method.apiUrl != null ? method.apiUrl : "N/A").append("</div>\n");
-                html.append("                            <div class=\"detail-item\"><strong>Status Code:</strong> ").append(method.statusCode > 0 ? method.statusCode : "N/A").append("</div>\n");
-                html.append("                        </div>\n");
-                html.append("                    </div>\n");
-            }
-            html.append("                </div>\n");
-            html.append("            </div>\n");
-        }
-
-        html.append("        </div>\n");
-
-        html.append("        <div class=\"footer\">\n");
-        html.append("            <p>Generated by AdHash API Test Suite</p>\n");
-        html.append("        </div>\n");
+        html.append("                </tbody>\n            </table>\n        </div>\n");
+        html.append("        <div class=\"footer\"><p>Generated by AdHash API Test Suite</p></div>\n");
         html.append("    </div>\n");
-        html.append("    \n");
-        html.append("    <script>\n");
-        html.append("        function toggleDetails(methodId) {\n");
-        html.append("            var details = document.getElementById(methodId);\n");
-        html.append("            var icon = details.parentElement.querySelector('.expand-icon');\n");
-        html.append("            \n");
-        html.append("            if (details.style.display === 'none') {\n");
-        html.append("                details.style.display = 'block';\n");
-        html.append("                icon.innerHTML = '▲';\n");
-        html.append("                icon.style.transform = 'rotate(180deg)';\n");
-        html.append("            } else {\n");
-        html.append("                details.style.display = 'none';\n");
-        html.append("                icon.innerHTML = '▼';\n");
-        html.append("                icon.style.transform = 'rotate(0deg)';\n");
-        html.append("            }\n");
-        html.append("        }\n");
-        html.append("    </script>\n");
-        html.append("</body>\n");
-        html.append("</html>\n");
-        
+        html.append(generateJavaScript());
+        html.append("</body>\n</html>\n");
+
         return html.toString();
+    }
+
+    /**
+     * Generate CSS styles
+     */
+    private static String generateCSS(double successRate) {
+        String successColor = successRate >= 90 ? "#4caf50" : successRate >= 70 ? "#ff9800" : "#f44336";
+        return "body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }\n" +
+               ".container { max-width: 1100px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }\n" +
+               ".header { text-align: center; margin-bottom: 20px; }\n" +
+               ".title { color: #333; font-size: 24px; margin-bottom: 5px; }\n" +
+               ".timestamp { color: #666; font-size: 14px; text-decoration: underline; }\n" +
+               ".stats { display: flex; justify-content: center; gap: 20px; margin: 25px 0; }\n" +
+               ".stat-box { text-align: center; padding: 15px 30px; border-radius: 8px; min-width: 100px; border: 1px solid #e0e0e0; }\n" +
+               ".stat-number { font-size: 32px; font-weight: bold; }\n" +
+               ".stat-label { font-size: 12px; color: #666; margin-top: 5px; }\n" +
+               ".total { background-color: #e3f2fd; } .total .stat-number { color: #1976d2; }\n" +
+               ".passed { background-color: #e8f5e9; } .passed .stat-number, .passed .stat-label { color: #4caf50; }\n" +
+               ".failed { background-color: #ffebee; } .failed .stat-number, .failed .stat-label { color: #f44336; }\n" +
+               ".success-rate { text-align: center; margin: 20px 0; }\n" +
+               ".success-rate-number { font-size: 42px; font-weight: bold; color: " + successColor + "; }\n" +
+               ".success-rate-label { font-size: 14px; color: #666; }\n" +
+               ".status-banner { text-align: center; margin: 20px 0; padding: 12px; border-radius: 6px; font-size: 16px; font-weight: bold; }\n" +
+               ".status-banner.success { background-color: #4caf50; color: white; }\n" +
+               ".status-banner.failed { background-color: #f44336; color: white; }\n" +
+               ".status-banner.warning { background-color: #ff9800; color: white; }\n" +
+               ".table-container { margin: 25px 0; overflow-x: auto; }\n" +
+               "table { width: 100%; border-collapse: collapse; font-size: 13px; }\n" +
+               "th { background-color: #455a64; color: white; padding: 10px 8px; text-align: left; font-weight: 600; }\n" +
+               "td { padding: 10px 8px; border-bottom: 1px solid #e0e0e0; vertical-align: middle; }\n" +
+               "tr:hover { background-color: #f5f5f5; }\n" +
+               ".sno { width: 50px; text-align: center; }\n" +
+               ".expand-col { width: 40px; text-align: center; }\n" +
+               ".url a { color: #1976d2; text-decoration: none; word-break: break-all; }\n" +
+               ".url a:hover { text-decoration: underline; }\n" +
+               ".status-ok { color: #4caf50; font-weight: bold; }\n" +
+               ".status-fail { color: #f44336; font-weight: bold; }\n" +
+               ".status-skip { color: #ff9800; font-weight: bold; }\n" +
+               ".expand-btn { cursor: pointer; background: #e0e0e0; border: none; border-radius: 4px; padding: 5px 10px; font-size: 12px; }\n" +
+               ".expand-btn:hover { background: #bdbdbd; }\n" +
+               ".details-row { display: none; }\n" +
+               ".details-row.show { display: table-row; }\n" +
+               ".details-cell { background-color: #fafafa; padding: 15px !important; }\n" +
+               ".api-details { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }\n" +
+               ".detail-box { background: white; border: 1px solid #e0e0e0; border-radius: 6px; padding: 12px; }\n" +
+               ".detail-label { font-weight: bold; color: #455a64; margin-bottom: 5px; font-size: 11px; text-transform: uppercase; }\n" +
+               ".detail-value { font-family: 'Consolas', monospace; font-size: 12px; word-break: break-all; max-height: 150px; overflow-y: auto; white-space: pre-wrap; }\n" +
+               ".method-badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 11px; font-weight: bold; margin-right: 5px; }\n" +
+               ".method-get { background: #e3f2fd; color: #1976d2; }\n" +
+               ".method-post { background: #fff3e0; color: #f57c00; }\n" +
+               ".status-code { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 11px; font-weight: bold; }\n" +
+               ".status-2xx { background: #e8f5e9; color: #388e3c; }\n" +
+               ".status-4xx { background: #fff3e0; color: #f57c00; }\n" +
+               ".status-5xx { background: #ffebee; color: #d32f2f; }\n" +
+               ".function-tag { background: #e8eaf6; color: #3f51b5; padding: 2px 6px; border-radius: 3px; font-size: 11px; }\n" +
+               ".footer { text-align: center; margin-top: 20px; color: #999; font-size: 11px; }\n";
+    }
+
+    /**
+     * Generate a table row with expandable details
+     */
+    private static String generateTableRow(int sno, TestMethodDetails method, String status) {
+        StringBuilder row = new StringBuilder();
+        String rowId = "row-" + sno;
+        String[] parsed = parseMethodName(method.methodName);
+        String projectName = parsed[0];
+        String functionType = parsed[1];
+
+        // Main row
+        String statusClass = status.equals("pass") ? "status-ok" : status.equals("fail") ? "status-fail" : "status-skip";
+        String statusText = status.equals("pass") ? "✓ OK" : status.equals("fail") ? "✗ Failed" : "⏭ Skipped";
+
+        row.append("<tr>\n");
+        row.append("  <td class=\"sno\">").append(sno).append("</td>\n");
+        row.append("  <td>").append(escapeHtml(projectName)).append("</td>\n");
+        row.append("  <td><span class=\"function-tag\">").append(escapeHtml(functionType)).append("</span></td>\n");
+        row.append("  <td class=\"url\"><a href=\"").append(method.apiUrl != null ? escapeHtml(method.apiUrl) : "#").append("\" target=\"_blank\">").append(method.apiUrl != null ? escapeHtml(method.apiUrl) : "N/A").append("</a></td>\n");
+        row.append("  <td class=\"").append(statusClass).append("\">").append(statusText).append("</td>\n");
+        row.append("  <td class=\"expand-col\"><button class=\"expand-btn\" onclick=\"toggleDetails('").append(rowId).append("')\">▼</button></td>\n");
+        row.append("</tr>\n");
+
+        // Details row (hidden by default)
+        row.append("<tr class=\"details-row\" id=\"").append(rowId).append("\">\n");
+        row.append("  <td colspan=\"6\" class=\"details-cell\">\n");
+        row.append("    <div class=\"api-details\">\n");
+
+        // Method & Status Code box
+        row.append("      <div class=\"detail-box\">\n");
+        row.append("        <div class=\"detail-label\">HTTP Method & Status</div>\n");
+        row.append("        <div class=\"detail-value\">\n");
+        String methodClass = "POST".equals(method.httpMethod) ? "method-post" : "method-get";
+        row.append("          <span class=\"method-badge ").append(methodClass).append("\">").append(method.httpMethod != null ? method.httpMethod : "GET").append("</span>\n");
+        String statusCodeClass = method.statusCode >= 200 && method.statusCode < 300 ? "status-2xx" : method.statusCode >= 400 && method.statusCode < 500 ? "status-4xx" : "status-5xx";
+        row.append("          <span class=\"status-code ").append(statusCodeClass).append("\">Status: ").append(method.statusCode).append("</span>\n");
+        row.append("        </div>\n");
+        row.append("      </div>\n");
+
+        // Error message box (if any)
+        if (method.errorMessage != null && !method.errorMessage.isEmpty()) {
+            row.append("      <div class=\"detail-box\">\n");
+            row.append("        <div class=\"detail-label\">Error Message</div>\n");
+            row.append("        <div class=\"detail-value\" style=\"color: #d32f2f;\">").append(escapeHtml(method.errorMessage)).append("</div>\n");
+            row.append("      </div>\n");
+        }
+
+        // Request body box (if any)
+        if (method.requestBody != null && !method.requestBody.isEmpty()) {
+            row.append("      <div class=\"detail-box\">\n");
+            row.append("        <div class=\"detail-label\">Request Body</div>\n");
+            row.append("        <div class=\"detail-value\">").append(escapeHtml(method.requestBody)).append("</div>\n");
+            row.append("      </div>\n");
+        }
+
+        // Response body box (if any)
+        if (method.responseBody != null && !method.responseBody.isEmpty()) {
+            row.append("      <div class=\"detail-box\">\n");
+            row.append("        <div class=\"detail-label\">Response Body</div>\n");
+            row.append("        <div class=\"detail-value\">").append(escapeHtml(method.responseBody)).append("</div>\n");
+            row.append("      </div>\n");
+        }
+
+        row.append("    </div>\n");
+        row.append("  </td>\n");
+        row.append("</tr>\n");
+
+        return row.toString();
+    }
+
+    /**
+     * Generate JavaScript for expand/collapse functionality
+     */
+    private static String generateJavaScript() {
+        return "<script>\n" +
+               "function toggleDetails(rowId) {\n" +
+               "  var row = document.getElementById(rowId);\n" +
+               "  var btn = row.previousElementSibling.querySelector('.expand-btn');\n" +
+               "  if (row.classList.contains('show')) {\n" +
+               "    row.classList.remove('show');\n" +
+               "    btn.textContent = '▼';\n" +
+               "  } else {\n" +
+               "    row.classList.add('show');\n" +
+               "    btn.textContent = '▲';\n" +
+               "  }\n" +
+               "}\n" +
+               "</script>\n";
+    }
+
+    /**
+     * Parse method name to extract project name and function type
+     */
+    private static String[] parseMethodName(String methodName) {
+        // Remove pm_ prefix
+        String name = methodName.replace("pm_", "");
+
+        // Common function types to look for
+        String[] functionTypes = {"SuperAdmin_Login_UI", "SuperAdmin_Login", "Admin_Login_UI", "Admin_Login",
+                                   "Login_UI", "Login_OTP", "Login_PhoneNumber", "Login_Number", "Login",
+                                   "App_Login", "Web_Login_UI", "Web_Login", "CPA_Login_UI", "CPA_Login",
+                                   "PAR_Login_UI", "PAR_Login", "PAR_CRM_Login_UI", "PAR_CRM_Login",
+                                   "Participant_Login_UI", "Participant_Login", "Doctor_Login_UI", "Doctor_Login",
+                                   "Doctor_SuperAdmin_Login_UI", "Doctor_SuperAdmin_Login",
+                                   "Form_UI", "Market_Web", "Website", "UI", "Loader"};
+
+        String projectName = name;
+        String functionType = "API";
+
+        for (String ft : functionTypes) {
+            if (name.endsWith("_" + ft) || name.equals(ft)) {
+                int idx = name.lastIndexOf("_" + ft);
+                if (idx > 0) {
+                    projectName = name.substring(0, idx).replace("_", " ");
+                } else {
+                    projectName = name.replace("_", " ");
+                }
+                functionType = ft.replace("_", " ");
+                break;
+            }
+        }
+
+        // Clean up project name
+        projectName = projectName.replace("_", " ").trim();
+        if (projectName.isEmpty()) {
+            projectName = name.replace("_", " ");
+        }
+
+        return new String[]{projectName, functionType};
+    }
+
+    /**
+     * Extract project name from method name
+     */
+    private static String extractProjectName(String methodName) {
+        // Remove pm_ prefix and convert underscores to spaces
+        String name = methodName.replace("pm_", "");
+        // Take the first part before any underscore as project name
+        String[] parts = name.split("_");
+        if (parts.length >= 2) {
+            return parts[0] + " " + parts[1];
+        }
+        return name.replace("_", " ");
+    }
+
+    /**
+     * Escape HTML special characters
+     */
+    private static String escapeHtml(String text) {
+        if (text == null) return "";
+        return text.replace("&", "&amp;")
+                   .replace("<", "&lt;")
+                   .replace(">", "&gt;")
+                   .replace("\"", "&quot;");
     }
     
     /**

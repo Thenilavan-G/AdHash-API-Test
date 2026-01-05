@@ -1,11 +1,14 @@
 package utils;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.mail.Authenticator;
 import javax.mail.BodyPart;
@@ -18,6 +21,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+
+import utils.SimpleHtmlReportGenerator.TestMethodDetails;
 
 /**
  * EmailService class to send HTML test reports via email
@@ -160,57 +165,126 @@ public class EmailService {
     }
     
     /**
-     * Create HTML email body - converts HTML report to email-friendly format
-     * Email clients don't support JavaScript, so we remove expand/collapse functionality
-     * and show a clean table format that matches the HTML report style
+     * Create HTML email body - generates a clean email-friendly format
+     * Shows status banner, API endpoint table, and project groupings
      */
     private String createEmailBody(String additionalMessage, String htmlReportPath) {
-        // Try to read and modify HTML report for email compatibility
-        if (htmlReportPath != null && new File(htmlReportPath).exists()) {
-            try {
-                String htmlContent = new String(Files.readAllBytes(Paths.get(htmlReportPath)),
-                    java.nio.charset.StandardCharsets.UTF_8);
-
-                // Make HTML email-compatible by:
-                // 1. Remove JavaScript (doesn't work in emails)
-                htmlContent = htmlContent.replaceAll("(?s)<script[^>]*>.*?</script>", "");
-
-                // 2. Remove expand button column header
-                htmlContent = htmlContent.replaceAll("<th class=\"expand-col\"></th>", "");
-
-                // 3. Remove expand button cells (single line)
-                htmlContent = htmlContent.replaceAll("<td class=\"expand-col\">.*?</td>\\s*", "");
-
-                // 4. Remove hidden details rows (multi-line - they would just clutter the email)
-                // Each details-row contains the expandable API details that won't work without JS
-                htmlContent = htmlContent.replaceAll("(?s)<tr class=\"details-row\"[^>]*>.*?</tr>\\s*", "");
-
-                // 5. Update colspan from 6 to 5 since we removed the expand column
-                htmlContent = htmlContent.replaceAll("colspan=\"6\"", "colspan=\"5\"");
-
-                return htmlContent;
-            } catch (IOException e) {
-                // Fall back to simple email body if HTML report cannot be read
-            }
-        }
-
-        // Fallback simple email body if HTML report is not available
         StringBuilder body = new StringBuilder();
-        body.append("<html><head><meta charset=\"UTF-8\"></head><body>");
-        body.append("<div style=\"font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;\">");
-        body.append("<h2 style=\"color: #333;\">🎯 AdHash API Test Report</h2>");
-        body.append("<p><strong>Test Execution Completed:</strong> ").append(new Date()).append("</p>");
 
-        if (additionalMessage != null && !additionalMessage.trim().isEmpty()) {
-            body.append("<p>").append(additionalMessage).append("</p>");
+        // Get test data from SimpleHtmlReportGenerator
+        int totalTests = SimpleHtmlReportGenerator.getTotalTests();
+        int passedTests = SimpleHtmlReportGenerator.getPassedTests();
+        int failedTests = SimpleHtmlReportGenerator.getFailedTests();
+        List<TestMethodDetails> allTests = SimpleHtmlReportGenerator.getAllTestMethods();
+
+        String timestamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss z").format(new Date());
+        boolean allPassed = failedTests == 0;
+
+        body.append("<!DOCTYPE html><html><head><meta charset=\"UTF-8\"></head><body>");
+        body.append("<div style=\"font-family: 'Segoe UI', Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px;\">");
+
+        // Status Banner
+        if (allPassed) {
+            body.append("<div style=\"background-color: #4caf50; color: white; text-align: center; padding: 15px; border-radius: 6px; font-size: 18px; font-weight: bold; margin-bottom: 20px;\">☑ ALL TESTS PASSED</div>");
+        } else {
+            body.append("<div style=\"background-color: #f44336; color: white; text-align: center; padding: 15px; border-radius: 6px; font-size: 18px; font-weight: bold; margin-bottom: 20px;\">✗ TESTS FAILED (").append(failedTests).append(" of ").append(totalTests).append(")</div>");
         }
 
-        body.append("<p style=\"color: #ff9800;\">⚠️ HTML report file not found. Please check the attachment.</p>");
-        body.append("<hr style=\"border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;\">");
-        body.append("<p style=\"color: #666; font-size: 12px;\"><em>This is an automated email from AdHash API Test Suite.</em></p>");
+        // Attachment note
+        body.append("<div style=\"background-color: #f5f5f5; padding: 12px; border-radius: 4px; margin-bottom: 20px;\">");
+        body.append("<strong>📎 Detailed HTML report is attached to this email.</strong><br>");
+        body.append("<span style=\"color: #666;\">Open the attachment to view the complete test results with expandable test details.</span>");
+        body.append("</div>");
+
+        // Individual API Test Results section
+        body.append("<h3 style=\"color: #333; margin-top: 25px;\">📋 Individual API Test Results</h3>");
+
+        // API Endpoint Table
+        body.append("<table style=\"width: 100%; border-collapse: collapse; font-size: 13px;\">");
+        body.append("<thead><tr>");
+        body.append("<th style=\"background-color: #2196f3; color: white; padding: 10px; text-align: left; width: 40px;\">#</th>");
+        body.append("<th style=\"background-color: #2196f3; color: white; padding: 10px; text-align: left;\">API Endpoint</th>");
+        body.append("<th style=\"background-color: #2196f3; color: white; padding: 10px; text-align: right; width: 80px;\">Status</th>");
+        body.append("</tr></thead><tbody>");
+
+        int index = 1;
+        for (TestMethodDetails test : allTests) {
+            String projectName = extractProjectName(test.methodName);
+            String function = extractFunctionName(test.methodName);
+            boolean isPassed = test.errorMessage == null || test.errorMessage.isEmpty();
+            String statusColor = isPassed ? "#4caf50" : "#f44336";
+            String statusText = isPassed ? "✓ OK" : "✗ FAIL";
+
+            body.append("<tr style=\"border-bottom: 1px solid #e0e0e0;\">");
+            body.append("<td style=\"padding: 10px;\">").append(index++).append("</td>");
+            body.append("<td style=\"padding: 10px;\">");
+            body.append("<strong>").append(projectName).append("</strong> - ").append(function);
+            if (test.apiUrl != null && !test.apiUrl.isEmpty()) {
+                body.append("<br><a href=\"").append(test.apiUrl).append("\" style=\"color: #1976d2; font-size: 12px;\">").append(test.apiUrl).append("</a>");
+            }
+            body.append("</td>");
+            body.append("<td style=\"padding: 10px; text-align: right; color: ").append(statusColor).append("; font-weight: bold;\">").append(statusText).append("</td>");
+            body.append("</tr>");
+        }
+        body.append("</tbody></table>");
+
+        // AdHash Projects Tested section
+        body.append("<h3 style=\"color: #333; margin-top: 30px;\">🚀 AdHash Projects Tested</h3>");
+        body.append("<p>All <strong>").append(totalTests).append(" API endpoints</strong> tested successfully across all AdHash projects:</p>");
+
+        // Group by project
+        Map<String, Set<String>> projectFunctions = new HashMap<>();
+        for (TestMethodDetails test : allTests) {
+            String project = extractProjectName(test.methodName);
+            String function = extractFunctionName(test.methodName);
+            projectFunctions.computeIfAbsent(project, k -> new HashSet<>()).add(function);
+        }
+
+        // Display project cards
+        body.append("<div style=\"display: flex; flex-wrap: wrap; gap: 10px;\">");
+        for (Map.Entry<String, Set<String>> entry : projectFunctions.entrySet()) {
+            body.append("<div style=\"background-color: #f5f5f5; padding: 10px 15px; border-radius: 6px; margin: 5px;\">");
+            body.append("<strong>").append(entry.getKey()).append("</strong>");
+            body.append(" <span style=\"color: #666;\">(").append(String.join(", ", entry.getValue())).append(")</span>");
+            body.append("</div>");
+        }
+        body.append("</div>");
+
+        body.append("<hr style=\"border: none; border-top: 1px solid #e0e0e0; margin: 25px 0;\">");
+        body.append("<p style=\"color: #666; font-size: 12px;\"><em>Generated: ").append(timestamp).append("</em></p>");
         body.append("</div></body></html>");
 
         return body.toString();
+    }
+
+    /**
+     * Extract project name from method name (e.g., "pm_AdHash_Website" -> "AdHash")
+     */
+    private String extractProjectName(String methodName) {
+        if (methodName == null) return "Unknown";
+        // Remove prefix like "pm_" or "gm_"
+        String name = methodName.replaceFirst("^[a-z]+_", "");
+        // Extract project name (first part before underscore)
+        String[] parts = name.split("_");
+        if (parts.length >= 1) {
+            return parts[0];
+        }
+        return name;
+    }
+
+    /**
+     * Extract function name from method name (e.g., "pm_AdHash_Website" -> "Website")
+     */
+    private String extractFunctionName(String methodName) {
+        if (methodName == null) return "Unknown";
+        // Remove prefix like "pm_" or "gm_"
+        String name = methodName.replaceFirst("^[a-z]+_", "");
+        // Extract function name (everything after first underscore)
+        int idx = name.indexOf('_');
+        if (idx > 0 && idx < name.length() - 1) {
+            return name.substring(idx + 1).replace("_", " ");
+        }
+        return name;
     }
     
     /**

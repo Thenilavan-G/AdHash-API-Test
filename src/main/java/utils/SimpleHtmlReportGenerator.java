@@ -432,4 +432,36 @@ public class SimpleHtmlReportGenerator {
         failedTestMethods.clear();
         skippedTestMethods.clear();
     }
+
+    /**
+     * Get all test methods (passed + failed + skipped)
+     */
+    public static List<TestMethodDetails> getAllTestMethods() {
+        List<TestMethodDetails> allMethods = new ArrayList<>();
+        allMethods.addAll(passedTestMethods);
+        allMethods.addAll(failedTestMethods);
+        allMethods.addAll(skippedTestMethods);
+        return allMethods;
+    }
+
+    /**
+     * Get passed test methods
+     */
+    public static List<TestMethodDetails> getPassedTestMethods() {
+        return passedTestMethods;
+    }
+
+    /**
+     * Get failed test methods
+     */
+    public static List<TestMethodDetails> getFailedTestMethods() {
+        return failedTestMethods;
+    }
+
+    /**
+     * Get test statistics
+     */
+    public static int getTotalTests() { return totalTests; }
+    public static int getPassedTests() { return passedTests; }
+    public static int getFailedTests() { return failedTests; }
 }

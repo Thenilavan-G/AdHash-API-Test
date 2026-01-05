@@ -178,7 +178,7 @@ public class GeneratedApiTest extends ApiBase {
     @Test
     public void pm_MHRTM_Participant_Login_UI() {
         // Source: MHRTM_Participant_Login_UI
-        HttpClient.get("https://participant.myhealthrtm.com/", 200);
+        HttpClient.get("https://participants.myhealthrtm.com/", 200);
     }
 
     @Test

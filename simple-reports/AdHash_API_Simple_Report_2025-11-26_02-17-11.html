@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AdHash API Test Report</title>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .header { text-align: center; margin-bottom: 30px; }
+        .title { color: #333; font-size: 28px; margin-bottom: 10px; }
+        .subtitle { color: #666; font-size: 16px; }
+        .stats { display: flex; justify-content: space-around; margin: 30px 0; }
+        .stat-box { text-align: center; padding: 20px; border-radius: 8px; min-width: 120px; }
+        .stat-number { font-size: 36px; font-weight: bold; margin-bottom: 5px; }
+        .stat-label { font-size: 14px; color: #666; }
+        .total { background-color: #e3f2fd; color: #1976d2; }
+        .passed { background-color: #e8f5e8; color: #4caf50; }
+        .failed { background-color: #ffebee; color: #f44336; }
+        .skipped { background-color: #fff3e0; color: #ff9800; }
+        .success-rate { text-align: center; margin: 30px 0; }
+        .success-rate-number { font-size: 48px; font-weight: bold; color: #4caf50; }
+        .chart-container { text-align: center; margin: 30px 0; }
+        .status { text-align: center; margin: 20px 0; padding: 15px; border-radius: 8px; font-size: 18px; font-weight: bold; }
+        .status.success { background-color: #e8f5e8; color: #4caf50; }
+        .status.warning { background-color: #fff3e0; color: #ff9800; }
+        .status.error { background-color: #ffebee; color: #f44336; }
+        .test-methods { margin: 30px 0; }
+        .test-methods h3 { text-align: center; color: #333; margin-bottom: 20px; }
+        .method-section { margin: 20px 0; }
+        .method-section h4 { margin-bottom: 10px; }
+        .method-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 8px; }
+        .method-item { padding: 8px 12px; border-radius: 4px; font-size: 14px; margin-bottom: 4px; }
+        .expandable { cursor: pointer; transition: all 0.3s ease; }
+        .expandable:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .method-name { display: inline-block; flex: 1; }
+        .expand-icon { float: right; transition: transform 0.3s ease; font-size: 12px; }
+        .method-details { margin-top: 8px; padding: 8px; background: rgba(255,255,255,0.5); border-radius: 4px; }
+        .detail-item { margin: 4px 0; font-size: 12px; }
+        .error-message { color: #d32f2f; font-weight: bold; }
+        .passed-method { background-color: #e8f5e8; color: #2e7d32; border-left: 4px solid #4caf50; }
+        .failed-method { background-color: #ffebee; color: #c62828; border-left: 4px solid #f44336; }
+        .skipped-method { background-color: #fff3e0; color: #ef6c00; border-left: 4px solid #ff9800; }
+        .footer { text-align: center; margin-top: 30px; color: #666; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">🎯 AdHash API Test Report</h1>
+            <p class="subtitle">Wednesday, November 26, 2025 at 02:18 am</p>
+        </div>
+        <div class="stats">
+            <div class="stat-box total">
+                <div class="stat-number">74</div>
+                <div class="stat-label">Total Tests</div>
+            </div>
+            <div class="stat-box passed">
+                <div class="stat-number">74</div>
+                <div class="stat-label">✅ Passed</div>
+            </div>
+            <div class="stat-box failed">
+                <div class="stat-number">0</div>
+                <div class="stat-label">❌ Failed</div>
+            </div>
+        </div>
+        <div class="success-rate">
+            <div class="success-rate-number">100.0%</div>
+            <div class="stat-label">Success Rate</div>
+        </div>
+        <div class="status success">
+            ✅ ALL TESTS PASSED
+        </div>
+        <div class="test-methods">
+            <h3>📋 Test Methods</h3>
+            <div class="method-section">
+                <h4 style="color: #4caf50;">✅ Passed Tests (74)</h4>
+                <div class="method-list">
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_AdHash_Website')">
+                        <span class="method-name">AdHash Website</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_AdHash_Website" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://adhashtech.com/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_AutoChecker_Login_UI')">
+                        <span class="method-name">AutoChecker Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_AutoChecker_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://manage.autochecker.com/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_AutoChecker_Admin_Login')">
+                        <span class="method-name">AutoChecker Admin Login</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_AutoChecker_Admin_Login" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://manageadminapi.autochecker.com/adminapi/auth/login</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 201</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_AutoChecker_App_Login')">
+                        <span class="method-name">AutoChecker App Login</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_AutoChecker_App_Login" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://managemobileapi.autochecker.com/api/auth/login</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 201</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHAI_Doctor_SuperAdmin_Login_UI')">
+                        <span class="method-name">MHAI Doctor SuperAdmin Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHAI_Doctor_SuperAdmin_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://admin.myhealthai.io/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHAI_Doctor_SuperAdmin_Login')">
+                        <span class="method-name">MHAI Doctor SuperAdmin Login</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHAI_Doctor_SuperAdmin_Login" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://admin.myhealthai.io/api/login/login</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHAI_Doctor_Login_UI')">
+                        <span class="method-name">MHAI Doctor Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHAI_Doctor_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://doctor.myhealthai.io/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHAI_Doctor_Login')">
+                        <span class="method-name">MHAI Doctor Login</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHAI_Doctor_Login" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://admin.myhealthai.io/api/login/physicianlogin</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_KCAI_Doctor_SuperAdmin_Login_UI')">
+                        <span class="method-name">KCAI Doctor SuperAdmin Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_KCAI_Doctor_SuperAdmin_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://admin.kaicare.ai/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_KCAI_Doctor_SuperAdmin_Login')">
+                        <span class="method-name">KCAI Doctor SuperAdmin Login</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_KCAI_Doctor_SuperAdmin_Login" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://adminapi.kaicare.ai/api/login/login</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_KCAI_Doctor_Login_UI')">
+                        <span class="method-name">KCAI Doctor Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_KCAI_Doctor_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://doctor.kaicare.ai/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_KCAI_Doctor_Login')">
+                        <span class="method-name">KCAI Doctor Login</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_KCAI_Doctor_Login" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://adminapi.kaicare.ai/api/login/physicianlogin</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHCRM_SuperAdmin_Login_UI')">
+                        <span class="method-name">MHCRM SuperAdmin Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHCRM_SuperAdmin_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://crm.myhealthccm.com/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHCRM_SuperAdmin_Login')">
+                        <span class="method-name">MHCRM SuperAdmin Login</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHCRM_SuperAdmin_Login" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://crmapi.myhealthccm.com/api/login/CrmLogin</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHCRM_Admin_Login')">
+                        <span class="method-name">MHCRM Admin Login</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHCRM_Admin_Login" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://crmapi.myhealthccm.com/api/login/CrmLogin</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHCCM_SuperAdmin_Login_UI')">
+                        <span class="method-name">MHCCM SuperAdmin Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHCCM_SuperAdmin_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://admin.myhealthccm.com/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHCCM_SuperAdmin_Login')">
+                        <span class="method-name">MHCCM SuperAdmin Login</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHCCM_SuperAdmin_Login" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://admin.myhealthccm.com/api/login/login</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHCCM_CPA_Login_UI')">
+                        <span class="method-name">MHCCM CPA Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHCCM_CPA_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://cpa.myhealthccm.com/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHCCM_CPA_Login')">
+                        <span class="method-name">MHCCM CPA Login</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHCCM_CPA_Login" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://admin.myhealthccm.com/api/login/physicianlogin</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHCCM_PAR_Login_UI')">
+                        <span class="method-name">MHCCM PAR Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHCCM_PAR_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://participants.myhealthccm.com/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHCCM_PAR_Login')">
+                        <span class="method-name">MHCCM PAR Login</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHCCM_PAR_Login" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://admin.myhealthccm.com/api/login/physicianlogin</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHCCM_Form_UI')">
+                        <span class="method-name">MHCCM Form UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHCCM_Form_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://forms.myhealthccm.com/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHCCM_PAR_CRM_Login_UI')">
+                        <span class="method-name">MHCCM PAR CRM Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHCCM_PAR_CRM_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://participantscrm.myhealthccm.com/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHCCM_PAR_CRM_Login')">
+                        <span class="method-name">MHCCM PAR CRM Login</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHCCM_PAR_CRM_Login" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://participantscrmapi.myhealthccm.com/api/login/CrmLogin</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHRTM_SuperAdmin_Login_UI')">
+                        <span class="method-name">MHRTM SuperAdmin Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHRTM_SuperAdmin_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://admin.myhealthrtm.com/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHRTM_SuperAdmin_Login')">
+                        <span class="method-name">MHRTM SuperAdmin Login</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHRTM_SuperAdmin_Login" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://adminapi.myhealthrtm.com/api/login/physicianlogin</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHRTM_CPA_Login_UI')">
+                        <span class="method-name">MHRTM CPA Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHRTM_CPA_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://cpa.myhealthrtm.com/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHRTM_CPA_Login')">
+                        <span class="method-name">MHRTM CPA Login</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHRTM_CPA_Login" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://adminapi.myhealthrtm.com/api/login/physicianlogin</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHRTM_Participant_Login_UI')">
+                        <span class="method-name">MHRTM Participant Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHRTM_Participant_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://participant.myhealthrtm.com/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHRTM_Participant_Login')">
+                        <span class="method-name">MHRTM Participant Login</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHRTM_Participant_Login" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://adminapi.myhealthrtm.com/api/login/physicianlogin</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_MHAI_Patient_App_Login')">
+                        <span class="method-name">MHAI Patient App Login</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_MHAI_Patient_App_Login" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://mobileapi.myhealthai.io/api/Login</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_KCAI_Patient_App_Login')">
+                        <span class="method-name">KCAI Patient App Login</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_KCAI_Patient_App_Login" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://mobileapi.kaicare.ai/api/Login</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_Wavedin_App_Login')">
+                        <span class="method-name">Wavedin App Login</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_Wavedin_App_Login" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://mobileliveapi.wavedin.app/api/auth/login</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 201</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_Sparkme_App_Login')">
+                        <span class="method-name">Sparkme App Login</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_Sparkme_App_Login" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://spark.synctag.com/api/auth/login</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 201</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_WavedIn_SuperAdmin_Login_UI')">
+                        <span class="method-name">WavedIn SuperAdmin Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_WavedIn_SuperAdmin_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://superadmin.wavedin.app/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_WavedIn_Market_Web')">
+                        <span class="method-name">WavedIn Market Web</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_WavedIn_Market_Web" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://market.wavedin.app/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_Sparkme_Web_Login_UI')">
+                        <span class="method-name">Sparkme Web Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_Sparkme_Web_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://sparkanalytics.synctag.com/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_Sparkme_Web_Login')">
+                        <span class="method-name">Sparkme Web Login</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_Sparkme_Web_Login" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://spark.synctag.com/analyticsapi/auth/login</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 201</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_Algomax_ProSky_Web_Login_UI')">
+                        <span class="method-name">Algomax ProSky Web Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_Algomax_ProSky_Web_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://prosky.algomax.co</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_Algomax_GoPocket_Web_Login_UI')">
+                        <span class="method-name">Algomax GoPocket Web Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_Algomax_GoPocket_Web_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://gopocket.algomax.co</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_LGM_Login_UI')">
+                        <span class="method-name">LGM Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_LGM_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://zapcrm.ai/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_LGM_Login_PhoneNumber')">
+                        <span class="method-name">LGM Login PhoneNumber</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_LGM_Login_PhoneNumber" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://identitytoolkit.googleapis.com/v1/accounts:sendVerificationCode?key=AIzaSyA02OjHzzCXgEnDBC1vS4zFdOSgs2HJzxg</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_LGM_Login_OTP')">
+                        <span class="method-name">LGM Login OTP</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_LGM_Login_OTP" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyA02OjHzzCXgEnDBC1vS4zFdOSgs2HJzxg</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_AskEPI_Login_UI')">
+                        <span class="method-name">AskEPI Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_AskEPI_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://askepi.ai/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_AskEPI_Login_PhoneNumber')">
+                        <span class="method-name">AskEPI Login PhoneNumber</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_AskEPI_Login_PhoneNumber" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://eadgapi.myhealthai.io/ai/user/checkUser</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_AskEPI_Login_OTP')">
+                        <span class="method-name">AskEPI Login OTP</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_AskEPI_Login_OTP" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyA02OjHzzCXgEnDBC1vS4zFdOSgs2HJzxg</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_RiskRealm_Admin_Web_Login_UI')">
+                        <span class="method-name">RiskRealm Admin Web Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_RiskRealm_Admin_Web_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://www.riskrealm.ai/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_RiskRealm_Chat_Web_Login_UI')">
+                        <span class="method-name">RiskRealm Chat Web Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_RiskRealm_Chat_Web_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://chat.riskrealm.ai/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_RiskRealm_Login_Number')">
+                        <span class="method-name">RiskRealm Login Number</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_RiskRealm_Login_Number" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://api.riskrealm.ai/ai/user/beforeLogincheckUser</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_RiskRealm_Login_OTP')">
+                        <span class="method-name">RiskRealm Login OTP</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_RiskRealm_Login_OTP" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyA02OjHzzCXgEnDBC1vS4zFdOSgs2HJzxg</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_AutoeVantage_eCommerce_Web_UI')">
+                        <span class="method-name">AutoeVantage eCommerce Web UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_AutoeVantage_eCommerce_Web_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://www.autoevantage.com/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_AutoeVantage_eCommerce_Login_PhoneNumber')">
+                        <span class="method-name">AutoeVantage eCommerce Login PhoneNumber</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_AutoeVantage_eCommerce_Login_PhoneNumber" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://identitytoolkit.googleapis.com/v1/accounts:sendVerificationCode?key=AIzaSyBAf4PM4HeNcO0uuByCUWwZFIYMYHfwUik</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_AutoeVantage_eCommerce_Login_OTP')">
+                        <span class="method-name">AutoeVantage eCommerce Login OTP</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_AutoeVantage_eCommerce_Login_OTP" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyBAf4PM4HeNcO0uuByCUWwZFIYMYHfwUik</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_AutoeVantage_Tools_Web_UI')">
+                        <span class="method-name">AutoeVantage Tools Web UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_AutoeVantage_Tools_Web_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://tools.autoevantage.com/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_AutoeVantage_Tools_Login_PhoneNumber')">
+                        <span class="method-name">AutoeVantage Tools Login PhoneNumber</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_AutoeVantage_Tools_Login_PhoneNumber" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://identitytoolkit.googleapis.com/v1/accounts:sendVerificationCode?key=AIzaSyBWHkUDpvKpigYPy2cpdfMHWOWiUl0CF2g</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_AutoeVantage_Tools_Login_OTP')">
+                        <span class="method-name">AutoeVantage Tools Login OTP</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_AutoeVantage_Tools_Login_OTP" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyBWHkUDpvKpigYPy2cpdfMHWOWiUl0CF2g</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_AutoeVantage_Analytics_Web_UI')">
+                        <span class="method-name">AutoeVantage Analytics Web UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_AutoeVantage_Analytics_Web_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://admin.autoevantage.com/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_AutoeVantage_Analytics_Login_PhoneNumber')">
+                        <span class="method-name">AutoeVantage Analytics Login PhoneNumber</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_AutoeVantage_Analytics_Login_PhoneNumber" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://identitytoolkit.googleapis.com/v1/accounts:sendVerificationCode?key=AIzaSyBWHkUDpvKpigYPy2cpdfMHWOWiUl0CF2g</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_AutoeVantage_Analytics_Login_OTP')">
+                        <span class="method-name">AutoeVantage Analytics Login OTP</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_AutoeVantage_Analytics_Login_OTP" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyBWHkUDpvKpigYPy2cpdfMHWOWiUl0CF2g</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_Metcalf_UI')">
+                        <span class="method-name">Metcalf UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_Metcalf_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://metcalf.ai/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_Humee_Admin_Web_Login_UI')">
+                        <span class="method-name">Humee Admin Web Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_Humee_Admin_Web_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://www.humee.com/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_Humee_Dashboard_Web_Login_UI')">
+                        <span class="method-name">Humee Dashboard Web Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_Humee_Dashboard_Web_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://dashboard.humee.com/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_Humee_Dashboard_Login_Number')">
+                        <span class="method-name">Humee Dashboard Login Number</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_Humee_Dashboard_Login_Number" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://api.humee.com/api/users/beforeLogincheckUser</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_Humee_Dashboard_Login_OTP')">
+                        <span class="method-name">Humee Dashboard Login OTP</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_Humee_Dashboard_Login_OTP" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyB6Fk4wRtuKFPL_2BToGZuGP7bOGUH08lQ</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_Humee_SuperAdmin_Login_UI')">
+                        <span class="method-name">Humee SuperAdmin Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_Humee_SuperAdmin_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://admin.humee.com/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_Humee_SuperAdmin_Login_Number')">
+                        <span class="method-name">Humee SuperAdmin Login Number</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_Humee_SuperAdmin_Login_Number" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://apiparticipant.humee.com/api/user/login</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_Humee_SuperAdmin_Login_OTP')">
+                        <span class="method-name">Humee SuperAdmin Login OTP</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_Humee_SuperAdmin_Login_OTP" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyBAf4PM4HeNcO0uuByCUWwZFIYMYHfwUik</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_Humee_CPA_Login_UI')">
+                        <span class="method-name">Humee CPA Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_Humee_CPA_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://cpa.humee.com/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_Humee_CPA_Login_Number')">
+                        <span class="method-name">Humee CPA Login Number</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_Humee_CPA_Login_Number" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://apiparticipant.humee.com/api/user/login</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_Humee_CPA_Login_OTP')">
+                        <span class="method-name">Humee CPA Login OTP</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_Humee_CPA_Login_OTP" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyBAf4PM4HeNcO0uuByCUWwZFIYMYHfwUik</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_Humee_Participant_Login_UI')">
+                        <span class="method-name">Humee Participant Login UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_Humee_Participant_Login_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://participant.humee.com/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_Humee_Participant_Login_Number')">
+                        <span class="method-name">Humee Participant Login Number</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_Humee_Participant_Login_Number" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://apiparticipant.humee.com/api/user/login</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_Humee_Participant_Login_OTP')">
+                        <span class="method-name">Humee Participant Login OTP</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_Humee_Participant_Login_OTP" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyBAf4PM4HeNcO0uuByCUWwZFIYMYHfwUik</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                    <div class="method-item passed-method expandable" onclick="toggleDetails('passed_pm_ZAPAI_UI')">
+                        <span class="method-name">ZAPAI UI</span>
+                        <span class="expand-icon">▼</span>
+                        <div class="method-details" id="passed_pm_ZAPAI_UI" style="display: none;">
+                            <div class="detail-item"><strong>API URL:</strong> https://zapai.us/</div>
+                            <div class="detail-item"><strong>Status Code:</strong> 200</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>Generated by AdHash API Test Suite</p>
+        </div>
+    </div>
+    
+    <script>
+        function toggleDetails(methodId) {
+            var details = document.getElementById(methodId);
+            var icon = details.parentElement.querySelector('.expand-icon');
+            
+            if (details.style.display === 'none') {
+                details.style.display = 'block';
+                icon.innerHTML = '▲';
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                details.style.display = 'none';
+                icon.innerHTML = '▼';
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AdHash API Test Report</title>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }
+        .container { max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .header { text-align: center; margin-bottom: 20px; }
+        .title { color: #333; font-size: 24px; margin-bottom: 5px; }
+        .timestamp { color: #666; font-size: 14px; text-decoration: underline; }
+        .stats { display: flex; justify-content: center; gap: 20px; margin: 25px 0; }
+        .stat-box { text-align: center; padding: 15px 30px; border-radius: 8px; min-width: 100px; border: 1px solid #e0e0e0; }
+        .stat-number { font-size: 32px; font-weight: bold; }
+        .stat-label { font-size: 12px; color: #666; margin-top: 5px; }
+        .total { background-color: #e3f2fd; }
+        .total .stat-number { color: #1976d2; }
+        .passed { background-color: #e8f5e9; }
+        .passed .stat-number { color: #4caf50; }
+        .passed .stat-label { color: #4caf50; }
+        .failed { background-color: #ffebee; }
+        .failed .stat-number { color: #f44336; }
+        .failed .stat-label { color: #f44336; }
+        .success-rate { text-align: center; margin: 20px 0; }
+        .success-rate-number { font-size: 42px; font-weight: bold; color: #4caf50; }
+        .success-rate-label { font-size: 14px; color: #666; }
+        .status-banner { text-align: center; margin: 20px 0; padding: 12px; border-radius: 6px; font-size: 16px; font-weight: bold; }
+        .status-banner.success { background-color: #4caf50; color: white; }
+        .status-banner.failed { background-color: #f44336; color: white; }
+        .status-banner.warning { background-color: #ff9800; color: white; }
+        .table-container { margin: 25px 0; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th { background-color: #455a64; color: white; padding: 10px 8px; text-align: left; font-weight: 600; }
+        td { padding: 10px 8px; border-bottom: 1px solid #e0e0e0; vertical-align: top; }
+        tr:hover { background-color: #f5f5f5; }
+        .sno { width: 50px; text-align: center; }
+        .project-name { width: 120px; }
+        .url { word-break: break-all; }
+        .url a { color: #1976d2; text-decoration: none; }
+        .url a:hover { text-decoration: underline; }
+        .status-ok { color: #4caf50; font-weight: bold; }
+        .status-fail { color: #f44336; font-size: 12px; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 11px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">🎯 AdHash API Test Report</h1>
+            <p class="timestamp">05/01/2026 17:19:13 IST</p>
+        </div>
+        <div class="stats">
+            <div class="stat-box total">
+                <div class="stat-number">75</div>
+                <div class="stat-label">Total Tests</div>
+            </div>
+            <div class="stat-box passed">
+                <div class="stat-number">✓ 75</div>
+                <div class="stat-label">Passed</div>
+            </div>
+            <div class="stat-box failed">
+                <div class="stat-number">✗ 0</div>
+                <div class="stat-label">Failed</div>
+            </div>
+        </div>
+        <div class="success-rate">
+            <div class="success-rate-number">100.0%</div>
+            <div class="success-rate-label">Success Rate</div>
+        </div>
+        <div class="status-banner success">
+            ✓ ALL TESTS PASSED
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="sno">S.No</th>
+                        <th class="project-name">Project Name</th>
+                        <th>Website URL</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="sno">1</td>
+                        <td class="project-name">AdHash Website</td>
+                        <td class="url"><a href="https://adhashtech.com/" target="_blank">https://adhashtech.com/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">2</td>
+                        <td class="project-name">AutoChecker Login</td>
+                        <td class="url"><a href="https://manage.autochecker.com/" target="_blank">https://manage.autochecker.com/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">3</td>
+                        <td class="project-name">AutoChecker Admin</td>
+                        <td class="url"><a href="https://manageadminapi.autochecker.com/adminapi/auth/login" target="_blank">https://manageadminapi.autochecker.com/adminapi/auth/login</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">4</td>
+                        <td class="project-name">AutoChecker App</td>
+                        <td class="url"><a href="https://managemobileapi.autochecker.com/api/auth/login" target="_blank">https://managemobileapi.autochecker.com/api/auth/login</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">5</td>
+                        <td class="project-name">KCAI Doctor</td>
+                        <td class="url"><a href="https://admin.kaicare.ai/" target="_blank">https://admin.kaicare.ai/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">6</td>
+                        <td class="project-name">KCAI Doctor</td>
+                        <td class="url"><a href="https://adminapi.kaicare.ai/api/login/login" target="_blank">https://adminapi.kaicare.ai/api/login/login</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">7</td>
+                        <td class="project-name">KCAI Doctor</td>
+                        <td class="url"><a href="https://doctor.kaicare.ai/" target="_blank">https://doctor.kaicare.ai/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">8</td>
+                        <td class="project-name">KCAI Doctor</td>
+                        <td class="url"><a href="https://adminapi.kaicare.ai/api/login/physicianlogin" target="_blank">https://adminapi.kaicare.ai/api/login/physicianlogin</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">9</td>
+                        <td class="project-name">MHCRM SuperAdmin</td>
+                        <td class="url"><a href="https://crm.myhealthccm.com/" target="_blank">https://crm.myhealthccm.com/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">10</td>
+                        <td class="project-name">MHCRM SuperAdmin</td>
+                        <td class="url"><a href="https://crmapi.myhealthccm.com/api/login/CrmLogin" target="_blank">https://crmapi.myhealthccm.com/api/login/CrmLogin</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">11</td>
+                        <td class="project-name">MHCRM Admin</td>
+                        <td class="url"><a href="https://crmapi.myhealthccm.com/api/login/CrmLogin" target="_blank">https://crmapi.myhealthccm.com/api/login/CrmLogin</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">12</td>
+                        <td class="project-name">MHCCM SuperAdmin</td>
+                        <td class="url"><a href="https://admin.myhealthccm.com/" target="_blank">https://admin.myhealthccm.com/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">13</td>
+                        <td class="project-name">MHCCM SuperAdmin</td>
+                        <td class="url"><a href="https://admin.myhealthccm.com/api/login/login" target="_blank">https://admin.myhealthccm.com/api/login/login</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">14</td>
+                        <td class="project-name">MHCCM CPA</td>
+                        <td class="url"><a href="https://cpa.myhealthccm.com/" target="_blank">https://cpa.myhealthccm.com/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">15</td>
+                        <td class="project-name">MHCCM CPA</td>
+                        <td class="url"><a href="https://admin.myhealthccm.com/api/login/physicianlogin" target="_blank">https://admin.myhealthccm.com/api/login/physicianlogin</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">16</td>
+                        <td class="project-name">MHCCM PAR</td>
+                        <td class="url"><a href="https://participants.myhealthccm.com/" target="_blank">https://participants.myhealthccm.com/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">17</td>
+                        <td class="project-name">MHCCM PAR</td>
+                        <td class="url"><a href="https://admin.myhealthccm.com/api/login/physicianlogin" target="_blank">https://admin.myhealthccm.com/api/login/physicianlogin</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">18</td>
+                        <td class="project-name">MHCCM Form</td>
+                        <td class="url"><a href="https://forms.myhealthccm.com/" target="_blank">https://forms.myhealthccm.com/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">19</td>
+                        <td class="project-name">MHCCM PAR</td>
+                        <td class="url"><a href="https://participantscrm.myhealthccm.com/" target="_blank">https://participantscrm.myhealthccm.com/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">20</td>
+                        <td class="project-name">MHCCM PAR</td>
+                        <td class="url"><a href="https://participantscrmapi.myhealthccm.com/api/login/CrmLogin" target="_blank">https://participantscrmapi.myhealthccm.com/api/login/CrmLogin</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">21</td>
+                        <td class="project-name">MHRTM SuperAdmin</td>
+                        <td class="url"><a href="https://admin.myhealthrtm.com/" target="_blank">https://admin.myhealthrtm.com/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">22</td>
+                        <td class="project-name">MHRTM SuperAdmin</td>
+                        <td class="url"><a href="https://adminapi.myhealthrtm.com/api/login/physicianlogin" target="_blank">https://adminapi.myhealthrtm.com/api/login/physicianlogin</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">23</td>
+                        <td class="project-name">MHRTM CPA</td>
+                        <td class="url"><a href="https://cpa.myhealthrtm.com/" target="_blank">https://cpa.myhealthrtm.com/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">24</td>
+                        <td class="project-name">MHRTM CPA</td>
+                        <td class="url"><a href="https://adminapi.myhealthrtm.com/api/login/physicianlogin" target="_blank">https://adminapi.myhealthrtm.com/api/login/physicianlogin</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">25</td>
+                        <td class="project-name">MHRTM Participant</td>
+                        <td class="url"><a href="https://participants.myhealthrtm.com/" target="_blank">https://participants.myhealthrtm.com/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">26</td>
+                        <td class="project-name">MHRTM Participant</td>
+                        <td class="url"><a href="https://adminapi.myhealthrtm.com/api/login/physicianlogin" target="_blank">https://adminapi.myhealthrtm.com/api/login/physicianlogin</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">27</td>
+                        <td class="project-name">KCAI Patient</td>
+                        <td class="url"><a href="https://mobileapi.kaicare.ai/api/Login" target="_blank">https://mobileapi.kaicare.ai/api/Login</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">28</td>
+                        <td class="project-name">Wavedin App</td>
+                        <td class="url"><a href="https://mobileliveapi.wavedin.app/api/auth/login" target="_blank">https://mobileliveapi.wavedin.app/api/auth/login</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">29</td>
+                        <td class="project-name">Sparkme App</td>
+                        <td class="url"><a href="https://spark.synctag.com/api/auth/login" target="_blank">https://spark.synctag.com/api/auth/login</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">30</td>
+                        <td class="project-name">WavedIn SuperAdmin</td>
+                        <td class="url"><a href="https://superadmin.wavedin.app/" target="_blank">https://superadmin.wavedin.app/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">31</td>
+                        <td class="project-name">WavedIn Market</td>
+                        <td class="url"><a href="https://market.wavedin.app/" target="_blank">https://market.wavedin.app/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">32</td>
+                        <td class="project-name">Sparkme Web</td>
+                        <td class="url"><a href="https://sparkanalytics.synctag.com/" target="_blank">https://sparkanalytics.synctag.com/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">33</td>
+                        <td class="project-name">Sparkme Web</td>
+                        <td class="url"><a href="https://spark.synctag.com/analyticsapi/auth/login" target="_blank">https://spark.synctag.com/analyticsapi/auth/login</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">34</td>
+                        <td class="project-name">Algomax ProSky</td>
+                        <td class="url"><a href="https://prosky.algomax.co" target="_blank">https://prosky.algomax.co</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">35</td>
+                        <td class="project-name">Algomax GoPocket</td>
+                        <td class="url"><a href="https://gopocket.algomax.co" target="_blank">https://gopocket.algomax.co</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">36</td>
+                        <td class="project-name">LGM Login</td>
+                        <td class="url"><a href="https://zapcrm.ai/" target="_blank">https://zapcrm.ai/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">37</td>
+                        <td class="project-name">LGM Login</td>
+                        <td class="url"><a href="https://identitytoolkit.googleapis.com/v1/accounts:sendVerificationCode?key=AIzaSyA02OjHzzCXgEnDBC1vS4zFdOSgs2HJzxg" target="_blank">https://identitytoolkit.googleapis.com/v1/accounts:sendVerificationCode?key=AIzaSyA02OjHzzCXgEnDBC1vS4zFdOSgs2HJzxg</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">38</td>
+                        <td class="project-name">LGM Login</td>
+                        <td class="url"><a href="https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyA02OjHzzCXgEnDBC1vS4zFdOSgs2HJzxg" target="_blank">https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyA02OjHzzCXgEnDBC1vS4zFdOSgs2HJzxg</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">39</td>
+                        <td class="project-name">AskEPI Login</td>
+                        <td class="url"><a href="https://askepi.ai/" target="_blank">https://askepi.ai/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">40</td>
+                        <td class="project-name">AskEPI Login</td>
+                        <td class="url"><a href="https://eadgapi.myhealthai.io/ai/user/checkUser" target="_blank">https://eadgapi.myhealthai.io/ai/user/checkUser</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">41</td>
+                        <td class="project-name">AskEPI Login</td>
+                        <td class="url"><a href="https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyA02OjHzzCXgEnDBC1vS4zFdOSgs2HJzxg" target="_blank">https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyA02OjHzzCXgEnDBC1vS4zFdOSgs2HJzxg</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">42</td>
+                        <td class="project-name">RiskRealm Admin</td>
+                        <td class="url"><a href="https://www.riskrealm.ai/" target="_blank">https://www.riskrealm.ai/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">43</td>
+                        <td class="project-name">RiskRealm Chat</td>
+                        <td class="url"><a href="https://chat.riskrealm.ai/" target="_blank">https://chat.riskrealm.ai/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">44</td>
+                        <td class="project-name">RiskRealm Login</td>
+                        <td class="url"><a href="https://api.riskrealm.ai/ai/user/beforeLogincheckUser" target="_blank">https://api.riskrealm.ai/ai/user/beforeLogincheckUser</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">45</td>
+                        <td class="project-name">RiskRealm Login</td>
+                        <td class="url"><a href="https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyA02OjHzzCXgEnDBC1vS4zFdOSgs2HJzxg" target="_blank">https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyA02OjHzzCXgEnDBC1vS4zFdOSgs2HJzxg</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">46</td>
+                        <td class="project-name">AutoeVantage eCommerce</td>
+                        <td class="url"><a href="https://www.autoevantage.com/" target="_blank">https://www.autoevantage.com/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">47</td>
+                        <td class="project-name">AutoeVantage eCommerce</td>
+                        <td class="url"><a href="https://identitytoolkit.googleapis.com/v1/accounts:sendVerificationCode?key=AIzaSyBAf4PM4HeNcO0uuByCUWwZFIYMYHfwUik" target="_blank">https://identitytoolkit.googleapis.com/v1/accounts:sendVerificationCode?key=AIzaSyBAf4PM4HeNcO0uuByCUWwZFIYMYHfwUik</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">48</td>
+                        <td class="project-name">AutoeVantage eCommerce</td>
+                        <td class="url"><a href="https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyBAf4PM4HeNcO0uuByCUWwZFIYMYHfwUik" target="_blank">https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyBAf4PM4HeNcO0uuByCUWwZFIYMYHfwUik</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">49</td>
+                        <td class="project-name">AutoeVantage Tools</td>
+                        <td class="url"><a href="https://tools.autoevantage.com/" target="_blank">https://tools.autoevantage.com/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">50</td>
+                        <td class="project-name">AutoeVantage Tools</td>
+                        <td class="url"><a href="https://identitytoolkit.googleapis.com/v1/accounts:sendVerificationCode?key=AIzaSyBWHkUDpvKpigYPy2cpdfMHWOWiUl0CF2g" target="_blank">https://identitytoolkit.googleapis.com/v1/accounts:sendVerificationCode?key=AIzaSyBWHkUDpvKpigYPy2cpdfMHWOWiUl0CF2g</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">51</td>
+                        <td class="project-name">AutoeVantage Tools</td>
+                        <td class="url"><a href="https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyBWHkUDpvKpigYPy2cpdfMHWOWiUl0CF2g" target="_blank">https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyBWHkUDpvKpigYPy2cpdfMHWOWiUl0CF2g</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">52</td>
+                        <td class="project-name">AutoeVantage Analytics</td>
+                        <td class="url"><a href="https://admin.autoevantage.com/" target="_blank">https://admin.autoevantage.com/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">53</td>
+                        <td class="project-name">AutoeVantage Analytics</td>
+                        <td class="url"><a href="https://identitytoolkit.googleapis.com/v1/accounts:sendVerificationCode?key=AIzaSyBWHkUDpvKpigYPy2cpdfMHWOWiUl0CF2g" target="_blank">https://identitytoolkit.googleapis.com/v1/accounts:sendVerificationCode?key=AIzaSyBWHkUDpvKpigYPy2cpdfMHWOWiUl0CF2g</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">54</td>
+                        <td class="project-name">AutoeVantage Analytics</td>
+                        <td class="url"><a href="https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyBWHkUDpvKpigYPy2cpdfMHWOWiUl0CF2g" target="_blank">https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyBWHkUDpvKpigYPy2cpdfMHWOWiUl0CF2g</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">55</td>
+                        <td class="project-name">Metcalf UI</td>
+                        <td class="url"><a href="https://metcalf.ai/" target="_blank">https://metcalf.ai/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">56</td>
+                        <td class="project-name">Humee Admin</td>
+                        <td class="url"><a href="https://www.humee.com/" target="_blank">https://www.humee.com/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">57</td>
+                        <td class="project-name">Humee Dashboard</td>
+                        <td class="url"><a href="https://dashboard.humee.com/" target="_blank">https://dashboard.humee.com/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">58</td>
+                        <td class="project-name">Humee Dashboard</td>
+                        <td class="url"><a href="https://api.humee.com/api/users/beforeLogincheckUser" target="_blank">https://api.humee.com/api/users/beforeLogincheckUser</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">59</td>
+                        <td class="project-name">Humee Dashboard</td>
+                        <td class="url"><a href="https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyB6Fk4wRtuKFPL_2BToGZuGP7bOGUH08lQ" target="_blank">https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyB6Fk4wRtuKFPL_2BToGZuGP7bOGUH08lQ</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">60</td>
+                        <td class="project-name">Humee SuperAdmin</td>
+                        <td class="url"><a href="https://admin.humee.com/" target="_blank">https://admin.humee.com/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">61</td>
+                        <td class="project-name">Humee SuperAdmin</td>
+                        <td class="url"><a href="https://apiparticipant.humee.com/api/user/login" target="_blank">https://apiparticipant.humee.com/api/user/login</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">62</td>
+                        <td class="project-name">Humee SuperAdmin</td>
+                        <td class="url"><a href="https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyBAf4PM4HeNcO0uuByCUWwZFIYMYHfwUik" target="_blank">https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyBAf4PM4HeNcO0uuByCUWwZFIYMYHfwUik</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">63</td>
+                        <td class="project-name">Humee CPA</td>
+                        <td class="url"><a href="https://cpa.humee.com/" target="_blank">https://cpa.humee.com/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">64</td>
+                        <td class="project-name">Humee CPA</td>
+                        <td class="url"><a href="https://apiparticipant.humee.com/api/user/login" target="_blank">https://apiparticipant.humee.com/api/user/login</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">65</td>
+                        <td class="project-name">Humee CPA</td>
+                        <td class="url"><a href="https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyBAf4PM4HeNcO0uuByCUWwZFIYMYHfwUik" target="_blank">https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyBAf4PM4HeNcO0uuByCUWwZFIYMYHfwUik</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">66</td>
+                        <td class="project-name">Humee Participant</td>
+                        <td class="url"><a href="https://participant.humee.com/" target="_blank">https://participant.humee.com/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">67</td>
+                        <td class="project-name">Humee Participant</td>
+                        <td class="url"><a href="https://apiparticipant.humee.com/api/user/login" target="_blank">https://apiparticipant.humee.com/api/user/login</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">68</td>
+                        <td class="project-name">Humee Participant</td>
+                        <td class="url"><a href="https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyBAf4PM4HeNcO0uuByCUWwZFIYMYHfwUik" target="_blank">https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyBAf4PM4HeNcO0uuByCUWwZFIYMYHfwUik</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">69</td>
+                        <td class="project-name">ZAPAI UI</td>
+                        <td class="url"><a href="https://zapai.us/" target="_blank">https://zapai.us/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">70</td>
+                        <td class="project-name">ZAPCRM UI</td>
+                        <td class="url"><a href="https://zapcrm.io/" target="_blank">https://zapcrm.io/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">71</td>
+                        <td class="project-name">Lead ZAPCRM</td>
+                        <td class="url"><a href="https://lead.zapcrm.io/" target="_blank">https://lead.zapcrm.io/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">72</td>
+                        <td class="project-name">Secure ZAPCRM</td>
+                        <td class="url"><a href="https://secure.zapcrm.io/" target="_blank">https://secure.zapcrm.io/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">73</td>
+                        <td class="project-name">Social ZAPCRM</td>
+                        <td class="url"><a href="https://social.zapcrm.io/" target="_blank">https://social.zapcrm.io/</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">74</td>
+                        <td class="project-name">KaiCareAi CPTCode</td>
+                        <td class="url"><a href="https://adminapi.kaicare.ai/api/PhysicianAsst/UpdateCPTCode" target="_blank">https://adminapi.kaicare.ai/api/PhysicianAsst/UpdateCPTCode</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                    <tr>
+                        <td class="sno">75</td>
+                        <td class="project-name">KaiCareAi CallRecord</td>
+                        <td class="url"><a href="https://adminapi.kaicare.ai/api/Calls/ProcessCallRecordUploads?key=9dk3ci5AaSsCHJAgRrEqExpEBzF/PfERfrAF7ur07tQ=" target="_blank">https://adminapi.kaicare.ai/api/Calls/ProcessCallRecordUploads?key=9dk3ci5AaSsCHJAgRrEqExpEBzF/PfERfrAF7ur07tQ=</a></td>
+                        <td class="status-ok">✓ OK</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="footer">
+            <p>Generated by AdHash API Test Suite</p>
+        </div>
+    </div>
+</body>
+</html>

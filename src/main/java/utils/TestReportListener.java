@@ -40,10 +40,16 @@ public class TestReportListener implements ITestListener, ISuiteListener {
         String httpMethod = apiDetails != null ? apiDetails.httpMethod : "GET";
         String requestBody = apiDetails != null ? apiDetails.requestBody : null;
         String responseBody = apiDetails != null ? apiDetails.responseBody : null;
+        String certificateError = apiDetails != null ? apiDetails.certificateError : null;
 
-        // Record in simple report with full details
+        // Log certificate error if present
+        if (certificateError != null && !certificateError.isEmpty()) {
+            System.out.println("   🔒 " + certificateError);
+        }
+
+        // Record in simple report with full details including certificate error
         SimpleHtmlReportGenerator.recordTestResult("pass", testName, apiUrl, statusCode, errorMessage,
-                                                    httpMethod, requestBody, responseBody);
+                                                    httpMethod, requestBody, responseBody, certificateError);
 
         // Clear API details for next test
         HttpClient.clearCurrentApiCallDetails();
@@ -64,10 +70,16 @@ public class TestReportListener implements ITestListener, ISuiteListener {
         String httpMethod = apiDetails != null ? apiDetails.httpMethod : "GET";
         String requestBody = apiDetails != null ? apiDetails.requestBody : null;
         String responseBody = apiDetails != null ? apiDetails.responseBody : null;
+        String certificateError = apiDetails != null ? apiDetails.certificateError : null;
 
-        // Record in simple report with full details
+        // Log certificate error if present
+        if (certificateError != null && !certificateError.isEmpty()) {
+            System.out.println("   🔒 " + certificateError);
+        }
+
+        // Record in simple report with full details including certificate error
         SimpleHtmlReportGenerator.recordTestResult("fail", testName, apiUrl, statusCode, errorMessage,
-                                                    httpMethod, requestBody, responseBody);
+                                                    httpMethod, requestBody, responseBody, certificateError);
 
         // Clear API details for next test
         HttpClient.clearCurrentApiCallDetails();
@@ -87,10 +99,16 @@ public class TestReportListener implements ITestListener, ISuiteListener {
         String httpMethod = apiDetails != null ? apiDetails.httpMethod : "GET";
         String requestBody = apiDetails != null ? apiDetails.requestBody : null;
         String responseBody = apiDetails != null ? apiDetails.responseBody : null;
+        String certificateError = apiDetails != null ? apiDetails.certificateError : null;
 
-        // Record in simple report with full details
+        // Log certificate error if present
+        if (certificateError != null && !certificateError.isEmpty()) {
+            System.out.println("   🔒 " + certificateError);
+        }
+
+        // Record in simple report with full details including certificate error
         SimpleHtmlReportGenerator.recordTestResult("skip", testName, apiUrl, statusCode, errorMessage,
-                                                    httpMethod, requestBody, responseBody);
+                                                    httpMethod, requestBody, responseBody, certificateError);
 
         // Clear API details for next test
         HttpClient.clearCurrentApiCallDetails();

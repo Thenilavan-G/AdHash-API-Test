@@ -166,7 +166,7 @@ public class EmailService {
     
     /**
      * Create HTML email body - generates a clean email-friendly format
-     * Shows status banner, API endpoint table, and project groupings
+     * Shows status banner, API endpoint table, certificate warnings, and project groupings
      */
     private String createEmailBody(String additionalMessage, String htmlReportPath) {
         StringBuilder body = new StringBuilder();
@@ -175,7 +175,9 @@ public class EmailService {
         int totalTests = SimpleHtmlReportGenerator.getTotalTests();
         int passedTests = SimpleHtmlReportGenerator.getPassedTests();
         int failedTests = SimpleHtmlReportGenerator.getFailedTests();
+        int certErrorCount = SimpleHtmlReportGenerator.getCertificateErrorCount();
         List<TestMethodDetails> allTests = SimpleHtmlReportGenerator.getAllTestMethods();
+        List<TestMethodDetails> testsWithCertErrors = SimpleHtmlReportGenerator.getTestsWithCertificateErrors();
 
         String timestamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss z").format(new Date());
         boolean allPassed = failedTests == 0;
@@ -188,6 +190,31 @@ public class EmailService {
             body.append("<div style=\"background-color: #4caf50; color: white; text-align: center; padding: 15px; border-radius: 6px; font-size: 18px; font-weight: bold; margin-bottom: 20px;\">☑ ALL TESTS PASSED</div>");
         } else {
             body.append("<div style=\"background-color: #f44336; color: white; text-align: center; padding: 15px; border-radius: 6px; font-size: 18px; font-weight: bold; margin-bottom: 20px;\">✗ TESTS FAILED (").append(failedTests).append(" of ").append(totalTests).append(")</div>");
+        }
+
+        // SSL Certificate Warning Banner (if any certificate errors)
+        if (certErrorCount > 0) {
+            body.append("<div style=\"background-color: #ff9800; color: white; text-align: center; padding: 12px; border-radius: 6px; font-size: 16px; font-weight: bold; margin-bottom: 20px;\">");
+            body.append("🔒 SSL CERTIFICATE WARNING: ").append(certErrorCount).append(" endpoint(s) have certificate issues!");
+            body.append("</div>");
+
+            // Certificate Error Details Section
+            body.append("<div style=\"background-color: #fff3e0; border: 2px solid #ff9800; border-radius: 6px; padding: 15px; margin-bottom: 20px;\">");
+            body.append("<h4 style=\"color: #e65100; margin-top: 0;\">🔒 SSL Certificate Issues Detected</h4>");
+            body.append("<p style=\"color: #e65100; margin-bottom: 10px;\">The following endpoints have SSL certificate problems that require attention:</p>");
+            body.append("<ul style=\"margin: 0; padding-left: 20px;\">");
+            for (TestMethodDetails test : testsWithCertErrors) {
+                String projectName = extractProjectName(test.methodName);
+                body.append("<li style=\"color: #e65100; margin-bottom: 8px;\">");
+                body.append("<strong>").append(projectName).append("</strong>");
+                if (test.apiUrl != null) {
+                    body.append(" - <a href=\"").append(test.apiUrl).append("\" style=\"color: #e65100;\">").append(test.apiUrl).append("</a>");
+                }
+                body.append("<br><span style=\"font-size: 12px;\">").append(test.certificateError).append("</span>");
+                body.append("</li>");
+            }
+            body.append("</ul>");
+            body.append("</div>");
         }
 
         // Attachment note
@@ -204,6 +231,7 @@ public class EmailService {
         body.append("<thead><tr>");
         body.append("<th style=\"background-color: #2196f3; color: white; padding: 10px; text-align: left; width: 40px;\">#</th>");
         body.append("<th style=\"background-color: #2196f3; color: white; padding: 10px; text-align: left;\">API Endpoint</th>");
+        body.append("<th style=\"background-color: #2196f3; color: white; padding: 10px; text-align: center; width: 50px;\">SSL</th>");
         body.append("<th style=\"background-color: #2196f3; color: white; padding: 10px; text-align: right; width: 80px;\">Status</th>");
         body.append("</tr></thead><tbody>");
 
@@ -214,6 +242,9 @@ public class EmailService {
             boolean isPassed = test.errorMessage == null || test.errorMessage.isEmpty();
             String statusColor = isPassed ? "#4caf50" : "#f44336";
             String statusText = isPassed ? "✓ OK" : "✗ FAIL";
+            boolean hasCertError = test.certificateError != null && !test.certificateError.isEmpty();
+            String sslStatus = hasCertError ? "⚠️" : "✓";
+            String sslColor = hasCertError ? "#ff9800" : "#4caf50";
 
             body.append("<tr style=\"border-bottom: 1px solid #e0e0e0;\">");
             body.append("<td style=\"padding: 10px;\">").append(index++).append("</td>");
@@ -223,6 +254,7 @@ public class EmailService {
                 body.append("<br><a href=\"").append(test.apiUrl).append("\" style=\"color: #1976d2; font-size: 12px;\">").append(test.apiUrl).append("</a>");
             }
             body.append("</td>");
+            body.append("<td style=\"padding: 10px; text-align: center; color: ").append(sslColor).append("; font-weight: bold;\">").append(sslStatus).append("</td>");
             body.append("<td style=\"padding: 10px; text-align: right; color: ").append(statusColor).append("; font-weight: bold;\">").append(statusText).append("</td>");
             body.append("</tr>");
         }

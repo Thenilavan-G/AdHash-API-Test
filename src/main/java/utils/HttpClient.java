@@ -1,8 +1,14 @@
 package utils;
 
 import java.io.IOException;
+import java.net.URL;
+import java.security.cert.Certificate;
+import java.security.cert.X509Certificate;
+import java.util.Date;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLHandshakeException;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.config.RequestConfig;
@@ -41,6 +47,7 @@ public class HttpClient {
         public String httpMethod;
         public String requestBody;
         public String responseBody;
+        public String certificateError;  // SSL certificate error message
 
         public ApiCallDetails(String url, int statusCode, String errorMessage) {
             this.url = url;
@@ -49,6 +56,7 @@ public class HttpClient {
             this.httpMethod = "GET";
             this.requestBody = null;
             this.responseBody = null;
+            this.certificateError = null;
         }
 
         public ApiCallDetails(String url, int statusCode, String errorMessage, String httpMethod, String requestBody, String responseBody) {
@@ -58,6 +66,17 @@ public class HttpClient {
             this.httpMethod = httpMethod;
             this.requestBody = requestBody;
             this.responseBody = responseBody;
+            this.certificateError = null;
+        }
+
+        public ApiCallDetails(String url, int statusCode, String errorMessage, String httpMethod, String requestBody, String responseBody, String certificateError) {
+            this.url = url;
+            this.statusCode = statusCode;
+            this.errorMessage = errorMessage;
+            this.httpMethod = httpMethod;
+            this.requestBody = requestBody;
+            this.responseBody = responseBody;
+            this.certificateError = certificateError;
         }
     }
 
@@ -100,11 +119,73 @@ public class HttpClient {
                 .build();
         }
     }
-    
+
+    /**
+     * Check SSL certificate validity for a URL
+     * Returns error message if certificate is invalid, null if valid
+     */
+    private static String checkCertificateValidity(String urlString) {
+        if (!urlString.startsWith("https://")) {
+            return null; // Not HTTPS, no certificate to check
+        }
+
+        try {
+            URL url = new URL(urlString);
+            HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+            conn.setConnectTimeout(10000);
+            conn.setReadTimeout(10000);
+            conn.connect();
+
+            Certificate[] certs = conn.getServerCertificates();
+            if (certs != null && certs.length > 0) {
+                for (Certificate cert : certs) {
+                    if (cert instanceof X509Certificate) {
+                        X509Certificate x509 = (X509Certificate) cert;
+                        Date now = new Date();
+                        Date notAfter = x509.getNotAfter();
+                        Date notBefore = x509.getNotBefore();
+
+                        // Check if certificate is expired
+                        if (now.after(notAfter)) {
+                            long daysExpired = (now.getTime() - notAfter.getTime()) / (1000 * 60 * 60 * 24);
+                            conn.disconnect();
+                            return "⚠️ SSL CERTIFICATE EXPIRED! Certificate expired " + daysExpired + " days ago (Expired: " + notAfter + ")";
+                        }
+
+                        // Check if certificate is not yet valid
+                        if (now.before(notBefore)) {
+                            conn.disconnect();
+                            return "⚠️ SSL CERTIFICATE NOT YET VALID! Valid from: " + notBefore;
+                        }
+
+                        // Check if certificate is expiring soon (within 30 days)
+                        long daysUntilExpiry = (notAfter.getTime() - now.getTime()) / (1000 * 60 * 60 * 24);
+                        if (daysUntilExpiry <= 30) {
+                            conn.disconnect();
+                            return "⚠️ SSL CERTIFICATE EXPIRING SOON! Expires in " + daysUntilExpiry + " days (Expires: " + notAfter + ")";
+                        }
+                    }
+                }
+            }
+            conn.disconnect();
+            return null; // Certificate is valid
+        } catch (javax.net.ssl.SSLHandshakeException e) {
+            return "⚠️ SSL CERTIFICATE ERROR: " + e.getMessage();
+        } catch (javax.net.ssl.SSLException e) {
+            return "⚠️ SSL ERROR: " + e.getMessage();
+        } catch (Exception e) {
+            // Certificate check failed but don't block the API call
+            return null;
+        }
+    }
+
     /**
      * Execute GET request and verify status code
      */
     public static void get(String url, int expectedStatusCode) {
+        // Check SSL certificate validity first
+        String certError = checkCertificateValidity(url);
+
         try {
             HttpGet request = new HttpGet(url);
             HttpResponse response = client.execute(request);
@@ -113,18 +194,22 @@ public class HttpClient {
             // Get response body (limit to prevent memory issues with large responses)
             String responseBody = getResponseBody(response);
 
-            // Store API call details with response
-            currentApiCall.set(new ApiCallDetails(url, statusCode, null, "GET", null, responseBody));
+            // Store API call details with response and certificate error
+            currentApiCall.set(new ApiCallDetails(url, statusCode, null, "GET", null, responseBody, certError));
 
             if (statusCode != expectedStatusCode) {
                 String errorMsg = "Expected status code " + expectedStatusCode + " but got " + statusCode;
-                currentApiCall.set(new ApiCallDetails(url, statusCode, errorMsg, "GET", null, responseBody));
+                currentApiCall.set(new ApiCallDetails(url, statusCode, errorMsg, "GET", null, responseBody, certError));
                 throw new AssertionError(errorMsg);
             }
 
         } catch (IOException e) {
             String errorMsg = "HTTP GET request failed: " + e.getMessage();
-            currentApiCall.set(new ApiCallDetails(url, 0, errorMsg, "GET", null, null));
+            // Check if it's an SSL certificate issue
+            if (e.getMessage() != null && (e.getMessage().contains("SSL") || e.getMessage().contains("certificate") || e.getMessage().contains("PKIX"))) {
+                certError = "⚠️ SSL CERTIFICATE ERROR: " + e.getMessage();
+            }
+            currentApiCall.set(new ApiCallDetails(url, 0, errorMsg, "GET", null, null, certError));
             throw new RuntimeException(errorMsg, e);
         }
     }
@@ -133,6 +218,9 @@ public class HttpClient {
      * Execute POST request with JSON body and verify status code
      */
     public static void post(String url, String jsonBody, int expectedStatusCode) {
+        // Check SSL certificate validity first
+        String certError = checkCertificateValidity(url);
+
         try {
             HttpPost request = new HttpPost(url);
             request.setHeader("Content-Type", "application/json");
@@ -148,18 +236,22 @@ public class HttpClient {
             // Get response body (limit to prevent memory issues with large responses)
             String responseBody = getResponseBody(response);
 
-            // Store API call details with request and response
-            currentApiCall.set(new ApiCallDetails(url, statusCode, null, "POST", jsonBody, responseBody));
+            // Store API call details with request and response and certificate error
+            currentApiCall.set(new ApiCallDetails(url, statusCode, null, "POST", jsonBody, responseBody, certError));
 
             if (statusCode != expectedStatusCode) {
                 String errorMsg = "Expected status code " + expectedStatusCode + " but got " + statusCode;
-                currentApiCall.set(new ApiCallDetails(url, statusCode, errorMsg, "POST", jsonBody, responseBody));
+                currentApiCall.set(new ApiCallDetails(url, statusCode, errorMsg, "POST", jsonBody, responseBody, certError));
                 throw new AssertionError(errorMsg);
             }
 
         } catch (IOException e) {
             String errorMsg = "HTTP POST request failed: " + e.getMessage();
-            currentApiCall.set(new ApiCallDetails(url, 0, errorMsg, "POST", jsonBody, null));
+            // Check if it's an SSL certificate issue
+            if (e.getMessage() != null && (e.getMessage().contains("SSL") || e.getMessage().contains("certificate") || e.getMessage().contains("PKIX"))) {
+                certError = "⚠️ SSL CERTIFICATE ERROR: " + e.getMessage();
+            }
+            currentApiCall.set(new ApiCallDetails(url, 0, errorMsg, "POST", jsonBody, null, certError));
             throw new RuntimeException(errorMsg, e);
         }
     }

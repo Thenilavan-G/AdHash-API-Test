@@ -35,6 +35,7 @@ public class SimpleHtmlReportGenerator {
         public String httpMethod;
         public String requestBody;
         public String responseBody;
+        public String certificateError;  // SSL certificate error message
 
         public TestMethodDetails(String methodName, String apiUrl, int statusCode, String errorMessage) {
             this.methodName = methodName;
@@ -44,6 +45,7 @@ public class SimpleHtmlReportGenerator {
             this.httpMethod = "GET";
             this.requestBody = null;
             this.responseBody = null;
+            this.certificateError = null;
         }
 
         public TestMethodDetails(String methodName, String apiUrl, int statusCode, String errorMessage,
@@ -55,6 +57,19 @@ public class SimpleHtmlReportGenerator {
             this.httpMethod = httpMethod;
             this.requestBody = requestBody;
             this.responseBody = responseBody;
+            this.certificateError = null;
+        }
+
+        public TestMethodDetails(String methodName, String apiUrl, int statusCode, String errorMessage,
+                                  String httpMethod, String requestBody, String responseBody, String certificateError) {
+            this.methodName = methodName;
+            this.apiUrl = apiUrl;
+            this.statusCode = statusCode;
+            this.errorMessage = errorMessage;
+            this.httpMethod = httpMethod;
+            this.requestBody = requestBody;
+            this.responseBody = responseBody;
+            this.certificateError = certificateError;
         }
     }
     
@@ -80,17 +95,26 @@ public class SimpleHtmlReportGenerator {
      * Record test result with test method name and API details (legacy method)
      */
     public static void recordTestResult(String status, String testMethodName, String apiUrl, int statusCode, String errorMessage) {
-        recordTestResult(status, testMethodName, apiUrl, statusCode, errorMessage, "GET", null, null);
+        recordTestResult(status, testMethodName, apiUrl, statusCode, errorMessage, "GET", null, null, null);
     }
 
     /**
-     * Record test result with full API details including request/response
+     * Record test result with full API details including request/response (legacy method)
      */
     public static void recordTestResult(String status, String testMethodName, String apiUrl, int statusCode,
                                          String errorMessage, String httpMethod, String requestBody, String responseBody) {
+        recordTestResult(status, testMethodName, apiUrl, statusCode, errorMessage, httpMethod, requestBody, responseBody, null);
+    }
+
+    /**
+     * Record test result with full API details including request/response and certificate error
+     */
+    public static void recordTestResult(String status, String testMethodName, String apiUrl, int statusCode,
+                                         String errorMessage, String httpMethod, String requestBody, String responseBody,
+                                         String certificateError) {
         totalTests++;
         TestMethodDetails details = new TestMethodDetails(testMethodName, apiUrl, statusCode, errorMessage,
-                                                           httpMethod, requestBody, responseBody);
+                                                           httpMethod, requestBody, responseBody, certificateError);
 
         switch (status.toLowerCase()) {
             case "pass":
@@ -172,6 +196,30 @@ public class SimpleHtmlReportGenerator {
         String bannerClass = failedTests > 0 ? "failed" : skippedTests > 0 ? "warning" : "success";
         String bannerText = failedTests > 0 ? "✗ TESTS FAILED" : skippedTests > 0 ? "⚠ TESTS PASSED WITH SKIPS" : "✓ ALL TESTS PASSED";
         html.append("        <div class=\"status-banner ").append(bannerClass).append("\">").append(bannerText).append("</div>\n");
+
+        // SSL Certificate Warning Banner (if any certificate errors)
+        int certErrorCount = getCertificateErrorCount();
+        if (certErrorCount > 0) {
+            html.append("        <div class=\"status-banner warning\" style=\"margin-top: 10px;\">🔒 SSL CERTIFICATE WARNING: ")
+                .append(certErrorCount).append(" endpoint(s) have certificate issues!</div>\n");
+
+            // Certificate Error Details Section
+            html.append("        <div style=\"background-color: #fff3e0; border: 2px solid #ff9800; border-radius: 6px; padding: 15px; margin: 15px 0;\">\n");
+            html.append("            <h4 style=\"color: #e65100; margin: 0 0 10px 0;\">🔒 SSL Certificate Issues Detected</h4>\n");
+            html.append("            <p style=\"color: #e65100; margin-bottom: 10px;\">The following endpoints have SSL certificate problems:</p>\n");
+            html.append("            <ul style=\"margin: 0; padding-left: 20px;\">\n");
+            for (TestMethodDetails test : getTestsWithCertificateErrors()) {
+                String projectName = extractProjectName(test.methodName);
+                html.append("                <li style=\"color: #e65100; margin-bottom: 8px;\"><strong>")
+                    .append(projectName).append("</strong>");
+                if (test.apiUrl != null) {
+                    html.append(" - <a href=\"").append(test.apiUrl).append("\" style=\"color: #e65100;\">").append(test.apiUrl).append("</a>");
+                }
+                html.append("<br><span style=\"font-size: 12px;\">").append(escapeHtml(test.certificateError)).append("</span></li>\n");
+            }
+            html.append("            </ul>\n");
+            html.append("        </div>\n");
+        }
 
         // Table with all tests
         html.append("        <div class=\"table-container\">\n");
@@ -296,6 +344,14 @@ public class SimpleHtmlReportGenerator {
         row.append("          <span class=\"status-code ").append(statusCodeClass).append("\">Status: ").append(method.statusCode).append("</span>\n");
         row.append("        </div>\n");
         row.append("      </div>\n");
+
+        // Certificate error box (if any) - PROMINENTLY DISPLAYED
+        if (method.certificateError != null && !method.certificateError.isEmpty()) {
+            row.append("      <div class=\"detail-box\" style=\"grid-column: 1 / -1; background-color: #fff3e0; border: 2px solid #ff9800;\">\n");
+            row.append("        <div class=\"detail-label\" style=\"color: #e65100;\">🔒 SSL Certificate Warning</div>\n");
+            row.append("        <div class=\"detail-value\" style=\"color: #e65100; font-weight: bold;\">").append(escapeHtml(method.certificateError)).append("</div>\n");
+            row.append("      </div>\n");
+        }
 
         // Error message box (if any)
         if (method.errorMessage != null && !method.errorMessage.isEmpty()) {
@@ -464,4 +520,24 @@ public class SimpleHtmlReportGenerator {
     public static int getTotalTests() { return totalTests; }
     public static int getPassedTests() { return passedTests; }
     public static int getFailedTests() { return failedTests; }
+
+    /**
+     * Get all tests with certificate errors
+     */
+    public static List<TestMethodDetails> getTestsWithCertificateErrors() {
+        List<TestMethodDetails> testsWithCertErrors = new ArrayList<>();
+        for (TestMethodDetails test : getAllTestMethods()) {
+            if (test.certificateError != null && !test.certificateError.isEmpty()) {
+                testsWithCertErrors.add(test);
+            }
+        }
+        return testsWithCertErrors;
+    }
+
+    /**
+     * Get count of tests with certificate errors
+     */
+    public static int getCertificateErrorCount() {
+        return getTestsWithCertificateErrors().size();
+    }
 }

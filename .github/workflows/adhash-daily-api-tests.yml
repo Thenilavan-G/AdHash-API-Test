@@ -258,259 +258,33 @@ jobs:
 
     - name: Send Success Email
       if: always() && steps.test-results.outputs.status == 'SUCCESS' && steps.check-secrets.outputs.secrets_available == 'true'
-      shell: bash
-      run: |
-        # Extract SSL issues from HTML report and send email with card-based UI
-        python3 << 'PYEOF'
-        import smtplib
-        import re
-        import os
-        from email.mime.multipart import MIMEMultipart
-        from email.mime.text import MIMEText
-        from email.mime.base import MIMEBase
-        from email import encoders
-
-        # Extract SSL issues from the HTML report
-        ssl_issues = []
-        report_path = "${{ steps.find-report.outputs.report_path }}"
-        if report_path and os.path.exists(report_path):
-            with open(report_path, 'r', encoding='utf-8') as f:
-                content = f.read()
-                ssl_match = re.search(r'SSL Certificate Issues Detected.*?<ul.*?>(.*?)</ul>', content, re.DOTALL)
-                if ssl_match:
-                    items = re.findall(r'<li.*?><strong>(.*?)</strong>.*?<a href="(.*?)"', ssl_match.group(1), re.DOTALL)
-                    ssl_issues = [(name.strip(), url.strip()) for name, url in items]
-
-        # Build SSL section HTML
-        ssl_html = ""
-        if ssl_issues:
-            ssl_items = ""
-            for name, url in ssl_issues:
-                ssl_items += f'<div style="padding:8px 0;border-bottom:1px solid #FFE0B2;"><strong style="color:#E65100;">⚠ {name}</strong><br><a href="{url}" style="color:#FF6D00;font-size:12px;word-break:break-all;">{url}</a></div>'
-            ssl_html = f'''
-            <div style="background:#FFF3E0;border-radius:8px;padding:15px;margin-top:15px;border-left:4px solid #FF9800;">
-              <div style="font-weight:bold;color:#E65100;margin-bottom:10px;">🔒 SSL CERTIFICATE WARNING - {len(ssl_issues)} Issue(s)</div>
-              {ssl_items}
-            </div>'''
-
-        # Build HTML email body with card-based UI
-        html_body = f'''<!DOCTYPE html>
-<html><head><meta charset="UTF-8"></head>
-<body style="margin:0;padding:20px;background:#f5f5f5;font-family:Arial,sans-serif;">
-<table width="600" align="center" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
-
-<!-- Header -->
-<tr><td style="background:linear-gradient(135deg,#4CAF50,#2E7D32);padding:25px;text-align:center;border-radius:12px 12px 0 0;">
-<h1 style="margin:0;color:#fff;font-size:22px;">🎯 AdHash API Test Report</h1>
-<p style="margin:8px 0 0;color:rgba(255,255,255,0.9);font-size:13px;">${{ steps.test-results.outputs.timestamp }}</p>
-</td></tr>
-
-<!-- Stats Cards -->
-<tr><td style="padding:20px;">
-<table width="100%" cellpadding="0" cellspacing="8">
-<tr>
-<td width="33%" align="center" style="background:#E3F2FD;padding:15px;border-radius:8px;">
-<div style="font-size:28px;font-weight:bold;color:#1976D2;">${{ steps.test-results.outputs.tests_run }}</div>
-<div style="font-size:11px;color:#666;margin-top:4px;">Total Tests</div></td>
-<td width="33%" align="center" style="background:#E8F5E9;padding:15px;border-radius:8px;">
-<div style="font-size:28px;font-weight:bold;color:#388E3C;">✓ ${{ steps.test-stats.outputs.passed }}</div>
-<div style="font-size:11px;color:#666;margin-top:4px;">Passed</div></td>
-<td width="33%" align="center" style="background:#FFEBEE;padding:15px;border-radius:8px;">
-<div style="font-size:28px;font-weight:bold;color:#D32F2F;">✗ ${{ steps.test-stats.outputs.failed }}</div>
-<div style="font-size:11px;color:#666;margin-top:4px;">Failed</div></td>
-</tr></table>
-
-<!-- Success Rate & Status -->
-<div style="text-align:center;margin:20px 0;">
-<div style="font-size:42px;font-weight:bold;color:#4CAF50;">${{ steps.test-stats.outputs.success_rate }}%</div>
-<div style="font-size:12px;color:#666;">Success Rate</div>
-</div>
-
-<div style="background:#4CAF50;color:#fff;text-align:center;padding:12px;border-radius:8px;font-weight:bold;font-size:14px;">
-✓ ALL TESTS PASSED
-</div>
-
-<!-- SSL Warning (if any) -->
-{ssl_html}
-
-<!-- Attachment Note -->
-<div style="background:#E8F5E9;border-radius:8px;padding:12px;margin-top:15px;border-left:4px solid #4CAF50;">
-<strong style="color:#2E7D32;">📎 Detailed report attached</strong>
-<div style="font-size:12px;color:#558B2F;margin-top:4px;">Open the HTML attachment for complete test details.</div>
-</div>
-
-</td></tr>
-
-<!-- Footer -->
-<tr><td style="background:#FAFAFA;padding:15px;text-align:center;border-radius:0 0 12px 12px;border-top:1px solid #EEE;">
-<p style="margin:0;font-size:11px;color:#999;">AdHash API Test Automation | ${{ steps.test-results.outputs.timestamp }}</p>
-</td></tr>
-
-</table></body></html>'''
-
-        # Email configuration
-        smtp_server = "smtp.zoho.com"
-        smtp_port = 465
-        username = "${{ secrets.EMAIL_USERNAME }}"
-        password = "${{ secrets.EMAIL_PASSWORD }}"
-        from_email = "${{ secrets.EMAIL_USERNAME }}"
-        to_email = "${{ secrets.EMAIL_TO }}"
-        subject = "✅ AdHash Daily API Tests - SUCCESS (${{ steps.test-results.outputs.timestamp }})"
-
-        # Create message
-        msg = MIMEMultipart()
-        msg['From'] = from_email
-        msg['To'] = to_email
-        msg['Subject'] = subject
-        msg.attach(MIMEText(html_body, 'html'))
-
-        # Attach HTML report if available
-        if report_path and os.path.exists(report_path):
-            with open(report_path, 'rb') as f:
-                part = MIMEBase('application', 'octet-stream')
-                part.set_payload(f.read())
-                encoders.encode_base64(part)
-                part.add_header('Content-Disposition', f'attachment; filename="{os.path.basename(report_path)}"')
-                msg.attach(part)
-
-        # Send email
-        try:
-            with smtplib.SMTP_SSL(smtp_server, smtp_port) as server:
-                server.login(username, password)
-                server.send_message(msg)
-            print("Success email sent successfully!")
-        except Exception as e:
-            print(f"Error sending email: {e}")
-            raise
-        PYEOF
+      env:
+        TEST_STATUS: SUCCESS
+        TEST_TIMESTAMP: ${{ steps.test-results.outputs.timestamp }}
+        TESTS_RUN: ${{ steps.test-results.outputs.tests_run }}
+        TESTS_PASSED: ${{ steps.test-stats.outputs.passed }}
+        TESTS_FAILED: ${{ steps.test-stats.outputs.failed }}
+        SUCCESS_RATE: ${{ steps.test-stats.outputs.success_rate }}
+        REPORT_PATH: ${{ steps.find-report.outputs.report_path }}
+        EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
+        EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        EMAIL_TO: ${{ secrets.EMAIL_TO }}
+      run: python3 .github/scripts/send_email.py
 
     - name: Send Failure Email
       if: always() && (steps.test-results.outputs.status == 'FAILURE' || steps.test-results.outputs.status == 'NO_TESTS') && steps.check-secrets.outputs.secrets_available == 'true'
-      shell: bash
-      run: |
-        # Extract SSL issues from HTML report and send email with card-based UI
-        python3 << 'PYEOF'
-        import smtplib
-        import re
-        import os
-        from email.mime.multipart import MIMEMultipart
-        from email.mime.text import MIMEText
-        from email.mime.base import MIMEBase
-        from email import encoders
-
-        # Extract SSL issues from the HTML report
-        ssl_issues = []
-        report_path = "${{ steps.find-report.outputs.report_path }}"
-        if report_path and os.path.exists(report_path):
-            with open(report_path, 'r', encoding='utf-8') as f:
-                content = f.read()
-                ssl_match = re.search(r'SSL Certificate Issues Detected.*?<ul.*?>(.*?)</ul>', content, re.DOTALL)
-                if ssl_match:
-                    items = re.findall(r'<li.*?><strong>(.*?)</strong>.*?<a href="(.*?)"', ssl_match.group(1), re.DOTALL)
-                    ssl_issues = [(name.strip(), url.strip()) for name, url in items]
-
-        # Build SSL section HTML
-        ssl_html = ""
-        if ssl_issues:
-            ssl_items = ""
-            for name, url in ssl_issues:
-                ssl_items += f'<div style="padding:8px 0;border-bottom:1px solid #FFE0B2;"><strong style="color:#E65100;">⚠ {name}</strong><br><a href="{url}" style="color:#FF6D00;font-size:12px;word-break:break-all;">{url}</a></div>'
-            ssl_html = f'''
-            <div style="background:#FFF3E0;border-radius:8px;padding:15px;margin-top:15px;border-left:4px solid #FF9800;">
-              <div style="font-weight:bold;color:#E65100;margin-bottom:10px;">🔒 SSL CERTIFICATE WARNING - {len(ssl_issues)} Issue(s)</div>
-              {ssl_items}
-            </div>'''
-
-        # Build HTML email body with card-based UI
-        html_body = f'''<!DOCTYPE html>
-<html><head><meta charset="UTF-8"></head>
-<body style="margin:0;padding:20px;background:#f5f5f5;font-family:Arial,sans-serif;">
-<table width="600" align="center" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
-
-<!-- Header -->
-<tr><td style="background:linear-gradient(135deg,#F44336,#C62828);padding:25px;text-align:center;border-radius:12px 12px 0 0;">
-<h1 style="margin:0;color:#fff;font-size:22px;">🎯 AdHash API Test Report</h1>
-<p style="margin:8px 0 0;color:rgba(255,255,255,0.9);font-size:13px;">${{ steps.test-results.outputs.timestamp }}</p>
-</td></tr>
-
-<!-- Stats Cards -->
-<tr><td style="padding:20px;">
-<table width="100%" cellpadding="0" cellspacing="8">
-<tr>
-<td width="33%" align="center" style="background:#E3F2FD;padding:15px;border-radius:8px;">
-<div style="font-size:28px;font-weight:bold;color:#1976D2;">${{ steps.test-results.outputs.tests_run }}</div>
-<div style="font-size:11px;color:#666;margin-top:4px;">Total Tests</div></td>
-<td width="33%" align="center" style="background:#E8F5E9;padding:15px;border-radius:8px;">
-<div style="font-size:28px;font-weight:bold;color:#388E3C;">✓ ${{ steps.test-stats.outputs.passed }}</div>
-<div style="font-size:11px;color:#666;margin-top:4px;">Passed</div></td>
-<td width="33%" align="center" style="background:#FFEBEE;padding:15px;border-radius:8px;">
-<div style="font-size:28px;font-weight:bold;color:#D32F2F;">✗ ${{ steps.test-stats.outputs.failed }}</div>
-<div style="font-size:11px;color:#666;margin-top:4px;">Failed</div></td>
-</tr></table>
-
-<!-- Success Rate & Status -->
-<div style="text-align:center;margin:20px 0;">
-<div style="font-size:42px;font-weight:bold;color:#F44336;">${{ steps.test-stats.outputs.success_rate }}%</div>
-<div style="font-size:12px;color:#666;">Success Rate</div>
-</div>
-
-<div style="background:#F44336;color:#fff;text-align:center;padding:12px;border-radius:8px;font-weight:bold;font-size:14px;">
-✗ TESTS FAILED
-</div>
-
-<!-- SSL Warning (if any) -->
-{ssl_html}
-
-<!-- Attachment Note -->
-<div style="background:#FFEBEE;border-radius:8px;padding:12px;margin-top:15px;border-left:4px solid #F44336;">
-<strong style="color:#C62828;">📎 Detailed report attached</strong>
-<div style="font-size:12px;color:#D32F2F;margin-top:4px;">Open the HTML attachment for complete test details and error information.</div>
-</div>
-
-</td></tr>
-
-<!-- Footer -->
-<tr><td style="background:#FAFAFA;padding:15px;text-align:center;border-radius:0 0 12px 12px;border-top:1px solid #EEE;">
-<p style="margin:0;font-size:11px;color:#999;">AdHash API Test Automation | ${{ steps.test-results.outputs.timestamp }}</p>
-</td></tr>
-
-</table></body></html>'''
-
-        # Email configuration
-        smtp_server = "smtp.zoho.com"
-        smtp_port = 465
-        username = "${{ secrets.EMAIL_USERNAME }}"
-        password = "${{ secrets.EMAIL_PASSWORD }}"
-        from_email = "${{ secrets.EMAIL_USERNAME }}"
-        to_email = "${{ secrets.EMAIL_TO }}"
-        subject = "❌ AdHash Daily API Tests - FAILED (${{ steps.test-results.outputs.timestamp }})"
-
-        # Create message
-        msg = MIMEMultipart()
-        msg['From'] = from_email
-        msg['To'] = to_email
-        msg['Subject'] = subject
-        msg.attach(MIMEText(html_body, 'html'))
-
-        # Attach HTML report if available
-        if report_path and os.path.exists(report_path):
-            with open(report_path, 'rb') as f:
-                part = MIMEBase('application', 'octet-stream')
-                part.set_payload(f.read())
-                encoders.encode_base64(part)
-                part.add_header('Content-Disposition', f'attachment; filename="{os.path.basename(report_path)}"')
-                msg.attach(part)
-
-        # Send email
-        try:
-            with smtplib.SMTP_SSL(smtp_server, smtp_port) as server:
-                server.login(username, password)
-                server.send_message(msg)
-            print("Failure email sent successfully!")
-        except Exception as e:
-            print(f"Error sending email: {e}")
-            raise
-        PYEOF
+      env:
+        TEST_STATUS: FAILURE
+        TEST_TIMESTAMP: ${{ steps.test-results.outputs.timestamp }}
+        TESTS_RUN: ${{ steps.test-results.outputs.tests_run }}
+        TESTS_PASSED: ${{ steps.test-stats.outputs.passed }}
+        TESTS_FAILED: ${{ steps.test-stats.outputs.failed }}
+        SUCCESS_RATE: ${{ steps.test-stats.outputs.success_rate }}
+        REPORT_PATH: ${{ steps.find-report.outputs.report_path }}
+        EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
+        EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        EMAIL_TO: ${{ secrets.EMAIL_TO }}
+      run: python3 .github/scripts/send_email.py
 
     - name: Warn about missing secrets
       if: always() && steps.check-secrets.outputs.secrets_available == 'false'

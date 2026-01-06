@@ -129,10 +129,10 @@ public class EmailService {
             // Create multipart message
             Multipart multipart = new MimeMultipart();
             
-            // Add text part
+            // Add HTML part with card-based UI
             BodyPart messageBodyPart = new MimeBodyPart();
             String emailBody = createEmailBody(additionalMessage, htmlReportPath);
-            messageBodyPart.setContent(emailBody, "text/plain; charset=utf-8");
+            messageBodyPart.setContent(emailBody, "text/html; charset=utf-8");
             multipart.addBodyPart(messageBodyPart);
             
             // Add HTML report as attachment
@@ -158,7 +158,7 @@ public class EmailService {
     }
     
     /**
-     * Create simple email body - just a brief message, HTML report is attached
+     * Create HTML email body with card-based UI design
      */
     private String createEmailBody(String additionalMessage, String htmlReportPath) {
         String timestamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss z").format(new Date());
@@ -168,26 +168,68 @@ public class EmailService {
         int certErrorCount = SimpleHtmlReportGenerator.getCertificateErrorCount();
         java.util.List<SimpleHtmlReportGenerator.TestMethodDetails> sslIssues = SimpleHtmlReportGenerator.getTestsWithCertificateErrors();
 
-        String status = failedTests == 0 ? "ALL TESTS PASSED" : failedTests + " TEST(S) FAILED";
+        boolean allPassed = failedTests == 0;
+        String headerColor = allPassed ? "background:linear-gradient(135deg,#4CAF50,#2E7D32);" : "background:linear-gradient(135deg,#F44336,#C62828);";
+        String statusBanner = allPassed
+            ? "<div style=\"background:#4CAF50;color:#fff;text-align:center;padding:12px;border-radius:8px;font-weight:bold;\">✓ ALL TESTS PASSED</div>"
+            : "<div style=\"background:#F44336;color:#fff;text-align:center;padding:12px;border-radius:8px;font-weight:bold;\">✗ " + failedTests + " TEST(S) FAILED</div>";
+        String rateColor = allPassed ? "#4CAF50" : "#F44336";
+        double successRate = totalTests > 0 ? (passedTests * 100.0 / totalTests) : 0;
 
-        StringBuilder body = new StringBuilder();
-        body.append("AdHash API Test Report - ").append(timestamp).append("\n\n");
-        body.append("Total: ").append(totalTests).append(" | Passed: ").append(passedTests).append(" | Failed: ").append(failedTests).append("\n");
-        body.append("Status: ").append(status).append("\n");
-
+        // Build SSL warning section
+        StringBuilder sslHtml = new StringBuilder();
         if (certErrorCount > 0) {
-            body.append("\n⚠️ SSL CERTIFICATE WARNING: ").append(certErrorCount).append(" endpoint(s) have SSL certificate issues!\n");
+            sslHtml.append("<div style=\"background:#FFF3E0;border-radius:8px;padding:15px;margin-top:15px;border-left:4px solid #FF9800;\">");
+            sslHtml.append("<div style=\"font-weight:bold;color:#E65100;margin-bottom:10px;\">🔒 SSL CERTIFICATE WARNING - ").append(certErrorCount).append(" Issue(s)</div>");
             for (SimpleHtmlReportGenerator.TestMethodDetails test : sslIssues) {
                 String projectName = extractProjectName(test.methodName);
-                body.append("  - ").append(projectName);
+                sslHtml.append("<div style=\"padding:8px 0;border-bottom:1px solid #FFE0B2;\"><strong style=\"color:#E65100;\">⚠ ").append(projectName).append("</strong>");
                 if (test.apiUrl != null) {
-                    body.append(": ").append(test.apiUrl);
+                    sslHtml.append("<br><a href=\"").append(test.apiUrl).append("\" style=\"color:#FF6D00;font-size:12px;word-break:break-all;\">").append(test.apiUrl).append("</a>");
                 }
-                body.append("\n");
+                sslHtml.append("</div>");
             }
+            sslHtml.append("</div>");
         }
 
-        body.append("\nPlease open the attached HTML report for detailed results.");
+        // Build card-based HTML email
+        StringBuilder body = new StringBuilder();
+        body.append("<!DOCTYPE html><html><head><meta charset=\"UTF-8\"></head>");
+        body.append("<body style=\"margin:0;padding:20px;background:#f5f5f5;font-family:Arial,sans-serif;\">");
+        body.append("<table width=\"600\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);\">");
+
+        // Header
+        body.append("<tr><td style=\"").append(headerColor).append("padding:25px;text-align:center;border-radius:12px 12px 0 0;\">");
+        body.append("<h1 style=\"margin:0;color:#fff;font-size:22px;\">🎯 AdHash API Test Report</h1>");
+        body.append("<p style=\"margin:8px 0 0;color:rgba(255,255,255,0.9);font-size:13px;\">").append(timestamp).append("</p>");
+        body.append("</td></tr>");
+
+        // Stats Cards
+        body.append("<tr><td style=\"padding:20px;\">");
+        body.append("<table width=\"100%\" cellpadding=\"0\" cellspacing=\"8\"><tr>");
+        body.append("<td width=\"33%\" align=\"center\" style=\"background:#E3F2FD;padding:15px;border-radius:8px;\"><div style=\"font-size:28px;font-weight:bold;color:#1976D2;\">").append(totalTests).append("</div><div style=\"font-size:11px;color:#666;margin-top:4px;\">Total Tests</div></td>");
+        body.append("<td width=\"33%\" align=\"center\" style=\"background:#E8F5E9;padding:15px;border-radius:8px;\"><div style=\"font-size:28px;font-weight:bold;color:#388E3C;\">✓ ").append(passedTests).append("</div><div style=\"font-size:11px;color:#666;margin-top:4px;\">Passed</div></td>");
+        body.append("<td width=\"33%\" align=\"center\" style=\"background:#FFEBEE;padding:15px;border-radius:8px;\"><div style=\"font-size:28px;font-weight:bold;color:#D32F2F;\">✗ ").append(failedTests).append("</div><div style=\"font-size:11px;color:#666;margin-top:4px;\">Failed</div></td>");
+        body.append("</tr></table>");
+
+        // Success Rate
+        body.append("<div style=\"text-align:center;margin:20px 0;\"><div style=\"font-size:42px;font-weight:bold;color:").append(rateColor).append(";\">").append(String.format("%.1f", successRate)).append("%</div><div style=\"font-size:12px;color:#666;\">Success Rate</div></div>");
+
+        // Status Banner
+        body.append(statusBanner);
+
+        // SSL Warning
+        body.append(sslHtml);
+
+        // Attachment Note
+        body.append("<div style=\"background:#E8F5E9;border-radius:8px;padding:12px;margin-top:15px;border-left:4px solid #4CAF50;\"><strong style=\"color:#2E7D32;\">📎 Detailed report attached</strong><div style=\"font-size:12px;color:#558B2F;margin-top:4px;\">Open the HTML attachment for complete test details.</div></div>");
+
+        body.append("</td></tr>");
+
+        // Footer
+        body.append("<tr><td style=\"background:#FAFAFA;padding:15px;text-align:center;border-radius:0 0 12px 12px;border-top:1px solid #EEE;\"><p style=\"margin:0;font-size:11px;color:#999;\">AdHash API Test Automation | ").append(timestamp).append("</p></td></tr>");
+
+        body.append("</table></body></html>");
 
         return body.toString();
     }
@@ -197,9 +239,7 @@ public class EmailService {
      */
     private String extractProjectName(String methodName) {
         if (methodName == null) return "Unknown";
-        // Remove prefix like "pm_" or "gm_"
         String name = methodName.replaceFirst("^[a-z]+_", "");
-        // Replace underscores with spaces
         return name.replace("_", " ");
     }
 

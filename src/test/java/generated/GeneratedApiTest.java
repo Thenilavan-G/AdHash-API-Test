@@ -274,6 +274,14 @@ public class GeneratedApiTest extends ApiBase {
     }
 
     @Test
+    public void pm_LGM_Login_CheckUser() {
+        // Source: LGM_Login_PhoneNumber
+        HttpClient.post("https://leadgenapi.myhealthai.io/api/user/add",
+                       "{\"key\":\"S8TBVL/DaRbrmMynOz3XJub9V8qxEmpaRyP3ZdcbRE6xAEgyJOl4lgsskg6/0WRIC9coJmH7N3Z3cGsRVzev+Ti+m8yZFJksghS1u7neMgBD6gOzZtUfahufUe8AFSz3\"}",
+                       200);
+    }
+
+    @Test
     public void pm_AskEPI_Login_UI() {
         // Source: AskEPI_Login_UI
         HttpClient.get("https://askepi.ai/", 200);
@@ -282,19 +290,9 @@ public class GeneratedApiTest extends ApiBase {
     @Test
     public void pm_AskEPI_Login_PhoneNumber() {
         // Source: AskEPI_Login_PhoneNumber
-        try {
             HttpClient.post("https://eadgapi.myhealthai.io/ai/user/checkUser",
                            "{\"key\":\"fUjZB3a/IJyX6AyCgxVZ4m0d7ldlQbaFKSVspmarCFDZaT5lO/yIVd83upxkcfXG\"}",
                            200);
-        } catch (RuntimeException e) {
-            if (e.getMessage().contains("PKIX path building failed") || e.getMessage().contains("certificate")) {
-                System.out.println("⚠️ SSL Certificate issue detected for AskEPI API - marking as passed due to external SSL configuration");
-                // Don't fail the test due to SSL certificate issues
-                return;
-            }
-            // Re-throw other exceptions
-            throw e;
-        }
     }
 
     @Test
@@ -356,6 +354,14 @@ public class GeneratedApiTest extends ApiBase {
     }
 
     @Test
+    public void pm_AutoeVantage_eCommerce_Login() {
+        // Source: RiskRealm_Login_Number
+        HttpClient.post("https://aeeapi.autoevantage.com/api/user/login",
+                       "{\"key\" : \"hGGnbrc0Z2KZSG++olqRT1G47KAmFV7E7IW1P6sQb1TqqOYdXeTjlCDCEFvAH6jHlM/iuNGsL5RMEoo1BxK033xrZY4+FOTipdMfVpZMovN2Ph9Wpl86macnOXPA9YZc8mVgrFP6YzSddJepZZ9bvYe+MAQHXBrmwJ7mkjEuG2A=\"}",
+                       200);
+    }
+
+    @Test
     public void pm_AutoeVantage_Tools_Web_UI() {
         // Source: AutoeVantage_Tools_Web_UI
         HttpClient.get("https://tools.autoevantage.com/", 200);
@@ -374,6 +380,14 @@ public class GeneratedApiTest extends ApiBase {
         // Source: AutoeVantage_Tools_Login_OTP
         HttpClient.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=AIzaSyBWHkUDpvKpigYPy2cpdfMHWOWiUl0CF2g",
                        "{\"sessionInfo\":\"AD8T5IsH0Oyvy6zBlBilqSpTDknT5vh4HTMCLO4JhP2JMk3lekbwdilJHtpONpUzVlEx-E_5Eu2Kz9c6kKlFG5MzeYKIrRIAZ0J2pUEYY8b_wnRIwO-ROC6C9LFPSEX95aGQEohRh7IZ2JZMIaTxJt5o9M_CIDYObw\",\"code\":\"123456\"}",
+                       200);
+    }
+
+    @Test
+    public void pm_AutoeVantage_Tools_Login() {
+        // Source: RiskRealm_Login_Number
+        HttpClient.post("https://aeeapi.autoevantage.com/api/user/login",
+                       "{\"key\" : \"yhKUPp5VsQvFVC3J8DyAp0Qn9jJ0l42idpbzwq88JkkTx1nXk0V7KAFMO/VIp0wjbkHtuaEZUQSHkqMGIV+VKYuK9WdbtUzk/tY7QjoZ/pWej5o+jXSej4rkF4X6sJ1h\"}",
                        200);
     }
 
@@ -400,12 +414,20 @@ public class GeneratedApiTest extends ApiBase {
     }
 
     @Test
+    public void pm_AutoeVantage_Analytics_Login() {
+        // Source: RiskRealm_Login_Number
+        HttpClient.post("https://aeeapi.autoevantage.com/api/user/login",
+                       "{\"key\" : \"yhKUPp5VsQvFVC3J8DyAp0Qn9jJ0l42idpbzwq88JkkTx1nXk0V7KAFMO/VIp0wjbkHtuaEZUQSHkqMGIV+VKYuK9WdbtUzk/tY7QjoZ/pWej5o+jXSej4rkF4X6sJ1h\"}",
+                       200);
+    }
+
+    @Test
     public void pm_Metcalf_UI() {
         // Source: Metcalf_UI
         HttpClient.get("https://metcalf.ai/", 200);
     }
 
-        @Test
+    @Test
     public void pm_Humee_Admin_Web_Login_UI() {
         // Source: RiskRealm_Admin_Web_Login_UI
         HttpClient.get("https://www.humee.com/", 200);
@@ -517,13 +539,13 @@ public class GeneratedApiTest extends ApiBase {
         HttpClient.get("https://lead.zapcrm.io/", 200);
     }
 
-        @Test
+    @Test
     public void pm_Secure_ZAPCRM_UI() {
         // Source: Metcalf_UI
         HttpClient.get("https://secure.zapcrm.io/", 200);
     }
 
-        @Test
+    @Test
     public void pm_Social_ZAPCRM_UI() {
         // Source: Metcalf_UI
         HttpClient.get("https://social.zapcrm.io/", 200);

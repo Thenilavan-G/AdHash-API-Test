@@ -45,6 +45,7 @@
                     <include name="pm_LGM_Login_UI"/>
                     <include name="pm_LGM_Login_PhoneNumber"/>
                     <include name="pm_LGM_Login_OTP"/>
+                    <include name="pm_LGM_Login_CheckUser"/>
                     <include name="pm_AskEPI_Login_UI"/>
                     <include name="pm_AskEPI_Login_PhoneNumber"/>
                     <include name="pm_AskEPI_Login_OTP"/>
@@ -55,12 +56,15 @@
                     <include name="pm_AutoeVantage_eCommerce_Web_UI"/>
                     <include name="pm_AutoeVantage_eCommerce_Login_PhoneNumber"/>
                     <include name="pm_AutoeVantage_eCommerce_Login_OTP"/>
+                    <include name="pm_AutoeVantage_eCommerce_Login"/>
                     <include name="pm_AutoeVantage_Tools_Web_UI"/>
                     <include name="pm_AutoeVantage_Tools_Login_PhoneNumber"/>
                     <include name="pm_AutoeVantage_Tools_Login_OTP"/>
+                    <include name="pm_AutoeVantage_Tools_Login"/>
                     <include name="pm_AutoeVantage_Analytics_Web_UI"/>
                     <include name="pm_AutoeVantage_Analytics_Login_PhoneNumber"/>
                     <include name="pm_AutoeVantage_Analytics_Login_OTP"/>
+                    <include name="pm_AutoeVantage_Analytics_Login"/>
                     <include name="pm_Metcalf_UI"/>
                     <include name="pm_Humee_Admin_Web_Login_UI"/>
                     <include name="pm_Humee_Dashboard_Web_Login_UI"/>

@@ -260,184 +260,50 @@ jobs:
       if: always() && steps.test-results.outputs.status == 'SUCCESS' && steps.check-secrets.outputs.secrets_available == 'true'
       shell: bash
       run: |
-        # Read test details
-        TEST_DETAILS=$(cat test_details.html)
-
-        # Create email body with test details injected
-        cat > email_body_success.html << 'EMAILEOF'
-          <!DOCTYPE html>
-          <html>
-          <head>
-            <meta charset="UTF-8">
-            <style>
-              body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f5f5f5; padding: 20px; }
-              .container { max-width: 800px; margin: 0 auto; background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-              .header { text-align: center; margin-bottom: 30px; }
-              .title { color: #333; font-size: 28px; margin: 10px 0; }
-              .subtitle { color: #666; font-size: 14px; }
-              .stats-container { display: flex; justify-content: space-around; margin: 30px 0; flex-wrap: wrap; }
-              .stat-card { background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center; min-width: 150px; margin: 10px; }
-              .stat-card.total { background: #e3f2fd; }
-              .stat-card.passed { background: #e8f5e9; }
-              .stat-card.failed { background: #ffebee; }
-              .stat-number { font-size: 48px; font-weight: bold; margin: 10px 0; }
-              .stat-label { font-size: 14px; color: #666; }
-              .success-rate { text-align: center; margin: 30px 0; }
-              .success-rate-number { font-size: 64px; font-weight: bold; color: #4caf50; }
-              .success-rate-label { font-size: 16px; color: #666; }
-              .status-banner { background: #d4edda; color: #155724; padding: 15px; border-radius: 8px; text-align: center; font-weight: bold; margin: 20px 0; }
-              .info-box { background-color: #e7f3ff; padding: 15px; border-left: 4px solid #2196F3; margin: 20px 0; border-radius: 4px; }
-              .projects-section { margin: 30px 0; }
-              .project-table { width: 100%; border-collapse: separate; border-spacing: 8px; margin: 20px 0; }
-              .project-item { background: #f8f9fa; padding: 12px 15px; border-radius: 6px; font-size: 14px; border: 1px solid #e0e0e0; }
-              .test-details-section { margin: 30px 0; }
-              .test-details-table { width: 100%; border-collapse: collapse; margin: 20px 0; background: white; }
-              .test-details-table th { background: #2196F3; color: white; padding: 12px; text-align: left; font-weight: bold; }
-              .test-details-table tr.pass { background: #f1f8f4; }
-              .test-details-table tr.fail { background: #fef1f1; }
-              .test-details-table tr.skip { background: #fff8e1; }
-              .test-details-table tr:hover { background: #f5f5f5; }
-              .footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 12px; }
-            </style>
-          </head>
-          <body>
-            <div class="container">
-              <div class="header">
-                <h1 class="title">🎯 AdHash API Test Report</h1>
-                <p class="subtitle">${{ steps.test-results.outputs.timestamp }}</p>
-              </div>
-
-              <div class="stats-container">
-                <div class="stat-card total">
-                  <div class="stat-number" style="color: #1976d2;">${{ steps.test-results.outputs.tests_run }}</div>
-                  <div class="stat-label">Total Tests</div>
-                </div>
-                <div class="stat-card passed">
-                  <div class="stat-number" style="color: #4caf50;">✅ ${{ steps.test-stats.outputs.passed }}</div>
-                  <div class="stat-label">Passed</div>
-                </div>
-                <div class="stat-card failed">
-                  <div class="stat-number" style="color: #f44336;">❌ ${{ steps.test-stats.outputs.failed }}</div>
-                  <div class="stat-label">Failed</div>
-                </div>
-              </div>
-
-              <div class="success-rate">
-                <div class="success-rate-number">${{ steps.test-stats.outputs.success_rate }}%</div>
-                <div class="success-rate-label">Success Rate</div>
-              </div>
-
-              <div class="status-banner">
-                ✅ ALL TESTS PASSED
-              </div>
-
-              <div class="info-box">
-                📎 <strong>Detailed HTML report is attached to this email.</strong><br>
-                Open the attachment to view the complete test results with expandable test details.
-              </div>
-
-              <div class="test-details-section">
-                <h3>📋 Individual API Test Results</h3>
-                <table class="test-details-table">
-                  <thead>
-                    <tr>
-                      <th style="width: 60px;">#</th>
-                      <th>API Endpoint</th>
-                      <th style="width: 120px; text-align: center;">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    TEST_DETAILS_PLACEHOLDER
-                  </tbody>
-                </table>
-              </div>
-
-              <div class="projects-section">
-                <h3>🚀 AdHash Projects Tested</h3>
-                <p>All <strong>75 API endpoints</strong> tested successfully across all AdHash projects:</p>
-                <table class="project-table" cellpadding="5" cellspacing="0">
-                  <tr>
-                    <td class="project-item">🌐 AdHash Website</td>
-                    <td class="project-item">🔧 AutoChecker (UI, Admin, App)</td>
-                  </tr>
-                  <tr>
-                    <td class="project-item">🏥 MyHealth AI (Doctor SuperAdmin, Doctor Login)</td>
-                    <td class="project-item">💊 KaiCare AI (Doctor SuperAdmin, Doctor Login)</td>
-                  </tr>
-                  <tr>
-                    <td class="project-item">📋 MHCRM (SuperAdmin, Admin)</td>
-                    <td class="project-item">🏢 MHCCM (SuperAdmin, CPA, PAR, Form, CRM)</td>
-                  </tr>
-                  <tr>
-                    <td class="project-item">🎯 MHRTM (SuperAdmin, CPA, Participant)</td>
-                    <td class="project-item">📱 Patient Apps (MHAI, KCAI, Wavedin, Sparkme)</td>
-                  </tr>
-                  <tr>
-                    <td class="project-item">🌊 WavedIn (SuperAdmin, Market Web)</td>
-                    <td class="project-item">✨ Sparkme (Web Login)</td>
-                  </tr>
-                  <tr>
-                    <td class="project-item">📈 Algomax (ProSky, GoPocket)</td>
-                    <td class="project-item">🎮 LGM (Login UI, Phone, OTP)</td>
-                  </tr>
-                  <tr>
-                    <td class="project-item">💬 AskEPI (Login UI, Phone, OTP)</td>
-                    <td class="project-item">🛡️ RiskRealm (Admin, Chat, Login)</td>
-                  </tr>
-                  <tr>
-                    <td class="project-item">🚗 AutoeVantage (eCommerce, Tools, Analytics)</td>
-                    <td class="project-item">🏛️ Metcalf</td>
-                  </tr>
-                  <tr>
-                    <td class="project-item">👥 Humee (Admin, Dashboard, SuperAdmin, CPA, Participant)</td>
-                    <td class="project-item">⚡ ZAPAI</td>
-                  </tr>
-                </table>
-              </div>
-
-              <h3>🔗 Useful Links</h3>
-              <p>
-                <a href="https://github.com/Thenilavan-G/AdHash-API-Test/actions" style="color: #2196F3; text-decoration: none;">View Workflow Run</a> |
-                <a href="https://github.com/Thenilavan-G/AdHash-API-Test" style="color: #2196F3; text-decoration: none;">Repository</a>
-              </p>
-
-              <div class="footer">
-                This is an automated message from AdHash Daily API Tests.<br>
-                Scheduled runs: Daily at 9:00 AM IST and 5:00 PM IST
-              </div>
-            </div>
-          </body>
-          </html>
-        EMAILEOF
-
-        # Replace placeholder with actual test details
-        python3 << 'PYEOF'
-        import re
-
-        # Read test details
-        with open('test_details.html', 'r', encoding='utf-8') as f:
-            test_details = f.read()
-
-        # Read email template
-        with open('email_body_success.html', 'r', encoding='utf-8') as f:
-            email_body = f.read()
-
-        # Replace placeholder
-        email_body = email_body.replace('TEST_DETAILS_PLACEHOLDER', test_details)
-
-        # Write final email
-        with open('email_body_success_final.html', 'w', encoding='utf-8') as f:
-            f.write(email_body)
-        PYEOF
-
-        # Send email using Python SMTP
+        # Extract SSL issues from HTML report and send email
         python3 << 'PYEOF'
         import smtplib
+        import re
+        import os
         from email.mime.multipart import MIMEMultipart
         from email.mime.text import MIMEText
         from email.mime.base import MIMEBase
         from email import encoders
-        import os
+
+        # Extract SSL issues from the HTML report
+        ssl_issues = []
+        report_path = "${{ steps.find-report.outputs.report_path }}"
+        if report_path and os.path.exists(report_path):
+            with open(report_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+                # Find SSL certificate issues section
+                ssl_match = re.search(r'SSL Certificate Issues Detected.*?<ul.*?>(.*?)</ul>', content, re.DOTALL)
+                if ssl_match:
+                    # Extract each list item
+                    items = re.findall(r'<li.*?><strong>(.*?)</strong>.*?<a href="(.*?)"', ssl_match.group(1), re.DOTALL)
+                    ssl_issues = [(name.strip(), url.strip()) for name, url in items]
+
+        # Build email body
+        body = []
+        body.append("AdHash API Test Report - ${{ steps.test-results.outputs.timestamp }}")
+        body.append("")
+        body.append("Total: ${{ steps.test-results.outputs.tests_run }} | Passed: ${{ steps.test-stats.outputs.passed }} | Failed: ${{ steps.test-stats.outputs.failed }}")
+        body.append("Status: ALL TESTS PASSED")
+        body.append("Success Rate: ${{ steps.test-stats.outputs.success_rate }}%")
+
+        if ssl_issues:
+            body.append("")
+            body.append(f"⚠️ SSL CERTIFICATE WARNING: {len(ssl_issues)} endpoint(s) have SSL issues!")
+            for name, url in ssl_issues:
+                body.append(f"  - {name}: {url}")
+
+        body.append("")
+        body.append("Please open the attached HTML report for detailed results.")
+        body.append("")
+        body.append("---")
+        body.append("AdHash API Test Automation")
+
+        text_body = '\n'.join(body)
 
         # Email configuration
         smtp_server = "smtp.zoho.com"
@@ -448,21 +314,16 @@ jobs:
         to_email = "${{ secrets.EMAIL_TO }}"
         subject = "✅ AdHash Daily API Tests - SUCCESS (${{ steps.test-results.outputs.timestamp }})"
 
-        # Read email body
-        with open('email_body_success_final.html', 'r', encoding='utf-8') as f:
-            html_body = f.read()
-
         # Create message
         msg = MIMEMultipart()
         msg['From'] = from_email
         msg['To'] = to_email
         msg['Subject'] = subject
 
-        # Attach HTML body
-        msg.attach(MIMEText(html_body, 'html'))
+        # Attach plain text body
+        msg.attach(MIMEText(text_body, 'plain'))
 
         # Attach HTML report if available
-        report_path = "${{ steps.find-report.outputs.report_path }}"
         if report_path and os.path.exists(report_path):
             with open(report_path, 'rb') as f:
                 part = MIMEBase('application', 'octet-stream')
@@ -477,6 +338,8 @@ jobs:
                 server.login(username, password)
                 server.send_message(msg)
             print("Success email sent successfully!")
+            if ssl_issues:
+                print(f"Included {len(ssl_issues)} SSL issue(s) in the email")
         except Exception as e:
             print(f"Error sending email: {e}")
             raise
@@ -486,153 +349,50 @@ jobs:
       if: always() && (steps.test-results.outputs.status == 'FAILURE' || steps.test-results.outputs.status == 'NO_TESTS') && steps.check-secrets.outputs.secrets_available == 'true'
       shell: bash
       run: |
-        # Read test details
-        TEST_DETAILS=$(cat test_details.html)
-
-        # Create email body with test details injected
-        cat > email_body_failure.html << 'EMAILEOF'
-          <!DOCTYPE html>
-          <html>
-          <head>
-            <meta charset="UTF-8">
-            <style>
-              body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f5f5f5; padding: 20px; }
-              .container { max-width: 800px; margin: 0 auto; background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-              .header { text-align: center; margin-bottom: 30px; }
-              .title { color: #333; font-size: 28px; margin: 10px 0; }
-              .subtitle { color: #666; font-size: 14px; }
-              .stats-container { display: flex; justify-content: space-around; margin: 30px 0; flex-wrap: wrap; }
-              .stat-card { background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center; min-width: 150px; margin: 10px; }
-              .stat-card.total { background: #e3f2fd; }
-              .stat-card.passed { background: #e8f5e9; }
-              .stat-card.failed { background: #ffebee; }
-              .stat-number { font-size: 48px; font-weight: bold; margin: 10px 0; }
-              .stat-label { font-size: 14px; color: #666; }
-              .success-rate { text-align: center; margin: 30px 0; }
-              .success-rate-number { font-size: 64px; font-weight: bold; }
-              .success-rate-label { font-size: 16px; color: #666; }
-              .status-banner { padding: 15px; border-radius: 8px; text-align: center; font-weight: bold; margin: 20px 0; }
-              .status-banner.failed { background: #f8d7da; color: #721c24; }
-              .warning-box { background-color: #fff3cd; padding: 15px; border-left: 4px solid #ffc107; margin: 20px 0; border-radius: 4px; }
-              .troubleshooting { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; }
-              .test-details-section { margin: 30px 0; }
-              .test-details-table { width: 100%; border-collapse: collapse; margin: 20px 0; background: white; }
-              .test-details-table th { background: #2196F3; color: white; padding: 12px; text-align: left; font-weight: bold; }
-              .test-details-table tr.pass { background: #f1f8f4; }
-              .test-details-table tr.fail { background: #fef1f1; }
-              .test-details-table tr.skip { background: #fff8e1; }
-              .test-details-table tr:hover { background: #f5f5f5; }
-              .footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 12px; }
-            </style>
-          </head>
-          <body>
-            <div class="container">
-              <div class="header">
-                <h1 class="title">🎯 AdHash API Test Report</h1>
-                <p class="subtitle">${{ steps.test-results.outputs.timestamp }}</p>
-              </div>
-
-              <div class="stats-container">
-                <div class="stat-card total">
-                  <div class="stat-number" style="color: #1976d2;">${{ steps.test-results.outputs.tests_run }}</div>
-                  <div class="stat-label">Total Tests</div>
-                </div>
-                <div class="stat-card passed">
-                  <div class="stat-number" style="color: #4caf50;">✅ ${{ steps.test-stats.outputs.passed }}</div>
-                  <div class="stat-label">Passed</div>
-                </div>
-                <div class="stat-card failed">
-                  <div class="stat-number" style="color: #f44336;">❌ ${{ steps.test-stats.outputs.failed }}</div>
-                  <div class="stat-label">Failed</div>
-                </div>
-              </div>
-
-              <div class="success-rate">
-                <div class="success-rate-number" style="color: #f44336;">
-                  ${{ steps.test-stats.outputs.success_rate }}%
-                </div>
-                <div class="success-rate-label">Success Rate</div>
-              </div>
-
-              <div class="status-banner failed">
-                ❌ TESTS FAILED
-              </div>
-
-              <div class="warning-box">
-                📎 <strong>Detailed HTML report is attached to this email.</strong><br>
-                Open the attachment to view the complete test results and identify which tests failed.
-              </div>
-
-              <div class="test-details-section">
-                <h3>📋 Individual API Test Results</h3>
-                <table class="test-details-table">
-                  <thead>
-                    <tr>
-                      <th style="width: 60px;">#</th>
-                      <th>API Endpoint</th>
-                      <th style="width: 120px; text-align: center;">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    TEST_DETAILS_PLACEHOLDER
-                  </tbody>
-                </table>
-              </div>
-
-              <div class="troubleshooting">
-                <h3>🔍 Troubleshooting Steps</h3>
-                <ol>
-                  <li><strong>Check API Endpoints:</strong> Verify all AdHash project APIs are accessible</li>
-                  <li><strong>Authentication:</strong> Check if login credentials are valid</li>
-                  <li><strong>Network Issues:</strong> Check for any network connectivity problems</li>
-                  <li><strong>Server Status:</strong> Ensure all AdHash project servers are running</li>
-                  <li><strong>Review Logs:</strong> Check GitHub Actions logs for detailed error messages</li>
-                </ol>
-              </div>
-
-              <h3>🔗 Investigation Links</h3>
-              <p>
-                <a href="https://github.com/Thenilavan-G/AdHash-API-Test/actions" style="color: #2196F3; text-decoration: none;">View Workflow Run</a> |
-                <a href="https://github.com/Thenilavan-G/AdHash-API-Test" style="color: #2196F3; text-decoration: none;">Repository</a>
-              </p>
-
-              <div class="footer">
-                This is an automated message from AdHash Daily API Tests.<br>
-                Scheduled runs: Daily at 9:00 AM IST and 5:00 PM IST. Please investigate and resolve any issues promptly.
-              </div>
-            </div>
-          </body>
-          </html>
-        EMAILEOF
-
-        # Replace placeholder with actual test details
-        python3 << 'PYEOF'
-        import re
-
-        # Read test details
-        with open('test_details.html', 'r', encoding='utf-8') as f:
-            test_details = f.read()
-
-        # Read email template
-        with open('email_body_failure.html', 'r', encoding='utf-8') as f:
-            email_body = f.read()
-
-        # Replace placeholder
-        email_body = email_body.replace('TEST_DETAILS_PLACEHOLDER', test_details)
-
-        # Write final email
-        with open('email_body_failure_final.html', 'w', encoding='utf-8') as f:
-            f.write(email_body)
-        PYEOF
-
-        # Send email using Python SMTP
+        # Extract SSL issues from HTML report and send email
         python3 << 'PYEOF'
         import smtplib
+        import re
+        import os
         from email.mime.multipart import MIMEMultipart
         from email.mime.text import MIMEText
         from email.mime.base import MIMEBase
         from email import encoders
-        import os
+
+        # Extract SSL issues from the HTML report
+        ssl_issues = []
+        report_path = "${{ steps.find-report.outputs.report_path }}"
+        if report_path and os.path.exists(report_path):
+            with open(report_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+                # Find SSL certificate issues section
+                ssl_match = re.search(r'SSL Certificate Issues Detected.*?<ul.*?>(.*?)</ul>', content, re.DOTALL)
+                if ssl_match:
+                    # Extract each list item
+                    items = re.findall(r'<li.*?><strong>(.*?)</strong>.*?<a href="(.*?)"', ssl_match.group(1), re.DOTALL)
+                    ssl_issues = [(name.strip(), url.strip()) for name, url in items]
+
+        # Build email body
+        body = []
+        body.append("AdHash API Test Report - ${{ steps.test-results.outputs.timestamp }}")
+        body.append("")
+        body.append("Total: ${{ steps.test-results.outputs.tests_run }} | Passed: ${{ steps.test-stats.outputs.passed }} | Failed: ${{ steps.test-stats.outputs.failed }}")
+        body.append("Status: TESTS FAILED")
+        body.append("Success Rate: ${{ steps.test-stats.outputs.success_rate }}%")
+
+        if ssl_issues:
+            body.append("")
+            body.append(f"⚠️ SSL CERTIFICATE WARNING: {len(ssl_issues)} endpoint(s) have SSL issues!")
+            for name, url in ssl_issues:
+                body.append(f"  - {name}: {url}")
+
+        body.append("")
+        body.append("Please open the attached HTML report for detailed results.")
+        body.append("")
+        body.append("---")
+        body.append("AdHash API Test Automation")
+
+        text_body = '\n'.join(body)
 
         # Email configuration
         smtp_server = "smtp.zoho.com"
@@ -643,21 +403,16 @@ jobs:
         to_email = "${{ secrets.EMAIL_TO }}"
         subject = "❌ AdHash Daily API Tests - FAILED (${{ steps.test-results.outputs.timestamp }})"
 
-        # Read email body
-        with open('email_body_failure_final.html', 'r', encoding='utf-8') as f:
-            html_body = f.read()
-
         # Create message
         msg = MIMEMultipart()
         msg['From'] = from_email
         msg['To'] = to_email
         msg['Subject'] = subject
 
-        # Attach HTML body
-        msg.attach(MIMEText(html_body, 'html'))
+        # Attach plain text body
+        msg.attach(MIMEText(text_body, 'plain'))
 
         # Attach HTML report if available
-        report_path = "${{ steps.find-report.outputs.report_path }}"
         if report_path and os.path.exists(report_path):
             with open(report_path, 'rb') as f:
                 part = MIMEBase('application', 'octet-stream')
@@ -672,6 +427,8 @@ jobs:
                 server.login(username, password)
                 server.send_message(msg)
             print("Failure email sent successfully!")
+            if ssl_issues:
+                print(f"Included {len(ssl_issues)} SSL issue(s) in the email")
         except Exception as e:
             print(f"Error sending email: {e}")
             raise

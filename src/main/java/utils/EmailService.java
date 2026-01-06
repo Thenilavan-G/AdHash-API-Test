@@ -132,7 +132,7 @@ public class EmailService {
             // Add text part
             BodyPart messageBodyPart = new MimeBodyPart();
             String emailBody = createEmailBody(additionalMessage, htmlReportPath);
-            messageBodyPart.setContent(emailBody, "text/html; charset=utf-8");
+            messageBodyPart.setContent(emailBody, "text/plain; charset=utf-8");
             multipart.addBodyPart(messageBodyPart);
             
             // Add HTML report as attachment
@@ -166,6 +166,7 @@ public class EmailService {
         int passedTests = SimpleHtmlReportGenerator.getPassedTests();
         int failedTests = SimpleHtmlReportGenerator.getFailedTests();
         int certErrorCount = SimpleHtmlReportGenerator.getCertificateErrorCount();
+        java.util.List<SimpleHtmlReportGenerator.TestMethodDetails> sslIssues = SimpleHtmlReportGenerator.getTestsWithCertificateErrors();
 
         String status = failedTests == 0 ? "ALL TESTS PASSED" : failedTests + " TEST(S) FAILED";
 
@@ -176,12 +177,30 @@ public class EmailService {
 
         if (certErrorCount > 0) {
             body.append("\n⚠️ SSL CERTIFICATE WARNING: ").append(certErrorCount).append(" endpoint(s) have SSL certificate issues!\n");
-            body.append("Please check the attached HTML report for details.\n");
+            for (SimpleHtmlReportGenerator.TestMethodDetails test : sslIssues) {
+                String projectName = extractProjectName(test.methodName);
+                body.append("  - ").append(projectName);
+                if (test.apiUrl != null) {
+                    body.append(": ").append(test.apiUrl);
+                }
+                body.append("\n");
+            }
         }
 
         body.append("\nPlease open the attached HTML report for detailed results.");
 
         return body.toString();
+    }
+
+    /**
+     * Extract project name from method name (e.g., "pm_AdHash_Website" -> "AdHash Website")
+     */
+    private String extractProjectName(String methodName) {
+        if (methodName == null) return "Unknown";
+        // Remove prefix like "pm_" or "gm_"
+        String name = methodName.replaceFirst("^[a-z]+_", "");
+        // Replace underscores with spaces
+        return name.replace("_", " ");
     }
 
     /**

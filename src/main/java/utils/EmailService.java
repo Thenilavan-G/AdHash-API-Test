@@ -165,13 +165,23 @@ public class EmailService {
         int totalTests = SimpleHtmlReportGenerator.getTotalTests();
         int passedTests = SimpleHtmlReportGenerator.getPassedTests();
         int failedTests = SimpleHtmlReportGenerator.getFailedTests();
+        int certErrorCount = SimpleHtmlReportGenerator.getCertificateErrorCount();
 
         String status = failedTests == 0 ? "ALL TESTS PASSED" : failedTests + " TEST(S) FAILED";
 
-        return "AdHash API Test Report - " + timestamp + "\n\n" +
-               "Total: " + totalTests + " | Passed: " + passedTests + " | Failed: " + failedTests + "\n" +
-               "Status: " + status + "\n\n" +
-               "Please open the attached HTML report for detailed results.";
+        StringBuilder body = new StringBuilder();
+        body.append("AdHash API Test Report - ").append(timestamp).append("\n\n");
+        body.append("Total: ").append(totalTests).append(" | Passed: ").append(passedTests).append(" | Failed: ").append(failedTests).append("\n");
+        body.append("Status: ").append(status).append("\n");
+
+        if (certErrorCount > 0) {
+            body.append("\n⚠️ SSL CERTIFICATE WARNING: ").append(certErrorCount).append(" endpoint(s) have SSL certificate issues!\n");
+            body.append("Please check the attached HTML report for details.\n");
+        }
+
+        body.append("\nPlease open the attached HTML report for detailed results.");
+
+        return body.toString();
     }
 
     /**
